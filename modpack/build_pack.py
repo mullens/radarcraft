@@ -68,7 +68,7 @@ def apply_config_patches(overrides):
         if patch["format"] == "toml":
             text = target.read_text(encoding="utf-8")
             for key, val in patch["set"].items():
-                new, n = re.subn(rf"^(\s*{re.escape(key)}\s*=\s*)[^\n#]*", lambda m: m.group(1) + str(val), text, count=1, flags=re.M)
+                new, n = re.subn(rf"^(\s*{re.escape(key)}\s*=\s*)[^\n#]*", lambda m: m.group(1) + str(val), text, count=0, flags=re.M)  # every section
                 if n == 0:
                     print(f"WARNING: key {key} not found in {patch['file']}")
                 text = new
@@ -201,6 +201,26 @@ def main():
     for e in extras:
         rows.append(f'<li><a href="{e.get("url", "")}">{e["name"]} (added)</a></li>')
     (pack / "modlist.html").write_text("<ul>\n" + "\n".join(rows) + "\n</ul>\n", encoding="utf-8")
+
+    # mods.lock.json: the exact jar set of this pack version, for the friends' updater (reconcile + download)
+    lock = {"name": args.name, "version": args.version, "neoforge": manifest["minecraft"]["modLoaders"][0]["id"], "mods": []}
+    for f in files_out:
+        a = addons.get(f["projectID"])
+        if a and a["categorySection"]["path"] == "mods":
+            inst_file = a.get("installedFile", {})
+            lock["mods"].append({"file": a["fileNameOnDisk"], "name": a["name"], "projectID": f["projectID"], "fileID": f["fileID"],
+                                 "url": inst_file.get("downloadUrl") if a.get("allowModDistribution") is not False else None,
+                                 "page": a.get("webSiteURL", ""), "source": "curseforge"})
+        elif not a:
+            e = next((x for x in extras if x["projectID"] == f["projectID"]), None)
+            if e:
+                lock["mods"].append({"file": e.get("file", ""), "name": e["name"], "projectID": f["projectID"], "fileID": f["fileID"],
+                                     "url": None, "page": e.get("url", ""), "source": "curseforge"})
+    for jar in sorted((pack / "overrides" / "mods").glob("*.jar")):
+        lock["mods"].append({"file": jar.name, "name": jar.stem, "projectID": 0, "fileID": 0, "url": None, "page": "", "source": "zip"})
+    json.dump(lock, open(out / "mods.lock.json", "w", encoding="utf-8"), indent=1)
+    restricted = [m["name"] for m in lock["mods"] if m["source"] == "curseforge" and not m["url"]]
+    print(f"mods.lock.json: {len(lock['mods'])} jars, {len(restricted)} without a direct download URL")
 
     slug = re.sub(r"[^a-z0-9]+", "-", args.name.lower()).strip("-")
     zip_path = out / f"{slug}-{args.version}.zip"

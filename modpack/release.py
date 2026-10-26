@@ -37,6 +37,8 @@ def main():
             shutil.copy2(ROOT / "modpack" / name, dist / name)
     for z in (ROOT / "modpack" / "out").glob("*.zip"):
         shutil.copy2(z, dist / z.name)
+    if (ROOT / "modpack" / "out" / "mods.lock.json").exists():
+        shutil.copy2(ROOT / "modpack" / "out" / "mods.lock.json", dist / "mods.lock.json")
     print("release files in", dist)
     for p in sorted(dist.iterdir()):
         print(f"  {p.stat().st_size:>10,}  {p.name}")
