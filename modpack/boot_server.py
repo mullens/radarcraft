@@ -17,7 +17,7 @@ Prerequisites (both need your OK, so the script never downloads or accepts anyth
   - eula.txt in <dir> containing eula=true (Mojang's EULA is yours to accept)
 Java: uses the Gradle-provisioned JDK 21 under ~/.gradle/jdks if JAVA21 is not set.
 """
-import os, re, shutil, subprocess, sys, time, glob, json
+import os, re, shutil, struct, subprocess, sys, time, glob, json
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
