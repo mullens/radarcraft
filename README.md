@@ -8,6 +8,7 @@ NeoForge mods for Minecraft **1.21.1**, one Gradle project per mod, sharing a ro
 | **Keyboard Keybinds** | `keyboard-keybinds/` | client only | Replaces *Options → Controls → Key Binds* with a visual keyboard. Every key shows what is bound to it; real conflicts are red, intentional overlaps are yellow. |
 | **Cherished Mobs** | `cherished-mobs/` | server (clients need nothing) | Friendly mobs take 20% damage (like a full Protection V set) and regenerate. Any name-tagged mob is invincible, cannot die, and is pulled back if it falls out of the world. |
 | **Radars** | `radars/` | both | Name any mob "Radar" and it becomes Radar the cat, who points toward six giant boss cats hidden across the world. Beat one to tame it back down and learn where the next one lives. |
+| **Checklist** | `checklist/` | both | A challenge grid of curated advancements. Every completed square is one level and one point; points buy upgrade ranks you can take back at any time. Replaces skill trees with achievements. |
 
 ## Requirements
 
@@ -20,7 +21,7 @@ NeoForge mods for Minecraft **1.21.1**, one Gradle project per mod, sharing a ro
 ./gradlew build
 ```
 
-Jars land in each mod's `build/libs/` folder (`level-loss-only`, `keyboard-keybinds`, `cherished-mobs`, `radars`).
+Jars land in each mod's `build/libs/` folder (`level-loss-only`, `keyboard-keybinds`, `cherished-mobs`, `radars`, `checklist`).
 Drop a jar into a `mods/` folder of any NeoForge 1.21.1 instance (CurseForge app profile, server, ...).
 
 ## Run the game from the repo
@@ -63,6 +64,7 @@ The `dev-driver/` subproject is a dev-only mod that loads **all** mods of this r
 ./gradlew :dev-driver:runClient -PdriverScript=scripts/driver/levelloss.txt
 ./gradlew :dev-driver:runClient -PdriverScript=scripts/driver/cherished.txt
 ./gradlew :dev-driver:runClient -PdriverScript=scripts/driver/radars.txt
+./gradlew :dev-driver:runClient -PdriverScript=scripts/driver/checklist.txt   # copy scripts/driver/checklist-grid-dev.json to dev-driver/run/config/checklist-grid.json first
 
 # server scripts: console commands + entity checks on the logical server
 ./gradlew :dev-driver:runClient -PdriverScript=scripts/driver/park.txt -PserverScript=scripts/driver/server-cherished.txt
@@ -133,6 +135,66 @@ Decisions made without a spec: glow instead of per-variant tint (the glow outlin
 plain cat with 20 HP that is invulnerable anyway; bosses target survival players only, so creative testing is safe; the
 tamed cats answer any right-click, sneaking or not.
 
+## Checklist: the grid, the points, the files
+
+Two JSON files drive everything, read by both the client and the server from `config/`; the modpack ships them, so
+nothing has to be synced by hand. Missing files are written from the bundled defaults (the Skybound fork's real grid
+and catalog). `/checklist reload` re-reads both.
+
+### `config/checklist-grid.json`
+
+```json
+{
+  "grid": [["minecraft:story/mine_stone", null, "create:andesite_alloy"], ["..."]],
+  "start": [[1, 0]],
+  "hearts_every_levels": 0,
+  "commands_on_level": {"25": ["give @s minecraft:diamond 5"]},
+  "clear_vanilla_xp_rewards": false
+}
+```
+
+- `grid`: rows top to bottom, each a list of advancement ids; `null` is an empty square that is never drawn.
+  Unknown ids do not crash: they are logged once and treated as empty (they do not count toward the total either).
+- `start`: `[x, y]` squares revealed from the beginning (default: the centre square).
+- A square is **revealed** (title, icon, description visible) when it is done, or orthogonally next to a done square,
+  or listed in `start`. Everything else is a dark `?`. The level is simply the number of done squares.
+- `hearts_every_levels`: legacy reward, +1 heart per N levels; 0 disables (the upgrades replace it).
+- `commands_on_level`: server commands run once when the player reaches that level (`@s` or `＠s` = the player).
+- `clear_vanilla_xp_rewards`: take the advancement's own XP reward away again (default off).
+
+### `config/checklist-upgrades.json`
+
+```json
+{"upgrades": [{
+  "id": "hearts", "name": "Hearts", "category": "Vitality", "ranks": 12, "description": "+1 heart per rank.",
+  "modifiers": [{"attribute": "minecraft:generic.max_health", "operation": "add_value", "amount": 2.0}],
+  "effects": [{"effect": "minecraft:night_vision", "amplifier": 0}],
+  "effects_at_max": [{"effect": "minecraft:fire_resistance", "amplifier": 0}],
+  "excludes": ["smol"],
+  "special": "second_wind"
+}]}
+```
+
+- One point per rank, `amount` is per rank (modifier amount = amount × rank, applied as one modifier with the id
+  `checklist:<upgrade id>`), `operation` is `add_value`, `add_multiplied_base` or `add_multiplied_total`.
+- `effects` are permanent, ambient, particle-free potion effects while any rank is held (amplifier + rank − 1);
+  `effects_at_max` only at the top rank. `excludes` lists upgrades that cannot be held at the same time.
+- `special`: `second_wind` (a killing blow leaves you at one health, five-minute cooldown) or `magnet` (dropped items
+  drift toward you from 1.5 blocks per rank). Everything else is pure data; see `modpack/upgrades.md` for the design.
+- Ranks live in the player's persistent NBT (they survive death and restarts), modifiers are re-derived from them on
+  login, respawn, reload and every change, never stacked. If a grid edit lowers a player's level below the points spent,
+  the most recently taken ranks are removed until it fits. Removing a rank is free and instant.
+
+### Screen and commands
+
+The screen opens from the **Checklist** button on the vanilla Advancements screen or a keybind (unbound by default).
+Grid tab: level and progress bar, the grid, hover for title / description / mod / Done or Not yet. Upgrades tab:
+points available / spent / total, categories, rank pips and `-` / `+` per upgrade.
+
+`/checklist level [player]`, `/checklist upgrades [player]`, `/checklist respec [player]`, and for operators
+`/checklist reload`, `/checklist reveal` (dev: show the whole grid to yourself) and `/checklist grant <x> <y>`
+(dev: award that square's advancement).
+
 ## Keyboard Keybinds: how conflicts are judged
 
 NeoForge gives every key mapping a *conflict context* (in-game, in menus, or everywhere) and an
@@ -159,7 +221,7 @@ settings.gradle         lists the mod subprojects
 <mod>/src/main/java     sources
 <mod>/src/main/templates/META-INF/neoforge.mods.toml   mod metadata (placeholders filled by Gradle)
 dev-driver/             dev-only mod that runs scripts/driver/*.txt against the client (never published)
-scripts/driver/         client scripts (keybinds, levelloss, cherished, radars, park) and server scripts (server-cherished)
+scripts/driver/         client scripts (keybinds, levelloss, cherished, radars, checklist, park), server scripts (server-cherished), checklist-grid-dev.json
 scripts/*.ps1           mute-game.ps1 (mixer mute), screenshot.ps1 (PrintWindow capture), send-input.ps1 (emergency only)
 scripts/dev-options.txt muted/windowed options.txt written into every run/ folder before each launch
 ```

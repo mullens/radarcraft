@@ -43,7 +43,8 @@ import java.util.function.Predicate;
  * click X Y [BUTTON]     move there and click (button 0 = left)
  * key NAME               press and release a key on the current screen, e.g. key ENTER, key W, key ESCAPE
  * type TEXT              type text into the current screen
- * screen title|keybinds|inventory|advancements|none
+ * screen title|keybinds|inventory|advancements|checklist|none
+ * scroll X Y AMOUNT      mouse-wheel at X,Y (negative = down)
  * world NAME             create a fresh creative world with cheats on and join it
  * waitworld              block until the player is in a world and no screen is open
  * chat TEXT              send a chat message, or a command when TEXT starts with /
@@ -190,6 +191,12 @@ public final class ClientDriver {
                     DevDriverMod.LOGGER.error("{} FAIL {} expected {} but was {}", DevDriverMod.TAG, args[0], expected, actual);
                 }
             }
+            case "scroll" -> {
+                Screen s = requireScreen(mc);
+                double sx = Double.parseDouble(args[0]), sy = Double.parseDouble(args[1]);
+                move(mc, sx, sy);
+                s.mouseScrolled(sx, sy, 0, Double.parseDouble(args[2]));
+            }
             case "show" -> setWindowVisible(mc, true);
             case "hide" -> setWindowVisible(mc, false);
             case "quit" -> {
@@ -243,6 +250,7 @@ public final class ClientDriver {
             case "keybinds" -> mc.setScreen(new KeyBindsScreen(mc.screen, mc.options));
             case "inventory" -> mc.setScreen(new InventoryScreen(mc.player));
             case "advancements" -> mc.setScreen(new AdvancementsScreen(mc.player.connection.getAdvancements(), mc.screen));
+            case "checklist" -> com.lucasmods.checklist.client.ChecklistClient.open();
             default -> throw new IllegalArgumentException("unknown screen " + which);
         }
     }

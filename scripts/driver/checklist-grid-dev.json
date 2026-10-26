@@ -1,0 +1,11 @@
+{
+  "_comment": "Small vanilla-only grid for dev runs (the shipped default references pack mods). 5x3, centre is the start.",
+  "grid": [
+    ["minecraft:story/mine_stone", "minecraft:story/upgrade_tools", "minecraft:story/smelt_iron", "minecraft:story/obtain_armor", "minecraft:story/lava_bucket"],
+    ["minecraft:story/iron_tools", "minecraft:story/mine_diamond", "minecraft:story/root", "minecraft:story/enter_the_nether", "minecraft:story/shiny_gear"],
+    ["minecraft:story/enchant_item", "minecraft:story/cure_zombie_villager", null, "minecraft:story/form_obsidian", "minecraft:story/follow_ender_eye"]
+  ],
+  "start": [[2, 1]],
+  "hearts_every_levels": 0,
+  "commands_on_level": {"3": ["give @s minecraft:diamond 3"]}
+}

@@ -1,0 +1,89 @@
+# Verifies Checklist with the small vanilla dev grid.
+# Setup: copy scripts/driver/checklist-grid-dev.json to dev-driver/run/config/checklist-grid.json
+# Run:   gradlew :dev-driver:runClient -PdriverScript=scripts/driver/checklist.txt
+# GUI coordinates assume 640x360 (GUI scale 2). Upgrades rows: category header 14px, rows 24px, first row y=48;
+# "+" button centre x=516, "-" centre x=492; Hearts row y=48 (+ at y=59), Second Wind row 7 (+ at y=203).
+wait 40
+world checklist
+wait 40
+chat /checklist level
+screen checklist
+wait 5
+screenshot cl-grid-start
+screen none
+wait 2
+
+# complete the centre square and two neighbours: adjacent squares reveal, level 3 runs commands_on_level
+chat /advancement grant @s only minecraft:story/root
+chat /advancement grant @s only minecraft:story/mine_stone
+chat /advancement grant @s only minecraft:story/upgrade_tools
+wait 20
+log after 3 squares: hotbar={hotbar} (expect 3 diamonds from commands_on_level)
+chat /checklist level
+screen checklist
+wait 5
+move 262 112
+wait 2
+screenshot cl-grid-revealed
+screen none
+wait 2
+
+# three more squares = 6 points
+chat /advancement grant @s only minecraft:story/smelt_iron
+chat /advancement grant @s only minecraft:story/enter_the_nether
+chat /advancement grant @s only minecraft:story/mine_diamond
+wait 20
+log before upgrades: maxhealth={maxhealth} speed={speed}
+expect maxhealth 20.0
+
+# Upgrades tab: Hearts +2, Fleet Foot +1 (Mobility row 1: y=234, + at y=245), Second Wind +1 (y=203)
+screen checklist
+wait 5
+click 117 16
+wait 5
+click 516 59
+wait 5
+click 516 59
+wait 5
+click 516 245
+wait 5
+click 516 203
+wait 10
+screenshot cl-upgrades
+log after Hearts x2, Fleet Foot x1, Second Wind: maxhealth={maxhealth} speed={speed}
+expect maxhealth 24.0
+expect speed 0.1050
+chat /checklist upgrades
+
+# remove both Hearts ranks: back to base
+click 492 59
+wait 5
+click 492 59
+wait 10
+log after removing Hearts: maxhealth={maxhealth}
+expect maxhealth 20.0
+
+# exclusion: scroll to Senses, take Giant, Smol must stay at 0
+scroll 320 200 -30
+wait 2
+screenshot cl-upgrades-scrolled
+screen none
+wait 2
+chat /checklist upgrades
+
+# ranks survive death (persisted NBT)
+chat /gamemode survival
+chat /kill @s
+wait 50
+respawn
+wait 60
+log after respawn: maxhealth={maxhealth} speed={speed}
+expect speed 0.1050
+chat /checklist upgrades
+
+# Second Wind: lethal damage leaves 1 health
+chat /damage @s 1000 minecraft:generic
+wait 10
+log after lethal hit with Second Wind: health={health}
+expect health 1
+quit

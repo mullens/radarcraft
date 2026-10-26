@@ -13,12 +13,14 @@ evaluationDependsOn(':level-loss-only')
 evaluationDependsOn(':keyboard-keybinds')
 evaluationDependsOn(':cherished-mobs')
 evaluationDependsOn(':radars')
+evaluationDependsOn(':checklist')
 
 dependencies {
     implementation project(':level-loss-only')
     implementation project(':keyboard-keybinds')
     implementation project(':cherished-mobs')
     implementation project(':radars')
+    implementation project(':checklist')
 }
 
 neoForge {
@@ -39,6 +41,9 @@ neoForge {
         }
         radars {
             sourceSet(project(':radars').sourceSets.main)
+        }
+        checklist {
+            sourceSet(project(':checklist').sourceSets.main)
         }
     }
 
