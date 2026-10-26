@@ -60,3 +60,9 @@ BEB-NeoForge
 BTP-NeoForge
 # Our own
 keyboardkeybinds
+# Client-only mods that were in the original pack (scrapped now, but needed for the baseline boot)
+punchy
+BHMenu
+tipsmod
+underlay
+ImmersiveUI

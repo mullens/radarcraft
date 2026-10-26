@@ -67,7 +67,12 @@ def sync_baseline(d):
 
 def errors_of(d):
     txt = (d / "boot-console.txt").read_text(encoding="utf-8", errors="replace") if (d / "boot-console.txt").exists() else ""
-    return sorted({re.sub(r"^\[[^\]]*\]\s*", "", l).strip() for l in txt.splitlines() if "/ERROR]" in l or "/FATAL]" in l})
+    def norm(l):
+        l = re.sub(r"^\[[^\]]*\]\s*", "", l)            # timestamp
+        l = re.sub(r"^\[[^/\]]+/(ERROR|FATAL)\]", r"[\1]", l)  # thread name
+        l = re.sub(r"@[0-9a-f]{6,}", "@", l)              # object hashes
+        return l.strip()
+    return sorted({norm(l) for l in txt.splitlines() if "/ERROR]" in l or "/FATAL]" in l})
 
 
 def diff(d, baseline_file):

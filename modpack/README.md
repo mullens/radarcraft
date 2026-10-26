@@ -41,6 +41,16 @@ Run `gradlew build` first if you want the latest versions of our own mods inside
 3. `python modpack/sync_server.py plan` to see what would change, then `python modpack/sync_server.py apply --yes`.
 4. Also upload the pack's `overrides/config` and `overrides/kubejs` if they changed, then restart the server from the panel.
 
+## Boot test (2026-10-26)
+
+A local headless NeoForge 21.1.248 server (`boot_server.py`, folder `testserver/`, not committed) was booted twice:
+with the trimmed set (343 server-side jars) and with the original pack's full server-side set (368 jars). Both reach
+"Done" in about two minutes and log the same 43 unique errors, all pre-existing in the original pack: broken loot
+tables in Beautify and Create: Enchantment Industry, a few bad recipes (Just Enough Breeding, Ender's Delight),
+KubeJS tags referencing absent mods, a Sable physics entry, a Without Structures mixin. The trimmed pack adds no
+new error. Client-only mods (listed in `client-only-mods.txt`) must not be on a dedicated server: Sodium and Punchy
+crash it at startup, which is also why the live server's mods folder differs from the client's.
+
 ## Decisions so far
 
 Lucas reviewed all 426 mods and kept 388. Scrapped: the non-Create tech stack (Modern Industrialization, Modern Dynamics,

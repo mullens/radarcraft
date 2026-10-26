@@ -130,6 +130,9 @@ def main():
         src = inst / d
         if src.exists():
             shutil.copytree(src, pack / "overrides" / d, ignore=shutil.ignore_patterns("*.OLD", "*.bak"))
+    # the multiplayer server list, so friends see the server pre-added
+    if (inst / "servers.dat").exists():
+        shutil.copy2(inst / "servers.dat", pack / "overrides" / "servers.dat")
 
     # Jars that live in the instance's mods folder but are NOT CurseForge projects (the original pack shipped them
     # as overrides), e.g. the Aetherial Islands worldgen datapack-jar that makes the pack "Skybound". Keep them.
