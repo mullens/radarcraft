@@ -1,0 +1,54 @@
+# Skybound fork (modpack)
+
+A trimmed fork of **Create Aeronautics - Skybound** v17.1.0 (NeoForge 21.1, Minecraft 1.21.1) plus the mods built in this repo.
+
+## Files
+
+| File | What it is |
+|---|---|
+| `mods-audit.json` | every mod of the original pack: group, recommendation, dependency ids |
+| `decisions.json` | Lucas's keep/scrap choices, exported from the audit checklist (overrides the recommendation) |
+| `extra-mods.json` | mods added on top of the original pack (CurseForge project + file ids) |
+| `build_pack.py` | builds the pack: `python modpack/build_pack.py` |
+| `sync_server.py` | deletes scrapped jars on the UltraServers mods folder and uploads our jars over SFTP (NOT to be run until the server is backed up and friends are told) |
+| `check_deps.py` | verifies the kept set against the dependencies the jars themselves declare; finds stray jars |
+| `migrate_server.py` | migrates a server folder (snapshot or live files) to the trimmed set, with a backup; dry run by default |
+| `boot_server.py` | installs a local headless NeoForge server, syncs the pack into it, boots it and summarizes the log |
+| `make_grid.py` / `checklist-grid.json` / `checklist-upgrades.json` / `upgrades.md` | the Checklist mod's grid and upgrade catalog |
+| `audit.html` | the interactive checklist (published as a Claude artifact; its saved choices feed `decisions.json`) |
+| `out/` | build output, not committed |
+
+## Build the pack
+
+```bash
+python modpack/build_pack.py
+```
+
+Reads the original pack from the local CurseForge instance, applies `decisions.json`, auto-resolves libraries
+(a library stays only if something kept still needs it), adds `extra-mods.json`, and bundles any jars found in
+`*/build/libs/` (our own mods) under `overrides/mods`. Output in `modpack/out/`:
+
+- `create-aeronautics-skybound-lucas-fork-<version>.zip`: import it in the CurseForge app (Create Custom Profile, Import).
+- `report.md`: everything kept and scrapped, with reasons.
+- `server-remove.txt` / `server-add.txt`: jar names to delete from / add to the server.
+
+Run `gradlew build` first if you want the latest versions of our own mods inside the zip.
+
+## Update the server
+
+1. `pip install paramiko`, copy `server.example.json` to `server.json`, fill in the SFTP details from the UltraServers panel.
+2. `$env:ULTRASERVERS_SFTP_PASSWORD = "..."` in the shell (never commit it).
+3. `python modpack/sync_server.py plan` to see what would change, then `python modpack/sync_server.py apply --yes`.
+4. Also upload the pack's `overrides/config` and `overrides/kubejs` if they changed, then restart the server from the panel.
+
+## Decisions so far
+
+Lucas reviewed all 426 mods and kept 388. Scrapped: the non-Create tech stack (Modern Industrialization, Modern Dynamics,
+Powah, Flux Networks, Wireless Chargers, Charging Gadgets, Cognition, Security Craft, Additional Enchanted Miner), duplicate
+accessory and storage systems (Accessories, Tom's Simple Storage, Nether Chested, Super Ore Block), pack branding
+(BisectHosting menu, loading tips, toasts, AutoMessage, StartInv, Immersive UI, Underlay, Modern World Creation, Loading
+Backgrounds), Exclusive Weapons, Farmers Structures, Punchy (its item-swap flip animation), and four libraries nothing needed.
+Added: Inventory Crafting Grid (3x3 crafting in the inventory). The pack's KubeJS scripts and FTB quests reference only
+Create-family mods, so none of the removals break them.
+
+Resource packs from the original (the "Realistic 3D" packs) are dropped; the three shader packs stay.

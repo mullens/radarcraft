@@ -1,0 +1,284 @@
+<title>Skybound Fork Audit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: sticky tally bar, then one section per mod group, each a dense decision list. */
+  :root {
+    --bg: #eef1f4; --panel: #ffffff; --ink: #1b2430; --muted: #5c6873; --line: #d3d9df;
+    --keep: #1f7a6a; --keep-soft: #d9efe9; --scrap: #b5602a; --scrap-soft: #f6e3d6;
+    --warn: #a3621a; --warn-soft: #fbeedb; --auto: #4a5a8a; --auto-soft: #e3e7f5;
+    --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --body: "IBM Plex Sans", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg: #141a21; --panel: #1c242d; --ink: #e6ebf0; --muted: #94a1ad; --line: #2e3842;
+    --keep: #4fc1a8; --keep-soft: #16342e; --scrap: #e08a55; --scrap-soft: #3a2619;
+    --warn: #e0a85a; --warn-soft: #3a2d16; --auto: #9fb0e8; --auto-soft: #232b45; color-scheme: dark } }
+  :root[data-theme="dark"] {
+    --bg: #141a21; --panel: #1c242d; --ink: #e6ebf0; --muted: #94a1ad; --line: #2e3842;
+    --keep: #4fc1a8; --keep-soft: #16342e; --scrap: #e08a55; --scrap-soft: #3a2619;
+    --warn: #e0a85a; --warn-soft: #3a2d16; --auto: #9fb0e8; --auto-soft: #232b45; color-scheme: dark }
+
+  body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 14px; line-height: 1.45;
+    padding-block: 0 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+  a { color: inherit; }
+  h1, h2 { font-family: var(--display); text-wrap: balance; margin: 0; }
+  h1 { font-size: 34px; font-weight: 700; letter-spacing: .01em; }
+  h2 { font-size: 24px; font-weight: 600; }
+  .wrap { max-width: 980px; margin: 0 auto; }
+  header.top { padding-block: 22px 10px; }
+  header.top p { margin: 6px 0 0; color: var(--muted); max-width: 70ch; }
+
+  .tally { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); padding-block: 10px; display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+  .tally .n { font-family: var(--display); font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; }
+  .tally .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .tally .stat { display: flex; flex-direction: column; min-width: 60px; }
+  .stat.keep .n { color: var(--keep); } .stat.scrap .n { color: var(--scrap); } .stat.auto .n { color: var(--auto); }
+  .tally .spacer { flex: 1; }
+  .status { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  .status.err { color: var(--scrap); }
+
+  nav.groups { display: flex; flex-wrap: wrap; gap: 6px; padding-block: 12px 4px; }
+  nav.groups a { text-decoration: none; font-size: 12px; padding: 4px 9px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--muted); }
+  nav.groups a.done { border-color: var(--keep); color: var(--keep); }
+
+  section.group { margin-top: 26px; scroll-margin-top: 90px; }
+  .ghead { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; }
+  .ghead .count { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .ghead p { flex-basis: 100%; margin: 2px 0 8px; color: var(--muted); max-width: 80ch; }
+  .gactions { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; align-items: center; }
+  button { font: inherit; font-size: 12px; cursor: pointer; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 6px; padding: 5px 10px; }
+  button:hover { border-color: var(--muted); }
+  button:focus-visible, .seg button:focus-visible, label:focus-within { outline: 2px solid var(--auto); outline-offset: 2px; }
+  button[disabled] { opacity: .5; cursor: default; }
+  label.reviewed { font-size: 12px; display: inline-flex; gap: 6px; align-items: center; margin-left: auto; color: var(--muted); }
+
+  .rows { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .row { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 8px 12px; border-top: 1px solid var(--line); align-items: center; }
+  .row:first-child { border-top: 0; }
+  .row.scrap { background: color-mix(in srgb, var(--scrap-soft) 45%, var(--panel)); }
+  .row .name { font-weight: 600; min-width: 0; }
+  .row .name a { text-decoration: none; }
+  .row .name a:hover { text-decoration: underline; }
+  .row .note { grid-column: 1; color: var(--muted); font-size: 13px; min-width: 0; }
+  .row .hint { grid-column: 1 / -1; font-size: 12px; padding: 4px 8px; border-radius: 5px; background: var(--warn-soft); color: var(--warn); }
+  .row .hint.auto { background: var(--auto-soft); color: var(--auto); }
+  .row .hint.bad { background: var(--scrap-soft); color: var(--scrap); }
+  .tag { font-family: var(--mono); font-size: 11px; padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; color: var(--muted); border: 1px solid var(--line); }
+  .tag.changed { color: var(--warn); border-color: var(--warn); }
+
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; grid-row: 1 / span 2; }
+  .seg button { border: 0; border-radius: 0; padding: 5px 11px; background: transparent; color: var(--muted); }
+  .seg button + button { border-left: 1px solid var(--line); }
+  .seg button.on.k { background: var(--keep-soft); color: var(--keep); font-weight: 600; }
+  .seg button.on.s { background: var(--scrap-soft); color: var(--scrap); font-weight: 600; }
+  .seg button.on.a { background: var(--auto-soft); color: var(--auto); font-weight: 600; }
+
+  .export { margin-top: 32px; padding: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+  .export textarea { width: 100%; min-height: 120px; margin-top: 8px; font-family: var(--mono); font-size: 12px; background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 8px; box-sizing: border-box; }
+  @media (max-width: 520px) { .row { grid-template-columns: 1fr; } .seg { grid-row: auto; justify-self: start; } }
+  @media (prefers-reduced-motion: no-preference) { .row { transition: background .15s; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <h1>Skybound Fork Audit</h1>
+    <p>Every mod in <em>Create Aeronautics - Skybound</em> v17.1.0 (NeoForge 21.1.248, Minecraft 1.21.1), sorted into groups with a recommendation. Flip anything you disagree with. Libraries resolve themselves: a library stays only while something you kept still needs it. Your choices save as you click.</p>
+  </header>
+
+  <div class="tally" id="tally">
+    <div class="stat keep"><span class="n" id="nKeep">0</span><span class="lbl">keep</span></div>
+    <div class="stat scrap"><span class="n" id="nScrap">0</span><span class="lbl">scrap</span></div>
+    <div class="stat auto"><span class="n" id="nAuto">0</span><span class="lbl">libs kept</span></div>
+    <div class="stat"><span class="n" id="nDone">0/0</span><span class="lbl">groups reviewed</span></div>
+    <div class="spacer"></div>
+    <span class="status" id="status">loading saved choices…</span>
+  </div>
+
+  <nav class="groups" id="nav"></nav>
+  <main id="main"></main>
+
+  <div class="export">
+    <strong>Scrap list</strong> <button id="copyBtn" type="button">Copy</button>
+    <textarea id="exportBox" readonly aria-label="Scrap list"></textarea>
+  </div>
+</div>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(function () {
+  const MODS = JSON.parse(document.getElementById('data').textContent);
+  const byId = new Map(MODS.map(m => [m.id, m]));
+  const GROUPS = [
+    ['EQUIP', 'Equipment & storage systems', 'This is where the pack overlaps itself: two accessory-slot systems, two backpack mods, four extra chest types. The recommendation keeps Curios + Sophisticated Backpacks/Storage and scraps the duplicates.'],
+    ['TECH', 'Non-Create tech', 'A second tech tree (Modern Industrialization, Powah, Flux) sits next to Create. Scrapping all of it is the recommendation; Create does the same jobs.'],
+    ['COMBAT', 'Weapons, armor, tools', 'Mostly one-off weapon packs. Better Combat and Simply Swords are the two with real depth.'],
+    ['MAGIC', 'Magic & potions', 'Ars Nouveau is a full magic mod with two Create crossover addons; the rest are small one-offs.'],
+    ['SKILL', 'Progression', 'Pufferfish Skills gives the pack an RPG skill tree. Keep or drop as a set.'],
+    ['DIM', 'Dimensions', 'Each is a big chunk of content. The Aether group (5 mods) goes together.'],
+    ['STRUCT', 'Structures', 'Structure mods generally do not conflict with each other; the sky-themed ones fit the airship setting.'],
+    ['WORLD', 'Terrain, biomes, seasons', 'You said keep the cool terrain. Serene Seasons is the one to think about, since you were already looking for ways to skip winter.'],
+    ['MOB', 'Mobs', 'You said the mobs are all cool, so these default to keep. The one-off "merged" tweaks are flagged scrap.'],
+    ['FOOD', 'Food & farming', 'Farmer\'s Delight is the backbone; the rest are flavor addons.'],
+    ['QOL', 'Gameplay quality of life', 'Small gameplay conveniences. Kept ones are the widely used classics.'],
+    ['INFO', 'Maps, tooltips, recipe viewers', 'Client-side information mods. JEI, Jade and JourneyMap are the essentials.'],
+    ['SERVER', 'Server, quests, scripts', 'FTB Quests and KubeJS carry the pack\'s quests and recipe changes. If you scrap a mod the quests mention, those quest entries will need editing.'],
+    ['CREATE', 'Create & Aeronautics', 'Everything here stays, per your call.'],
+    ['DECO', 'Decoration blocks', 'Aesthetic building mods. All scrap except Supplementaries, which is mostly functional.'],
+    ['VISUAL', 'Visual & audio flair', 'Pure cosmetics: animations, particles, sounds, trims. Default scrap. EMF/ETF only matter if you keep the Fresh Animations resource pack.'],
+    ['UI', 'Menus & HUD theming', 'Custom main menu, toasts, loading screens, blur. Pack branding; scrap for a fork.'],
+    ['PERF', 'Performance & fixes', 'Keep all of these; they are why the pack runs at all.'],
+    ['LIB', 'Libraries (automatic)', 'Resolved from what you keep. A library with no declared dependents is kept by default so nothing silently breaks; the hint says so.'],
+  ];
+  const state = new Map();     // modId -> 'keep' | 'scrap' | 'auto'
+  const reviewed = new Set();  // group keys
+  let db = null, saving = 0;
+  const $ = (s, el = document) => el.querySelector(s);
+
+  for (const m of MODS) state.set(m.id, m.rec);
+
+  // ---- dependency resolution ----
+  function dependents(id) { return MODS.filter(m => m.requires.includes(id)); }
+  function resolve() {
+    // A mod is 'in' if keep, or auto and some 'in' mod requires it. Iterate to a fixpoint.
+    const inSet = new Set(MODS.filter(m => state.get(m.id) === 'keep').map(m => m.id));
+    let changed = true;
+    while (changed) {
+      changed = false;
+      for (const m of MODS) {
+        if (state.get(m.id) !== 'auto' || inSet.has(m.id)) continue;
+        if (m.requires.length === 0 && dependents(m.id).length === 0) { inSet.add(m.id); changed = true; continue; } // undeclared lib: keep
+        if (dependents(m.id).some(d => inSet.has(d.id))) { inSet.add(m.id); changed = true; }
+      }
+    }
+    return inSet;
+  }
+
+  // ---- rendering ----
+  function render() {
+    const inSet = resolve();
+    const main = $('#main'); main.innerHTML = '';
+    const nav = $('#nav'); nav.innerHTML = '';
+    let keep = 0, scrap = 0, autoKept = 0;
+    for (const m of MODS) {
+      const s = state.get(m.id);
+      if (s === 'auto') { if (inSet.has(m.id)) autoKept++; else scrap++; }
+      else if (s === 'keep') keep++; else scrap++;
+    }
+    $('#nKeep').textContent = keep; $('#nScrap').textContent = scrap; $('#nAuto').textContent = autoKept;
+    $('#nDone').textContent = reviewed.size + '/' + GROUPS.length;
+
+    for (const [key, title, intro] of GROUPS) {
+      const mods = MODS.filter(m => m.group === key);
+      const a = document.createElement('a'); a.href = '#' + key.toLowerCase(); a.textContent = title; if (reviewed.has(key)) a.className = 'done'; nav.appendChild(a);
+      const sec = document.createElement('section'); sec.className = 'group'; sec.id = key.toLowerCase();
+      const nScrap = mods.filter(m => (state.get(m.id) === 'scrap') || (state.get(m.id) === 'auto' && !inSet.has(m.id))).length;
+      sec.innerHTML = `<div class="ghead"><h2>${title}</h2><span class="count">${mods.length} mods · ${nScrap} scrapped</span><p>${intro}</p></div>
+        <div class="gactions"><button type="button" data-all="keep">Keep all</button><button type="button" data-all="scrap">Scrap all</button><button type="button" data-all="reset">Back to recommendation</button>
+        <label class="reviewed"><input type="checkbox" id="rev_${key}" ${reviewed.has(key) ? 'checked' : ''}> Reviewed</label></div><div class="rows"></div>`;
+      sec.querySelectorAll('[data-all]').forEach(b => b.addEventListener('click', () => setGroup(key, b.dataset.all)));
+      $('#rev_' + key, sec).addEventListener('change', e => { if (e.target.checked) reviewed.add(key); else reviewed.delete(key); saveReviewed(); render(); });
+      const rows = $('.rows', sec);
+      for (const m of mods) rows.appendChild(rowFor(m, inSet));
+      main.appendChild(sec);
+    }
+    $('#exportBox').value = exportText(inSet);
+  }
+
+  function rowFor(m, inSet) {
+    const s = state.get(m.id);
+    const effectiveScrap = s === 'scrap' || (s === 'auto' && !inSet.has(m.id));
+    const row = document.createElement('div'); row.className = 'row' + (effectiveScrap ? ' scrap' : '');
+    const changed = s !== m.rec ? `<span class="tag changed">was ${m.rec}</span>` : '';
+    let hint = '';
+    const keptDependents = dependents(m.id).filter(d => inSet.has(d.id) || state.get(d.id) === 'keep');
+    const scrappedNeeds = m.requires.map(id => byId.get(id)).filter(d => d && !inSet.has(d.id) && state.get(d.id) !== 'keep');
+    if (s === 'auto') {
+      const deps = dependents(m.id);
+      if (deps.length === 0) hint = `<div class="hint auto">No mod declares a dependency on this library, so it is kept to be safe. Verify before dropping.</div>`;
+      else if (inSet.has(m.id)) hint = `<div class="hint auto">Kept: needed by ${keptDependents.map(d => d.name).slice(0, 4).join(', ')}${keptDependents.length > 4 ? ' +' + (keptDependents.length - 4) : ''}</div>`;
+      else hint = `<div class="hint auto">Dropped: nothing you kept needs it (${deps.map(d => d.name).slice(0, 3).join(', ')}${deps.length > 3 ? '…' : ''})</div>`;
+    } else if (effectiveScrap && keptDependents.length) {
+      hint = `<div class="hint bad">Still needed by ${keptDependents.map(d => d.name).join(', ')}. Scrap those too, or keep this.</div>`;
+    } else if (!effectiveScrap && scrappedNeeds.length) {
+      hint = `<div class="hint">Needs ${scrappedNeeds.map(d => d.name).join(', ')}, which is scrapped. Flip one of them.</div>`;
+    }
+    row.innerHTML = `<div class="name"><a href="${m.url}" target="_blank" rel="noopener">${esc(m.name)}</a>${changed}</div>
+      <div class="seg" role="group" aria-label="${esc(m.name)} decision">
+        <button type="button" class="k ${s === 'keep' ? 'on' : ''}" data-set="keep">Keep</button>
+        ${m.rec === 'auto' ? `<button type="button" class="a ${s === 'auto' ? 'on' : ''}" data-set="auto">Auto</button>` : ''}
+        <button type="button" class="s ${s === 'scrap' ? 'on' : ''}" data-set="scrap">Scrap</button>
+      </div>
+      <div class="note">${esc(m.note)}</div>${hint}`;
+    row.querySelectorAll('[data-set]').forEach(b => b.addEventListener('click', () => setOne(m.id, b.dataset.set)));
+    return row;
+  }
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+  function exportText(inSet) {
+    const lines = [];
+    for (const [key, title] of GROUPS) {
+      const out = MODS.filter(m => m.group === key && (state.get(m.id) === 'scrap' || (state.get(m.id) === 'auto' && !inSet.has(m.id))));
+      if (out.length) lines.push(`## ${title}`, ...out.map(m => `- ${m.name}  (${m.file})`), '');
+    }
+    return lines.join('\n') || '(nothing scrapped yet)';
+  }
+
+  // ---- state changes + persistence ----
+  async function setOne(id, val) {
+    if (state.get(id) === val) return;
+    state.set(id, val); render();
+    await persist(id, val);
+  }
+  async function setGroup(key, mode) {
+    const mods = MODS.filter(m => m.group === key);
+    const changes = [];
+    for (const m of mods) {
+      const val = mode === 'reset' ? m.rec : (m.rec === 'auto' && mode === 'keep' ? 'auto' : mode);
+      if (state.get(m.id) !== val) { state.set(m.id, val); changes.push([m.id, val]); }
+    }
+    render();
+    for (const [id, val] of changes) await persist(id, val);
+  }
+  async function persist(id, val) {
+    if (!db) { setStatus('not signed in: choices stay in this tab only', true); return; }
+    saving++; setStatus('saving…');
+    try { await db.doc('decisions/' + id).set({ choice: val, at: new Date().toISOString() }); }
+    catch (e) { setStatus('save failed: ' + (e && e.code || 'unknown'), true); saving--; return; }
+    saving--; if (!saving) setStatus('saved');
+  }
+  async function saveReviewed() {
+    if (!db) return;
+    try { await db.doc('meta/reviewed').set({ groups: [...reviewed] }); } catch (e) { setStatus('save failed: ' + (e && e.code || 'unknown'), true); }
+  }
+  function setStatus(t, err) { const el = $('#status'); el.textContent = t; el.className = 'status' + (err ? ' err' : ''); }
+
+  $('#copyBtn').addEventListener('click', () => {
+    const box = $('#exportBox');
+    navigator.clipboard.writeText(box.value).then(() => setStatus('scrap list copied')).catch(() => { box.focus(); box.select(); setStatus('select the text and copy it'); });
+  });
+
+  render();
+
+  (async () => {
+    db = window.claude && window.claude.use ? await window.claude.use('db') : null;
+    if (!db) { setStatus('viewing without saved state', true); return; }
+    db.collection('decisions').onSnapshot(snap => {
+      let any = false;
+      for (const d of snap.docs) {
+        const id = Number(d.id); const data = d.data();
+        if (byId.has(id) && data && ['keep', 'scrap', 'auto'].includes(data.choice) && state.get(id) !== data.choice) { state.set(id, data.choice); any = true; }
+      }
+      if (any) render();
+      if (!saving) setStatus(snap.empty ? 'no saved choices yet' : 'saved');
+    }, e => setStatus('sync error: ' + e.code, true));
+    db.doc('meta/reviewed').onSnapshot(snap => {
+      const g = snap.exists ? (snap.data().groups || []) : [];
+      reviewed.clear(); for (const k of g) reviewed.add(k); render();
+    }, () => {});
+  })();
+})();
+</script>

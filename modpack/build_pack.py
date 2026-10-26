@@ -1,0 +1,214 @@
+"""Build a trimmed CurseForge modpack from the Skybound instance and the audit decisions.
+
+Usage (from the repo root):
+    python modpack/build_pack.py [--decisions modpack/decisions.json] [--name "..."] [--version 1.0.0]
+
+Inputs
+  modpack/mods-audit.json   every mod with group + recommendation + dependency ids
+  modpack/decisions.json    optional overrides {"<curseforge project id>": "keep"|"scrap"|"auto"}
+  the local CurseForge instance of the original pack (manifest.json, minecraftinstance.json, config/, kubejs/, ...)
+
+Outputs (modpack/out/)
+  <slug>-<version>.zip      importable in the CurseForge app (Create Custom Profile -> Import)
+  pack/                     the unzipped contents (manifest.json, modlist.html, overrides/)
+  report.md                 what was kept and scrapped, and why
+  server-remove.txt         jar filenames to delete from the server's mods folder
+"""
+import argparse, json, os, re, shutil, sys, zipfile
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+DEFAULT_INSTANCE = Path.home() / "curseforge/minecraft/Instances/Create Aeronautics - Skybound  Create Aeronautics & Create Addons with Quests"
+OVERRIDE_DIRS = ["config", "kubejs", "defaultconfigs", "datapacks"]
+# Resource packs are aesthetic ("Realistic 3D ..." packs, loading backgrounds); shaders are optional and harmless.
+KEEP_SECTIONS = {"mods", "shaderpacks"}
+_col = HERE / "client-only-mods.txt"
+CLIENT_ONLY_MODS = {l.strip().lower() for l in open(_col, encoding="utf-8") if l.strip() and not l.startswith("#")} if _col.exists() else {"keyboardkeybinds"}
+
+
+def resolve(mods, decisions):
+    """Return (kept_ids, reasons) applying decisions over recommendations and auto-resolving libraries."""
+    state = {m["id"]: decisions.get(str(m["id"]), m["rec"]) for m in mods}
+    dependents = {}
+    for m in mods:
+        for dep in m["requires"]:
+            dependents.setdefault(dep, []).append(m["id"])
+    kept = {m["id"] for m in mods if state[m["id"]] == "keep"}
+    reasons = {}
+    changed = True
+    while changed:
+        changed = False
+        for m in mods:
+            mid = m["id"]
+            if state[mid] != "auto" or mid in kept:
+                continue
+            deps = dependents.get(mid, [])
+            if not deps and not m["requires"]:
+                kept.add(mid); reasons[mid] = "library with no declared dependents, kept to be safe"; changed = True
+            elif any(d in kept for d in deps):
+                kept.add(mid); reasons[mid] = "needed by " + ", ".join(name_of(mods, d) for d in deps if d in kept); changed = True
+    for m in mods:
+        mid = m["id"]
+        if mid in kept and mid not in reasons:
+            reasons[mid] = "kept"
+        elif mid not in kept:
+            reasons[mid] = "dropped: nothing kept needs it" if state[mid] == "auto" else "scrapped"
+    return kept, reasons, state, dependents
+
+
+def name_of(mods, mid):
+    for m in mods:
+        if m["id"] == mid:
+            return m["name"]
+    return str(mid)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--instance", default=str(DEFAULT_INSTANCE))
+    ap.add_argument("--decisions", default=str(HERE / "decisions.json"))
+    ap.add_argument("--name", default="Create Aeronautics - Skybound (Lucas fork)")
+    ap.add_argument("--version", default="1.0.0")
+    ap.add_argument("--out", default=str(HERE / "out"))
+    ap.add_argument("--no-local-mods", action="store_true", help="don't bundle this repo's own mod jars")
+    args = ap.parse_args()
+
+    inst = Path(args.instance).resolve()
+    if os.name == "nt" and not str(inst).startswith("\\\\?\\"):
+        inst = Path("\\\\?\\" + str(inst))
+    mods = json.load(open(HERE / "mods-audit.json", encoding="utf-8"))
+    decisions = {}
+    if Path(args.decisions).exists():
+        decisions = json.load(open(args.decisions, encoding="utf-8"))
+    kept, reasons, state, dependents = resolve(mods, decisions)
+
+    manifest = json.load(open(inst / "manifest.json", encoding="utf-8"))
+    instance = json.load(open(inst / "minecraftinstance.json", encoding="utf-8"))
+    addons = {a["addonID"]: a for a in instance["installedAddons"]}
+
+    # Warn about kept mods whose required dependency got scrapped.
+    warnings = []
+    for m in mods:
+        if m["id"] in kept:
+            missing = [name_of(mods, d) for d in m["requires"] if d in addons and d not in kept]
+            if missing:
+                warnings.append(f"{m['name']} is kept but needs scrapped: {', '.join(missing)}")
+
+    files_out = []
+    for f in manifest["files"]:
+        pid = f["projectID"]
+        addon = addons.get(pid)
+        section = addon["categorySection"]["path"] if addon else "mods"
+        if section == "mods":
+            if pid in kept:
+                files_out.append(f)
+        elif section in KEEP_SECTIONS:
+            files_out.append(f)
+
+    # Mods added on top of the original pack: modpack/extra-mods.json, a list of
+    # {"projectID": int, "fileID": int, "name": str, "url": str}
+    extra_path = HERE / "extra-mods.json"
+    extras = json.load(open(extra_path, encoding="utf-8")) if extra_path.exists() else []
+    for e in extras:
+        files_out.append({"projectID": e["projectID"], "fileID": e["fileID"], "required": True})
+
+    out = Path(args.out).resolve()
+    if os.name == "nt" and not str(out).startswith("\\\\?\\"):
+        out = Path("\\\\?\\" + str(out))  # long-path mode: config trees get deeper than MAX_PATH
+    pack = out / "pack"
+    if pack.exists():
+        shutil.rmtree(pack)
+    (pack / "overrides").mkdir(parents=True)
+    new_manifest = dict(manifest)
+    new_manifest["name"] = args.name
+    new_manifest["version"] = args.version
+    new_manifest["author"] = "Lucas"
+    new_manifest["files"] = files_out
+    json.dump(new_manifest, open(pack / "manifest.json", "w", encoding="utf-8"), indent=2)
+
+    for d in OVERRIDE_DIRS:
+        src = inst / d
+        if src.exists():
+            shutil.copytree(src, pack / "overrides" / d, ignore=shutil.ignore_patterns("*.OLD", "*.bak"))
+
+    # Jars that live in the instance's mods folder but are NOT CurseForge projects (the original pack shipped them
+    # as overrides), e.g. the Aetherial Islands worldgen datapack-jar that makes the pack "Skybound". Keep them.
+    manifest_files = {a["fileNameOnDisk"] for a in addons.values() if a["categorySection"]["path"] == "mods"}
+    override_jars = []
+    for jar in sorted((inst / "mods").glob("*.jar")):
+        if jar.name not in manifest_files:
+            (pack / "overrides" / "mods").mkdir(exist_ok=True)
+            shutil.copy2(jar, pack / "overrides" / "mods" / jar.name)
+            override_jars.append(jar.name)
+
+    # Checklist mod grid (authored by modpack/make_grid.py) ships as a config file on both sides
+    for name in ("checklist-grid.json", "checklist-upgrades.json"):
+        src = HERE / name
+        if src.exists():
+            (pack / "overrides" / "config").mkdir(exist_ok=True)
+            shutil.copy2(src, pack / "overrides" / "config" / name)
+
+    # Our own mods, built by Gradle in this repo: <subproject>/build/libs/<modid>-<mc>-<ver>.jar
+    local_jars = []
+    if not args.no_local_mods:
+        for jar in sorted(HERE.parent.glob("*/build/libs/*.jar")):
+            if jar.name.endswith(("-sources.jar", "-javadoc.jar")) or jar.parent.parent.parent.name == "dev-driver":
+                continue
+            (pack / "overrides" / "mods").mkdir(exist_ok=True)
+            shutil.copy2(jar, pack / "overrides" / "mods" / jar.name)
+            local_jars.append(jar.name)
+
+    # modlist.html like the CurseForge app writes it
+    rows = []
+    for f in files_out:
+        a = addons.get(f["projectID"])
+        if a:
+            rows.append(f'<li><a href="{a.get("webSiteURL", "")}">{a["name"]} (by {a.get("primaryAuthor", "")})</a></li>')
+    for e in extras:
+        rows.append(f'<li><a href="{e.get("url", "")}">{e["name"]} (added)</a></li>')
+    (pack / "modlist.html").write_text("<ul>\n" + "\n".join(rows) + "\n</ul>\n", encoding="utf-8")
+
+    slug = re.sub(r"[^a-z0-9]+", "-", args.name.lower()).strip("-")
+    zip_path = out / f"{slug}-{args.version}.zip"
+    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+        for p in pack.rglob("*"):
+            if p.is_file():
+                z.write(p, p.relative_to(pack).as_posix())
+
+    # report + server removal list
+    scrapped = [m for m in mods if m["id"] not in kept]
+    kept_mods = [m for m in mods if m["id"] in kept]
+    groups = {}
+    for m in scrapped:
+        groups.setdefault(m["group"], []).append(m)
+    lines = [f"# {args.name} {args.version}", "",
+             f"Kept {len(kept_mods)} mods, scrapped {len(scrapped)} of {len(mods)}.", ""]
+    if warnings:
+        lines += ["## Warnings", *[f"- {w}" for w in warnings], ""]
+    lines.append("## Scrapped")
+    for g, ms in sorted(groups.items()):
+        lines.append(f"### {g}")
+        lines += [f"- {m['name']} ({reasons[m['id']]})" for m in ms]
+        lines.append("")
+    if extras:
+        lines += ["## Added", *[f"- {e['name']} ({e.get('url', '')})" for e in extras], ""]
+    if local_jars:
+        lines += ["## Our own mods (bundled in overrides/mods)", *[f"- {j}" for j in local_jars], ""]
+    if override_jars:
+        lines += ["## Non-CurseForge jars carried over from the original pack (overrides/mods)", *[f"- {j}" for j in override_jars], ""]
+    # client-only mods never go to the dedicated server
+    server_jars = [j for j in local_jars if not any(j.lower().startswith(c) for c in CLIENT_ONLY_MODS)]
+    (out / "server-add.txt").write_text("\n".join(server_jars) + "\n", encoding="utf-8")
+    lines.append("## Kept libraries (auto-resolved)")
+    lines += [f"- {m['name']}: {reasons[m['id']]}" for m in kept_mods if m["rec"] == "auto"]
+    (out / "report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (out / "server-remove.txt").write_text("\n".join(m["file"] for m in scrapped) + "\n", encoding="utf-8")
+
+    print(f"kept {len(kept_mods)} mods, scrapped {len(scrapped)}; manifest files {len(files_out)} (was {len(manifest['files'])}); bundled own jars: {local_jars or 'none built yet'}")
+    print(f"pack zip: {zip_path}")
+    for w in warnings:
+        print("WARNING:", w)
+
+
+if __name__ == "__main__":
+    main()

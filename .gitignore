@@ -27,3 +27,11 @@ run-data/
 # local tooling output
 screenshots/
 repo/
+
+# modpack tooling
+modpack/server.json
+modpack/db-export/
+modpack/out/
+modpack/tools/
+testserver/
+*.installer.jar.log

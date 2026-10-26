@@ -1,0 +1,10 @@
+[
+  {
+    "projectID": 232597,
+    "fileID": 8147538,
+    "name": "Inventory Crafting Grid (3x3 crafting in your inventory)",
+    "file": "invcrafting-1.21.1-2.0.0.jar",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/inventory-crafting-grid",
+    "why": "Lucas wants a 3x3 crafting grid in the regular inventory; existing mod, NeoForge 1.21.1 file 2.0.0 (May 2026), works on client and server."
+  }
+]

@@ -1,0 +1,62 @@
+# Jar-name prefixes (case-insensitive) of client-only mods that must NOT be put on a dedicated server.
+# Used by boot_server.py, migrate_server.py and build_pack.py (server-add list). One per line, # comments.
+# Renderers / performance (client)
+sodium-
+iris-
+reeses-sodium-options
+flerovium
+EuphoriaPatcher
+entityculling
+ImmediatelyFast
+BadOptimizations
+particle_core
+colorwheel
+createbetterfps
+betterfpsdist
+gpumemleakfix
+modelfix
+# Menus / HUD / UI theming (client)
+loadingbackgrounds
+fancymenu
+konkrete
+melody
+justzoom
+blur-
+Perception-
+underlay
+ImmersiveUI
+BetterF3
+chat_heads
+modernworldcreation
+fancytoasts
+ToastControl
+Controlling-
+MouseTweaks
+inventoryhud
+EquipmentCompare
+enchdesc
+Highlighter-
+# Animations / visuals / sounds (client)
+skinlayers3d
+notenoughanimations
+eatinganimation
+fallingleaves
+lambdynamiclights
+AmbientSounds
+PresenceFootsteps
+sound-physics-remastered
+SubtleEffects
+visuality
+particular-
+BetterThirdPerson
+BetterAnimationsCollection
+entity_model_features
+entity_texture_features
+mace3d
+Better_Pickaxe_Trims
+Better-Sword-Trims
+animal_armor_trims
+BEB-NeoForge
+BTP-NeoForge
+# Our own
+keyboardkeybinds

@@ -1,0 +1,6 @@
+{
+  "host": "your.server.ip",
+  "port": 2022,
+  "username": "your-sftp-username",
+  "remote_mods_dir": "/mods"
+}

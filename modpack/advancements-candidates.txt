@@ -1,0 +1,743 @@
+
+== Advanced Netherite (Forge / NeoForge)
+chal   advancednetherite:husbandry/obtain_netherite_diamond_hoe | Why?                                   | Craft a Netherite-Diamond Hoe and visit a psychologist afterwards | inventory_changed
+chal   advancednetherite:nether/netherite_diamond_armor        | Cover Me in Netherite-Diamond          | Get a full suit of Netherite-Diamond armor | inventory_changed
+chal   advancednetherite:nether/netherite_emerald_armor        | Endermen?                              | Get a full suit of Netherite-Emerald armor | inventory_changed
+chal   advancednetherite:nether/netherite_gold_armor           | Ultimate Piglin distraction suit       | Get a full suit of Netherite-Gold armor | inventory_changed
+chal   advancednetherite:nether/netherite_iron_armor           | No More Phantoms                       | Get a full suit of Netherite-Iron armor | inventory_changed
+
+== Ars Nouveau
+chal H ars_nouveau:catch_lightning                             | Lightning in a Bottle                  | Catch a lightning bolt in a containment jar. | catch_lightning
+chal   ars_nouveau:create_portal                               | Thinking with...wrong game             | Create a Warp Portal | portals
+goal   ars_nouveau:familiar                                    | This Seems Familiar...                 | Bind a magical creature into a Familiar | familiar
+task   ars_nouveau:poof_mob                                    | Where did it go?                       | Make a "Trade" with a Magical Creature | poof_mob
+chal H ars_nouveau:prismatic                                   | Thinking with Prisms                   | Redirect a Spell using a Prism four or more times | prismatic
+goal   ars_nouveau:ritual_gravity                              | You're Grounded                        | Be affected by a Ritual of Gravity | effects_changed
+chal H ars_nouveau:shrunk_starbuncle                           | Honey I Shrunk the Starbuncle          | Put a Starbuncle in a Containment Jar | shrunk_starby
+chal H ars_nouveau:time_in_a_bottle                            | Time in a Bottle                       | Put a clock in a containment jar | time_in_bottle
+chal H ars_nouveau:wilden_explosion                            | Wait, it can fly?                      | Witness an explosive divebomb | chimera_explosion
+
+== Artifacts
+task   artifacts:chest_slayer                                  | Chest Slayer                           | Kill a Mimic | player_killed_entity
+
+== Better Archeology
+chal   betterarcheology:all_fossils_found                      | Paleontologist's Pride                 | Collect all fossil parts! | inventory_changed
+goal   betterarcheology:unidentified_artifact                  | It's all coming together               | Craft an Unidentified Artifact from Shards. Now the identifying begins! | inventory_changed
+
+== Biomes O' Plenty
+chal   biomesoplenty:biomesoplenty/all_biomes                  | Wanderer                               | Discover every biome in Biomes O' Plenty | location
+task   biomesoplenty:biomesoplenty/root                        | Biomes O' Plenty                       | Explore the world around you | location
+
+== Bosses'Rise - Epic Souls like boss fights
+task   block_factorys_bosses:die_boss                          | Bosses' Rise                           | Die fighting a Boss | entity_killed_player
+chal   block_factorys_bosses:kill_all_bosses                   | Unbound                                | Defeat all Bosses | player_killed_entity
+chal   block_factorys_bosses:kill_boss_under_minute            | Overclocker                            | Defeat a Boss under a minute | impossible
+task   block_factorys_bosses:kill_dragon                       | Dragon Slayer                          | Defeat Ashlord, the Infernal Dragon | player_killed_entity
+task   block_factorys_bosses:kill_kraken                       | Terror of the Depths                   | Defeat Nerakyss, the Kraken | player_killed_entity
+task   block_factorys_bosses:kill_sandworm                     | The Beast Below                        | Defeat Sirok, the Sandworm | player_killed_entity
+task   block_factorys_bosses:kill_underworld_knight            | Back Into Hell!                        | Defeat Helvar, the Underworld Knight | player_killed_entity
+task   block_factorys_bosses:kill_yeti                         | Lost in the Snow                       | Defeat Skor, the Yeti | player_killed_entity
+chal   block_factorys_bosses:no_hit_dragon                     | Dragon Hunter                          | Kill the Infernal Dragon without getting hit | impossible
+chal   block_factorys_bosses:no_hit_kraken                     | Wraith of the Tide                     | Kill Nerakyss, the Kraken, without getting hit | impossible
+chal   block_factorys_bosses:no_hit_sandworm                   | Desert Power                           | Kill Sirok, the Sandworm, without getting hit | impossible
+chal   block_factorys_bosses:no_hit_underworld_knight          | Beyond Death                           | Kill the Underworld Knight without getting hit | impossible
+chal   block_factorys_bosses:no_hit_yeti                       | King of the Hill                       | Kill Skor without getting hit | impossible
+
+== Bountiful
+task   bountiful:bountiful/bounty_complete                     | Honest Pay for Honest Work             | Complete a bounty! | bounty_completed
+task   bountiful:bountiful/fetch_quest                         | Just a 'Fetch' Quest                   | Have a pet kill a mob for a bounty objective | fetch_quest
+task   bountiful:bountiful/ninety_five_theses                  | 95 Theses                              | Put every type of Decree on a bounty board at once | all_decrees_placed
+task   bountiful:bountiful/printing_press                      | Printing Press                         | Combine two Decrees at an anvil | printing_press
+task   bountiful:bountiful/procrastinator                      | Master Procrastinator                  | Complete a bounty with less than ten seconds left | procrastinator
+task   bountiful:bountiful/rush_order                          | Rush Order Delivery                    | Complete a bounty in under a minute | rush_order
+task   bountiful:bountiful/town_crier                          | Town Crier                             | Put a decree on a bounty board | decree_placed
+
+== Create
+task   create:andesite_casing                                  | The Andesite Age                       | Apply Andesite Alloy to stripped wood, creating a basic casing for your machines | andesite_casing_builtin
+goal   create:anvil_plough                                     | Blacksmith Artillery                   | Launch an Anvil with Mechanical Ploughs | anvil_plough_builtin
+task   create:arm_blaze_burner                                 | Combust-o-Tron                         | Instruct a Mechanical Arm to feed your Blaze Burner | arm_blaze_burner_builtin
+goal   create:arm_many_targets                                 | Organize-o-Tron                        | Program a Mechanical Arm with 10 or more output locations | arm_many_targets_builtin
+task   create:backtank                                         | Pressure to Go                         | Create a Copper Backtank and make it accumulate air pressure | backtank_builtin
+task   create:belt                                             | Kelp Drive                             | Connect two Shafts with a Mechanical Belt | belt_builtin
+goal H create:belt_funnel_kiss                                 | The Parrots and the Flaps              | Make two Belt-mounted Funnels kiss
+§7(Hidden Advancement) | belt_funnel_kiss_builtin
+task   create:brass_casing                                     | The Brass Age                          | Apply Brass Ingots to stripped wood, creating a casing for more sophisticated ma | brass_casing_builtin
+task   create:cardboard_armor                                  | Full Stealth                           | Sneak around in full Cardboard Armor | cardboard_armor_builtin
+goal H create:cardboard_armor_trim                             | Arts and Crafts                        | Decorate your cardboard equipment with armor trims
+§7(Hidden Advancement) | cardboard_armor_trim_builtin
+goal   create:cart_pickup                                      | Strong Arms                            | Pick up a Minecart Contraption with at least 200 attached blocks | cart_pickup_builtin
+goal H create:chained_drain                                    | On a Roll                              | Watch an item move across a row of Item Drains
+§7(Hidden Advancement) | chained_drain_builtin
+task   create:chute                                            | Vertical Logistics                     | Transport some items by Chute | chute_builtin
+task   create:clockwork_bearing                                | Contraption o'Clock                    | Assemble a structure mounted on a Clockwork Bearing | clockwork_bearing_builtin
+task   create:compacting                                       | Compactification                       | Use a Mechanical Press and a Basin to create fewer items from more | compacting_builtin
+task   create:conductor                                        | Conductor Instructor                   | Instruct a Train driver with a Train Schedule | conductor_builtin
+task   create:contraption_actors                               | Moving with Purpose                    | Create a Contraption with drills, saws, or harvesters on board | contraption_actors_builtin
+task   create:copper_casing                                    | The Copper Age                         | Apply Copper Ingots to stripped wood, creating a waterproof casing for your mach | copper_casing_builtin
+goal H create:crafter_lazy_000                                 | Desperate Measures                     | Drastically slow down a Mechanical Crafter to procrastinate on proper infrastruc | crafter_lazy_000_builtin
+goal H create:cross_streams                                    | Don't Cross the Streams!               | Watch two fluids meet in your pipe network
+§7(Hidden Advancement) | cross_streams_builtin
+goal   create:crusher_maxed_0000                               | Crushing It                            | Operate a pair of Crushing Wheels at maximum speed | crusher_maxed_0000_builtin
+task   create:crushing_wheel                                   | Wheels of Destruction                  | Place and power a set of Crushing Wheels | crushing_wheel_builtin
+task   create:cuckoo_clock                                     | Is it Time?                            | Witness your Cuckoo Clock announce bedtime | cuckoo_clock_builtin
+task   create:deployer                                         | Artificial Intelligence                | Place and power a Deployer, the perfect reflection of yourself | deployer_builtin
+task   create:display_board_0                                  | Dynamic Timetables                     | Forecast a Train's arrival on your Display Board with the help of Display Links | display_board_0_builtin
+task   create:display_link                                     | Big Data                               | Use a Display Link to visualise information | display_link_builtin
+task   create:diving_suit                                      | Ready for the Depths                   | Equip a Diving Helmet and a Copper Backtank, then jump into water | diving_suit_builtin
+goal   create:diving_suit_lava                                 | Swimming with the Striders             | Attempt to take a dive in lava with your netherite diving gear | diving_suit_lava_builtin
+task   create:drain                                            | Tumble Draining                        | Watch a fluid-containing item be emptied by an Item Drain | drain_builtin
+goal   create:ejector_maxed                                    | Springboard Champion                   | Get launched more than 30 blocks by a Weighted Ejector | ejector_maxed_builtin
+task   create:encased_fan                                      | Wind Maker                             | Place and power an Encased Fan | encased_fan_builtin
+task   create:extendo_grip                                     | Boioioing!                             | Get hold of an Extendo Grip | extendo_grip_builtin
+goal H create:extendo_grip_dual                                | To Full Extent                         | Dual-wield Extendo Grips for superhuman reach
+§7(Hidden Advancement) | extendo_grip_dual_builtin
+task   create:factory_gauge                                    | High Logistics                         | Trigger an automatic package request using Factory Gauges | factory_gauge_builtin
+task   create:fan_processing                                   | Processing by Particle                 | Use an Encased Fan to process materials | fan_processing_builtin
+goal H create:fist_bump                                        | Pound It, Bro!                         | Make two Deployers fist-bump
+§7(Hidden Advancement) | fist_bump_builtin
+goal   create:foods                                            | Balanced Diet                          | Create Chocolate Glazed Berries, a Honeyed Apple, and a Sweet Roll all from the  | foods_builtin
+task   create:frogport                                         | Hungry hoppers                         | Catch packages from your Chain Conveyor using a Frogport | frogport_builtin
+task   create:funnel                                           | Airport Aesthetic                      | Extract or insert items into a container using a Funnel | funnel_builtin
+task   create:glass_pipe                                       | Flow Discovery                         | Use your Wrench on a pipe that contains a fluid | glass_pipe_builtin
+goal H create:hand_crank_000                                   | Workout Session                        | Use a Hand Crank until fully exhausted
+§7(Hidden Advancement) | hand_crank_000_builtin
+task   create:haunted_bell                                     | Shadow Sense                           | Toll a Haunted Bell | haunted_bell_builtin
+task   create:honey_drain                                      | Autonomous Bee-Keeping                 | Use pipes to pull honey from a Bee Nest or Beehive | honey_drain_builtin
+task   create:hose_pulley                                      | Industrial Spillage                    | Lower a Hose Pulley and watch it drain or fill a body of fluid | hose_pulley_builtin
+goal   create:hose_pulley_lava                                 | Tapping the Mantle                     | Pump from a body of lava large enough to be considered infinite | hose_pulley_lava_builtin
+goal H create:lava_wheel_00000                                 | Magma Wheel                            | This shouldn't have worked
+§7(Hidden Advancement) | lava_wheel_00000_builtin
+task   create:linked_controller                                | Remote Activation                      | Activate a Redstone Link using a Linked Controller | linked_controller_builtin
+goal   create:long_train                                       | Ambitious Endeavours                   | Create a Train with at least 6 carriages | long_train_builtin
+goal   create:long_travel                                      | Field Trip                             | Leave a Train Seat over 5000 blocks away from where you started travelling | long_travel_builtin
+task   create:mechanical_arm                                   | Busy Hands                             | Watch your Mechanical Arm transport its first item | mechanical_arm_builtin
+task   create:mechanical_crafter                               | Automated Assembly                     | Place and power some Mechanical Crafters | mechanical_crafter_builtin
+task   create:mechanical_mixer                                 | Mixing It Up                           | Combine ingredients in a Mechanical Mixer | mechanical_mixer_builtin
+task   create:mechanical_press                                 | Bonk!                                  | Create some sheets in a Mechanical Press | mechanical_press_builtin
+task   create:mechanical_pump_0                                | Under Pressure                         | Place and power a Mechanical Pump | mechanical_pump_0_builtin
+task   create:millstone                                        | Embrace the Grind                      | Use a Millstone to pulverise materials | millstone_builtin
+goal H create:musical_arm                                      | DJ Mechanico                           | Watch a Mechanical Arm operate your Jukebox
+§7(Hidden Advancement) | musical_arm_builtin
+goal H create:package_chute_throw                              | Nothing but net                        | Land your cardboard package throw in an item chute
+§7(Hidden Advancement) | package_chute_throw_builtin
+task   create:packager                                         | Post Production                        | Package items from an inventory using the Packager | packager_builtin
+goal H create:pipe_organ                                       | The Pipe Organ                         | Attach 12 uniquely pitched Steam Whistles to a single Fluid Tank
+§7(Hidden Advan | pipe_organ_builtin
+task   create:portable_storage_interface                       | Drive-by Exchange                      | Use a Portable Storage Interface to take or insert items into a Contraption | portable_storage_interface_builtin
+task   create:potato_cannon                                    | Fwoomp!                                | Defeat an enemy with your Potato Cannon | potato_cannon_builtin
+goal   create:potato_cannon_collide                            | Veggie Fireworks                       | Cause Potato Cannon projectiles of different types to collide with each other | potato_cannon_collide_builtin
+goal   create:pulley_maxed                                     | Rope to Nowhere                        | Extend a Rope Pulley over 200 blocks deep | pulley_maxed_builtin
+goal H create:red_signal                                       | Expert Driver                          | Run a red Train Signal
+§7(Hidden Advancement) | red_signal_builtin
+task   create:saw_processing                                   | Workshop's Most Feared                 | Use an upright Mechanical Saw to process materials | saw_processing_builtin
+goal   create:self_deploying                                   | Self-Driving Cart                      | Create a Minecart Contraption that places tracks in front of itself | self_deploying_builtin
+task   create:shifting_gears                                   | Shifting Gears                         | Connect a Large Cogwheel to a Small Cogwheel, allowing you to change the speed o | shifting_gears_builtin
+task   create:speed_controller                                 | Engineers hate this simple trick!      | Fine-tune your Contraption with a Rotation Speed Controller | speed_controller_builtin
+task   create:spout                                            | Sploosh                                | Watch a fluid-containing item be filled by a Spout | spout_builtin
+task   create:steam_engine                                     | The Powerhouse                         | Use a Steam Engine to generate torque | steam_engine_builtin
+goal   create:steam_engine_maxed                               | Full Steam                             | Run a boiler at the maximum level of power | steam_engine_maxed_builtin
+task   create:steam_whistle                                    | Voice of an Angel                      | Activate a Steam Whistle | steam_whistle_builtin
+task   create:stock_ticker                                     | Order Up!                              | Employ a mob at your stock ticker and make your first requests | stock_ticker_builtin
+task   create:stressometer                                     | Stress for Nerds                       | Get an exact readout with the help of Engineer's Goggles and a Stressometer | stressometer_builtin
+goal H create:stressometer_maxed                               | Perfectly Stressed                     | Get a 100% readout from a Stressometer
+§7(Hidden Advancement) | stressometer_maxed_builtin
+task   create:super_glue                                       | Area of Connect                        | Super Glue some blocks into a group | super_glue_builtin
+task   create:table_cloth_shop                                 | Open for business                      | Put items up for sale using a Table Cloth | table_cloth_shop_builtin
+goal   create:track_crafting_factory                           | Track Factory                          | Produce more than 1000 Train Tracks with the same Mechanical Press | track_crafting_factory_builtin
+task   create:track_signal                                     | Traffic Control                        | Place a Train Signal | track_signal_builtin
+task   create:train                                            | All Aboard!                            | Assemble your first Train | train_builtin
+task   create:train_casing_00                                  | The Locomotive Age                     | Use Sturdy Sheets to create a casing for railway components | train_casing_00_builtin
+goal H create:train_crash                                      | Terrible Service                       | Witness a Train crash as a passenger
+§7(Hidden Advancement) | train_crash_builtin
+goal H create:train_crash_backwards                            | Blind Spot                             | Crash into another Train while driving backwards
+§7(Hidden Advancement) | train_crash_backwards_builtin
+task   create:train_portal                                     | Dimensional Commuter                   | Ride a Train through a portal | train_portal_builtin
+goal H create:train_roadkill                                   | Road Kill                              | Run over an enemy with your Train
+§7(Hidden Advancement) | train_roadkill_builtin
+task   create:train_whistle                                    | Choo Choo!                             | Assemble a Steam Whistle to your Train and activate it while driving | train_whistle_builtin
+task   create:water_supply                                     | Puddle Collector                       | Use the pulling end of a Fluid Pipe or Mechanical Pump to collect water | water_supply_builtin
+task   create:water_wheel                                      | Harnessed Hydraulics                   | Place a Water Wheel and use it to generate torque | water_wheel_builtin
+task   create:windmill                                         | A mild Breeze                          | Assemble a windmill and use it to generate torque | windmill_builtin
+goal   create:windmill_maxed                                   | A strong Breeze                        | Assemble a windmill of maximum strength | windmill_maxed_builtin
+
+== Create : Creating Space
+chal   creatingspace:reach_earth_orbit                         | Not enough ... space down there.       | Reach earth orbit. | changed_dimension
+chal   creatingspace:where_is_the_cheese                       | Where is the cheese?                   | Reach the moon. | changed_dimension
+
+== Create: AeroWarptics
+chal   aerowarptics:blind_jump                                 | Nobody Has Been Here                   | Warp to a fix a Rift Probe found, rather than to an anchor somebody placed | warp_completed
+task   aerowarptics:first_warp                                 | Somewhere Else                         | Ride an airship through a rift and arrive in one piece | warp_completed
+goal   aerowarptics:fissure_closed                             | Sealed Over                            | Empty a Rift Fissure with a Spatial Siphon, and be there when it closes for good | fissure_closed
+goal   aerowarptics:gate_haulier                               | Freight Forward                        | Take a vehicle through a Rift Gate. Both ends have to be wide enough for it | gate_travel
+task   aerowarptics:gate_traveller                             | Step Through                           | Walk into a dialled Rift Gate and come out somewhere else | gate_travel
+goal   aerowarptics:long_haul                                  | The Long Way Round                     | Cross two thousand blocks in a single warp | warp_completed
+goal   aerowarptics:ship_summoned                              | Come About                             | Call a bound airship down to the ground you are pointing at | ship_summoned
+chal   aerowarptics:singularity                                | Point of No Return                     | Build a Singularity drive, and buy its reach with an unsteady arrival | inventory_changed
+
+== Create: Enchantment Industry
+goal H create_enchantment_industry:a_shower_experience         | A Shower "Experience"                  | Break a Fluid Pipe and bathe in the leaked experience
+§7(Hidden Advancement) | a_shower_experience
+task   create_enchantment_industry:assembly_aesthetics         | Assembly Aesthetics                    | Use a Printer to change a package's pattern | assembly_aesthetics
+goal   create_enchantment_industry:blazing_centurion           | Blazing Centurion                      | Use a Blaze Forger 1,000 times | stat
+task   create_enchantment_industry:blazing_enchantment         | Blazing Enchantment                    | Enchant an unenchanted item using a Blaze Enchanter | blazing_enchantment
+task   create_enchantment_industry:blazing_fusion              | Blazing Fusion                         | Merge two of the same item using a Blaze Forger | blazing_fusion
+task   create_enchantment_industry:brand_registry              | Brand Registry                         | Use a Printer to rename an item | brand_registry
+task   create_enchantment_industry:copiable_masterpiece        | Copiable Masterpiece                   | Copy a Written Book using a Printer | copiable_masterpiece
+task   create_enchantment_industry:copiable_mystery            | Copiable Mystery                       | Copy an Enchanted Book using a Printer | copiable_mystery
+goal   create_enchantment_industry:experienced_recycler        | Experienced Recycler                   | Obtain 1,000,000 mB of Liquid Experience from Mechanical Grindstones | stat
+task   create_enchantment_industry:gone_with_the_foil          | Gone with the Foil                     | Watch an enchanted item be disenchanted by a Mechanical Grindstone | gone_with_the_foil
+goal   create_enchantment_industry:great_publisher             | Great Publisher                        | Use a Printer 1,000 times | stat
+task   create_enchantment_industry:grind_to_polish             | Grind to Polish                        | Sandpaper? I've got a better one | grind_to_polish
+goal   create_enchantment_industry:lightning_catalysis         | Lightning Catalysis                    | Obtain Super Experience | inventory_changed
+task   create_enchantment_industry:magic_unbinding             | Magic Unbinding                        | Strip an item's enchantment off using a Blaze Forger | magic_unbinding
+goal   create_enchantment_industry:omni_enchanter              | Omni-Enchanter                         | Unbelievable! You've Super Enchanted 1,000 times! Now the number speaks for itse | stat
+goal H create_enchantment_industry:osha_violation              | OSHA Violation                         | You should NOT have let this happen!!!
+§7(Hidden Advancement) | osha_violation
+goal   create_enchantment_industry:paradox_fusion              | Paradox Fusion                         | How is this possible? They shouldn't appear at the same time! | paradox_fusion
+goal   create_enchantment_industry:probability_spike           | Probability Spike                      | How did all these treasures get here? | probability_spike
+task   create_enchantment_industry:sigil_casting               | Sigil Casting                          | Apply an Enchanting Template using a Blaze Forger | sigil_casting
+task   create_enchantment_industry:sigil_forging               | Sigil Forging                          | Add a new enchantment to an Enchanting Template using a Blaze Enchanter | sigil_forging
+task   create_enchantment_industry:spirit_taking               | Spirit-Taking                          | Store your experience using an Experience Hatch | spirit_taking
+task   create_enchantment_industry:spiritual_return            | Spiritual Return                       | Retrieve some experience using an Experience Hatch | spiritual_return
+task   create_enchantment_industry:supply_chain_refactor       | Supply Chain Refactor                  | Use a Printer to change a package's address | supply_chain_refactor
+goal   create_enchantment_industry:thousand_runes              | Thousand Runes                         | Use a Blaze Enchanter 1,000 times | stat
+goal   create_enchantment_industry:thousandfold_everchant      | Thousandfold Everchant                 | Classic Blaze Enchanter enchants 1,000 times | stat
+goal   create_enchantment_industry:transcendent_overclock      | Transcendent Overclock                 | How is this possible? Enchantment level caps don't exist? | transcendent_overclock
+
+== Create: Escalated
+goal   escalated:escalator_100                                 | Stairway to Heaven                     | Ascend 100 blocks only on moving escalators | escalator_100_builtin
+chal H escalated:escalator_100_nether                          | No Stairway, Denied!                   | Ascend 100 blocks only on moving escalators in the nether | escalator_100_nether_builtin
+task   escalated:handrail                                      | Please Hold Handrail                   | Decorate your escalator with a Mechanical Belt | handrail_builtin
+task   escalated:walkway                                       | The Fast and the Fashionable           | Connect two Shafts with a walkway/escalator | walkway_builtin
+
+== Create: Numismatics
+goal H numismatics:is_this_legal                               | Is This Legal?                         | Buy coins for less than they are worth
+§7(Hidden Advancement) | is_this_legal_builtin
+goal H numismatics:money_laundering                            | Money Laundering                       | Buy coins in a vendor
+§7(Hidden Advancement) | money_laundering_builtin
+goal H numismatics:questionable_investment                     | Questionable Investment                | Buy coins for more than they are worth
+§7(Hidden Advancement) | questionable_investment_builtin
+
+== Create: Structures Arise
+task   create_structures_arise:structures/chocolate_pit        | Chocolate Pit                          | Discover the Chocolate Pit. | location
+task   create_structures_arise:structures/create_bastion       | Create Bastion                         | Discover the Create Bastion. | location
+task   create_structures_arise:structures/create_copper_statue | Copper Statue                          | Discover the Copper Statue. | location
+task   create_structures_arise:structures/create_dungeon_base  | Create Dungeon                         | Discover the Create Dungeon. | location
+task   create_structures_arise:structures/create_ruined_castle | Ruined Castle                          | Discover the Ruined Castle. | location
+task   create_structures_arise:structures/createairdrop        | Airdrop                                | Discover the Airdrop. | location
+task   create_structures_arise:structures/createcontainer      | Container                              | Discover the Container. | location
+task   create_structures_arise:structures/createcushercrane    | Crusher Crane                          | Discover the Crusher Crane. | location
+task   create_structures_arise:structures/createdesertwell     | Desert Well                            | Discover the Desert Well. | location
+task   create_structures_arise:structures/createfluidtank      | Fluid Tank                             | Discover the Fluid Tank. | location
+task   create_structures_arise:structures/createhouse          | Create House                           | Discover the Create House. | location
+task   create_structures_arise:structures/createlittleman      | Little Man                             | Discover the Little Man. | location
+task   create_structures_arise:structures/createlosttrainstation | Lost Train Station                     | Discover the Lost Train Station. | location
+task   create_structures_arise:structures/createminiskyvillage | Mini Sky Village                       | Discover the Mini Sky Village. | location
+task   create_structures_arise:structures/createmonsterroom    | Monster Room                           | Discover the Monster Room. | location
+task   create_structures_arise:structures/createoldruine       | Old Ruin                               | Discover the Old Ruin. | location
+task   create_structures_arise:structures/createpickaxestatue  | Pickaxe Statue                         | Discover the Pickaxe Statue. | location
+task   create_structures_arise:structures/createwitchhut       | Create Witch Hut                       | Discover the Create Witch Hut. | location
+task   create_structures_arise:structures/crimsite_tower       | Crimsite Tower                         | Discover the Crimsite Tower. | location
+task   create_structures_arise:structures/darkcastle           | Dark Castle                            | Discover the Dark Castle. | location
+task   create_structures_arise:structures/deadlordshouse       | Dead Lord's House                      | Discover the Dead Lord's House. | location
+task   create_structures_arise:structures/honey_pit            | Honey Pit                              | Discover the Honey Pit. | location
+task   create_structures_arise:structures/minetrain            | Mine Train                             | Discover the Mine Train. | location
+task   create_structures_arise:structures/obsidiantemple       | Obsidian Temple                        | Discover the Obsidian Temple. | location
+task   create_structures_arise:structures/pillager_boat        | Pillager Boat                          | Discover the Pillager Boat. | location
+task   create_structures_arise:structures/pillagersteampunkairship | Pillager Steampunk Airship             | Discover the Pillager Steampunk Airship. | location
+task   create_structures_arise:structures/towerofochrum        | Tower of Ochrum                        | Discover the Tower of Ochrum. | location
+task   create_structures_arise:structures/windmill             | Windmill                               | Discover the Windmill. | location
+
+== Create: Trading Floor
+task   trading_floor:drop_shipper                              | Intro to drop-shipping                 | Generate 64 emeralds from a single trading depot | drop_shipper_builtin
+task   trading_floor:happy_jeff                                | Jeff Bezos would be proud              | Generate 1000 emeralds from a single trading depot | happy_jeff_builtin
+task   trading_floor:money_money_money                         | Money Money Money,                     | Make a trade automatically using a trading depot | money_money_money_builtin
+
+== Cyberspace
+goal   cyberspace:cyberspace_visited_achievement               | .NET                                   | Enter the Cyberspace | changed_dimension
+
+== Darker Depths
+task   darkerdepths:activities/bottle_void_soul                | Bottle O'Void Souls                    | Bottle a Void Soul with a Glass Bottle | player_interacted_with_entity
+task   darkerdepths:activities/elytra_boosted_by_geyser        | Inverse Rocketry                       | Fly through a geyser burst with an Elytra | geyser_elytra_boost
+task   darkerdepths:activities/use_crystal_melon               | Feel the POWAH!                        | Use a Crystal Melon | used_crystal_melon
+goal   darkerdepths:story/root                                 | Darker Depths                          | Thank you for installing Darker Depths! | tick
+task   darkerdepths:visited/glowshroom_forest                  | Luminous Depths                        | Visit the Glowshroom Forest biome | location
+task   darkerdepths:visited/molten_cavern                      | It's Getting Hot in Here!              | Visit the Molten Cavern biome | location
+task   darkerdepths:visited/sandy_catacombs                    | Desert but Underground?                | Visit the Sandy Catacombs biome | location
+task   darkerdepths:visited/structure/visited_catacombs        | The Lost Souls                         | Visit the Catacombs Structure | location
+
+== Deep Aether
+chal   deep_aether:aether_champion                             | Champion Of The Aether                 | Defeat all Aether bosses without taking a single hit
+§b- Deep Aether - | flawless_boss_trigger
+goal   deep_aether:brass_dungeon                               | Storm Ruler                            | Defeat the brass boss
+§b- Deep Aether - | player_killed_entity
+chal   deep_aether:explore_aether                              | Aether Explorer                        | Explore all Aether biomes
+§b- Deep Aether - | location
+chal   deep_aether:stratus_armor                               | Cover Me in Sunshine                   | Get a full set of Stratus Armor
+§b- Deep Aether - | inventory_changed
+task   deep_aether:transform_poison                            | Purple Magic                           | Transform an item by throwing it into Poison
+§b- Deep Aether - | poison_trigger
+
+== Deeper and Darker
+task   deeperdarker:main/enter_otherside                       | Below the Bedrock                      | Deep below the bedrock, the darkness awaits | changed_dimension
+chal   deeperdarker:main/explore_otherside                     | Echolocation                           | Explore all Otherside biomes | location
+goal   deeperdarker:main/find_ancient_city                     | A Metropolis of Restless Souls         | Find an Ancient City | location
+goal   deeperdarker:main/find_ancient_temple                   | Abyssal Descent                        | Explore the depths for a temple | location
+chal   deeperdarker:main/kill_all_sculk_mobs                   | Sculk Slayer                           | Kill one of every Sculk monster | player_killed_entity
+chal   deeperdarker:main/kill_warden                           | Phantom Thief                          | Slay the Warden and take its heart | player_killed_entity
+task   deeperdarker:main/root                                  | Sculk Story                            | You feel something pulling you toward the source... | location
+chal   deeperdarker:main/warden_armor                          | Cover Me with Sculk                    | Protect yourself with a full set of Warden Armor | inventory_changed
+
+== Delight o' Flight
+task   delighto_flight:main/get_lotus_flower_night             | The Lotus Pool by Moonlight            | I am a part of all that I have met | cut_lotus_flower_night
+task   delighto_flight:main/get_weather_sensing                | Weather with You                       | Grants weather sensing effect | effects_changed
+task   delighto_flight:main/use_weather_horn                   | Stormcaller                            | Use weather horn | using_item
+
+== Ecologics
+task   ecologics:husbandry/breed_penguin                       | Happy Feet                             | Breed penguins to obtain a penguin feather from the baby. | bred_animals,inventory_changed
+
+== Eternal Starlight
+chal   eternal_starlight:all_starlight_biomes                  | Starlight Explorer                     | Explore all Starlight biomes | location
+chal   eternal_starlight:chain_tangled_skull_explosion         | It's just Friendly Fire                | Kill a Tangled Skull and use it's explosion to kill another | chain_tangled_skull_explosion
+task   eternal_starlight:challenge_gatekeeper                  | Duke it out!                           | Pass the gatekeeper's trial | challenged_gatekeeper
+task   eternal_starlight:deactivate_energy_block               | The Backstabber                        | Deactivate the Energy Block to make the Starlight Golem vulnerable to your attac | deactivate_energy_block
+task   eternal_starlight:enter_abyss                           | The Mariana Trench                     | Enter the Abyss biome | location
+task   eternal_starlight:enter_crystallized_desert             | Castle of Glass                        | Enter the Crystallized Desert biome | location
+task   eternal_starlight:enter_golem_forge                     | Cradle of Legion                       | Enter the Golem Forge | location
+task   eternal_starlight:enter_starlight                       | Sky of a Million Stars                 | Enter the Starlight Dimension | location
+task   eternal_starlight:freeze_starlight_golem                | Chill Out, Buddy!                      | Throw a Frozen Tube at the Starlight Golem to make it enter the charging state f | freeze_starlight_golem
+chal   eternal_starlight:full_unrealium_armor                  | Stepping into the Unseen               | Obtain a full set of Unrealium armor | inventory_changed
+task   eternal_starlight:hammer_critical_hit                   | The Hammer of Justice                  | Trigger your hammer's special attack by performing a critical attack with full a | hammer_critical_hit
+task   eternal_starlight:hire_stranghoul                       | Anyone Can Cook                        | Hire a Stranghoul for one day with a bowl of Pungency Stew | hire_stranghoul
+task   eternal_starlight:ignite_lunar_monstrosity              | Burn it to the Ground                  | Ignite the Lunar Monstrosity to make it vulnerable to your attack | player_interacted_with_entity
+task   eternal_starlight:ignite_tear_bomb                      | Whoever May Cry                        | Ignite a Tear Bomb | ignite_tear_bomb
+task   eternal_starlight:in_ether_fluid                        | Smells Like Hydrogen Ions              | Stand in the Ether fluid | location
+task   eternal_starlight:kill_creteor                          | C'mon TARS!                            | Defeat a Creteor, which falls from the sky during the meteor shower | player_killed_entity
+task   eternal_starlight:kill_golem                            | Ancient Wisdom                         | Defeat the Starlight Golem | player_killed_entity
+task   eternal_starlight:kill_lunar_monstrosity                | Through the Thorns                     | Defeat the Lunar Monstrosity | player_killed_entity
+task   eternal_starlight:kill_permafrost                       | Winter is Leaving                      | Defeat the Permafrost | player_killed_entity
+task   eternal_starlight:obtain_numbness_effect                | I've Become so Numb                    | Obtain the Numbness effect, which can temporarily absorb damage, from a Silver P | effects_changed
+task   eternal_starlight:put_seeds_into_starfire_bird_nest     | Nurturing Roots                        | Put seeds into the Starfire Birds' nests to help the birds breed | put_seeds_into_starfire_bird_nest
+task   eternal_starlight:root                                  | Eternal Starlight                      | Explore the Starlight Dimension! | location
+task   eternal_starlight:saturate_dagger_of_hunger             | Thanks for the Treat                   | Keep attacking mobs to satiate the Dagger of Hunger | saturate_dagger_of_hunger
+task   eternal_starlight:summon_aethersent_golem               | Planetary Protection Policy            | Summon an Aethersent Golem by putting a Carved Lunaris Cactus Fruit on a Aethers | summoned_entity
+task   eternal_starlight:summon_grimstone_golem                | Item Slate                             | Summon a Grimstone Golem by putting a Carved Lunaris Cactus Fruit on a Grimstone | summoned_entity
+task   eternal_starlight:tame_crystallized_moth                | Lost in the Echo                       | Tame a Crystallized Moth, which have the ability to use sound waves to attack, w | tame_animal
+task   eternal_starlight:throw_gleech_egg                      | Bloodletting Therapy                   | Throw a Gleech's egg and hit a creature | throw_gleech_egg
+task   eternal_starlight:under_permafrost_forest               | Under the Permafrost                   | Enter the Ashen Snow layer of the Permafrost Forest | location
+chal H eternal_starlight:use_blossom_of_stars                  | Swinging in the Boundless Milky Way    | To a thinker! | consume_item
+task   eternal_starlight:witness_meteor_shower                 | Wish upon a Star                       | Witness a meteor shower | witness_weather
+task   eternal_starlight:witness_stranghoul_hunt               | Even Death May Die                     | Witness a Stranghoul hunt its prey | witness_stranghoul_hunt
+
+== Exposure
+task   exposure:adventure/complex_composite_compound           | Complex Composite Compound             | Print a Photograph using Chromatic process by placing Tinted Glass on top of Lig | frame_printed
+task H exposure:adventure/exposed_paparazzi                    | Exposed Paparazzi                      | Forget to turn off the flash while sneakily photographing a villager | frame_exposed
+task   exposure:adventure/exposure                             | Exposure                               | Use Camera to expose a Film frame | frame_exposed
+task   exposure:adventure/family_portrait                      | Family Portrait                        | Use Camera Stand to take a photo of a player with tamed cat and wolf | frame_exposed
+task   exposure:adventure/lights_up                            | Lights Up!                             | Use flash when taking a photograph in the dark | frame_exposed
+task   exposure:adventure/moment_in_time                       | A Moment in Time                       | Print a Photograph | frame_printed
+task H exposure:adventure/photos_of_spider_man                 | I need photos of Spider...Man?         | Photograph a Spider Jockey | frame_exposed
+task   exposure:adventure/piercing_gaze                        | A Piercing Gaze                        | Use Interplanar Projector to project an image from another plane | successfully_project_image
+task   exposure:adventure/splitting_the_photon                 | Splitting the Photon                   | Expose black and white film frame with one of primary color filters | frame_exposed
+task   exposure:adventure/spotlight                            | Was that a spotlight? On me?           | Take a selfie | frame_exposed
+task H exposure:adventure/unforeseen_consequences              | Unforeseen Consequences                | Anger an Enderman by taking a photograph of him | photograph_enderman_eyes
+task H exposure:adventure/void                                 | It's a Brilliant Surface in That Void! | Take a Photograph in the End | frame_exposed
+chal   exposure:adventure/wildlife_archivist                   | Wildlife Archivist                     | Photograph every wild animal | frame_exposed
+
+== Farmer's Delight
+task   farmersdelight:main/eat_nourishing_food                 | Nourishing!                            | A balanced and diverse meal will keep you fed and healthy for a long time! | effects_changed
+goal   farmersdelight:main/get_rich_soil                       | Plant Food                             | Organic Compost slowly decays into Rich Soil, an upgrade for your farms! | inventory_changed
+task   farmersdelight:main/harvest_ropelogged_tomato           | Tall-mato                              | Hang some rope above a tomato crop to make it grow taller | default_block_use
+task   farmersdelight:main/hit_raider_with_rotten_tomato       | Boo! Hiss!                             | Throw a Rotten Tomato at one of these pesky raiders! | player_hurt_entity
+chal   farmersdelight:main/master_chef                         | Master Chef                            | Eat a course of every meal available! | consume_item
+chal   farmersdelight:main/obtain_netherite_knife              | If You Can't Take the Heat...          | Spend a whole Netherite Ingot to upgrade your knife! Or get out of the kitchen. | inventory_changed
+goal   farmersdelight:main/place_cooking_pot                   | Dinner's Served!                       | Put down a Cooking Pot and start preparing meals! | placed_block
+chal   farmersdelight:main/plant_all_crops                     | Crop Rotation                          | Cultivate every food-related plant you can find, such as vegetables, fruits, fun | placed_block
+task   farmersdelight:main/use_cutting_board                   | Watch Your Fingers                     | With a tool in hand, use a Cutting Board to break down an item | use_cutting_board
+
+== It Takes a Pillage Continuation
+task   takesapillage:adventure/bastille                        | Eh-eh-oh, eh-oh                        | Locate a Bastille | location
+task   takesapillage:adventure/pillager_camp                   | Campfire Song Song                     | Locate a Pillager Camp | location
+
+== Lootr (Forge & NeoForge)
+chal   lootr:100loot                                           | Centennial                             | Open 100 Lootr containers! | score
+task   lootr:10loot                                            | Delightful Decade                      | Open 10 Lootr containers! | score
+task   lootr:1barrel                                           | Barrel Booty                           | Open your first Lootr barrel! | barrel_opened
+task   lootr:1cart                                             | Tunnel Treasures                       | Open your first Lootr minecart! | cart_opened
+task   lootr:1chest                                            | 'X' Marks the Spot                     | Open your first Lootr chest! | chest_opened
+task   lootr:1frame                                            | I was framed!                          | Loot an item from a Lootr item frame! | item_frame_looted
+task   lootr:1shulker                                          | Bounty Box                             | Open your first Lootr shulker box! | shulker_opened
+task   lootr:25loot                                            | Close Quarters                         | Open 25 Lootr containers! | score
+task   lootr:50loot                                            | Half-Century                           | Open 50 Lootr containers! | score
+task   lootr:all_gravel                                        | Brush It Off                           | Brush all types of suspicious Lootr blocks! | gravel_brushed,sand_brushed
+chal   lootr:archaeologist                                     | That Was 90% Gravity                   | Loot all of Lootr's archaeological blocks! | advancement
+chal H lootr:emergency_escape_hatch                            | Emergency Escape Hatch!                | Trigger Lootr's emergency conversion contingency on an eligible chest! | emergency_escape_hatch
+task   lootr:pot_opened                                        | Woe to the Pot                         | Loot your first Lootr decorated pot! | pot_opened
+chal H lootr:social                                            | Socialised Loot                        | Open one of every Lootr container type! | advancement
+task H lootr:trapped_chest                                     | Surprise!                              | Open your first Lootr trapped chest! | trapped_chest
+
+== Minecraft
+chal   minecraft:adventure/adventuring_time                    | Adventuring Time                       | Discover every biome | location
+chal H minecraft:adventure/arbalistic                          | Arbalistic                             | Kill five unique mobs with one crossbow shot | killed_by_crossbow
+task   minecraft:adventure/avoid_vibration                     | Sneak 100                              | Sneak near a Sculk Sensor or Warden to prevent it from detecting you | avoid_vibration
+chal   minecraft:adventure/blowback                            | Blowback                               | Kill a Breeze with a deflected Breeze-shot Wind Charge | player_killed_entity
+task   minecraft:adventure/brush_armadillo                     | Isn't It Scute?                        | Get Armadillo Scutes from an Armadillo using a Brush | player_interacted_with_entity
+chal   minecraft:adventure/bullseye                            | Bullseye                               | Hit the bullseye of a Target block from at least 30 meters away | target_hit
+task   minecraft:adventure/crafters_crafting_crafters          | Crafters Crafting Crafters             | Be near a Crafter when it crafts a Crafter | crafter_recipe_crafted
+task   minecraft:adventure/fall_from_world_height              | Caves & Cliffs                         | Free fall from the top of the world (build limit) to the bottom of the world and | fall_from_height
+chal H minecraft:adventure/hero_of_the_village                 | Hero of the Village                    | Successfully defend a village from a raid | hero_of_the_village
+task   minecraft:adventure/honey_block_slide                   | Sticky Situation                       | Jump into a Honey Block to break your fall | slide_down_block
+task   minecraft:adventure/kill_a_mob                          | Monster Hunter                         | Kill any hostile monster | player_killed_entity
+chal   minecraft:adventure/kill_all_mobs                       | Monsters Hunted                        | Kill one of every hostile monster | player_killed_entity
+chal   minecraft:adventure/kill_mob_near_sculk_catalyst        | It Spreads                             | Kill a mob near a Sculk Catalyst | kill_mob_near_sculk_catalyst
+task   minecraft:adventure/lightning_rod_with_villager_no_fire | Surge Protector                        | Protect a Villager from an undesired shock without starting a fire | lightning_strike
+task   minecraft:adventure/minecraft_trials_edition            | Minecraft: Trial(s) Edition            | Step foot in a Trial Chamber | location
+task   minecraft:adventure/ol_betsy                            | Ol' Betsy                              | Shoot a Crossbow | shot_crossbow
+chal   minecraft:adventure/overoverkill                        | Over-Overkill                          | Deal 50 hearts of damage in a single hit using the Mace | player_hurt_entity
+goal   minecraft:adventure/revaulting                          | Revaulting                             | Unlock an Ominous Vault with an Ominous Trial Key | item_used_on_block
+task   minecraft:adventure/root                                | Adventure                              | Adventure, exploration and combat | entity_killed_player,player_killed_entit
+task   minecraft:adventure/salvage_sherd                       | Respecting the Remnants                | Brush a Suspicious block to obtain a Pottery Sherd | inventory_changed,player_generates_conta
+task   minecraft:adventure/shoot_arrow                         | Take Aim                               | Shoot something with an Arrow | player_hurt_entity
+task   minecraft:adventure/sleep_in_bed                        | Sweet Dreams                           | Sleep in a Bed to change your respawn point | slept_in_bed
+chal   minecraft:adventure/sniper_duel                         | Sniper Duel                            | Kill a Skeleton from at least 50 meters away | player_killed_entity
+task   minecraft:adventure/spyglass_at_dragon                  | Is It a Plane?                         | Look at the Ender Dragon through a Spyglass | using_item
+task   minecraft:adventure/spyglass_at_ghast                   | Is It a Balloon?                       | Look at a Ghast through a Spyglass | using_item
+task   minecraft:adventure/spyglass_at_parrot                  | Is It a Bird?                          | Look at a Parrot through a Spyglass | using_item
+goal   minecraft:adventure/summon_iron_golem                   | Hired Help                             | Summon an Iron Golem to help defend a village | summoned_entity
+task   minecraft:adventure/throw_trident                       | A Throwaway Joke                       | Throw a Trident at something.
+Note: Throwing away your only weapon is not a good | player_hurt_entity
+goal   minecraft:adventure/totem_of_undying                    | Postmortal                             | Use a Totem of Undying to cheat death | used_totem
+task   minecraft:adventure/trade                               | What a Deal!                           | Successfully trade with a Villager | villager_trade
+task   minecraft:adventure/trade_at_world_height               | Star Trader                            | Trade with a Villager at the build height limit | villager_trade
+chal   minecraft:adventure/trim_with_all_exclusive_armor_patterns | Smithing with Style                    | Apply these smithing templates at least once: Spire, Snout, Rib, Ward, Silence,  | recipe_crafted
+chal   minecraft:adventure/two_birds_one_arrow                 | Two Birds, One Arrow                   | Kill two Phantoms with a piercing Arrow | killed_by_crossbow
+task   minecraft:adventure/very_very_frightening               | Very Very Frightening                  | Strike a Villager with lightning | channeled_lightning
+task H minecraft:adventure/voluntary_exile                     | Voluntary Exile                        | Kill a raid captain.
+Maybe consider staying away from villages for the time bein | player_killed_entity
+task   minecraft:adventure/walk_on_powder_snow_with_leather_boots | Light as a Rabbit                      | Walk on Powder Snow... without sinking in it | location
+task   minecraft:adventure/who_needs_rockets                   | Who Needs Rockets?                     | Use a Wind Charge to launch yourself upward 8 blocks | fall_after_explosion
+task   minecraft:adventure/whos_the_pillager_now               | Who's the Pillager Now?                | Give a Pillager a taste of their own medicine | killed_by_crossbow
+goal   minecraft:end/dragon_breath                             | You Need a Mint                        | Collect Dragon's Breath in a Glass Bottle | inventory_changed
+goal   minecraft:end/dragon_egg                                | The Next Generation                    | Hold the Dragon Egg | inventory_changed
+goal   minecraft:end/elytra                                    | Sky's the Limit                        | Find Elytra | inventory_changed
+task   minecraft:end/enter_end_gateway                         | Remote Getaway                         | Escape the island | enter_block
+task   minecraft:end/find_end_city                             | The City at the End of the Game        | Go on in, what could happen? | location
+task   minecraft:end/kill_dragon                               | Free the End                           | Good luck | player_killed_entity
+chal   minecraft:end/levitate                                  | Great View From Up Here                | Levitate up 50 blocks from the attacks of a Shulker | levitation
+goal   minecraft:end/respawn_dragon                            | The End... Again...                    | Respawn the Ender Dragon | summoned_entity
+task   minecraft:end/root                                      | The End                                | Or the beginning? | changed_dimension
+task H minecraft:husbandry/allay_deliver_cake_to_note_block    | Birthday Song                          | Have an Allay drop a Cake at a Note Block | allay_drop_item_on_block
+task H minecraft:husbandry/allay_deliver_item_to_player        | You've Got a Friend in Me              | Have an Allay deliver items to you | thrown_item_picked_up_by_player
+task   minecraft:husbandry/axolotl_in_a_bucket                 | The Cutest Predator                    | Catch an Axolotl in a Bucket | filled_bucket
+chal   minecraft:husbandry/balanced_diet                       | A Balanced Diet                        | Eat everything that is edible, even if it's not good for you | consume_item
+chal   minecraft:husbandry/bred_all_animals                    | Two by Two                             | Breed all the animals! | bred_animals
+task   minecraft:husbandry/breed_an_animal                     | The Parrots and the Bats               | Breed two animals together | bred_animals
+chal   minecraft:husbandry/complete_catalogue                  | A Complete Catalogue                   | Tame all Cat variants! | tame_animal
+task H minecraft:husbandry/feed_snifflet                       | Little Sniffs                          | Feed a Snifflet | player_interacted_with_entity
+task   minecraft:husbandry/fishy_business                      | Fishy Business                         | Catch a fish | fishing_rod_hooked
+chal   minecraft:husbandry/froglights                          | With Our Powers Combined!              | Have all Froglights in your inventory | inventory_changed
+task   minecraft:husbandry/kill_axolotl_target                 | The Healing Power of Friendship!       | Team up with an Axolotl and win a fight | effects_changed
+task   minecraft:husbandry/leash_all_frog_variants             | When the Squad Hops into Town          | Get each Frog variant on a Lead | player_interacted_with_entity
+chal   minecraft:husbandry/obtain_netherite_hoe                | Serious Dedication                     | Use a Netherite Ingot to upgrade a Hoe, and then reevaluate your life choices | inventory_changed
+task   minecraft:husbandry/remove_wolf_armor                   | Shear Brilliance                       | Remove Wolf Armor from a Wolf using Shears | player_interacted_with_entity
+task   minecraft:husbandry/repair_wolf_armor                   | Good as New                            | Repair a damaged Wolf Armor using Armadillo Scutes | player_interacted_with_entity
+task   minecraft:husbandry/ride_a_boat_with_a_goat             | Whatever Floats Your Goat!             | Get in a Boat and float with a Goat | started_riding
+task   minecraft:husbandry/silk_touch_nest                     | Total Beelocation                      | Move a Bee Nest, with 3 Bees inside, using Silk Touch | bee_nest_destroyed
+task   minecraft:husbandry/tactical_fishing                    | Tactical Fishing                       | Catch a Fish... without a Fishing Rod! | filled_bucket
+task   minecraft:husbandry/tadpole_in_a_bucket                 | Bukkit Bukkit                          | Catch a Tadpole in a Bucket | filled_bucket
+task   minecraft:husbandry/tame_an_animal                      | Best Friends Forever                   | Tame an animal | tame_animal
+chal   minecraft:husbandry/whole_pack                          | The Whole Pack                         | Tame one of each Wolf variant | tame_animal
+chal H minecraft:nether/all_effects                            | How Did We Get Here?                   | Have every effect applied at the same time | effects_changed
+chal   minecraft:nether/all_potions                            | A Furious Cocktail                     | Have every potion effect applied at the same time | effects_changed
+task   minecraft:nether/brew_potion                            | Local Brewery                          | Brew a Potion | brewed_potion
+task   minecraft:nether/create_beacon                          | Bring Home the Beacon                  | Construct and place a Beacon | construct_beacon
+goal   minecraft:nether/create_full_beacon                     | Beaconator                             | Bring a Beacon to full power | construct_beacon
+task   minecraft:nether/distract_piglin                        | Oh Shiny                               | Distract Piglins with gold | player_interacted_with_entity,thrown_ite
+chal   minecraft:nether/explore_nether                         | Hot Tourist Destinations               | Explore all Nether biomes | location
+chal   minecraft:nether/fast_travel                            | Subspace Bubble                        | Use the Nether to travel 7 km in the Overworld | nether_travel
+task   minecraft:nether/find_bastion                           | Those Were the Days                    | Enter a Bastion Remnant | location
+task   minecraft:nether/find_fortress                          | A Terrible Fortress                    | Break your way into a Nether Fortress | location
+task   minecraft:nether/loot_bastion                           | War Pigs                               | Loot a Chest in a Bastion Remnant | player_generates_container_loot
+chal   minecraft:nether/netherite_armor                        | Cover Me in Debris                     | Get a full suit of Netherite armor | inventory_changed
+chal   minecraft:nether/return_to_sender                       | Return to Sender                       | Destroy a Ghast with a fireball | player_killed_entity
+task   minecraft:nether/ride_strider                           | This Boat Has Legs                     | Ride a Strider with a Warped Fungus on a Stick | item_durability_changed
+task   minecraft:nether/ride_strider_in_overworld_lava         | Feels Like Home                        | Take a Strider for a loooong ride on a lava lake in the Overworld | ride_entity_in_lava
+task   minecraft:nether/root                                   | Nether                                 | Bring summer clothes | changed_dimension
+task   minecraft:nether/summon_wither                          | Withering Heights                      | Summon the Wither | summoned_entity
+chal   minecraft:nether/uneasy_alliance                        | Uneasy Alliance                        | Rescue a Ghast from the Nether, bring it safely home to the Overworld... and the | player_killed_entity
+goal   minecraft:story/cure_zombie_villager                    | Zombie Doctor                          | Weaken and then cure a Zombie Villager | cured_zombie_villager
+task   minecraft:story/deflect_arrow                           | Not Today, Thank You                   | Deflect a projectile with a Shield | entity_hurt_player
+task   minecraft:story/enchant_item                            | Enchanter                              | Enchant an item at an Enchanting Table | enchanted_item
+task   minecraft:story/enter_the_end                           | The End?                               | Enter the End Portal | changed_dimension
+task   minecraft:story/enter_the_nether                        | We Need to Go Deeper                   | Build, light and enter a Nether Portal | changed_dimension
+task   minecraft:story/follow_ender_eye                        | Eye Spy                                | Follow an Eye of Ender | location
+
+== Mowzie's Mobs
+task   mowziesmobs:kill_bluff                                  | Called Your Bluff                      | Kill a Bluff | player_killed_entity
+task   mowziesmobs:kill_elokosa_howler                         | Gibbous Gibbons                        | Kill an Elokosa Howler | player_killed_entity
+chal   mowziesmobs:kill_ferrous_wroughtnaut                    | Just a Flesh Wound                     | Kill a Ferrous Wroughtnaut | player_killed_entity
+task   mowziesmobs:kill_foliaath                               | Jennifer Dumped Me                     | Kill a Foliaath | player_killed_entity
+chal   mowziesmobs:kill_frostmaw                               | Rude Awakening                         | Kill a Frostmaw | player_killed_entity
+task   mowziesmobs:kill_grottol                                | You Monster...                         | Kill a Grottol | player_killed_entity
+task H mowziesmobs:kill_grottol_fortune                        | Double Or Nothing!                     | Kill a Grottol with a fortune pickaxe | kill_grottol_fortune
+task H mowziesmobs:kill_grottol_silk_touch                     | You're Coming With Me                  | Kill a Grottol with a silk touch pickaxe | kill_grottol_silk_touch
+task   mowziesmobs:kill_naga                                   | Wingin' It                             | Kill a Naga | player_killed_entity
+task   mowziesmobs:kill_umvuthana_raptor                       | Masquerade                             | Kill an Umvuthana Raptor | player_killed_entity
+chal   mowziesmobs:kill_umvuthi                                | Praise the Sun                         | Kill Umvuthi, the Sunbird | player_killed_entity
+chal   mowziesmobs:sculptor_challenge                          | You Must Believe                       | Complete the Sculptor's challenge | sculptor_challenge
+task   mowziesmobs:sculptor_failure                            | No One Jumps for the Beef              | Fall to your death during the Sculptor's challenge | sculptor_failure
+task H mowziesmobs:sneak_grove                                 | Birds of a Feather                     | Sneak into an Umvuthana grove in disguise | sneak_grove
+task H mowziesmobs:steal_ice_crystal                           | Big Brain™ Time                        | Steal an ice crystal from a Frostmaw | steal_ice_crystal
+goal H mowziesmobs:suns_blessing                               | Heliomancer                            | Receive the Sun's Blessing | effects_changed
+
+== Mutant Monsters
+task   mutantmonsters:burn_zombie_burn                         | Burn Zombie Burn                       | Use a flint and steel to light a mutant zombie on fire when it's down | player_interacted_with_entity
+task   mutantmonsters:frosty_the_snow_golem                    | Frosty the Snow Golem                  | Create a Mutant Snow Golem using Chemical X | summoned_entity
+goal   mutantmonsters:hulk_smash                               | Hulk Smash!                            | Kill a Mutant Zombie using a Hulk Hammer | player_killed_entity
+goal   mutantmonsters:no_bones_about_it                        | No Bones About It                      | Kill a Mutant Skeleton using a crossbow while wearing a full set of Mutant Skele | player_killed_entity
+task   mutantmonsters:root                                     | Mutant Monsters                        | Mutant creatures and beasts to face off against. Will you triumph, or will you p | entity_killed_player,player_killed_entit
+task   mutantmonsters:spider_pig_spider_pig                    | Spider-Pig, Spider-Pig...              | Feed a Pig a Fermented Spider Eye and throw Chemical X at it | summoned_entity
+task   mutantmonsters:you_da_bomby                             | You da Bomby                           | Hatch a Creeper Minion from its egg | tame_animal
+
+== Naturalist
+task   naturalist:husbandry/feed_bear_honeycomb                | Oh Bother                              | Feed a Honeycomb to a Bear | thrown_item_picked_up_by_entity
+task   naturalist:husbandry/feed_hippo_melon                   | Hungry Hungry Hippos                   | Feed a Melon to a Hippo | player_interacted_with_entity
+
+== Paragliders
+chal   paraglider:all_vessels                                  | Hero of Hyrule                         | Obtain maximum amount of Heart Containers and Stamina Vessels | impossible
+goal   paraglider:paraglider                                   | Half a flight                          | Obtain Paraglider | inventory_changed
+goal   paraglider:pray_to_the_goddess                          | Pray to the Goddess                    | Exchange 4 Spirit Orbs for something good | impossible
+goal   paraglider:statues_bargain                              | Statue's Bargain                       | Complete your first bargain | impossible
+
+== ShellBound for AirShip
+task   shellbound_for_airship:airship/enter_airship            | Prologue                               | Discover all airships. | location
+task   shellbound_for_airship:airship/ship1                    | Pirates of the Crabbean                | Discover a flying pirate ship. | location
+task   shellbound_for_airship:airship/ship10                   | Huh? An Allay...                       | Discover the captive airship of the Array. | location
+task   shellbound_for_airship:airship/ship2                    | Villager Rescue Operation              | Discover the ship where the villagers are being held captive. | location
+task   shellbound_for_airship:airship/ship3                    | Wreckage                               | Discover a forgotten airship. | location
+task   shellbound_for_airship:airship/ship4                    | Traveling Zoo                          | Discover the airship of an animal-loving villager. | location
+task   shellbound_for_airship:airship/ship5                    | So Many Spiders, Yuck                  | Discover an airship swarming with spiders. | location
+task   shellbound_for_airship:airship/ship6                    | Small Adventure 1                      | Discover small airship 1. | location
+task   shellbound_for_airship:airship/ship7                    | Small Adventure 2                      | Discover small airship 2. | location
+task   shellbound_for_airship:airship/ship8                    | Traveling Bookshop                     | Discover the airship of the traveling librarian. | location
+task   shellbound_for_airship:airship/ship9                    | My Dear Maria                          | Discover an airship filled with chickens. | location
+
+== Simply Swords [Fabric & Forge]
+chal H simplyswords:dawnquiver                                 | Loose the Dawn                         | Find the unique weapon %s. | inventory_changed
+chal H simplyswords:dreadwhisper                               | The Wind Screams Back                  | Find the unique weapon %s. | inventory_changed
+chal H simplyswords:gloampiercer                               | The Wick Goes Dark                     | Find the unique weapon %s. | inventory_changed
+chal H simplyswords:ionbound_stormscale                        | Lightning in a Bottle                  | Find the unique weapon %s. | inventory_changed
+chal H simplyswords:riftmane                                   | Hold the Line                          | Find the unique weapon %s. | inventory_changed
+chal H simplyswords:soulstalker                                | That Which Walks Behind                | Find the unique weapon %s. | inventory_changed
+chal H simplyswords:the_devourer                               | All-Consuming                          | Find the unique weapon %s. | inventory_changed
+chal H simplyswords:wraithmaw                                  | Hunger Beyond Death                    | Find the unique weapon %s. | inventory_changed
+
+== Supplementaries
+task   supplementaries:adventure/road_sign                     | This Must be a Sign!                   | Follow me to find a village | location
+goal H supplementaries:husbandry/angry_birds                   | Angry Birds                            | Toss a parrot with a slingshot | impossible
+goal H supplementaries:husbandry/sus_stew                      | When the Stew is Sus                   | Drink a suspicious stew | consume_item
+chal H supplementaries:story/unenchanter                       | Why Would You do That!?                | Grind an Enchanted Golden Apple | grind_item
+
+== The Aether
+chal H aether:aether_sleep                                     | A Well Earned Rest                     | Finally sleep in the Aether | slept_in_bed
+goal   aether:black_moa                                        | Let's Fly!                             | Ride a Black Moa | started_riding
+task   aether:blue_aercloud                                    | To Infinity and Beyond!                | Bounce on a Blue Aercloud | enter_block
+goal   aether:bronze_dungeon                                   | Like a Bossaru!                        | Defeat the bronze boss | player_killed_entity
+task   aether:enter_aether                                     | Hostile Paradise                       | Enter the Aether | changed_dimension
+goal   aether:gold_dungeon                                     | Extinguished                           | Defeat the gold boss | player_killed_entity
+goal   aether:gravitite_armor                                  | Defying Gravity                        | Have a full set of gravitite armor in your inventory | inventory_changed
+goal   aether:hammer_loot                                      | The Power of the Gods                  | Obtain the Hammer of Kingbdogz from the Bronze Dungeon | inventory_changed
+task   aether:incubate_moa                                     | ... Until They hatch!                  | Incubate a Moa | incubation_trigger
+goal H aether:loreception                                      | Lore-Ception!                          | Put a Book of Lore inside a Book of Lore | lore_entry
+task   aether:mount_phyg                                       | When Phygs Fly                         | Fly on a Phyg! | started_riding
+chal H aether:obsidian_armor                                   | Ice Bucket Armor                       | Have a full set of obsidian armor in your inventory | inventory_changed
+goal   aether:phoenix_armor                                    | Fireproof                              | Obtain a piece of Phoenix armor from the Gold Dungeon | inventory_changed
+task   aether:read_lore                                        | The More You Know!                     | Read a Book of Lore | lore_entry
+goal   aether:silver_dungeon                                   | Dethroned                              | Defeat the silver boss | player_killed_entity
+task   aether:the_aether                                       | The Aether                             | It's not dead! | changed_dimension
+chal H aether:valkyrie_hoe                                     | Plunderer's Remorse                    | I defeated the Silver Dungeon and all I got was this stupid Hoe | item_used_on_block
+goal   aether:valkyrie_loot                                    | Earning your Wings                     | Obtain a piece of Valkyrie equipment from the Silver Dungeon | inventory_changed
+chal H aether:zephyr_hammer                                    | Ultimate Ban Hammer                    | Kill a Zephyr with the Hammer of Kingbdogz. Sweet Revenge! | player_killed_entity
+
+== The Bumblezone (NeoForge/Forge)
+task   the_bumblezone:armor/bumble_bee_chestplate_max_flight   | It's a Bird! It's a Plane! No it's...  | Buzz your wings with the Bumble Bee Chestplate while 3 or more other Bee Armor o | bumble_bee_chestplate_max_flight
+task   the_bumblezone:armor/carpenter_bee_boots_mined_blocks   | Power Thighs!                          | Crouch and burrow your way through 64 blocks such as logs, leaves, or combs with | carpenter_bee_boots_mined_blocks
+task   the_bumblezone:armor/carpenter_bee_boots_wall_hanging   | Floor is lava!                         | With Carpenter Bee Boots, spend a lot of time hanging from walls of certain bloc | carpenter_bee_boots_wall_hanging
+task   the_bumblezone:armor/flower_headwear_wrath_structure    | Beeing Curious                         | Enter a Cell Maze structure while wearing Flower Headwear. You won't get Wrath e | flower_headwear_wrath_structure
+task   the_bumblezone:armor/honey_bee_leggings_flower_pollen   | It's the Bee's Knees!                  | Collect pollen on your Honey Bee Leggings by walking or running through flowers! | honey_bee_leggings_flower_pollen
+task   the_bumblezone:armor/honey_bee_leggings_pollen_removal  | Bathing time!                          | Remove the pollen from your Honey Bee Leggings by walking on Wet Sponge or going | honey_bee_leggings_pollen_removal
+task   the_bumblezone:armor/stingless_bee_helmet_super_sight   | Compound Eyes                          | With the power of Stingless Bee Helmet, highlight at least 50 bees all at once! | stingless_bee_helmet_super_sight
+chal   the_bumblezone:armor/warrior_bee                        | The Bee Warrior Rises!                 | Equip yourself with the greatest weapon and armor that the bees have to offer! | inventory_changed
+task   the_bumblezone:beds/sleep_in_bed                        | Sweeter Dreams!                        | Sleep in a bed in Bumblezone dimension. The bed will set respawn point and won't | slept_in_bed
+chal   the_bumblezone:beehemoth/queen_beehemoth                | Regal Friends Till The Very End!       | Befriend a Beehemoth to maximum friendship! | created_queen_beehemoth
+task   the_bumblezone:beehemoth/tamed_beehemoth                | Bee Movie But It's 300% Larger         | Tame a Beehemoth with buckets of honey! Saddle it afterwards to have a flying mo | tame_animal
+task   the_bumblezone:bees/variant_bee_briefcase_capture       | Bee Collector                          | Collect 14 Variant Bees into a Buzzing Briefcase! Does not need to be different  | variant_bee_briefcase_capture
+task   the_bumblezone:bees/variant_bee_name                    | A Shiny Found!                         | Give a name to a Bumblezone's Variant Bee with a Name Tag! Looks like a Bee but  | player_interacted_with_entity
+chal   the_bumblezone:biomes/discover_all_biomes               | Beeography                             | Wow! You found all biomes that Bumblezone has! | location
+task   the_bumblezone:candles/light_soul_super_candle          | Setting the mood                       | Make a Super Candle or Potion Candle have a blue flame! Might have something to  | light_soul_potion_candle
+task   the_bumblezone:candles/projectile_light_instant_potion_candle | Activated my trap candle!              | Light a harmful instant effect Potion Candle with a flaming projectile | projectile_light_instant_potion_candle
+task   the_bumblezone:combs_and_wax/carve_ancient_wax          | Perfecting Design                      | Carve any Ancient Wax block! Use a Shear or Sword to do so! | carve_wax
+task   the_bumblezone:combs_and_wax/carve_carvable_wax         | Bold and Brash!                        | Carve all artworks on Carvable Wax block! Use a Shear or Sword to do so! | carve_wax
+task   the_bumblezone:combs_and_wax/carve_luminescent_wax      | Proper Orientation                     | Carve any Luminescent Wax block! Use a Shear or Sword to do so! | carve_wax
+task   the_bumblezone:combs_and_wax/comb_cutter_extra_drops    | Collecting More Rent From Bees         | Collect extra drops from Beehive/Bee Nests with a Comb Cutter tool | comb_cutter_extra_drops
+task   the_bumblezone:combs_and_wax/honey_cocoon_silk_touch    | A Delicate Touch                       | Find a way to gently mine a Honey Cocoon without spilling items everywhere! | honey_cocoon_silk_touch
+task   the_bumblezone:crystalline_flower/enchant_crystalline_flower | Choosing Wisely                        | Enchant a Book or Enchanted Book with an Enchantment that costs 5 tiers or more. | enchant_crystalline_flower
+task   the_bumblezone:crystalline_flower/grow_crystalline_flower | CONSUME CONSUME CONSUME                | Give items and experience to a Crystalline Flower until it is fully grown! (Righ | grow_crystalline_flower
+task   the_bumblezone:decor/extend_string_curtains             | Bee-Blocking Walls                     | Extend a curtain downward by right clicking with Strings! Blocks bees too! | extend_string_curtain
+chal   the_bumblezone:decor/obtain_all_banner_patterns         | Fashion Fad!                           | Wow! You collected all Bumblezone's Banner Pattern items! | inventory_changed
+task   the_bumblezone:dirt_pellet/dirt_pellet_kill_phantom     | Sky Smackdown                          | Kill a Phantom with thrown Dirt Pellets | player_killed_entity
+task   the_bumblezone:dirt_pellet/dirt_pellet_return_to_sender | A Dirty Return                         | Smack a Dirt Pellet back to a Rootmin | player_hurt_entity
+task   the_bumblezone:effects/bee_hit_wrath_of_the_hive        | NOT THE BEEEEEES!!!                    | Make the mistake of attacking a bee while under the Wrath of the Hive effect | bee_hit_wrath_of_the_hive
+task   the_bumblezone:effects/beenergized_maxed                | Speedy Buzzy Bees!                     | Feed Bee Bread to Bees until they are maximum speed! Zoom! Perhaps can be made f | beenergized_maxed
+task   the_bumblezone:effects/brew_bee_soup                    | Brewing Danger                         | Brew a Potion of Neurotoxin! Perhaps Bee Soup could be refined in Brewing Stands | brewed_potion
+task   the_bumblezone:effects/brew_bee_stinger                 | Concentrated Toxins                    | Brew a Potion of Long Poison! Perhaps Bee Stingers could be refined in Brewing S | brewed_potion
+task   the_bumblezone:effects/brew_glistering_honey_crystal_block | Cheating Chances!                      | Brew a Potion of Luck! Perhaps a Glistering Honey Crystal block can help... | brewed_potion
+task   the_bumblezone:effects/food_removed_wrath_of_the_hive   | A Honey Offering Of Peace              | Appease the angry swarm of bees with food... if you can survive... | food_removed_wrath_of_the_hive
+task   the_bumblezone:effects/getting_protection               | Winning Favors                         | Feed a Honeycomb Brood Block or a Bee until you get Protection of the Hive effec | getting_protection
+task   the_bumblezone:effects/honey_permission                 | No more Wrath! Only friendship!        | While Protection of the Hive effect is on, collect honey from Filled Porous Hone | honey_permission
+task   the_bumblezone:effects/protection_of_the_hive_defense   | BEHOLD! My Bees!                       | Unleash bees onto whoever was unfortunate to attack you while you have Protectio | protection_of_the_hive_defense
+chal   the_bumblezone:essence/bee_essence_infusion             | Hope, Love, Dreams, and BEES!!!        | Consume an Essence of the Bees! Congratulations on beating Queen's Desire quest! | consume_item
+chal   the_bumblezone:essence/essence_calming                  | Peace and Love                         | Defeat the Blue Sempiternal Sanctum special event! | essence_event_reward
+chal   the_bumblezone:essence/essence_continuity               | Reality Glitch                         | Defeat the White Sempiternal Sanctum special event! | essence_event_reward
+chal   the_bumblezone:essence/essence_knowing                  | The All-Seeing                         | Defeat the Purple Sempiternal Sanctum special event! | essence_event_reward
+chal   the_bumblezone:essence/essence_life                     | Blessings of Life                      | Defeat the Green Sempiternal Sanctum special event! | essence_event_reward
+chal   the_bumblezone:essence/essence_radiance                 | Solar Powered                          | Defeat the Yellow Sempiternal Sanctum special event! | essence_event_reward
+chal   the_bumblezone:essence/essence_raging                   | Unstoppable Anger                      | Defeat the Red Sempiternal Sanctum special event! | essence_event_reward
+task   the_bumblezone:honey_bucket/honey_bucket_bee_grow       | Quick To Grow Up!                      | Make a baby bee grow up instantly when fed | honey_bucket_bee_grow
+task   the_bumblezone:honey_bucket/honey_bucket_bee_love       | Love Is A-Buzzing!                     | Use Honey Bucket to make a group of adult Bees be in love! | honey_bucket_bee_love
+task   the_bumblezone:honey_bucket/honey_bucket_brood          | Bee Farmer                             | Grow bee larva in certain brood blocks with Honey Buckets | honey_bucket_brood
+task   the_bumblezone:honey_bucket/royal_jelly_block_piston    | PULL! NO PUSH!                         | Place a block of Royal Jelly next to a Sticky Piston | royal_jelly_block_piston
+task   the_bumblezone:honey_crystal/cleanup_honey_web          | Clean Freak!                           | Wash away a web of honey with a web sponge! | cleanup_honey_web
+task   the_bumblezone:honey_crystal/cleanup_sticky_honey_residue | A Stickier Situation!                  | Cleanup a sticky residue or web mess of honey with a Wet Sponge, Water Bucket, o | cleanup_sticky_honey_residue
+task   the_bumblezone:honey_crystal/trigger_redstone_honey_web | The Power Of Sticky!                   | Generate Redstone power from a special web of honey | trigger_redstone_honey_web
+task   the_bumblezone:honey_crystal_shield/honey_crystal_shield_block_ineffectively | Unblockable Offense Won!               | Find one of the weaknesses of Honey Crystal Shields other than Axes | honey_crystal_shield_block_ineffectively
+chal   the_bumblezone:honey_crystal_shield/obtain_maxed_honey_crystal_shield | Grand Hive Defender                    | Forge the strongest Honey Crystal Shield possible at an Anvil! Takes lots of rep | inventory_changed
+task   the_bumblezone:honey_slime/honey_slime_creation         | The Honey Is Alive!                    | Infused a Slime with honey! | honey_slime_creation
+task   the_bumblezone:honey_slime/honey_slime_harvest          | Who Needs Bees???                      | Harvest the honey from a Honey Slime | honey_slime_harvest
+chal   the_bumblezone:music_discs/obtain_all_music_discs       | Gotta Hive a Dance!                    | Obtain all Bee-themed music discs! | inventory_changed
+task   the_bumblezone:pollen_pile/brush_pollen_pollen_suspicious | Strange Artifacts...                   | Brush a Suspicious Pile of Pollen | player_generates_container_loot
+task   the_bumblezone:pollen_pile/fall_onto_pollen_pile        | Stuffy Nose & No Broken Knees!         | Perform a high trust fall into thick Piles of Pollen! | fall_onto_pollen_pile
+task   the_bumblezone:pollen_pile/hide_in_pollen_pile          | Tactical Pollen                        | Hide yourself in deep Piles of Pollen | effects_changed
+task   the_bumblezone:pollen_puff/bee_drop_pollen_puff         | Bee Clean!                             | Wash the pollen off of a bee with a Wet Sponge, Water Bucket, or Water Bottle | bee_drop_pollen_puff
+task   the_bumblezone:pollen_puff/pollen_puff_fireball         | Unbeelievably Ineffective!             | Fight a Ghast's Fireball with a ball of pollen! | pollen_puff_fireball
+task   the_bumblezone:pollen_puff/pollen_puff_mooshroom        | Mushrooms, flowers, same thing         | Pollinate a Mooshroom and spawn a mushroom! | pollen_puff_mooshroom
+task   the_bumblezone:pollen_puff/pollen_puff_panda            | Bless You Panda!                       | Make a Panda suffer seasonal allergies! | pollen_puff_panda
+task   the_bumblezone:pollen_puff/pollen_puff_pollinate_bee    | A Beeball Homerun!                     | Play catch with an unpollinated bee by throwing pollen at it! | pollen_puff_pollinate_bee
+task   the_bumblezone:pollen_puff/pollen_puff_pollinate_tall_flower | Beetastic Pollinator                   | Make more tall flowers by pollinating them with Pollen Puff! | pollen_puff_pollinate_tall_flower
+task   the_bumblezone:rootmin/rootmin_flower_swap              | Floral Sharing                         | With bee armor on, right click a Rootmin while holding a small or tall flower | rootmin_flower_swap
+task   the_bumblezone:rootmin/rootmin_rainbow_name             | WHAT DOES IT MEAN?!                    | Give a Rootmin the name of "jeb_" with a Name Tag | player_interacted_with_entity
+task   the_bumblezone:sentry_watcher/sentry_watcher_use_egg    | Personal Guardian                      | Craft and use a Sentry Watcher Spawn Egg! It will not charge at the person who s | sentry_watcher_spawn_egg_used
+task   the_bumblezone:stinger_spear/stinger_spear_long_range_kill | A Worthy Javelin Throw                 | Yeet a Stinger Spear over a massive distance and kill a mob | stinger_spear_long_range_kill
+task   the_bumblezone:stinger_spear/stinger_spear_paralyze_boss | Getting Favorable Odds                 | Inflict paralysis on a very high health mob by using a Stinger Spear! | stinger_spear_paralyze_boss
+task   the_bumblezone:stinger_spear/stinger_spear_paralyzing   | Stopped in its Tracks!                 | Inflict paralysis on a victim by using a Neurotoxin enchanted Stinger Spear! | stinger_spear_paralyzing
+task   the_bumblezone:stinger_spear/stinger_spear_poisoning    | Being the Bee!                         | Inflict poison on a victim by using a Neurotoxin enchanted Stinger Spear! | stinger_spear_poisoning
+chal   the_bumblezone:structures/enter_all_structures          | Sightbee-er                            | Incredible! You discovered all structures that Bumblezone has! | location
+task   the_bumblezone:structures/enter_cell_maze               | Lost in the Cells                      | Find and enter a Cell Maze structure! (Be careful if you don't have Protection o | location
+task   the_bumblezone:structures/enter_garden                  | The Gardener and the Bees              | Look up! You may find a large garden structure hanging down! | location
+task   the_bumblezone:structures/enter_sempiternal_sanctum     | Ancient Origins                        | Discover and enter any Sempiternal Sanctum after consuming Essence of the Bees | sempiternal_sanctum_enter_with_bee_essen
+task   the_bumblezone:structures/enter_throne_pillar           | Royal Presence                         | Find and enter a Throne Pillar structure! (Use throne-locating compasses from ot | location
+task   the_bumblezone:sugar_water/sugar_water_next_to_sugar_cane | Soon... It'll All Be Sugar Canes!      | Place Sugar Water source block next to an existing Sugar Cane block | sugar_water_next_to_sugar_cane
+task   the_bumblezone:teleportation/is_near_beehive            | Dimension of Bees awaits!              | Boldly approach a Beehive or Bee Nest | is_near_beehive
+task   the_bumblezone:teleportation/teleport_out_of_bumblezone | Dive Bombing Exit                      | Leave the Bumblezone by going beyond the bottom or top of the dimension! (You wi | teleport_out_of_bumblezone
+task   the_bumblezone:teleportation/teleport_to_bumblezone_pearl | Beenderman Intrusion!                  | Enter Bumblezone dimension by throwing Enderpearl at Beehive/Bee Nests | teleport_to_bumblezone_pearl
+task   the_bumblezone:teleportation/teleport_to_bumblezone_piston | Honeydraulic Press                     | Enter the Bumblezone dimension by being forced into a Beehive/Bee Nest by a Pist | teleport_to_bumblezone_piston
+chal   the_bumblezone:the_queens_desire/back_in_action         | Back in Action                         | Save 12 bees from certain death by putting their stingers back on | bee_saved_by_stinger
+chal   the_bumblezone:the_queens_desire/crazy_trader           | Crazy Trader                           | Trade 128 times with the Bee Queen. Does not need to be bonus trades. Any trade  | bee_queen_trading
+chal   the_bumblezone:the_queens_desire/fighting_the_swarm     | Fighting the Swarm                     | Kill 8 wriggling Silverfish crawling and burrowing everywhere | killed_counter
+chal   the_bumblezone:the_queens_desire/flooding_the_housing_market | Flooding the Housing Market            | Craft 6 Bee Nests or Beehives | beehive_crafted
+chal   the_bumblezone:the_queens_desire/honey_drunk            | Honey Drunk                            | Gulp down 8 bottles of honey! | honey_bottle_drank
+chal   the_bumblezone:the_queens_desire/hungry_hungry_bees     | Hungry Hungry Bees                     | Satisfy the hunger of bees by feeding them sugar water or honey-like stuff 48 ti | bee_fed
+chal   the_bumblezone:the_queens_desire/journeys_end           | Journey's End                          | Complete all Queen's Desire advancements! Right click the Bee Queen for a grand  | target_advancement_done
+chal   the_bumblezone:the_queens_desire/love_bees              | Love bees                              | Breed Bees until a total of 8 baby bees are born | bee_breeding
+chal   the_bumblezone:the_queens_desire/otherworldly_mites     | Otherworldly Mites                     | Slay 4 Endermites for their transgression of existence | killed_counter
+chal   the_bumblezone:the_queens_desire/peak_inefficiency      | Peak Inefficiency                      | Somehow managed to kill Wither with Stinger Spear... | stinger_spear_killed_with_wither
+chal   the_bumblezone:the_queens_desire/poison_warfare         | Poison Warfare                         | Fire 32 Bee Stingers from Bows/Crossbows | bee_stinger_shooter
+chal   the_bumblezone:the_queens_desire/pollen_fight           | Pollen Fight                           | Throw and hit 24 entities with Pollen Puff. Other players count! | pollen_puff_hit
+chal   the_bumblezone:the_queens_desire/slimy_mitosis          | Slimy Mitosis                          | Breed 6 Honey Slimes (They really love sugar!) | honey_slime_bred
+chal   the_bumblezone:the_queens_desire/terror_fangs           | Terror Fangs                           | Butcher 16 Cave Spiders from the depths | killed_counter
+chal H the_bumblezone:the_queens_desire/the_beginning          | The Queen's Desire                     | A quest-line bestowed upon you from meeting the Bee Queen. Complete the advancem | bee_queen_first_trade
+chal   the_bumblezone:the_queens_desire/the_crazy_florist      | The Crazy Florist                      | Spawn 8 flowers by pollinating flowers with Pollen Puff | pollen_puff_spawn_flower
+chal   the_bumblezone:the_queens_desire/the_great_dragon_slayer | The Great Dragon Slayer                | Become legendary by slaying the Enderdragon with full Bee Armor on | killed_counter
+chal   the_bumblezone:the_queens_desire/too_many_legs          | Too Many Legs                          | Smash and kill 32 Spiders for their icky-ness (Cave Spiders don't count) | killed_counter
+task   the_bumblezone:tools/bee_cannon_full                    | You better beehave now!                | Load and fire a full cannon of bees! | bee_cannon_full
+task   the_bumblezone:tools/bee_stinger_paralysis              | Endless Stinging                       | Paralyze a mob by shooting them non-stop with Bee Stingers from Bows/Crossbows | bee_stinger_paralyze
+task   the_bumblezone:tools/buzzing_briefcase_full             | What's this?...                        | Right click bees with Buzzing Briefcase until it is full | buzzing_briefcase_full
+task   the_bumblezone:tools/buzzing_briefcase_heal             | The Doctor is IN!                      | Heal a bee in a Buzzing Briefcase! (Open UI by shift right click) | buzzing_briefcase_heal
+task   the_bumblezone:tools/buzzing_briefcase_release          | A Hive Superhero!                      | Release bees from Buzzing Briefcase by left clicking on a block or entity. (Shif | buzzing_briefcase_release
+task   the_bumblezone:tools/cystal_cannon_full                 | Extreme Crowd Control                  | Load and fire a full cannon of crystals! | crystal_cannon_full
+chal   the_bumblezone:tools/fish_rare_loot                     | Beesistent Fishing                     | Fish out rare loot while in Bumblezone dimension! | fishing_rod_hooked
+task   the_bumblezone:tools/honey_compass_use                  | Dora the Beexplorer                    | Activate the Honey Compass's tracking/locating abilities! | honey_compass_use
+
+== The Undergarden
+chal   undergarden:undergarden/all_ore_blocks                  | Collector's Edition                    | Collect one block of every Undergarden ore. | inventory_changed
+chal   undergarden:undergarden/all_undergarden_biomes          | Subterranean Cartographer              | Discover every Undergarden biome. | location
+task H undergarden:undergarden/break_denizen_campfire          | Party Pooper                           | Upset all of the Denizens around you by destroying their campfire. | denizen_campfire_destroyed
+task   undergarden:undergarden/catacombs                       | Forgotten Halls                        | Enter some Catacombs. | location
+goal   undergarden:undergarden/cloggrum_armor                  | Cover Me in Coprolites                 | Obtain a full suit of Cloggrum armor. | inventory_changed
+goal   undergarden:undergarden/cloggrum_battleaxe              | Cold Dead Hands                        | Obtain a Cloggrum Battleaxe from a Forgotten carrying one. | inventory_changed
+task   undergarden:undergarden/contract_utheric_infection      | The Plague Upon the Land               | Contract the Utheric Infection. Don't let it get out of control! | utheric_infection
+task   undergarden:undergarden/cure_utheric_infection          | A Much Needed Antidote                 | Find a way to hold back the Utheric Infection. | consume_item,effects_changed
+task   undergarden:undergarden/enter_denizen_camp              | Meeting the Locals                     | Find a Denizen Camp. | location
+goal   undergarden:undergarden/enter_depths                    | Into the Depths                        | Break through the Dreadrock barrier at the bottom of the Undergarden and enter t | location
+task   undergarden:undergarden/enter_undergarden               | Enter the Undergarden                  | The forgotten land awaits... | changed_dimension
+chal   undergarden:undergarden/forgotten_battleaxe             | Axe of Legends                         | Upgrade a Cloggrum Battle Axe with a Forgotten Ingot. | inventory_changed
+chal   undergarden:undergarden/forgotten_tools                 | Forgotten Arsenal                      | Use Forgotten Ingots to upgrade Cloggrum tools and make all 6 Forgotten tools. | inventory_changed
+chal H undergarden:undergarden/gloomper_secret_disc            | Death Gloomps                          | Obtain the secret music disc. | inventory_changed
+chal   undergarden:undergarden/kill_all_rotspawn               | Rotbane                                | Slay all kinds of Rotspawn. | player_killed_entity
+goal   undergarden:undergarden/kill_forgotten_guardian         | Decommissioned                         | Slay a Forgotten Guardian. | player_killed_entity
+task   undergarden:undergarden/kill_rotling                    | Birth Control                          | Slay the weakest of the Rotspawn, the Rotling. | player_killed_entity
+task H undergarden:undergarden/kill_scintling                  | Terrible Person                        | You killed an innocent Scintling. You monster... | player_killed_entity
+goal   undergarden:undergarden/obtain_denizen_mask             | One of Us                              | Obtain a Mysterious Mask from a Denizen. | inventory_changed
+task   undergarden:undergarden/shoot_slingshot                 | Flinging Rocks                         | Shoot a pebble at something. | slingshot_fire
+task   undergarden:undergarden/shoot_slingshot_goo             | Flying Inconvenience                   | Shoot a Scintling Goo Ball at something to annoy it. | slingshot_fire
+task   undergarden:undergarden/shoot_slingshot_gronglet        | Ethically Questionable                 | Shoot a Gronglet! Is this okay..? | slingshot_fire
+task   undergarden:undergarden/shoot_slingshot_rotten_blisterberry | This Isn't Safe                        | Shoot a Rotten Blisterberry at something, and hopefully keep all your limbs. | slingshot_fire
+chal   undergarden:undergarden/slingshot_20_damage             | Sniping's a Good Job                   | Deal 20 or more damage to something with a single pebble...!? | player_hurt_entity
+goal H undergarden:undergarden/stack_of_gloomgourds            | Gourd Lord                             | Acquire a stack of Gloomgourds. | inventory_changed
+task   undergarden:undergarden/stoneborn_trade                 | Interdimensional Business              | Trade with a Stoneborn. | stoneborn_trade
+task   undergarden:undergarden/summon_minion                   | Buildin' a Sentry                      | Create a Forgotten Minion using a Forgotten Block and a Carved Gloomgourd. | summoned_entity
+
+== Vanilla Backport
+task   minecraft:husbandry/uh_oh                               | Uh Oh                                  | Have a Sulfur Cube absorb a TNT block | player_interacted_with_entity,thrown_ite
+
+== Void Totem (Forge)
+goal   voidtotem:adventure/totem_of_void_undying               | Postmortal 2                           | Use a Totem of Void Undying to cheat death when falling in the void | used_totem
+
+== YUNG's Better Desert Temples (NeoForge) [1.20.4 - 1.21.1 ONLY]
+chal   betterdeserttemples:temple_clear                        | Eternal Slumber                        | Slay the Pharaoh and free the Temple from his curse | player_killed_entity
+task   betterdeserttemples:temple_entry                        | An Ancient Tomb                        | Discover a Better Desert Temple | location
+
+== YUNG's Better Dungeons (NeoForge) [1.20.4 - 1.21.1 ONLY]
+task   betterdungeons:all_dungeons                             | Professional Dungeoneer                | Explore all of the Better Dungeons! | location
+task   betterdungeons:skeleton_dungeon                         | A Bone to Pick                         | Enter a Fortress of the Undead | location
+task   betterdungeons:small_dungeon                            | Quite the Renovation                   | Find an upgraded Monster Room | location
+task H betterdungeons:small_nether_dungeon                     | A Special Addition                     | Find a Small Nether Dungeon | location
+task   betterdungeons:spider_dungeon                           | Cobweb Entanglement                    | Discover a Spider Cave | location
+task   betterdungeons:zombie_dungeon                           | When in Rome                           | Set foot in a Catacomb | location
+
+== YUNG's Better Nether Fortresses (NeoForge) [1.20.4 - 1.21.1 ONLY]
+task   minecraft:nether/find_fortress                          | A Terrible Fortress                    | Break your way into a Nether Fortress | location
+
+== YUNG's Better Strongholds (NeoForge) [1.20.4 - 1.21.1 ONLY]
+task   minecraft:story/follow_ender_eye                        | Eye Spy                                | Follow an Eye of Ender | location
+
+== [Let's Do] Beachparty
+chal   beachparty:main/get_all_artifacts                       | The Treasure of the Sandy Madre        | Collect all currently available Artifacts | inventory_changed
+chal   beachparty:main/get_all_cocktails                       | The Big Sip                            | Collect all currently available Cocktails | inventory_changed
+chal   beachparty:main/get_all_music_discs                     | Summer Mixtape                         | Collect all currently available Beachparty Music Discs | inventory_changed
+chal H beachparty:main/hoarder                                 | Mine! Mine! Mine!                      | Collect all currently available Artifacts and Cocktails | inventory_changed
+task   beachparty:main/root                                    | Welcome to Beachparty!                 | Thank you for downloading Beachparty | location
+goal   beachparty:main/welcome_to_the_beach                    | No Shirt, No Shoes, No Problem         | Enter a Beach Biome | location
+
+== [Let's Do] Vinery
+chal   vinery:main/budding_grapes                              | Budding Grapes                         | Harvest Red and White Jungle Grapes. | inventory_changed
+task   vinery:main/fruits_of_the_field                         | Fruits of the Field                    | Apple and Cherry Trees now grow in Plains Biomes. | location
+chal   vinery:main/grape_picker                                | Grape Picker                           | Harvest Red, White, Taiga, and Savanna Grape variants. | inventory_changed
+goal   vinery:main/juice_it_up                                 | Juice It Up!                           | Place a Grapevine Pot. | placed_block
+chal   vinery:main/nectar_of_life                              | Nectar of Life                         | Collect all Grapejuice variants. | inventory_changed
+goal   vinery:main/the_first_press                             | The First Press                        | Place an Apple Press. | placed_block
+chal   vinery:main/vineyard_visionary                          | Vineyard Visionary                     | Collect all Grape variants. | inventory_changed
+chal   vinery:main/wine_somelier                               | Wine Sommelier                         | Collect all Wine variants. | inventory_changed
+
+== [Let's Do] Camping
+chal   camping:main/get_all_backpacks                          | Pack Collector                         | Collect all 7 different Backpacks | inventory_changed
