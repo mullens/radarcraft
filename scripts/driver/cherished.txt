@@ -1,0 +1,33 @@
+# Verifies Cherished Mobs: friendly cow takes 20% damage and regenerates; a named zombie survives
+# lava, huge damage and the void, and only /kill removes it.
+# Run: gradlew :dev-driver:runClient -PdriverScript=scripts/driver/cherished.txt
+wait 40
+world cherished
+wait 60
+chat /time set noon
+chat /summon minecraft:cow ~3 ~ ~ {NoAI:1b}
+chat /summon minecraft:zombie ~-3 ~ ~ {CustomName:'"Bob"',NoAI:1b}
+wait 20
+log spawned: {entities}
+screenshot cm-spawned
+
+chat /damage @e[type=minecraft:cow,limit=1,sort=nearest] 8 minecraft:generic
+wait 5
+log cow after 8 damage (expect 8.4/10): {entities}
+wait 130
+log cow after regen (expect 10.0/10): {entities}
+
+chat /damage @e[type=minecraft:zombie,limit=1,sort=nearest] 1000 minecraft:lava
+chat /damage @e[type=minecraft:zombie,limit=1,sort=nearest] 1000 minecraft:generic
+wait 5
+log Bob after 2000 damage (expect 20.0/20): {entities}
+
+chat /tp @e[type=minecraft:zombie,limit=1,sort=nearest] ~ -100 ~
+wait 40
+log Bob after void drop (expect back at surface, 20.0/20): {entities}
+screenshot cm-rescued
+
+chat /kill @e[type=minecraft:zombie,limit=1,sort=nearest]
+wait 10
+log after /kill (expect only the cow): {entities}
+quit

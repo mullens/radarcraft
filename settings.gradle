@@ -14,4 +14,6 @@ rootProject.name = 'lucas-mc-mods'
 
 include 'level-loss-only'
 include 'keyboard-keybinds'
+include 'cherished-mobs'
+include 'radars'
 include 'dev-driver'

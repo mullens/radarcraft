@@ -1,0 +1,14 @@
+# Focused check: a named mob dropped below the world comes back.
+wait 40
+world cherishedvoid
+wait 60
+chat /summon minecraft:zombie ~-3 ~ ~ {CustomName:'"Bob"',NoAI:1b}
+wait 45
+log spawned: {entities}
+chat /tp @e[type=minecraft:zombie,limit=1,sort=nearest] ~ -100 ~
+wait 80
+log after void drop: {entities}
+chat /damage @e[type=minecraft:zombie,name=Bob,limit=1] 1000 minecraft:out_of_world
+wait 5
+log after out_of_world damage: {entities}
+quit

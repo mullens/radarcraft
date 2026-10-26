@@ -11,6 +11,9 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.gui.screens.options.controls.KeyBindsScreen;
 import net.minecraft.client.gui.screens.worldselection.CreateWorldScreen;
 import net.minecraft.client.gui.screens.worldselection.WorldCreationUiState;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -45,7 +48,7 @@ import java.util.function.Predicate;
  * waitworld              block until the player is in a world and no screen is open
  * chat TEXT              send a chat message, or a command when TEXT starts with /
  * respawn                click the Respawn button on the death screen
- * log TEXT               log TEXT; placeholders {xp} {items} {screen} {health} {hotbar}
+ * log TEXT               log TEXT; placeholders {xp} {items} {screen} {health} {hotbar} {entities}
  * expect PLACEHOLDER V   log PASS/FAIL comparing a placeholder with V
  * quit                   close the game
  * </pre>
@@ -227,7 +230,20 @@ public final class DevDriver {
     private static String expand(Minecraft mc, String text) {
         String screen = mc.screen == null ? "none" : mc.screen.getClass().getSimpleName();
         text = text.replace("{screen}", screen);
-        if (mc.player == null) return text.replace("{xp}", "?").replace("{items}", "?").replace("{health}", "?").replace("{hotbar}", "?");
+        if (mc.player == null) return text.replace("{xp}", "?").replace("{items}", "?").replace("{health}", "?").replace("{hotbar}", "?").replace("{entities}", "?");
+        if (text.contains("{entities}")) {
+            // every living non-player entity within 32 blocks horizontally (any height), with health and y
+            StringBuilder sb = new StringBuilder();
+            for (Entity e : mc.level.getEntities(mc.player, mc.player.getBoundingBox().inflate(32, 512, 32), e -> e instanceof LivingEntity && !(e instanceof Player))) {
+                LivingEntity le = (LivingEntity) e;
+                if (sb.length() > 0) sb.append(", ");
+                sb.append(le.getType().toShortString());
+                if (le.hasCustomName()) sb.append("(").append(le.getCustomName().getString()).append(")");
+                sb.append(":").append(String.format(Locale.ROOT, "%.1f/%.0f", le.getHealth(), le.getMaxHealth()));
+                sb.append("@y").append((int) le.getY());
+            }
+            text = text.replace("{entities}", sb.length() == 0 ? "none" : sb.toString());
+        }
         int items = 0;
         StringBuilder hotbar = new StringBuilder();
         for (int i = 0; i < mc.player.getInventory().getContainerSize(); i++) {

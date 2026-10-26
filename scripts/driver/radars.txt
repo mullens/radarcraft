@@ -1,0 +1,23 @@
+# Verifies Radars: shrine maths, a boss spawn with its boss bar, taming on defeat, pointing, and name-tag conversion.
+# Run: gradlew :dev-driver:runClient -PdriverScript=scripts/driver/radars.txt
+wait 40
+world radars
+wait 60
+chat /radars locate 2
+chat /radars locate 3
+chat /tp @s ~ ~ ~ -90 10
+wait 5
+chat /radars spawn 2
+wait 40
+log boss: {entities}
+screenshot rd-boss
+chat /kill @e[type=radars:radar,limit=1,sort=nearest]
+wait 80
+log after kill: {entities}
+screenshot rd-tamed
+chat /summon minecraft:zombie ~3 ~ ~3 {CustomName:'"Radar"'}
+wait 30
+log after naming a zombie Radar: {entities}
+screenshot rd-radar1
+chat /radars status
+quit

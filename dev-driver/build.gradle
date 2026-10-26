@@ -5,10 +5,14 @@
 
 evaluationDependsOn(':level-loss-only')
 evaluationDependsOn(':keyboard-keybinds')
+evaluationDependsOn(':cherished-mobs')
+evaluationDependsOn(':radars')
 
 dependencies {
     implementation project(':level-loss-only')
     implementation project(':keyboard-keybinds')
+    implementation project(':cherished-mobs')
+    implementation project(':radars')
 }
 
 neoForge {
@@ -23,6 +27,12 @@ neoForge {
         }
         keyboardkeybinds {
             sourceSet(project(':keyboard-keybinds').sourceSets.main)
+        }
+        cherishedmobs {
+            sourceSet(project(':cherished-mobs').sourceSets.main)
+        }
+        radars {
+            sourceSet(project(':radars').sourceSets.main)
         }
     }
 
