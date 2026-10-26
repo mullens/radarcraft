@@ -1,7 +1,13 @@
-// Dev-only harness. `gradlew :dev-driver:runClient -PdriverScript=scripts/driver/keybinds.txt`
-// launches the client with BOTH real mods plus the driver, which then executes the script
-// (clicks, key presses, chat commands, in-game screenshots) without touching the real mouse.
-// Nothing here is published; the jar task is disabled.
+// Dev-only harness. Never published; the jar task is disabled.
+//
+//   gradlew :dev-driver:runClient -PdriverScript=scripts/driver/keybinds.txt            client script
+//   gradlew :dev-driver:runClient -PdriverScript=scripts/driver/park.txt -PserverScript=scripts/driver/server-cherished.txt
+//                                                                                      client script + integrated-server script
+//   gradlew :dev-driver:runServer -PdriverScript=scripts/driver/server-cherished.txt    headless dedicated server (needs run/eula.txt)
+//
+// Every run loads ALL mods of this repo. Client runs are muted and windowed by scripts/dev-options.txt
+// (re-applied before each launch by the root build), and the driver hides the game window while a
+// script runs, so nothing takes focus, grabs the mouse, or appears on screen.
 
 evaluationDependsOn(':level-loss-only')
 evaluationDependsOn(':keyboard-keybinds')
@@ -37,11 +43,14 @@ neoForge {
     }
 
     runs {
+        def script = providers.gradleProperty('driverScript').getOrElse('')
+        def serverScript = providers.gradleProperty('serverScript').getOrElse('')
         client {
-            def script = providers.gradleProperty('driverScript').getOrElse('')
-            if (script) {
-                systemProperty 'devdriver.script', rootProject.file(script).absolutePath
-            }
+            if (script) systemProperty 'devdriver.script', rootProject.file(script).absolutePath
+            if (serverScript) systemProperty 'devdriver.serverScript', rootProject.file(serverScript).absolutePath
+        }
+        server {
+            if (script) systemProperty 'devdriver.script', rootProject.file(script).absolutePath
         }
     }
 }

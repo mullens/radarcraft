@@ -20,7 +20,7 @@ $ErrorActionPreference = "Stop"
 . "$PSScriptRoot\Win32.ps1"
 
 $proc = Get-McWindow -TitleMatch $TitleMatch
-Focus-McWindow $proc
+Write-Warning "send-input.ps1 moves the REAL mouse and keyboard. Do not run it while someone is using the PC; prefer the in-game driver."
 $r = Get-McClientRect $proc
 
 function Move-Mouse([int]$x, [int]$y) {

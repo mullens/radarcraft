@@ -78,15 +78,17 @@ subprojects {
     sourceSets.main.resources.srcDir generateModMetadata
     neoForge.ideSyncTask generateModMetadata
 
-    // Seed run/options.txt on first launch (GUI scale 2, onboarding off) so scripted runs are predictable.
+    // Before EVERY run, overwrite run/options.txt with scripts/dev-options.txt: all sound categories at 0,
+    // windowed, no pause on focus loss, GUI scale 2. Minecraft rewrites options.txt on exit, so this is
+    // re-asserted each launch; the game is meant to run quietly in the background while you keep working.
+    var devOptionsFile = rootProject.file('scripts/dev-options.txt')
     var runOptionsFile = layout.projectDirectory.file('run/options.txt').asFile
-    var seedRunOptions = tasks.register("seedRunOptions", Copy) {
-        from rootProject.file('scripts/dev-options.txt')
-        into layout.projectDirectory.dir('run')
-        rename { 'options.txt' }
-        onlyIf { !runOptionsFile.exists() }
+    tasks.matching { it.name.startsWith('run') }.configureEach {
+        doFirst {
+            runOptionsFile.parentFile.mkdirs()
+            runOptionsFile.text = devOptionsFile.text
+        }
     }
-    tasks.matching { it.name.startsWith('run') }.configureEach { dependsOn seedRunOptions }
 
     tasks.withType(JavaCompile).configureEach {
         options.encoding = 'UTF-8'

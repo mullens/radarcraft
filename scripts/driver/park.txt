@@ -1,0 +1,8 @@
+# Minimal client script: create a world so the integrated server runs, wait for a server script, then quit.
+# Pair with -PserverScript=... ; the window stays hidden the whole time.
+wait 40
+screenshot park-title
+world parktest
+wait 400
+screenshot park-world
+quit

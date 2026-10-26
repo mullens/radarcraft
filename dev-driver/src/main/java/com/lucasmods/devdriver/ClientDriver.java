@@ -1,12 +1,12 @@
 package com.lucasmods.devdriver;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
 import net.minecraft.client.gui.screens.DeathScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.gui.screens.advancements.AdvancementsScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.gui.screens.options.controls.KeyBindsScreen;
 import net.minecraft.client.gui.screens.worldselection.CreateWorldScreen;
@@ -15,13 +15,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import org.slf4j.Logger;
+import org.lwjgl.glfw.GLFW;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,6 +31,10 @@ import java.util.function.Predicate;
  * Executes a script of client actions, one per tick, so the game can be exercised and
  * screenshotted without a human (or an OS-level input injector) at the keyboard.
  *
+ * <p>While a script runs the game window is hidden (unless {@code -Ddevdriver.visible=true}), so it
+ * never takes keyboard focus, never grabs the mouse and never appears on screen; screenshots are
+ * taken from the game's own framebuffer. The window is shown again when the script finishes.
+ *
  * <p>Enable with {@code -Ddevdriver.script=<file>}. One command per line, {@code #} comments:
  * <pre>
  * wait N                 pause N ticks (20 per second)
@@ -43,22 +43,18 @@ import java.util.function.Predicate;
  * click X Y [BUTTON]     move there and click (button 0 = left)
  * key NAME               press and release a key on the current screen, e.g. key ENTER, key W, key ESCAPE
  * type TEXT              type text into the current screen
- * screen title|keybinds|inventory|none
+ * screen title|keybinds|inventory|advancements|none
  * world NAME             create a fresh creative world with cheats on and join it
  * waitworld              block until the player is in a world and no screen is open
  * chat TEXT              send a chat message, or a command when TEXT starts with /
  * respawn                click the Respawn button on the death screen
- * log TEXT               log TEXT; placeholders {xp} {items} {screen} {health} {hotbar} {entities}
+ * log TEXT               log TEXT; placeholders {xp} {items} {screen} {health} {hotbar} {entities} {maxhealth} {speed}
  * expect PLACEHOLDER V   log PASS/FAIL comparing a placeholder with V
+ * show / hide            show or hide the game window
  * quit                   close the game
  * </pre>
  */
-@Mod(value = DevDriver.MODID, dist = Dist.CLIENT)
-public final class DevDriver {
-    public static final String MODID = "devdriver";
-    private static final Logger LOGGER = LogUtils.getLogger();
-    private static final String TAG = "[DevDriver]";
-
+public final class ClientDriver {
     private final List<String> lines = new ArrayList<>();
     private int pc = 0;
     private int waitTicks = 60; // let the title screen settle first
@@ -66,30 +62,39 @@ public final class DevDriver {
     private int waitForTimeout = 0;
     private boolean done = false;
     private int failures = 0;
+    private boolean parked = false;
+    private final boolean keepVisible = Boolean.getBoolean("devdriver.visible");
 
-    public DevDriver(IEventBus modBus, ModContainer container) {
-        String path = System.getProperty("devdriver.script");
+    static void register(String path) {
         if (path == null || path.isBlank()) {
-            LOGGER.info("{} idle: no -Ddevdriver.script given", TAG);
+            DevDriverMod.LOGGER.info("{} idle: no -Ddevdriver.script given", DevDriverMod.TAG);
             return;
         }
+        ClientDriver driver = new ClientDriver();
         try {
             for (String raw : Files.readAllLines(Path.of(path))) {
                 String line = raw.strip();
                 if (line.isEmpty() || line.startsWith("#")) continue;
-                lines.add(line);
+                driver.lines.add(line);
             }
         } catch (IOException e) {
-            LOGGER.error("{} cannot read script {}", TAG, path, e);
+            DevDriverMod.LOGGER.error("{} cannot read script {}", DevDriverMod.TAG, path, e);
             return;
         }
-        LOGGER.info("{} loaded {} commands from {}", TAG, lines.size(), path);
-        NeoForge.EVENT_BUS.addListener(this::onTick);
+        DevDriverMod.LOGGER.info("{} loaded {} commands from {}", DevDriverMod.TAG, driver.lines.size(), path);
+        NeoForge.EVENT_BUS.addListener(driver::onTick);
     }
 
     private void onTick(ClientTickEvent.Post event) {
         if (done) return;
         Minecraft mc = Minecraft.getInstance();
+        if (!parked) {
+            parked = true;
+            if (!keepVisible) setWindowVisible(mc, false);
+        }
+        // Never trap the real cursor while a script is running, whatever focus the window has.
+        if (mc.mouseHandler.isMouseGrabbed()) mc.mouseHandler.releaseMouse();
+
         if (waitTicks > 0) {
             waitTicks--;
             return;
@@ -97,7 +102,7 @@ public final class DevDriver {
         if (waitFor != null) {
             if (!waitFor.test(mc)) {
                 if (--waitForTimeout <= 0) {
-                    LOGGER.error("{} timed out waiting for condition before line {}", TAG, pc + 1);
+                    DevDriverMod.LOGGER.error("{} timed out waiting for condition before line {}", DevDriverMod.TAG, pc + 1);
                     failures++;
                     waitFor = null;
                 }
@@ -107,17 +112,29 @@ public final class DevDriver {
         }
         if (pc >= lines.size()) {
             done = true;
-            LOGGER.info("{} script finished with {} failure(s)", TAG, failures);
+            DevDriverMod.LOGGER.info("{} script finished with {} failure(s)", DevDriverMod.TAG, failures);
+            setWindowVisible(mc, true);
             return;
         }
         String line = lines.get(pc++);
-        LOGGER.info("{} > {}", TAG, line);
+        DevDriverMod.LOGGER.info("{} > {}", DevDriverMod.TAG, line);
         try {
             execute(mc, line);
         } catch (Exception e) {
             failures++;
-            LOGGER.error("{} command failed: {}", TAG, line, e);
+            DevDriverMod.LOGGER.error("{} command failed: {}", DevDriverMod.TAG, line, e);
         }
+    }
+
+    private static void setWindowVisible(Minecraft mc, boolean visible) {
+        long handle = mc.getWindow().getWindow();
+        if (visible) {
+            GLFW.glfwSetWindowAttrib(handle, GLFW.GLFW_FOCUS_ON_SHOW, GLFW.GLFW_FALSE);
+            GLFW.glfwShowWindow(handle);
+        } else {
+            GLFW.glfwHideWindow(handle);
+        }
+        DevDriverMod.LOGGER.info("{} game window {}", DevDriverMod.TAG, visible ? "shown" : "hidden (background mode)");
     }
 
     private void execute(Minecraft mc, String line) {
@@ -129,7 +146,7 @@ public final class DevDriver {
         switch (cmd) {
             case "wait" -> waitTicks = Integer.parseInt(args[0]);
             case "screenshot" -> Screenshot.grab(mc.gameDirectory, rest + ".png", mc.getMainRenderTarget(),
-                    msg -> LOGGER.info("{} screenshot: {}", TAG, msg.getString()));
+                    msg -> DevDriverMod.LOGGER.info("{} screenshot: {}", DevDriverMod.TAG, msg.getString()));
             case "move" -> move(mc, Double.parseDouble(args[0]), Double.parseDouble(args[1]));
             case "click" -> click(mc, Double.parseDouble(args[0]), Double.parseDouble(args[1]), args.length > 2 ? Integer.parseInt(args[2]) : 0);
             case "key" -> key(mc, args[0]);
@@ -162,19 +179,21 @@ public final class DevDriver {
                 if (!(s instanceof DeathScreen)) throw new IllegalStateException("not on the death screen but on " + s.getClass().getSimpleName());
                 click(mc, s.width / 2.0, s.height / 4.0 + 82, 0);
             }
-            case "log" -> LOGGER.info("{} {}", TAG, expand(mc, rest));
+            case "log" -> DevDriverMod.LOGGER.info("{} {}", DevDriverMod.TAG, expand(mc, rest));
             case "expect" -> {
                 String actual = expand(mc, "{" + args[0] + "}");
                 String expected = args[1];
                 if (actual.equals(expected)) {
-                    LOGGER.info("{} PASS {} == {}", TAG, args[0], expected);
+                    DevDriverMod.LOGGER.info("{} PASS {} == {}", DevDriverMod.TAG, args[0], expected);
                 } else {
                     failures++;
-                    LOGGER.error("{} FAIL {} expected {} but was {}", TAG, args[0], expected, actual);
+                    DevDriverMod.LOGGER.error("{} FAIL {} expected {} but was {}", DevDriverMod.TAG, args[0], expected, actual);
                 }
             }
+            case "show" -> setWindowVisible(mc, true);
+            case "hide" -> setWindowVisible(mc, false);
             case "quit" -> {
-                LOGGER.info("{} quitting with {} failure(s)", TAG, failures);
+                DevDriverMod.LOGGER.info("{} quitting with {} failure(s)", DevDriverMod.TAG, failures);
                 mc.stop();
             }
             default -> throw new IllegalArgumentException("unknown command " + cmd);
@@ -223,6 +242,7 @@ public final class DevDriver {
             case "title" -> mc.setScreen(new TitleScreen());
             case "keybinds" -> mc.setScreen(new KeyBindsScreen(mc.screen, mc.options));
             case "inventory" -> mc.setScreen(new InventoryScreen(mc.player));
+            case "advancements" -> mc.setScreen(new AdvancementsScreen(mc.player.connection.getAdvancements(), mc.screen));
             default -> throw new IllegalArgumentException("unknown screen " + which);
         }
     }
@@ -230,7 +250,10 @@ public final class DevDriver {
     private static String expand(Minecraft mc, String text) {
         String screen = mc.screen == null ? "none" : mc.screen.getClass().getSimpleName();
         text = text.replace("{screen}", screen);
-        if (mc.player == null) return text.replace("{xp}", "?").replace("{items}", "?").replace("{health}", "?").replace("{hotbar}", "?").replace("{entities}", "?");
+        if (mc.player == null) {
+            for (String k : new String[]{"xp", "items", "health", "hotbar", "entities", "maxhealth", "speed"}) text = text.replace("{" + k + "}", "?");
+            return text;
+        }
         if (text.contains("{entities}")) {
             // every living non-player entity within 32 blocks horizontally (any height), with health and y
             StringBuilder sb = new StringBuilder();
@@ -254,6 +277,8 @@ public final class DevDriver {
         return text.replace("{xp}", String.valueOf(mc.player.experienceLevel))
                 .replace("{items}", String.valueOf(items))
                 .replace("{health}", String.valueOf((int) mc.player.getHealth()))
+                .replace("{maxhealth}", String.format(Locale.ROOT, "%.1f", mc.player.getMaxHealth()))
+                .replace("{speed}", String.format(Locale.ROOT, "%.4f", mc.player.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)))
                 .replace("{hotbar}", hotbar.toString());
     }
 }

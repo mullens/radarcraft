@@ -14,14 +14,14 @@ description='''${mod_description}'''
     type="required"
     versionRange="${neo_version_range}"
     ordering="NONE"
-    side="CLIENT"
+    side="BOTH"
 
 [[dependencies.${mod_id}]]
     modId="minecraft"
     type="required"
     versionRange="${minecraft_version_range}"
     ordering="NONE"
-    side="CLIENT"
+    side="BOTH"
 
 [[accessTransformers]]
 file="META-INF/accesstransformer.cfg"

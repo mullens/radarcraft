@@ -36,33 +36,48 @@ Each mod runs from its own `run/` folder (worlds, logs, options). Those folders 
 `run/options.txt` is pre-seeded with `guiScale:2` and the first-launch onboarding disabled so the
 window is predictable for the scripts below.
 
-## Scripted dev loop (no hands on the mouse)
+## Scripted dev loop (quiet, in the background, no hands on the mouse)
 
 The point of this repo is that an AI assistant (or you) can change code, launch the game, and *look*
-at the result without a human at the keyboard. The `dev-driver/` subproject is a dev-only client mod
-that loads **both** real mods and executes a script of actions on the game's own tick, so it never
-touches your real mouse or keyboard:
+at the result without a human at the keyboard, and **without the test run getting in the way of
+whoever is using the PC**. Three rules are baked in:
+
+1. **Muted and windowed.** Before every `run*` task the root build overwrites `run/options.txt` with
+   `scripts/dev-options.txt`: every `soundCategory_*` at 0, `fullscreen:false`, `pauseOnLostFocus:false`,
+   GUI scale 2, onboarding off. Minecraft rewrites options.txt on exit, so this is re-applied each launch.
+   Backstop: `scripts/mute-game.ps1` mutes the audio session of every running `java.exe` in the Windows
+   mixer (CoreAudio), `-Unmute` reverses it.
+2. **Never focused.** The driver hides the game window while a script runs (`-Ddevdriver.visible=true`
+   keeps it visible) and releases the mouse every tick, so the game cannot take keyboard focus, grab the
+   cursor or appear on screen. Screenshots come from the game's own framebuffer. The PowerShell helpers
+   never call `SetForegroundWindow`; `scripts/screenshot.ps1` uses `PrintWindow`, and `scripts/send-input.ps1`
+   (real mouse/keyboard injection) only exists for emergencies and warns loudly.
+3. **Headless where possible.** Server-side logic is tested on the logical server with commands, no
+   player and no rendering, through the server driver.
+
+The `dev-driver/` subproject is a dev-only mod that loads **all** mods of this repo:
 
 ```bash
+# client scripts (clicks, keys, chat commands, world creation, in-game screenshots)
 ./gradlew :dev-driver:runClient -PdriverScript=scripts/driver/keybinds.txt
 ./gradlew :dev-driver:runClient -PdriverScript=scripts/driver/levelloss.txt
 ./gradlew :dev-driver:runClient -PdriverScript=scripts/driver/cherished.txt
 ./gradlew :dev-driver:runClient -PdriverScript=scripts/driver/radars.txt
+
+# server scripts: console commands + entity checks on the logical server
+./gradlew :dev-driver:runClient -PdriverScript=scripts/driver/park.txt -PserverScript=scripts/driver/server-cherished.txt
+./gradlew :dev-driver:runServer -PdriverScript=scripts/driver/server-cherished.txt   # fully headless; needs dev-driver/run/eula.txt
 ```
 
-Scripts are one command per line (`wait`, `click X Y`, `key ENTER`, `type`, `chat /give @s diamond`,
-`world NAME`, `respawn`, `screen keybinds|inventory|none`, `screenshot NAME`, `log`, `expect`, `quit`).
-Screenshots are written by Minecraft itself to `dev-driver/run/screenshots/NAME.png`; results and
-`PASS`/`FAIL` lines go to the game log, prefixed `[DevDriver]`. The full command list is in the
-Javadoc of `dev-driver/src/main/java/com/lucasmods/devdriver/DevDriver.java`.
+Client scripts are one command per line (`wait`, `click X Y`, `key ENTER`, `type`, `chat /give @s diamond`,
+`world NAME`, `respawn`, `screen keybinds|inventory|advancements|none`, `screenshot NAME`, `log`, `expect`,
+`show`, `hide`, `quit`); server scripts use `wait`, `cmd <command>`, `log` with `{named}` / `{namedcount}`,
+`expect`, `quit`. Screenshots are written by Minecraft itself to `dev-driver/run/screenshots/NAME.png`;
+results and `PASS`/`FAIL` lines go to the game log, prefixed `[DevDriver]`. The full command lists are in the
+Javadoc of `ClientDriver.java` and `ServerDriver.java`.
 
-Typical loop: edit → run a driver script in the background → read the log → open the PNGs → fix →
-repeat. The client window is launched at 1280×720 with GUI scale 2, so GUI coordinates (640×360)
-stay stable between runs.
-
-`scripts/screenshot.ps1` captures the game window from outside the game and `scripts/send-input.ps1`
-injects real mouse and keyboard input. They exist for the rare state the driver cannot reach (a
-crash screen, the loading splash), but they steal focus and move the real cursor, so prefer the driver.
+Typical loop: edit → run a driver script in the background → read the log → open the PNGs → fix → repeat.
+The client window is launched at 1280×720 with GUI scale 2, so GUI coordinates (640×360) stay stable.
 
 ## Cherished Mobs: rules and decisions
 
@@ -144,9 +159,9 @@ settings.gradle         lists the mod subprojects
 <mod>/src/main/java     sources
 <mod>/src/main/templates/META-INF/neoforge.mods.toml   mod metadata (placeholders filled by Gradle)
 dev-driver/             dev-only mod that runs scripts/driver/*.txt against the client (never published)
-scripts/driver/         driver scripts: keybinds.txt, levelloss.txt, cherished.txt, cherished-void.txt, radars.txt
-scripts/*.ps1           PowerShell fallbacks for capturing / driving the window from outside the game
-scripts/dev-options.txt options.txt seeded into every run/ folder on first launch
+scripts/driver/         client scripts (keybinds, levelloss, cherished, radars, park) and server scripts (server-cherished)
+scripts/*.ps1           mute-game.ps1 (mixer mute), screenshot.ps1 (PrintWindow capture), send-input.ps1 (emergency only)
+scripts/dev-options.txt muted/windowed options.txt written into every run/ folder before each launch
 ```
 
 To add a third mod: copy a mod folder, change its `gradle.properties`, add it to `settings.gradle`.

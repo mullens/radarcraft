@@ -47,10 +47,7 @@ function Get-McClientRect {
 }
 
 function Focus-McWindow {
+    # Deliberately disabled: test runs must never steal focus from the user. Kept so old callers do not break.
     param($Proc)
-    # Windows only lets a process steal focus after it has sent input; a bare Alt press does the trick.
-    [System.Windows.Forms.SendKeys]::SendWait("%")
-    [void][McWin32]::ShowWindow($Proc.MainWindowHandle, 9) # SW_RESTORE
-    [void][McWin32]::SetForegroundWindow($Proc.MainWindowHandle)
-    Start-Sleep -Milliseconds 300
+    Write-Warning "Focus-McWindow is disabled: the game is driven in the background (see scripts/driver and dev-driver)."
 }

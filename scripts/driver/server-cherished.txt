@@ -1,0 +1,20 @@
+# Headless check of Cherished Mobs on the logical server: commands run at world spawn, no player needed.
+#   gradlew :dev-driver:runServer -PdriverScript=scripts/driver/server-cherished.txt      (dedicated, needs run/eula.txt)
+#   gradlew :dev-driver:runClient -PdriverScript=scripts/driver/park.txt -PserverScript=scripts/driver/server-cherished.txt
+wait 40
+cmd summon minecraft:zombie ~ ~8 ~ {CustomName:'"Bob"',NoAI:1b}
+wait 60
+log named: {named}
+expect namedcount 1
+cmd damage @e[name=Bob,limit=1] 1000 minecraft:out_of_world
+wait 5
+log after out_of_world damage: {named}
+cmd tp @e[name=Bob,limit=1] ~ -100 ~
+wait 60
+log after void drop: {named}
+expect namedcount 1
+cmd kill @e[name=Bob,limit=1]
+wait 40
+log after kill: {named}
+expect namedcount 0
+quit
