@@ -14,6 +14,7 @@ A trimmed fork of **Create Aeronautics - Skybound** v17.1.0 (NeoForge 21.1, Mine
 | `check_deps.py` | verifies the kept set against the dependencies the jars themselves declare; finds stray jars |
 | `migrate_server.py` | migrates a server folder (snapshot or live files) to the trimmed set, with a backup; dry run by default |
 | `boot_server.py` | installs a local headless NeoForge server, syncs the pack into it, boots it and summarizes the log |
+| `release.py` | local release: Gradle build of every mod, pack rebuild, everything collected into `dist/<version>/` (no CI, ever) |
 | `make_grid.py` / `checklist-grid.json` / `checklist-upgrades.json` / `upgrades.md` | the Checklist mod's grid and upgrade catalog |
 | `audit.html` | the interactive checklist (published as a Claude artifact; its saved choices feed `decisions.json`) |
 | `out/` | build output, not committed |
