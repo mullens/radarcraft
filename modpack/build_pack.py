@@ -56,6 +56,35 @@ def resolve(mods, decisions):
     return kept, reasons, state, dependents
 
 
+def apply_config_patches(overrides):
+    """Apply modpack/config-patches.json to the copied config files (TOML line replacement, JSON nested set)."""
+    pfile = HERE / "config-patches.json"
+    if not pfile.exists():
+        return
+    for patch in json.load(open(pfile, encoding="utf-8"))["patches"]:
+        target = overrides / patch["file"]
+        if not target.exists():
+            print("WARNING: config patch target missing:", patch["file"]); continue
+        if patch["format"] == "toml":
+            text = target.read_text(encoding="utf-8")
+            for key, val in patch["set"].items():
+                new, n = re.subn(rf"^(\s*{re.escape(key)}\s*=\s*)[^\n#]*", lambda m: m.group(1) + str(val), text, count=1, flags=re.M)
+                if n == 0:
+                    print(f"WARNING: key {key} not found in {patch['file']}")
+                text = new
+            target.write_text(text, encoding="utf-8")
+        elif patch["format"] == "json":
+            data = json.load(open(target, encoding="utf-8"))
+            for dotted, val in patch["set"].items():
+                node = data
+                parts = dotted.split(".")
+                for p in parts[:-1]:
+                    node = node.setdefault(p, {})
+                node[parts[-1]] = val
+            json.dump(data, open(target, "w", encoding="utf-8"), indent=2)
+        print(f"patched {patch['file']}: {', '.join(patch['set'])}")
+
+
 def name_of(mods, mid):
     for m in mods:
         if m["id"] == mid:
@@ -130,6 +159,8 @@ def main():
         src = inst / d
         if src.exists():
             shutil.copytree(src, pack / "overrides" / d, ignore=shutil.ignore_patterns("*.OLD", "*.bak"))
+    apply_config_patches(pack / "overrides")
+
     # the multiplayer server list, so friends see the server pre-added
     if (inst / "servers.dat").exists():
         shutil.copy2(inst / "servers.dat", pack / "overrides" / "servers.dat")
