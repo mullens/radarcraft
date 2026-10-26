@@ -1,0 +1,8 @@
+guiScale:2
+onboardAccessibility:false
+skipMultiplayerWarning:true
+joinedFirstServer:true
+tutorialStep:none
+narrator:0
+pauseOnLostFocus:false
+lang:en_us

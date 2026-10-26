@@ -1,0 +1,39 @@
+// Dev-only harness. `gradlew :dev-driver:runClient -PdriverScript=scripts/driver/keybinds.txt`
+// launches the client with BOTH real mods plus the driver, which then executes the script
+// (clicks, key presses, chat commands, in-game screenshots) without touching the real mouse.
+// Nothing here is published; the jar task is disabled.
+
+evaluationDependsOn(':level-loss-only')
+evaluationDependsOn(':keyboard-keybinds')
+
+dependencies {
+    implementation project(':level-loss-only')
+    implementation project(':keyboard-keybinds')
+}
+
+neoForge {
+    // Access transformers of the sibling mods must be applied here too, since this project's
+    // Minecraft artifact is what the combined run uses.
+    accessTransformers.from(file('src/main/resources/META-INF/accesstransformer.cfg'))
+    accessTransformers.from(project(':keyboard-keybinds').file('src/main/resources/META-INF/accesstransformer.cfg'))
+
+    mods {
+        levellossonly {
+            sourceSet(project(':level-loss-only').sourceSets.main)
+        }
+        keyboardkeybinds {
+            sourceSet(project(':keyboard-keybinds').sourceSets.main)
+        }
+    }
+
+    runs {
+        client {
+            def script = providers.gradleProperty('driverScript').getOrElse('')
+            if (script) {
+                systemProperty 'devdriver.script', rootProject.file(script).absolutePath
+            }
+        }
+    }
+}
+
+tasks.named('jar') { enabled = false }

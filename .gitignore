@@ -1,0 +1,29 @@
+# gradle
+build/
+.gradle/
+**/build/
+**/.gradle/
+
+# idea / eclipse / vscode
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+bin/
+.settings/
+.classpath
+.project
+.vscode/
+
+# minecraft run directories (worlds, logs, options)
+run/
+runs/
+run-data/
+**/run/
+**/runs/
+**/run-data/
+
+# local tooling output
+screenshots/
+repo/

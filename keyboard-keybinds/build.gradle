@@ -1,0 +1,11 @@
+// Shared configuration lives in the root build.gradle; this file only adds mod-specific run configs.
+neoForge {
+    runs {
+        // Opens the keyboard screen right on top of the title screen: `gradlew :keyboard-keybinds:runClientScreen`
+        clientScreen {
+            client()
+            programArguments.addAll '--width', '1280', '--height', '720'
+            systemProperty 'keyboardkeybinds.devOpen', 'true'
+        }
+    }
+}

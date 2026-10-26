@@ -1,0 +1,51 @@
+# Exercises the Keyboard Keybinds screen. GUI coordinates assume a 1280x720 window at GUI scale 2 (640x360).
+# Run: gradlew :dev-driver:runClient -PdriverScript=scripts/driver/keybinds.txt
+wait 40
+screen keybinds
+wait 10
+log screen={screen}
+screenshot kk-open
+
+# select the W key cell (keyboard starts at x=72,y=18; unit 22; W is at 2.5u,2.5u)
+click 138 84
+wait 2
+screenshot kk-select-w
+
+# press "Change" on the Walk Forwards row, then click the S key cell: Walk Forwards now conflicts with Walk Backwards
+click 261 200
+wait 2
+screenshot kk-listening
+click 143 106
+wait 2
+move 143 106
+wait 2
+screenshot kk-conflict
+
+# mark the pair as intentional: S turns yellow
+click 328 220
+wait 2
+screenshot kk-intentional
+# and undo it again
+click 328 220
+wait 2
+
+# search for an action
+click 500 186
+type sneak
+wait 2
+screenshot kk-search
+
+# Reset All restores defaults
+click 234 346
+wait 2
+screenshot kk-reset
+
+# List View opens the vanilla screen; Escape returns to the keyboard
+click 320 346
+wait 5
+screenshot kk-listview
+key ESCAPE
+wait 5
+log screen={screen}
+screenshot kk-back
+quit

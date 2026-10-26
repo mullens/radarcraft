@@ -1,0 +1,33 @@
+# Verifies Level Loss Only: die with items and XP, respawn, items are back and XP is gone.
+# Run: gradlew :dev-driver:runClient -PdriverScript=scripts/driver/levelloss.txt
+wait 40
+world devtest
+wait 60
+chat /gamemode survival
+chat /give @s diamond_sword
+chat /give @s diamond 10
+chat /item replace entity @s armor.chest with diamond_chestplate
+chat /xp set @s 10 levels
+wait 20
+log before death: xp={xp} items={items} hotbar={hotbar}
+expect xp 10
+expect items 3
+screen inventory
+wait 2
+screenshot lll-before
+screen none
+wait 2
+chat /kill @s
+wait 50
+log screen={screen}
+screenshot lll-dead
+respawn
+wait 60
+log after respawn: xp={xp} items={items} hotbar={hotbar} health={health}
+expect xp 0
+expect items 3
+screen inventory
+wait 2
+screenshot lll-after
+screen none
+quit

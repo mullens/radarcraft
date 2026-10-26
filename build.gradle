@@ -1,0 +1,101 @@
+// Root build: shared configuration for every mod subproject.
+// Each mod lives in its own folder with a gradle.properties that sets mod_id, mod_name, etc.
+plugins {
+    id 'idea'
+    id 'net.neoforged.moddev' version '2.0.91' apply false
+}
+
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'idea'
+    apply plugin: 'net.neoforged.moddev'
+
+    version = mod_version
+    group = mod_group_id
+
+    base {
+        archivesName = "${mod_id}-${minecraft_version}"
+    }
+
+    // Mojang ships Java 21 to end users starting in 1.20.5, so mods target Java 21.
+    java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+    repositories {
+        mavenLocal()
+    }
+
+    neoForge {
+        version = project.neo_version
+
+        parchment {
+            mappingsVersion = project.parchment_mappings_version
+            minecraftVersion = project.parchment_minecraft_version
+        }
+
+        runs {
+            client {
+                client()
+                // Fixed window size so screenshots taken by tooling are predictable.
+                programArguments.addAll '--width', '1280', '--height', '720'
+            }
+            server {
+                server()
+                programArgument '--nogui'
+            }
+            configureEach {
+                systemProperty 'forge.logging.markers', 'REGISTRIES'
+                logLevel = org.slf4j.event.Level.INFO
+            }
+        }
+
+        mods {
+            "${mod_id}" {
+                sourceSet(sourceSets.main)
+            }
+        }
+    }
+
+    // Expand ${...} placeholders in src/main/templates (neoforge.mods.toml) from gradle properties.
+    var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
+        var replaceProperties = [
+                minecraft_version      : minecraft_version,
+                minecraft_version_range: minecraft_version_range,
+                neo_version            : neo_version,
+                neo_version_range      : neo_version_range,
+                loader_version_range   : loader_version_range,
+                mod_id                 : mod_id,
+                mod_name               : mod_name,
+                mod_license            : mod_license,
+                mod_version            : mod_version,
+                mod_authors            : mod_authors,
+                mod_description        : mod_description
+        ]
+        inputs.properties replaceProperties
+        expand replaceProperties
+        from "src/main/templates"
+        into "build/generated/sources/modMetadata"
+    }
+    sourceSets.main.resources.srcDir generateModMetadata
+    neoForge.ideSyncTask generateModMetadata
+
+    // Seed run/options.txt on first launch (GUI scale 2, onboarding off) so scripted runs are predictable.
+    var runOptionsFile = layout.projectDirectory.file('run/options.txt').asFile
+    var seedRunOptions = tasks.register("seedRunOptions", Copy) {
+        from rootProject.file('scripts/dev-options.txt')
+        into layout.projectDirectory.dir('run')
+        rename { 'options.txt' }
+        onlyIf { !runOptionsFile.exists() }
+    }
+    tasks.matching { it.name.startsWith('run') }.configureEach { dependsOn seedRunOptions }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+
+    idea {
+        module {
+            downloadSources = true
+            downloadJavadoc = true
+        }
+    }
+}
