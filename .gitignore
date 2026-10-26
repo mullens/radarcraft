@@ -36,3 +36,4 @@ modpack/tools/
 testserver/
 *.installer.jar.log
 dist/
+__pycache__/
