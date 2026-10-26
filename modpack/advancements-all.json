@@ -4162,7 +4162,8 @@
   "criteria": [
    "minecraft:changed_dimension"
   ],
-  "icon": "creatingspace:moon_stone"
+  "icon": "creatingspace:moon_stone",
+  "legacy_folder": true
  },
  {
   "id": "creatingspace:where_is_the_cheese",
@@ -4179,7 +4180,8 @@
   "criteria": [
    "minecraft:changed_dimension"
   ],
-  "icon": "creatingspace:moon_stone"
+  "icon": "creatingspace:moon_stone",
+  "legacy_folder": true
  },
  {
   "id": "createpropulsion:energy_propulsion",
@@ -5318,7 +5320,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/createairdrop",
@@ -5335,7 +5338,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/createcontainer",
@@ -5352,7 +5356,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/createcushercrane",
@@ -5369,7 +5374,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/createdesertwell",
@@ -5386,7 +5392,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/createfluidtank",
@@ -5403,7 +5410,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/createhouse",
@@ -5420,7 +5428,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/createlittleman",
@@ -5437,7 +5446,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/createlosttrainstation",
@@ -5454,7 +5464,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/createminiskyvillage",
@@ -5471,7 +5482,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/createmonsterroom",
@@ -5488,7 +5500,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/createoldruine",
@@ -5505,7 +5518,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/createpickaxestatue",
@@ -5522,7 +5536,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/createwitchhut",
@@ -5539,7 +5554,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/create_bastion",
@@ -5556,7 +5572,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/create_copper_statue",
@@ -5573,7 +5590,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/create_dungeon_base",
@@ -5590,7 +5608,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/create_ruined_castle",
@@ -5607,7 +5626,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/crimsite_tower",
@@ -5624,7 +5644,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/darkcastle",
@@ -5641,7 +5662,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/deadlordshouse",
@@ -5658,7 +5680,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/honey_pit",
@@ -5675,7 +5698,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/minetrain",
@@ -5692,7 +5716,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/obsidiantemple",
@@ -5709,7 +5734,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/pillagersteampunkairship",
@@ -5726,7 +5752,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/pillager_boat",
@@ -5743,7 +5770,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/root",
@@ -5760,7 +5788,8 @@
   "criteria": [
    "minecraft:tick"
   ],
-  "icon": "minecraft:compass"
+  "icon": "minecraft:compass",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/towerofochrum",
@@ -5777,7 +5806,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "create_structures_arise:structures/windmill",
@@ -5794,7 +5824,8 @@
   "criteria": [
    "minecraft:location"
   ],
-  "icon": "minecraft:map"
+  "icon": "minecraft:map",
+  "legacy_folder": true
  },
  {
   "id": "trading_floor:drop_shipper",

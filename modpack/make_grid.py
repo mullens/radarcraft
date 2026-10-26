@@ -32,14 +32,15 @@ CURATED = [
     # --- Create addons ---
     ("create_enchantment_industry:blazing_enchantment", 2), ("create_enchantment_industry:a_shower_experience", 2),
     ("create_enchantment_industry:transcendent_overclock", 4), ("create_enchantment_industry:experienced_recycler", 5),
-    ("create_structures_arise:structures/pillagersteampunkairship", 2), ("create_structures_arise:structures/createlosttrainstation", 2),
-    ("create_structures_arise:structures/createminiskyvillage", 3),
+    # (Create: Structures Arise and Creating Space ship advancements in the pre-1.21 "advancements/" folder, which the
+    #  game ignores, so they are not usable; replaced by live Create / Bumblezone / Bosses' Rise squares)
+    ("create:cardboard_armor", 2), ("create:backtank", 2), ("create:cart_pickup", 3),
     ("aerowarptics:first_warp", 2), ("aerowarptics:gate_traveller", 3), ("aerowarptics:ship_summoned", 3),
     ("aerowarptics:long_haul", 4), ("aerowarptics:fissure_closed", 4), ("aerowarptics:blind_jump", 4),
     ("escalated:escalator_100", 3), ("escalated:escalator_100_nether", 4),
     ("numismatics:money_laundering", 2),
     ("trading_floor:drop_shipper", 3), ("trading_floor:happy_jeff", 5),
-    ("creatingspace:reach_earth_orbit", 5), ("creatingspace:where_is_the_cheese", 5),
+    ("the_bumblezone:essence/essence_raging", 5), ("block_factorys_bosses:no_hit_yeti", 5),
     # --- The Aether + Deep Aether ---
     ("aether:enter_aether", 2), ("aether:incubate_moa", 2), ("aether:aether_sleep", 2), ("aether:black_moa", 3),
     ("aether:bronze_dungeon", 3), ("aether:silver_dungeon", 4), ("aether:zephyr_hammer", 4), ("aether:gold_dungeon", 5),
@@ -103,8 +104,9 @@ def main():
     ids = [c[0] for c in CURATED]
     dupes = [k for k, v in Counter(ids).items() if v > 1]
     unknown = [i for i in ids if i not in known]
-    if dupes or unknown:
-        sys.exit(f"duplicates: {dupes}\nunknown ids: {unknown}")
+    dead = [i for i in ids if i in known and known[i].get("legacy_folder")]
+    if dupes or unknown or dead:
+        sys.exit(f"duplicates: {dupes}\nunknown ids: {unknown}\nin a legacy advancements/ folder (ignored by 1.21): {dead}")
     assert len(CURATED) <= WIDTH * HEIGHT, f"{len(CURATED)} entries do not fit {WIDTH}x{HEIGHT}"
 
     cx, cy = (WIDTH - 1) / 2, (HEIGHT - 1) / 2
