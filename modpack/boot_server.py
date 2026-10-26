@@ -7,6 +7,10 @@
     python modpack/boot_server.py baseline <dir>       # instead of sync: the ORIGINAL pack's full server-side set, for comparison
     python modpack/boot_server.py errors  <dir> > file # normalized unique error lines of the last boot
     python modpack/boot_server.py diff    <dir> <file> # errors of the last boot vs a saved error list
+    python modpack/boot_server.py serve   <dir>        # start detached with RCON (127.0.0.1:25575) and keep running
+    python modpack/boot_server.py wait    <dir> [secs] # block until the served server prints Done, then summarize
+    python modpack/boot_server.py rcon    <dir> <cmd>  # run a console command on the served server
+    python modpack/boot_server.py stop    <dir>        # stop the served server
 
 Prerequisites (both need your OK, so the script never downloads or accepts anything itself):
   - the installer: neoforge-21.1.248-installer.jar placed in modpack/tools/
@@ -153,6 +157,75 @@ def run(d, secs):
     report(d)
 
 
+RCON_PORT, RCON_PASS = 25575, "devrcon"
+
+
+def rcon(d, command, timeout=20):
+    """Send one command over RCON to the server started by `serve` and return its response text."""
+    import socket
+    def packet(pid, ptype, body):
+        b = body.encode("utf-8")
+        return struct.pack("<iii", 10 + len(b), pid, ptype) + b + b"\x00\x00"
+    def recv(s):
+        hdr = s.recv(4)
+        if len(hdr) < 4: raise ConnectionError("rcon closed")
+        n = struct.unpack("<i", hdr)[0]
+        data = b""
+        while len(data) < n:
+            data += s.recv(n - len(data))
+        pid, ptype = struct.unpack("<ii", data[:8])
+        return pid, ptype, data[8:-2].decode("utf-8", "replace")
+    with socket.create_connection(("127.0.0.1", RCON_PORT), timeout=timeout) as s:
+        s.sendall(packet(1, 3, RCON_PASS))
+        pid, _, _ = recv(s)
+        if pid == -1: raise PermissionError("rcon auth failed")
+        s.sendall(packet(2, 2, command))
+        _, _, body = recv(s)
+        return body
+
+
+def serve(d):
+    """Start the server detached (RCON enabled) and return immediately; use `wait`, `rcon`, `stop`."""
+    if not (d / "eula.txt").exists() or "eula=true" not in (d / "eula.txt").read_text():
+        sys.exit("eula.txt with eula=true is missing")
+    args_file = next(iter(glob.glob(str(d / "libraries/net/neoforged/neoforge/*/win_args.txt"))), None)
+    props = d / "server.properties"
+    text = props.read_text() if props.exists() else "online-mode=false\nlevel-name=testworld\nmax-players=4\nview-distance=6\nspawn-protection=0\n"
+    import re as _re
+    for k, v in (("enable-rcon", "true"), ("rcon.port", str(RCON_PORT)), ("rcon.password", RCON_PASS), ("online-mode", "false")):
+        text = _re.sub(rf"^{_re.escape(k)}=.*$", f"{k}={v}", text, flags=_re.M) if _re.search(rf"^{_re.escape(k)}=", text, _re.M) else text + f"\n{k}={v}"
+    props.write_text(text.strip() + "\n")
+    cmd = [java21(), "-Xmx8G", "-Xms2G", f"@{Path(args_file).relative_to(d)}", "--nogui"]
+    log = open(d / "boot-console.txt", "w", encoding="utf-8")
+    flags = 0x00000008 | 0x00000200 if os.name == "nt" else 0  # DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP
+    p = subprocess.Popen(cmd, cwd=d, stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT, creationflags=flags)
+    (d / "server.pid").write_text(str(p.pid))
+    print(f"started pid {p.pid}; log: {d / 'boot-console.txt'}; rcon on 127.0.0.1:{RCON_PORT}")
+
+
+def wait(d, secs):
+    t0 = time.time()
+    while time.time() - t0 < secs:
+        txt = (d / "boot-console.txt").read_text(encoding="utf-8", errors="replace") if (d / "boot-console.txt").exists() else ""
+        if re.search(r'Done \([\d.]+s\)! For help', txt):
+            print(f"server is up after {time.time()-t0:.0f}s"); report(d); return
+        if "Failed to start the minecraft server" in txt or "A fatal error" in txt:
+            print("server failed"); report(d); return
+        time.sleep(5)
+    print("timeout waiting for the server")
+
+
+def stop(d):
+    try:
+        print(rcon(d, "stop"))
+    except Exception as e:
+        print("rcon stop failed:", e)
+        pid = (d / "server.pid").read_text().strip() if (d / "server.pid").exists() else None
+        if pid:
+            subprocess.run(["taskkill", "/PID", pid, "/F"], check=False)
+    time.sleep(5)
+
+
 def report(d):
     txt = (d / "boot-console.txt").read_text(encoding="utf-8", errors="replace") if (d / "boot-console.txt").exists() else ""
     lines = txt.splitlines()
@@ -179,4 +252,6 @@ if __name__ == "__main__":
     {"setup": lambda: setup(d), "sync": lambda: sync(d), "baseline": lambda: sync_baseline(d),
      "run": lambda: run(d, int(sys.argv[3]) if len(sys.argv) > 3 else 900), "report": lambda: report(d),
      "errors": lambda: print("\n".join(errors_of(d))),
-     "diff": lambda: diff(d, sys.argv[3])}[cmd]()
+     "diff": lambda: diff(d, sys.argv[3]),
+     "serve": lambda: serve(d), "wait": lambda: wait(d, int(sys.argv[3]) if len(sys.argv) > 3 else 900),
+     "stop": lambda: stop(d), "rcon": lambda: print(rcon(d, " ".join(sys.argv[3:])))}[cmd]()
