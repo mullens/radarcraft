@@ -12,7 +12,7 @@ Setup: nothing, unless the profile name below does not match yours (open the Cur
 the name under the pack picture).
 #>
 $ProfileName = "Create Aeronautics - Skybound (Lucas fork)"
-$Repo        = "OWNER/REPO"          # GitHub repo of the pack, e.g. lucas/vibecraft
+$Repo        = "mullens/radarcraft"  # GitHub repo of the pack
 $Token       = ""                    # only needed while the repo is private: a read-only token Lucas gives you
 
 $ErrorActionPreference = "Stop"
