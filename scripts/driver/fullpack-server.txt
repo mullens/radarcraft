@@ -1,0 +1,38 @@
+# Full-pack client joining the headless test server at localhost:25565 (online-mode=false, player "Dev").
+# Run: python scripts/launch-fullpack.py scripts/driver/fullpack-server.txt
+# While the script sits in the long waits, grant advancements through RCON from outside:
+#   python modpack/boot_server.py rcon C:\Users\lucas\vibecraft\testserver "advancement grant Dev only minecraft:story/root"
+wait 100
+log menus reached: screen={screen}
+connect localhost:25565
+wait 200
+log joined server: screen={screen} health={health}
+screenshot fps-world
+chat /checklist level
+chat /radars status
+wait 600
+log after rcon grants: screen={screen}
+screen checklist
+wait 20
+screenshot fps-checklist-grid
+click 117 16
+wait 20
+screenshot fps-checklist-upgrades
+click 516 59
+wait 20
+log after buying Hearts: maxhealth={maxhealth}
+screenshot fps-checklist-bought
+screen none
+wait 5
+screen keybinds
+wait 20
+log keybinds screen with Controlling installed: screen={screen}
+screenshot fps-keybinds
+key ESCAPE
+wait 5
+chat /radars spawn 1
+wait 60
+log radar cat: {entities}
+screenshot fps-radar
+wait 40
+quit

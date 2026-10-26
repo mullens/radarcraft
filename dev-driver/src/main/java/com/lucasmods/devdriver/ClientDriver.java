@@ -46,6 +46,7 @@ import java.util.function.Predicate;
  * screen title|keybinds|inventory|advancements|checklist|none
  * scroll X Y AMOUNT      mouse-wheel at X,Y (negative = down)
  * world NAME             create a fresh creative world with cheats on and join it
+ * connect HOST:PORT      join a multiplayer server and wait until in-world
  * waitworld              block until the player is in a world and no screen is open
  * chat TEXT              send a chat message, or a command when TEXT starts with /
  * respawn                click the Respawn button on the death screen
@@ -156,10 +157,17 @@ public final class ClientDriver {
                 for (char c : rest.toCharArray()) s.charTyped(c, 0);
             }
             case "screen" -> screen(mc, args[0]);
+            case "connect" -> {
+                String address = args[0];
+                net.minecraft.client.gui.screens.ConnectScreen.startConnecting(new TitleScreen(), mc,
+                        net.minecraft.client.multiplayer.resolver.ServerAddress.parseString(address),
+                        new net.minecraft.client.multiplayer.ServerData("dev test server", address, net.minecraft.client.multiplayer.ServerData.Type.OTHER), false, null);
+                lines.add(pc, "waitworld");
+            }
             case "world" -> {
                 CreateWorldScreen.openFresh(mc, null);
                 lines.add(pc, "_createworld " + rest);
-                await(m -> m.screen instanceof CreateWorldScreen, 600);
+                await(m -> m.screen instanceof CreateWorldScreen, 20 * 300);
             }
             case "_createworld" -> {
                 CreateWorldScreen s = (CreateWorldScreen) requireScreen(mc);
@@ -170,7 +178,7 @@ public final class ClientDriver {
                 s.onCreate(); // made public by the access transformer
                 lines.add(pc, "waitworld");
             }
-            case "waitworld" -> await(m -> m.player != null && m.level != null && m.screen == null && m.player.tickCount > 20, 20 * 180);
+            case "waitworld" -> await(m -> m.player != null && m.level != null && m.screen == null && m.player.tickCount > 20, 20 * 900);
             case "chat" -> {
                 if (rest.startsWith("/")) mc.player.connection.sendCommand(rest.substring(1));
                 else mc.player.connection.sendChat(rest);

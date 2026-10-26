@@ -1,0 +1,25 @@
+# Full-pack boot test: the trimmed Skybound pack (assembled by scripts/assemble-fullpack.py into dev-driver/run-fullpack)
+# with this repo's mods on the classpath. Run: gradlew :dev-driver:runClientFullPack -PdriverScript=scripts/driver/fullpack.txt
+wait 100
+log title screen reached: screen={screen}
+screenshot fp-title
+world fullpack
+wait 100
+log in world: screen={screen} health={health}
+screenshot fp-world
+screen keybinds
+wait 10
+log keybinds screen with the full pack: screen={screen}
+screenshot fp-keybinds
+key ESCAPE
+wait 5
+screen checklist
+wait 10
+log checklist screen with the full pack: screen={screen}
+screenshot fp-checklist
+screen none
+wait 2
+chat /checklist level
+chat /radars status
+wait 10
+quit

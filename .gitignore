@@ -37,3 +37,4 @@ testserver/
 *.installer.jar.log
 dist/
 __pycache__/
+**/run-fullpack/

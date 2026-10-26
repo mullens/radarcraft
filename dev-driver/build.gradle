@@ -1,4 +1,4 @@
-// Dev-only harness. Never published; the jar task is disabled.
+// Dev-only harness. Never published.
 //
 //   gradlew :dev-driver:runClient -PdriverScript=scripts/driver/keybinds.txt            client script
 //   gradlew :dev-driver:runClient -PdriverScript=scripts/driver/park.txt -PserverScript=scripts/driver/server-cherished.txt
@@ -57,7 +57,28 @@ neoForge {
         server {
             if (script) systemProperty 'devdriver.script', rootProject.file(script).absolutePath
         }
+        // The whole trimmed modpack (assembled by scripts/assemble-fullpack.py) in its own run dir, with a big heap.
+        clientFullPack {
+            client()
+            gameDirectory = project.file('run-fullpack')
+            jvmArgument '-Xmx8G'
+            programArguments.addAll '--width', '1280', '--height', '720'
+            if (script) systemProperty 'devdriver.script', rootProject.file(script).absolutePath
+            // Create Numismatics calls URI.create() on this property; ModDevGradle sets it to a bare Windows
+            // path, which is not a URI and breaks mod construction in dev only. Give it a file: URI instead.
+            systemProperty 'log4j2.configurationFile', layout.buildDirectory.file('moddev/clientFullPackLog4j2.xml').get().asFile.toURI().toString()
+        }
     }
 }
 
-tasks.named('jar') { enabled = false }
+// the root build only refreshes run/options.txt; do the same for the full-pack run dir
+var fullPackOptions = project.file('run-fullpack/options.txt')
+var devOptions = rootProject.file('scripts/dev-options.txt')
+tasks.named('runClientFullPack') {
+    doFirst {
+        fullPackOptions.parentFile.mkdirs()
+        fullPackOptions.text = devOptions.text
+    }
+}
+
+// The jar is only used to drop the driver into a production game dir (scripts/launch-fullpack.py); never publish it.
