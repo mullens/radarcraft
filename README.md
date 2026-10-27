@@ -38,11 +38,14 @@ If double-clicking opens Notepad instead of running: right-click → *Run with P
 
 ## What's different from Skybound
 
-- **41 mods removed**: the second tech tree (Modern Industrialization, Powah, Flux Networks, ...), duplicate
-  backpack/accessory/storage systems, the old skill trees with the hearts, pack-branding menus, and Punchy.
+- **41 mods removed**: most of the second tech tree (Modern Industrialization, Modern Dynamics, Security Craft, ...;
+  Powah and Flux Networks stay), duplicate storage systems, the old skill trees with the hearts, pack-branding menus,
+  Punchy, Crafting on a Stick, More Useful Copper and Freeze the Happy Ghasts (no version for the new Vanilla Backport).
 - **Added**: Inventory Crafting Grid (3x3 crafting in your inventory), the Accessories Compatibility Layer (one
   accessory screen for everything: Curios trinkets, Aether gloves and pendants, all in the Accessories slots), and the
   five mods below.
+- **Newest vanilla content**: Vanilla Backport is updated to 1.2.2, which brings the Copper Age (copper tools and
+  armor, copper golem, copper chests, shelves), Mounts of Mayhem, Chase the Skies (happy ghasts) and more to 1.21.1.
 - **Rarer loot**: modded chest loot, Artifacts and Simply Swords weapons are harder to find; goblin traders are ~10x rarer.
 - **Sky islands, quests, Create and all the Aeronautics addons** are unchanged.
 - **Radarcraft title screen** instead of the Skybound one; JourneyMap comes preconfigured the way Skybound had it;

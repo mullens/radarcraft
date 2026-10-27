@@ -41,5 +41,14 @@
     "url": "https://www.curseforge.com/minecraft/mc-mods/platform",
     "download": "https://mediafilez.forgecdn.net/files/9318/519/Platform-neoforge-1.21.1-1.4.2.jar",
     "why": "Vanilla Backport 1.2.2 requires platform >= 1.4."
+  },
+  {
+    "projectID": 1360543,
+    "fileID": 9288688,
+    "name": "Happy Ghasts Boost (upgrade 1.0.1 -> 1.2.0, for Vanilla Backport 1.2)",
+    "file": "happy_ghasts_boost-merged-1.21.1-1.2.0.jar",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/happy-ghasts-boost",
+    "download": "https://mediafilez.forgecdn.net/files/9288/688/happy_ghasts_boost-merged-1.21.1-1.2.0.jar",
+    "why": "1.0.1 hooks a Vanilla Backport class removed in 1.2; 1.2.0 requires vanillabackport [1.2,)."
   }
 ]
