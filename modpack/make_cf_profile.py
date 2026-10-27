@@ -95,6 +95,8 @@ def main():
             if (dst / sub).exists():
                 shutil.rmtree(dst / sub)
             shutil.copytree(pack / "overrides" / sub, dst / sub)
+    if (pack / "overrides" / "journeymap").exists():  # settings only; never touch map data
+        shutil.copytree(pack / "overrides" / "journeymap", dst / "journeymap", dirs_exist_ok=True)
     for fn in ("options.txt", "defaultoptions.journal.json"):
         if (SRC / fn).exists() and not (dst / fn).exists():
             shutil.copy2(SRC / fn, dst / fn)

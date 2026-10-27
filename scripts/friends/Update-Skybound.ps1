@@ -100,6 +100,14 @@ try {
         }
         Say "  refreshed $folder/ ($($entries.Count) files)"
     }
+    # journeymap settings: overwrite files only, never delete the folder (it holds the player's map data)
+    $jm = $zip.Entries | Where-Object { $_.FullName -like "overrides/journeymap/*" -and $_.Name }
+    foreach ($e in $jm) {
+        $out = Join-Path $profileDir.FullName $e.FullName.Substring("overrides/".Length)
+        New-Item -ItemType Directory -Force (Split-Path $out) | Out-Null
+        [System.IO.Compression.ZipFileExtensions]::ExtractToFile($e, $out, $true)
+    }
+    if ($jm.Count -gt 0) { Say "  refreshed journeymap settings ($($jm.Count) files)" }
     $srv = $zip.Entries | Where-Object { $_.FullName -eq "overrides/servers.dat" } | Select-Object -First 1
     if ($srv -and -not (Test-Path (Join-Path $profileDir.FullName "servers.dat"))) {
         [System.IO.Compression.ZipFileExtensions]::ExtractToFile($srv, (Join-Path $profileDir.FullName "servers.dat"), $true)

@@ -56,6 +56,29 @@ def resolve(mods, decisions):
     return kept, reasons, state, dependents
 
 
+def make_title_screen(overrides):
+    """Replace the Skybound FancyMenu title screen with the Radarcraft one (same layout geometry, our art).
+
+    Art comes from modpack/titlescreen/assets (drawn by titlescreen/make_art.py). The Skybound layout is reused
+    with its image paths swapped and the BisectHosting ad button removed, so button positions stay as tuned.
+    """
+    fm = overrides / "config" / "fancymenu"
+    src_layout = fm / "customization" / "fm_skybound.txt"
+    art = HERE / "titlescreen" / "assets"
+    if not src_layout.exists() or not (art / "bg.png").exists():
+        print("WARNING: title screen not replaced (layout or art missing)"); return
+    text = src_layout.read_text(encoding="utf-8")
+    # drop the custom button block that opens the hosting sponsor link
+    text = re.sub(r"\nelement \{\n(?:(?!\n\}).)*?openlink(?:(?!\n\}).)*?\n\}\n", "\n", text, flags=re.S)
+    text = text.replace("/config/fancymenu/assets/1x/", "/config/fancymenu/assets/radarcraft/")
+    (fm / "customization" / "fm_radarcraft.txt").write_text(text, encoding="utf-8")
+    src_layout.unlink()
+    if (fm / "assets" / "1x").exists():
+        shutil.rmtree(fm / "assets" / "1x")
+    shutil.copytree(art, fm / "assets" / "radarcraft", dirs_exist_ok=True)
+    print("title screen: fm_radarcraft.txt +", len(list(art.glob('*.png'))), "images")
+
+
 def apply_config_patches(overrides):
     """Apply modpack/config-patches.json to the copied config files (TOML line replacement, JSON nested set)."""
     pfile = HERE / "config-patches.json"
@@ -160,6 +183,12 @@ def main():
         if src.exists():
             shutil.copytree(src, pack / "overrides" / d, ignore=shutil.ignore_patterns("*.OLD", "*.bak"))
     apply_config_patches(pack / "overrides")
+    make_title_screen(pack / "overrides")
+
+    # JourneyMap settings (not the map data): friends start with the same minimap/fullmap/waypoint setup as Skybound
+    jm = inst / "journeymap" / "config"
+    if jm.exists():
+        shutil.copytree(jm, pack / "overrides" / "journeymap" / "config")
 
     # the multiplayer server list, so friends see the server pre-added
     if (inst / "servers.dat").exists():

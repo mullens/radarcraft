@@ -192,7 +192,8 @@ def serve(d):
     props = d / "server.properties"
     text = props.read_text() if props.exists() else "online-mode=false\nlevel-name=testworld\nmax-players=4\nview-distance=6\nspawn-protection=0\n"
     import re as _re
-    for k, v in (("enable-rcon", "true"), ("rcon.port", str(RCON_PORT)), ("rcon.password", RCON_PASS), ("online-mode", "false")):
+    # allow-flight: airships, paragliders and elytra-like movement trip the vanilla "Flying is not enabled" kick
+    for k, v in (("enable-rcon", "true"), ("rcon.port", str(RCON_PORT)), ("rcon.password", RCON_PASS), ("online-mode", "false"), ("allow-flight", "true")):
         text = _re.sub(rf"^{_re.escape(k)}=.*$", f"{k}={v}", text, flags=_re.M) if _re.search(rf"^{_re.escape(k)}=", text, _re.M) else text + f"\n{k}={v}"
     props.write_text(text.strip() + "\n")
     cmd = [java21(), "-Xmx8G", "-Xms2G", f"@{Path(args_file).relative_to(d)}", "--nogui"]

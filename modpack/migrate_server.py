@@ -91,6 +91,14 @@ def main():
     (server / "config").mkdir(exist_ok=True)
     for c in configs:
         shutil.copy2(c, server / "config" / c.name); print("config", c.name)
+    # server.properties: flight must be allowed or airships/paragliders get players kicked
+    props = server / "server.properties"
+    if props.exists():
+        import re as _re
+        text = props.read_text(encoding="utf-8")
+        if _re.search(r"^allow-flight=false", text, _re.M):
+            props.write_text(_re.sub(r"^allow-flight=false", "allow-flight=true", text, flags=_re.M), encoding="utf-8")
+            print("server.properties: allow-flight=true")
     print("done. New mods that need a download:", [e["file"] for e in to_add_extra] or "none")
 
 
