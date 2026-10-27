@@ -1,0 +1,5 @@
+# Dump the client-side registered payload channels once mod loading is complete, then quit.
+waittitle
+log title: screen={screen}
+dumpchannels channels-client.txt
+quit

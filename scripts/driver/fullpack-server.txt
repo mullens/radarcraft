@@ -2,8 +2,10 @@
 # Run: python scripts/launch-fullpack.py scripts/driver/fullpack-server.txt
 # While the script sits in the long waits, grant advancements through RCON from outside:
 #   python modpack/boot_server.py rcon C:\Users\lucas\vibecraft\testserver "advancement grant Dev only minecraft:story/root"
-wait 100
-log menus reached: screen={screen}
+waittitle
+log title reached: screen={screen}
+dumpchannels channels-client.txt
+screenshot fps-title
 connect localhost:25565
 wait 200
 log joined server: screen={screen} health={health}

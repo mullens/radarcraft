@@ -23,6 +23,7 @@ import java.util.Locale;
  * cmd TEXT               run a server command (no leading slash needed), output goes to the log
  * log TEXT               log TEXT; placeholders {named} {namedcount} {tick}
  * expect PLACEHOLDER V   log PASS/FAIL comparing a placeholder with V
+ * dumpchannels FILE      write every registered network payload channel to FILE (relative to the server dir)
  * quit                   stop the server (dedicated) or do nothing (integrated: let the client script quit)
  * </pre>
  */
@@ -88,6 +89,11 @@ public final class ServerDriver {
                     failures++;
                     DevDriverMod.LOGGER.error("{} [server] FAIL {} expected {} but was {}", DevDriverMod.TAG, args[0], args[1].trim(), actual);
                 }
+            }
+            case "dumpchannels" -> {
+                java.nio.file.Path out = server.getServerDirectory().resolve(rest.trim());
+                int n = ChannelDump.dump(out);
+                DevDriverMod.LOGGER.info("{} [server] dumped {} payload channels to {}", DevDriverMod.TAG, n, out);
             }
             case "quit" -> {
                 DevDriverMod.LOGGER.info("{} [server] quitting with {} failure(s)", DevDriverMod.TAG, failures);

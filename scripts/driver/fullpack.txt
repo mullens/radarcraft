@@ -1,6 +1,6 @@
 # Full-pack boot test: the trimmed Skybound pack (assembled by scripts/assemble-fullpack.py into dev-driver/run-fullpack)
 # with this repo's mods on the classpath. Run: gradlew :dev-driver:runClientFullPack -PdriverScript=scripts/driver/fullpack.txt
-wait 100
+waittitle
 log title screen reached: screen={screen}
 screenshot fp-title
 world fullpack

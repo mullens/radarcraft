@@ -45,6 +45,7 @@ import java.util.function.Predicate;
  * type TEXT              type text into the current screen
  * screen title|keybinds|inventory|advancements|checklist|none
  * scroll X Y AMOUNT      mouse-wheel at X,Y (negative = down)
+ * waittitle              block until mod loading is complete and the title screen is up (big packs take minutes)
  * world NAME             create a fresh creative world with cheats on and join it
  * connect HOST:PORT      join a multiplayer server and wait until in-world
  * waitworld              block until the player is in a world and no screen is open
@@ -53,6 +54,7 @@ import java.util.function.Predicate;
  * log TEXT               log TEXT; placeholders {xp} {items} {screen} {health} {hotbar} {entities} {maxhealth} {speed}
  * expect PLACEHOLDER V   log PASS/FAIL comparing a placeholder with V
  * show / hide            show or hide the game window
+ * dumpchannels FILE      write every registered network payload channel to FILE (relative to the game dir)
  * quit                   close the game
  * </pre>
  */
@@ -178,6 +180,7 @@ public final class ClientDriver {
                 s.onCreate(); // made public by the access transformer
                 lines.add(pc, "waitworld");
             }
+            case "waittitle" -> await(m -> !net.neoforged.neoforge.client.loading.ClientModLoader.isLoading() && m.getOverlay() == null && m.screen != null, 20 * 900); // packs replace the title screen class
             case "waitworld" -> await(m -> m.player != null && m.level != null && m.screen == null && m.player.tickCount > 20, 20 * 900);
             case "chat" -> {
                 if (rest.startsWith("/")) mc.player.connection.sendCommand(rest.substring(1));
@@ -204,6 +207,11 @@ public final class ClientDriver {
                 double sx = Double.parseDouble(args[0]), sy = Double.parseDouble(args[1]);
                 move(mc, sx, sy);
                 s.mouseScrolled(sx, sy, 0, Double.parseDouble(args[2]));
+            }
+            case "dumpchannels" -> {
+                java.nio.file.Path out = mc.gameDirectory.toPath().resolve(rest.trim());
+                int n = ChannelDump.dump(out);
+                DevDriverMod.LOGGER.info("{} dumped {} payload channels to {}", DevDriverMod.TAG, n, out);
             }
             case "show" -> setWindowVisible(mc, true);
             case "hide" -> setWindowVisible(mc, false);

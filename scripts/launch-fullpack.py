@@ -137,6 +137,7 @@ with open(log, "w", encoding="utf-8", errors="replace") as out:
     out.write(" ".join(cmd) + "\n\n")
     out.flush()
     proc = subprocess.Popen(cmd, cwd=str(GAME_DIR), stdout=out, stderr=subprocess.STDOUT)
+    (GAME_DIR / "game.pid").write_text(str(proc.pid))  # so tooling can stop exactly this process
     try:
         code = proc.wait(timeout=timeout_min * 60)
     except subprocess.TimeoutExpired:

@@ -2,9 +2,12 @@ package com.lucasmods.keyboardkeybinds;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.gui.screens.options.OptionsSubScreen;
 import net.minecraft.client.gui.screens.options.controls.KeyBindsScreen;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -23,7 +26,8 @@ public final class KeyboardKeybinds {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public KeyboardKeybinds(IEventBus modBus, ModContainer container) {
-        NeoForge.EVENT_BUS.addListener(KeyboardKeybinds::onScreenOpening);
+        // Lowest priority: run after other mods that swap the Key Binds screen (Controlling), so the keyboard wins.
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, KeyboardKeybinds::onScreenOpening);
         LOGGER.info("Keyboard Keybinds loaded: the Key Binds screen now shows a keyboard.");
     }
 
@@ -37,13 +41,20 @@ public final class KeyboardKeybinds {
             event.setNewScreen(new KeyboardScreen(title, Minecraft.getInstance().options));
             return;
         }
-        if (!(event.getNewScreen() instanceof KeyBindsScreen vanilla)) return;
+        if (!isKeyBindsScreen(event.getNewScreen())) return;
         if (KeyboardScreen.openingClassic) {
-            // The keyboard screen itself asked for the classic list; let it through once.
+            // The keyboard screen itself asked for the classic list; let it through once
+            // (if Controlling is installed, its own handler has already swapped in its list).
             KeyboardScreen.openingClassic = false;
             return;
         }
-        // lastScreen is made public by META-INF/accesstransformer.cfg
-        event.setNewScreen(new KeyboardScreen(vanilla.lastScreen, Minecraft.getInstance().options));
+        // Return to whatever opened the key binds (normally the Controls screen).
+        Screen back = event.getNewScreen() instanceof OptionsSubScreen sub ? sub.lastScreen : event.getCurrentScreen();
+        event.setNewScreen(new KeyboardScreen(back, Minecraft.getInstance().options));
+    }
+
+    /** Vanilla's screen, or a mod's replacement for it (Controlling's NewKeyBindsScreen is not a subclass). */
+    private static boolean isKeyBindsScreen(Screen screen) {
+        return screen instanceof KeyBindsScreen || screen.getClass().getSimpleName().endsWith("KeyBindsScreen");
     }
 }

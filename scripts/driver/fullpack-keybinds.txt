@@ -1,0 +1,18 @@
+# Quick full-pack check of Keyboard Keybinds vs Controlling on the test server.
+waittitle
+log title: screen={screen}
+connect localhost:25565
+wait 100
+log joined: screen={screen}
+screen keybinds
+wait 15
+log keybinds screen: screen={screen}
+screenshot fpk-keybinds
+click 320 346
+wait 15
+log list view: screen={screen}
+screenshot fpk-listview
+key ESCAPE
+wait 5
+log back: screen={screen}
+quit

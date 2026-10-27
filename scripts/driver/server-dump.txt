@@ -1,0 +1,4 @@
+# Dump the server-side registered payload channels, then stop (dedicated server).
+wait 20
+dumpchannels channels-server.txt
+quit
