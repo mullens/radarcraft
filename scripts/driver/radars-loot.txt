@@ -1,0 +1,38 @@
+# Client check: defeat tier 2 and tier 7 bosses, open their loot chests, screenshot the contents.
+# Run: gradlew :dev-driver:runClient -PdriverScript=scripts/driver/radars-loot.txt
+wait 40
+world radarloot
+wait 40
+chat /time set noon
+chat /gamemode creative
+chat /tp @s ~ ~ ~ -90 20
+wait 10
+chat /radars spawn 2
+wait 40
+chat /kill @e[type=radars:radar,nbt={Variant:2,Tamed:0b}]
+wait 60
+screenshot rl-chest2
+gochest
+wait 20
+usechest
+wait 20
+log chest 2 screen: {screen}
+screenshot rl-loot2
+key ESCAPE
+wait 10
+chat /tp @s ~ ~ ~60 -90 20
+wait 40
+chat /radars spawn 7
+wait 40
+chat /kill @e[type=radars:radar,nbt={Variant:7,Tamed:0b}]
+wait 60
+screenshot rl-chest7
+gochest
+wait 20
+usechest
+wait 20
+log chest 7 screen: {screen}
+screenshot rl-loot7
+key ESCAPE
+wait 10
+quit

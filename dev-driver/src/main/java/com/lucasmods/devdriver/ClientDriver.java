@@ -53,6 +53,8 @@ import java.util.function.Predicate;
  * respawn                click the Respawn button on the death screen
  * log TEXT               log TEXT; placeholders {xp} {items} {screen} {health} {hotbar} {entities} {maxhealth} {speed}
  * expect PLACEHOLDER V   log PASS/FAIL comparing a placeholder with V
+ * gochest                /tp beside the nearest chest within 32 blocks
+ * usechest               right-click the nearest chest within 6 blocks (opens it)
  * show / hide            show or hide the game window
  * dumpchannels FILE      write every registered network payload channel to FILE (relative to the game dir)
  * quit                   close the game
@@ -213,6 +215,19 @@ public final class ClientDriver {
                 int n = ChannelDump.dump(out);
                 DevDriverMod.LOGGER.info("{} dumped {} payload channels to {}", DevDriverMod.TAG, n, out);
             }
+            case "gochest" -> {
+                // teleport (via /tp, needs cheats) to the block south of the nearest chest within 32 blocks
+                net.minecraft.core.BlockPos chest = nearestChest(mc, 32);
+                DevDriverMod.LOGGER.info("{} going to chest at {}", DevDriverMod.TAG, chest.toShortString());
+                mc.player.connection.sendCommand("tp @s " + (chest.getX() + 0.5) + " " + chest.getY() + " " + (chest.getZ() + 1.5) + " 180 30");
+            }
+            case "usechest" -> {
+                // right-click the nearest chest within 6 blocks (opens its container screen)
+                net.minecraft.core.BlockPos chest = nearestChest(mc, 6);
+                DevDriverMod.LOGGER.info("{} using chest at {}", DevDriverMod.TAG, chest.toShortString());
+                mc.gameMode.useItemOn(mc.player, net.minecraft.world.InteractionHand.MAIN_HAND,
+                        new net.minecraft.world.phys.BlockHitResult(net.minecraft.world.phys.Vec3.atCenterOf(chest), net.minecraft.core.Direction.UP, chest, false));
+            }
             case "show" -> setWindowVisible(mc, true);
             case "hide" -> setWindowVisible(mc, false);
             case "quit" -> {
@@ -304,5 +319,19 @@ public final class ClientDriver {
                 .replace("{maxhealth}", String.format(Locale.ROOT, "%.1f", mc.player.getMaxHealth()))
                 .replace("{speed}", String.format(Locale.ROOT, "%.4f", mc.player.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)))
                 .replace("{hotbar}", hotbar.toString());
+    }
+
+    private static net.minecraft.core.BlockPos nearestChest(Minecraft mc, int radius) {
+        net.minecraft.core.BlockPos best = null;
+        double bestD = Double.MAX_VALUE;
+        net.minecraft.core.BlockPos origin = mc.player.blockPosition();
+        for (net.minecraft.core.BlockPos p : net.minecraft.core.BlockPos.betweenClosed(origin.offset(-radius, -6, -radius), origin.offset(radius, 6, radius))) {
+            if (mc.level.getBlockState(p).is(net.minecraft.world.level.block.Blocks.CHEST)) {
+                double d = p.distSqr(origin);
+                if (d < bestD) { bestD = d; best = p.immutable(); }
+            }
+        }
+        if (best == null) throw new IllegalStateException("no chest within " + radius + " blocks");
+        return best;
     }
 }

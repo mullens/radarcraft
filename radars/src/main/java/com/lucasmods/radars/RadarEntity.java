@@ -9,6 +9,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -600,6 +601,7 @@ public final class RadarEntity extends Monster {
         RadarEntity cat = spawn(level, variant, true, at, shrineIndex);
         for (RadarEntity minion : ownedMinions(level, RadarVariant.KITTEN)) minion.discard();
         for (RadarEntity minion : ownedMinions(level, RadarVariant.MIRROR)) minion.discard();
+        placeLootChest(level, at, variant);
         if (shrineIndex >= RadarVariant.FIRST_SHRINE) {
             RadarsData data = RadarsData.get(level);
             RadarsData.Shrine shrine = data.get(shrineIndex);
@@ -616,6 +618,52 @@ public final class RadarEntity extends Monster {
             if (p.distanceToSqr(this) < 96 * 96) p.sendSystemMessage(message);
         }
         Radars.LOGGER.info("{} defeated at {}; tamed cat {} spawned", variant.displayName, at.toShortString(), cat == null ? "NOT" : cat.getUUID());
+    }
+
+    /**
+     * Puts a loot chest beside the shrine centre (never on the lodestone) carrying only a LootTable tag, so
+     * loot mods such as Lootr can turn it into a per-player chest. Prefers a free block with solid ground.
+     */
+    private void placeLootChest(ServerLevel level, BlockPos centre, RadarVariant variant) {
+        BlockPos chosen = null;
+        BlockPos fallback = null;
+        for (int ring = 1; ring <= 3 && chosen == null; ring++) {
+            for (BlockPos candidate : ringAround(centre, ring)) {
+                if (!level.getBlockState(candidate).canBeReplaced()) continue;
+                if (fallback == null) fallback = candidate;
+                if (level.getBlockState(candidate.below()).isSolid()) {
+                    chosen = candidate;
+                    break;
+                }
+            }
+        }
+        if (chosen == null) chosen = fallback != null ? fallback : centre.east();
+        net.minecraft.core.Direction facing = net.minecraft.core.Direction.getNearest(centre.getX() - chosen.getX(), 0, centre.getZ() - chosen.getZ());
+        if (facing.getAxis().isVertical()) facing = net.minecraft.core.Direction.NORTH;
+        level.setBlock(chosen, net.minecraft.world.level.block.Blocks.CHEST.defaultBlockState()
+                .setValue(net.minecraft.world.level.block.ChestBlock.FACING, facing), 3);
+        if (level.getBlockEntity(chosen) instanceof net.minecraft.world.level.block.entity.ChestBlockEntity chest) {
+            ResourceLocation table = ResourceLocation.fromNamespaceAndPath(Radars.MODID, "chests/radar_" + variant.id);
+            chest.setLootTable(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.LOOT_TABLE, table), level.random.nextLong());
+            chest.setChanged();
+            Radars.LOGGER.info("Loot chest for {} placed at {} with loot table {}", variant.displayName, chosen.toShortString(), table);
+        }
+    }
+
+    /** The blocks at Chebyshev distance {@code ring} around a centre, on the centre's level, cardinal neighbours first. */
+    private static List<BlockPos> ringAround(BlockPos centre, int ring) {
+        List<BlockPos> list = new java.util.ArrayList<>();
+        if (ring == 1) {
+            list.add(centre.east()); list.add(centre.west()); list.add(centre.south()); list.add(centre.north());
+        }
+        for (int dx = -ring; dx <= ring; dx++) {
+            for (int dz = -ring; dz <= ring; dz++) {
+                if (Math.max(Math.abs(dx), Math.abs(dz)) != ring) continue;
+                BlockPos p = centre.offset(dx, 0, dz);
+                if (!list.contains(p)) list.add(p);
+            }
+        }
+        return list;
     }
 
     @Override

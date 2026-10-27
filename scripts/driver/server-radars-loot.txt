@@ -1,0 +1,26 @@
+# Headless check: a defeated Radar boss leaves a loot chest beside its home block with the right LootTable tag.
+# Run: gradlew :dev-driver:runServer -PdriverScript=scripts/driver/server-radars-loot.txt (dev-driver/run/server.properties uses port 25599)
+wait 20
+cmd forceload add -16 -16 16 16
+wait 40
+cmd fill -2 99 -2 2 99 2 minecraft:stone
+cmd fill -2 100 -2 2 104 2 minecraft:air
+cmd summon radars:radar 0.5 100 0.5 {Variant:2,Tamed:0b,ShrineIndex:2,HomePos:[I;0,100,0]}
+wait 20
+cmd kill @e[type=radars:radar,limit=1,sort=nearest,x=0,y=100,z=0]
+wait 30
+cmd data get block 1 100 0 LootTable
+cmd data get block 1 100 0 Items
+cmd data get block 1 100 0
+cmd kill @e[type=radars:radar]
+cmd fill -2 100 -2 2 104 2 minecraft:air
+cmd fill -2 99 -2 2 99 2 minecraft:stone
+cmd summon radars:radar 0.5 100 0.5 {Variant:7,Tamed:0b,ShrineIndex:7,HomePos:[I;0,100,0]}
+wait 20
+cmd kill @e[type=radars:radar,nbt={Tamed:0b}]
+wait 30
+cmd data get block 1 100 0 LootTable
+cmd data get block -1 100 0 LootTable
+cmd data get block 0 100 1 LootTable
+cmd data get block 0 100 -1 LootTable
+quit

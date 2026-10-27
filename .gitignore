@@ -38,3 +38,4 @@ testserver/
 dist/
 __pycache__/
 **/run-fullpack/
+**/run-fullpack-server/
