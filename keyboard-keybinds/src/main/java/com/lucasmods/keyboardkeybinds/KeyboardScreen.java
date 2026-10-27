@@ -55,7 +55,8 @@ public final class KeyboardScreen extends Screen {
     private static final int ROW_H = 24;
     private static final int LINE_H = 10;
     private static final int LIST_ROW_H = 11;
-    private static final int LEFT_HEADER_H = 16;
+    private static final int LEFT_HEADER_H = 22;
+    private static final int HEADER_BAND = 0xE0141414;
     private static final int RIGHT_HEADER_H = 19;
 
     private final Screen lastScreen;
@@ -239,8 +240,11 @@ public final class KeyboardScreen extends Screen {
         g.renderOutline(leftX, panelTop, leftW, panelBottom - panelTop, PANEL_BORDER);
 
         List<KeyMapping> rows = panelRows();
-        int headerColor = TEXT;
-        Component header;
+        // title bar: a darker band, the key as a key-cap chip in its keyboard colour, then count and state
+        g.fill(leftX + 1, panelTop + 1, leftX + leftW - 1, panelTop + LEFT_HEADER_H - 2, HEADER_BAND);
+        g.fill(leftX + 1, panelTop + LEFT_HEADER_H - 2, leftX + leftW - 1, panelTop + LEFT_HEADER_H - 1, PANEL_BORDER);
+        int hx = leftX + 5;
+        int hy = panelTop + 4;
         if (selectedKey != null) {
             List<KeyMapping> live = analysis.bindingsOn(selectedKey);
             int conflicts = 0;
@@ -250,23 +254,30 @@ public final class KeyboardScreen extends Screen {
                 if (s == BindingAnalysis.Severity.HARD) conflicts++;
                 else if (s == BindingAnalysis.Severity.SOFT) overlap = true;
             }
-            String count = live.size() == 1 ? Component.translatable("keyboardkeybinds.panel.bindings.one").getString()
-                    : Component.translatable("keyboardkeybinds.panel.bindings", live.size()).getString();
-            String state = "";
+            int chipFill = live.isEmpty() ? FILL_UNBOUND : conflicts > 0 ? FILL_HARD : overlap ? FILL_SOFT : FILL_BOUND;
+            Component keyName = Component.literal(selectedKey.getDisplayName().getString().toUpperCase(Locale.ROOT)).withStyle(ChatFormatting.BOLD);
+            int chipW = Math.max(18, font.width(keyName) + 10);
+            g.fill(hx, hy - 1, hx + chipW, hy + 13, chipFill);
+            g.renderOutline(hx, hy - 1, chipW, 14, OUTLINE_SELECTED);
+            g.drawCenteredString(font, keyName, hx + chipW / 2, hy + 2, TEXT);
+            hx += chipW + 7;
+
+            Component count = live.size() == 1 ? Component.translatable("keyboardkeybinds.panel.bindings.one")
+                    : Component.translatable("keyboardkeybinds.panel.bindings", live.size());
+            g.drawString(font, count.copy().withStyle(ChatFormatting.BOLD), hx, hy + 2, TEXT, true);
+            hx += font.width(count.copy().withStyle(ChatFormatting.BOLD)) + 8;
             if (conflicts > 0) {
-                state = "  ·  " + Component.translatable("keyboardkeybinds.panel.conflict", conflicts).getString();
-                headerColor = TEXT_HARD;
+                Component c = Component.translatable("keyboardkeybinds.panel.conflict", conflicts).withStyle(ChatFormatting.BOLD);
+                g.drawString(font, c, hx, hy + 2, TEXT_HARD, true);
             } else if (overlap) {
-                state = "  ·  " + Component.translatable("keyboardkeybinds.panel.overlap").getString();
-                headerColor = TEXT_SOFT;
+                g.drawString(font, Component.translatable("keyboardkeybinds.panel.overlap").withStyle(ChatFormatting.BOLD), hx, hy + 2, TEXT_SOFT, true);
             }
-            header = Component.literal(selectedKey.getDisplayName().getString() + "  ·  " + count + state);
         } else if (!rows.isEmpty()) {
-            header = Component.translatable("keyboardkeybinds.panel.unbound", rows.get(0).getDisplayName());
+            Component h = Component.translatable("keyboardkeybinds.panel.unbound", rows.get(0).getDisplayName()).withStyle(ChatFormatting.BOLD);
+            g.drawString(font, truncate(h.getString(), leftW - 10), hx, hy + 2, TEXT, true);
         } else {
-            header = Component.translatable("keyboardkeybinds.hint");
+            g.drawString(font, truncate(Component.translatable("keyboardkeybinds.hint").getString(), leftW - 10), hx, hy + 2, TEXT_DIM, false);
         }
-        g.drawString(font, truncate(header.getString(), leftW - 8), leftX + 4, panelTop + 4, headerColor, false);
 
         int top = panelTop + LEFT_HEADER_H;
         int bottom = panelBottom - 1;

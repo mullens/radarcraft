@@ -18,4 +18,18 @@ log screen={screen}
 click 220 128
 wait 3
 screenshot kk-b-8
+# "Only this" on the Jump row: the other 7 are unbound but stay listed, dimmed, until another key is picked
+move 320 20
+wait 2
+click 346 206
+wait 3
+screenshot kk-b-only-jump
+# "Change" on Sneak, then click the Left Shift cell: Sneak moves to Shift and its row shows the new key
+click 213 232
+wait 2
+click 96 128
+wait 3
+move 320 20
+wait 2
+screenshot kk-b-sneak-moved
 quit
