@@ -1,0 +1,42 @@
+# Full pack: the 793-square grid (biomes | achievements | photos), opened on the achievements, zoom and pan,
+# a biome square earned by standing in plains (the test server is a flat world), a photo square granted by command.
+# Server first: python scripts/launch-fullpack-server.py start scripts/driver/fullpack-ui-server.txt
+# Run: python scripts/launch-fullpack.py scripts/driver/fullpack-grid.txt --xmx 10G --timeout 25
+waittitle
+wait 40
+connect localhost:25566
+wait 400
+log joined: screen={screen}
+chat /gamemode creative
+chat /advancement grant @s only checklist:photo/minecraft/cow
+chat /advancement grant @s only checklist:photo/naturalist/elephant
+chat /advancement grant @s only checklist:biome/biomesoplenty/lavender_field
+wait 200
+chat /checklist level
+wait 20
+screen checklist
+wait 20
+screenshot fpg-open
+move 330 190
+wait 5
+screenshot fpg-hover
+scroll 320 190 -1
+scroll 320 190 -1
+scroll 320 190 -1
+scroll 320 190 -1
+scroll 320 190 -1
+scroll 320 190 -1
+wait 5
+screenshot fpg-zoomed-out
+key ESCAPE
+wait 10
+screen checklist
+wait 10
+screenshot fpg-reopened
+clickwidget Upgrades
+wait 10
+move 4 300
+screenshot fpg-upgrades
+screen none
+wait 10
+quit

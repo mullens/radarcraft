@@ -38,7 +38,7 @@ public final class Checklist {
     }
 
     private static void registerPayloads(RegisterPayloadHandlersEvent event) {
-        PayloadRegistrar registrar = event.registrar("2");
+        PayloadRegistrar registrar = event.registrar("3");
         registrar.playToServer(SetRankPayload.TYPE, SetRankPayload.CODEC, ChecklistServer::handleSetRank);
         registrar.playToServer(DoubleJumpPayload.TYPE, DoubleJumpPayload.CODEC, Specials::handleDoubleJump);
         registrar.playToClient(SyncPayload.TYPE, SyncPayload.CODEC, (payload, context) -> context.enqueueWork(() -> {
@@ -49,6 +49,7 @@ public final class Checklist {
             ClientState.renownLevel = payload.renownLevel();
             ClientState.renownInto = payload.renownInto();
             ClientState.renownNeed = payload.renownNeed();
+            ClientState.team = payload.team();
         }));
         registrar.playToClient(GridSyncPayload.TYPE, GridSyncPayload.CODEC, (payload, context) -> context.enqueueWork(() -> ClientState.squares = payload.squares()));
     }

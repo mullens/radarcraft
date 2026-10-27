@@ -1,0 +1,35 @@
+{
+ "parent": "checklist:biome/root",
+ "display": {
+  "icon": {
+   "id": "minecraft:netherrack"
+  },
+  "title": {
+   "translate": "biome.minecraft.nether_wastes",
+   "fallback": "Nether Wastes"
+  },
+  "description": "Stand in this biome (the Nether)",
+  "frame": "task",
+  "show_toast": true,
+  "announce_to_chat": false,
+  "hidden": true
+ },
+ "criteria": {
+  "visit": {
+   "trigger": "minecraft:location",
+   "conditions": {
+    "player": [
+     {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+       "location": {
+        "biomes": "minecraft:nether_wastes"
+       }
+      }
+     }
+    ]
+   }
+  }
+ }
+}

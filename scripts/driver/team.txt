@@ -1,0 +1,19 @@
+# Client half of the team-shared grid test (see team-server.txt).
+waittitle
+world teamtest
+waitworld
+chat /gamemode creative
+wait 450
+screen checklist
+wait 5
+move 330 120
+wait 2
+screenshot team-grid
+screen none
+wait 520
+screen checklist
+wait 5
+screenshot team-left
+screen none
+wait 20
+quit

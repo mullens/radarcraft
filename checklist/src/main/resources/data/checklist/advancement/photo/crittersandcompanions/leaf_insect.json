@@ -1,0 +1,46 @@
+{
+ "neoforge:conditions": [
+  {
+   "type": "neoforge:mod_loaded",
+   "modid": "crittersandcompanions"
+  },
+  {
+   "type": "neoforge:mod_loaded",
+   "modid": "exposure"
+  }
+ ],
+ "parent": "checklist:photo/root",
+ "display": {
+  "icon": {
+   "id": "crittersandcompanions:leaf_insect_spawn_egg"
+  },
+  "title": {
+   "translate": "checklist.square.photo",
+   "with": [
+    {
+     "translate": "entity.crittersandcompanions.leaf_insect",
+     "fallback": "Leaf Insect"
+    }
+   ]
+  },
+  "description": "Take a photo with this mob in the frame (Exposure camera)",
+  "frame": "task",
+  "show_toast": true,
+  "announce_to_chat": false,
+  "hidden": true
+ },
+ "criteria": {
+  "photo": {
+   "trigger": "exposure:frame_exposed",
+   "conditions": {
+    "frame": {
+     "entities_in_frame": [
+      {
+       "type": "crittersandcompanions:leaf_insect"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

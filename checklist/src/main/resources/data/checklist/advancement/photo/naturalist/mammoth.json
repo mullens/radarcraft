@@ -1,0 +1,46 @@
+{
+ "neoforge:conditions": [
+  {
+   "type": "neoforge:mod_loaded",
+   "modid": "exposure"
+  },
+  {
+   "type": "neoforge:mod_loaded",
+   "modid": "naturalist"
+  }
+ ],
+ "parent": "checklist:photo/root",
+ "display": {
+  "icon": {
+   "id": "naturalist:mammoth_spawn_egg"
+  },
+  "title": {
+   "translate": "checklist.square.photo",
+   "with": [
+    {
+     "translate": "entity.naturalist.mammoth",
+     "fallback": "Mammoth"
+    }
+   ]
+  },
+  "description": "Take a photo with this mob in the frame (Exposure camera)",
+  "frame": "task",
+  "show_toast": true,
+  "announce_to_chat": false,
+  "hidden": true
+ },
+ "criteria": {
+  "photo": {
+   "trigger": "exposure:frame_exposed",
+   "conditions": {
+    "frame": {
+     "entities_in_frame": [
+      {
+       "type": "naturalist:mammoth"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

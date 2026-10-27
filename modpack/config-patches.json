@@ -49,6 +49,14 @@
       "after": "buttons: {",
       "unless": "\"checklist:radarcraft\"",
       "text": "\t\t\t\"checklist:radarcraft\": {\n\t\t\t\tenabled: true\n\t\t\t\tx: 4\n\t\t\t\ty: 1\n\t\t\t}\n"
+    },
+    {
+      "file": "config/clickadv.json",
+      "format": "json",
+      "why": "Clickable Advancements repeats every non-announced advancement in your own chat; Radarcraft already prints one line per grid square (628 of them are its own biome and photo advancements)",
+      "set": {
+        "showAllInLocalChat.showAllInLocalChat": false
+      }
     }
   ]
 }

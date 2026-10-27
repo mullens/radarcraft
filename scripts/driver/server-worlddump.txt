@@ -1,0 +1,4 @@
+# Dump every biome and mob type of the full pack (for generating grid squares), then stop.
+wait 20
+dumpworld world-dump.json
+quit

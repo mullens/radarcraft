@@ -1,0 +1,35 @@
+{
+ "parent": "checklist:biome/root",
+ "display": {
+  "icon": {
+   "id": "minecraft:pink_petals"
+  },
+  "title": {
+   "translate": "biome.minecraft.cherry_grove",
+   "fallback": "Cherry Grove"
+  },
+  "description": "Stand in this biome (the Overworld)",
+  "frame": "task",
+  "show_toast": true,
+  "announce_to_chat": false,
+  "hidden": true
+ },
+ "criteria": {
+  "visit": {
+   "trigger": "minecraft:location",
+   "conditions": {
+    "player": [
+     {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+       "location": {
+        "biomes": "minecraft:cherry_grove"
+       }
+      }
+     }
+    ]
+   }
+  }
+ }
+}

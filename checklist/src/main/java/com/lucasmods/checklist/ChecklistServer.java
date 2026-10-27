@@ -30,9 +30,13 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.UUID;
 import java.util.WeakHashMap;
 
 /**
@@ -50,6 +54,9 @@ public final class ChecklistServer {
     private static final Map<ServerPlayer, Boolean> revealAll = new WeakHashMap<>();
     /** Players whose Renown progress changed since the last sync. */
     private static final Set<ServerPlayer> syncDirty = Collections.newSetFromMap(new WeakHashMap<>());
+    /** Each online player's party as last seen, to notice joins and leaves (FTB Teams is only read, never hooked). */
+    private static final Map<ServerPlayer, String> teamKeys = new WeakHashMap<>();
+    private static final int TEAM_CHECK_TICKS = 40;
 
     private ChecklistServer() {}
 
@@ -73,17 +80,48 @@ public final class ChecklistServer {
         return knownSquares(player.server, ChecklistConfig.grid()).size();
     }
 
-    /** Done grid squares (the square level). */
+    /** Done grid squares (the square level), the party's included. */
     public static int level(ServerPlayer player) {
-        return doneSquares(player).size();
+        return teamSquares(player).size();
     }
 
-    private static List<AdvancementHolder> doneSquares(ServerPlayer player) {
-        List<AdvancementHolder> done = new ArrayList<>();
-        for (AdvancementHolder holder : knownSquares(player.server, ChecklistConfig.grid())) {
-            if (player.getAdvancements().getOrStartProgress(holder).isDone()) done.add(holder);
+    /**
+     * Done grid squares that count for this player: their own, plus those of everyone in their FTB Teams party
+     * (online players read live, offline ones from the {@link SquareLedger}). The value is who did it: empty when the
+     * player did it themselves, else a teammate's name.
+     */
+    public static Map<ResourceLocation, String> teamSquares(ServerPlayer player) {
+        List<AdvancementHolder> known = knownSquares(player.server, ChecklistConfig.grid());
+        Map<ResourceLocation, String> done = new LinkedHashMap<>();
+        for (AdvancementHolder holder : known) {
+            if (player.getAdvancements().getOrStartProgress(holder).isDone()) done.put(holder.id(), "");
+        }
+        for (UUID member : Teams.members(player)) {
+            if (member.equals(player.getUUID())) continue;
+            ServerPlayer online = player.server.getPlayerList().getPlayer(member);
+            SquareLedger.Entry offline = online == null ? SquareLedger.get(player.server).entry(player.server, member) : null;
+            String name = online != null ? online.getGameProfile().getName() : offline.name();
+            for (AdvancementHolder holder : known) {
+                if (done.containsKey(holder.id())) continue;
+                boolean isDone = online != null ? online.getAdvancements().getOrStartProgress(holder).isDone() : offline.done().contains(holder.id().toString());
+                if (isDone) done.put(holder.id(), name);
+            }
         }
         return done;
+    }
+
+    /** Remembers every advancement the player has done, for teammates to count while this player is offline. */
+    private static void snapshot(ServerPlayer player) {
+        Set<String> done = new LinkedHashSet<>();
+        for (AdvancementHolder holder : player.server.getAdvancements().getAllAdvancements()) {
+            if (player.getAdvancements().getOrStartProgress(holder).isDone()) done.add(holder.id().toString());
+        }
+        SquareLedger.get(player.server).record(player.getUUID(), player.getGameProfile().getName(), done);
+    }
+
+    /** "party id:members", or "solo"; a change means the player joined or left a party, or it gained or lost someone. */
+    private static String teamKey(ServerPlayer player) {
+        return Teams.party(player).map(p -> p.id() + ":" + new TreeSet<>(p.members())).orElse("solo");
     }
 
     public static int renownLevel(ServerPlayer player) {
@@ -179,24 +217,25 @@ public final class ChecklistServer {
         PlayerState state = PlayerState.load(player);
         long xp = state.renownXp;
         PacketDistributor.sendToPlayer(player, new SyncPayload(level(player), total(player), revealAll.getOrDefault(player, false),
-                state.ranks, Renown.level(xp), Renown.into(xp), Renown.need(xp)));
+                state.ranks, Renown.level(xp), Renown.into(xp), Renown.need(xp), Teams.party(player).map(Teams.Party::name).orElse("")));
         syncDirty.remove(player);
     }
 
     /** Sends the whole grid with display data and done flags (login, advancement earned, reload). */
     public static void syncGrid(ServerPlayer player) {
         GridConfig grid = ChecklistConfig.grid();
+        Map<ResourceLocation, String> teamDone = teamSquares(player);
         List<GridSyncPayload.Square> squares = new ArrayList<>();
         for (GridConfig.Cell cell : grid.cells()) {
             AdvancementHolder holder = player.server.getAdvancements().get(cell.id());
             if (holder == null) continue; // unknown: treated as empty
-            boolean done = player.getAdvancements().getOrStartProgress(holder).isDone();
+            boolean done = teamDone.containsKey(holder.id());
             var display = holder.value().display().orElse(null);
             squares.add(new GridSyncPayload.Square(cell.x(), cell.y(), cell.id().toString(),
                     display != null ? display.getTitle() : Component.literal(cell.id().toString()),
                     display != null ? display.getDescription() : Component.empty(),
                     display != null ? display.getIcon() : net.minecraft.world.item.ItemStack.EMPTY,
-                    display != null ? display.getType().ordinal() : 0, done));
+                    display != null ? display.getType().ordinal() : 0, done, teamDone.getOrDefault(holder.id(), "")));
         }
         PacketDistributor.sendToPlayer(player, new GridSyncPayload(squares));
     }
@@ -218,6 +257,8 @@ public final class ChecklistServer {
      * Counts what a player already did before Radarcraft saw it, without any level-up fanfare: done squares that were
      * never credited are credited silently, level commands for thresholds already passed are marked as given without
      * running them, and Renown is seeded once from past XP. One summary line tells the player what they got.
+     * Also runs when the player's party changes: squares their new teammates did start counting, and squares only a
+     * former teammate did stop counting.
      *
      * @param gridChanged true after /checklist reload, where newly counted squares come from a changed grid
      */
@@ -229,10 +270,18 @@ public final class ChecklistServer {
         boolean announceSquares = firstTime || gridChanged;
 
         int newSquares = 0;
-        for (AdvancementHolder holder : doneSquares(player)) {
-            if (state.credited.add(holder.id().toString())) newSquares++;
+        int teamSquares = 0;
+        Map<ResourceLocation, String> done = teamSquares(player);
+        for (Map.Entry<ResourceLocation, String> e : done.entrySet()) {
+            if (state.credited.add(e.getKey().toString())) {
+                if (e.getValue().isEmpty()) newSquares++; else teamSquares++;
+            }
         }
-        int level = level(player);
+        int lostSquares = 0;
+        for (AdvancementHolder holder : knownSquares(player.server, grid)) {
+            if (!done.containsKey(holder.id()) && state.credited.remove(holder.id().toString())) lostSquares++;
+        }
+        int level = done.size();
         for (Integer at : grid.commandsOnLevel.keySet()) {
             if (at <= level && !state.rewardedLevels.contains(at)) state.rewardedLevels.add(at);
         }
@@ -253,15 +302,19 @@ public final class ChecklistServer {
                     ? String.format("the grid changed: %d more square%s already done", newSquares, newSquares == 1 ? " is" : "s are")
                     : String.format("%d square%s already done from your past adventures", newSquares, newSquares == 1 ? "" : "s"));
         }
+        if (teamSquares > 0) parts.add(String.format("%d square%s done by your team", teamSquares, teamSquares == 1 ? "" : "s"));
+        if (lostSquares > 0) parts.add(String.format("%d square%s only a former teammate did no longer count", lostSquares, lostSquares == 1 ? "" : "s"));
         if (seededRenown > 0) parts.add(String.format("Renown %d from your past experience", seededRenown));
         if (!parts.isEmpty()) {
             int available = level + Renown.level(state.renownXp) - state.spent(ChecklistConfig.upgrades());
-            player.sendSystemMessage(Component.literal("Radarcraft: " + String.join(" and ", parts)
-                    + String.format(", %d point%s to spend.", available, available == 1 ? "" : "s")).withStyle(ChatFormatting.GOLD));
+            String tail = available >= 0 ? String.format(", %d point%s to spend.", available, available == 1 ? "" : "s")
+                    : String.format(": your newest upgrades give back %d point%s.", -available, available == -1 ? "" : "s");
+            player.sendSystemMessage(Component.literal("Radarcraft: " + String.join(" and ", parts) + tail).withStyle(ChatFormatting.GOLD));
         }
-        if (newSquares > 0 || seededRenown > 0) {
-            Checklist.LOGGER.info("{}: baseline credited {} square(s) silently ({}), Renown seed {}",
-                    player.getGameProfile().getName(), newSquares, gridChanged ? "grid changed" : firstTime ? "first login" : "login", seededRenown);
+        if (newSquares > 0 || teamSquares > 0 || lostSquares > 0 || seededRenown > 0) {
+            Checklist.LOGGER.info("{}: baseline credited {} square(s) silently ({}), {} from the team, {} no longer counted, Renown seed {}",
+                    player.getGameProfile().getName(), newSquares, gridChanged ? "grid changed" : firstTime ? "first login" : "login",
+                    teamSquares, lostSquares, seededRenown);
         }
     }
 
@@ -328,16 +381,32 @@ public final class ChecklistServer {
         }
         boolean fresh = state.credited.add(holder.id().toString());
         state.save(player);
-        if (!fresh) { // already counted (re-earned after a revoke): no fanfare
+        snapshot(player);
+        String title = holder.value().display().map(d -> d.getTitle().getString()).orElse(holder.id().toString());
+        creditSquare(player, title, fresh, "");
+        // the party shares squares: every online teammate who did not have it yet gets the point too
+        for (UUID member : Teams.members(player)) {
+            ServerPlayer mate = member.equals(player.getUUID()) ? null : player.server.getPlayerList().getPlayer(member);
+            if (mate == null) continue;
+            PlayerState mateState = PlayerState.load(mate);
+            boolean mateFresh = mateState.credited.add(holder.id().toString());
+            if (mateFresh) mateState.save(mate);
+            creditSquare(mate, title, mateFresh, player.getGameProfile().getName());
+        }
+    }
+
+    /** Fanfare and level rewards for a newly counted square; only a resync when it already counted (re-earned, or a teammate had it). */
+    private static void creditSquare(ServerPlayer player, String title, boolean fresh, String by) {
+        if (!fresh) {
             applyAndSync(player);
             return;
         }
         int level = level(player);
-        int before = level - 1; // this advancement is already done when the event fires
-        String title = holder.value().display().map(d -> d.getTitle().getString()).orElse(holder.id().toString());
-        player.sendSystemMessage(Component.literal(String.format("Square %d / %d: %s (+1 point)", level, total(player), title)));
+        int before = level - 1; // this square is already done when the event fires
+        player.sendSystemMessage(Component.literal(String.format("Square %d / %d: %s (+1 point%s)", level, total(player), title,
+                by.isEmpty() ? "" : ", by " + by)));
         player.level().playSound(null, player.blockPosition(), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.PLAYERS, 0.8f, 1.0f);
-        runLevelCommands(player, grid, before, level);
+        runLevelCommands(player, ChecklistConfig.grid(), before, level);
         applyAndSync(player);
     }
 
@@ -383,8 +452,18 @@ public final class ChecklistServer {
     @SubscribeEvent
     public static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
+            snapshot(player);
+            teamKeys.put(player, teamKey(player));
             baseline(player, false);
             applyAndSync(player);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            snapshot(player);
+            teamKeys.remove(player);
         }
     }
 
@@ -402,5 +481,14 @@ public final class ChecklistServer {
     public static void onPlayerTick(PlayerTickEvent.Post event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         if (player.tickCount % SYNC_FLUSH_TICKS == 0 && syncDirty.contains(player)) sync(player);
+        if (player.tickCount % TEAM_CHECK_TICKS == 0) {
+            String key = teamKey(player);
+            String old = teamKeys.put(player, key);
+            if (old != null && !old.equals(key)) {
+                Checklist.LOGGER.info("{}: party changed ({} -> {}), recounting squares", player.getGameProfile().getName(), old, key);
+                baseline(player, false);
+                applyAndSync(player);
+            }
+        }
     }
 }

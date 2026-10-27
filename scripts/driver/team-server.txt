@@ -1,0 +1,36 @@
+# Team-shared grid squares (mini pack + FTB Teams in dev-driver/run/mods): Dev is online, Buddy is a fake teammate
+# (counts as offline; fakes never earn advancements, so `award Buddy` writes Radarcraft's offline record). Run with team.txt: gradlew :dev-driver:runClient -PdriverScript=scripts/driver/team.txt -PserverScript=scripts/driver/team-server.txt
+wait 300
+cmd advancement grant Dev only minecraft:story/mine_stone
+fakejoin Buddy
+award Buddy minecraft:story/root
+award Buddy minecraft:story/smelt_iron
+award Buddy minecraft:story/mine_diamond
+wait 20
+log solo: expect squares 1
+cmd checklist level Dev
+as Buddy ftbteams party create Buddies
+wait 10
+as Buddy ftbteams party invite Dev
+wait 10
+as Dev ftbteams party join {party:Buddy}
+wait 60
+log in the party: expect squares 4 (1 own + 3 of Buddy)
+cmd checklist level Dev
+award Buddy minecraft:story/upgrade_tools
+wait 20
+log Buddy (offline) earned one more: expect squares 5
+cmd checklist level Dev
+cmd advancement grant Dev only minecraft:story/iron_tools
+wait 20
+log Dev earned one: expect squares 6
+cmd checklist level Dev
+cmd checklist setrank hearts 6 Dev
+cmd checklist upgrades Dev
+wait 500
+as Dev ftbteams party leave
+wait 60
+log left the party: expect squares 2 and hearts trimmed to 2
+cmd checklist level Dev
+cmd checklist upgrades Dev
+quit

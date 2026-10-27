@@ -2,5 +2,6 @@
   "key.categories.checklist": "Radarcraft",
   "key.checklist.open": "Open Radarcraft",
   "sidebar_button.checklist.radarcraft": "Radarcraft",
-  "sidebar_button.checklist.radarcraft.tooltip": "Achievement grid and upgrades"
+  "sidebar_button.checklist.radarcraft.tooltip": "Achievement grid and upgrades",
+  "checklist.square.photo": "Photograph: %s"
 }

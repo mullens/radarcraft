@@ -19,6 +19,7 @@ import java.util.TreeMap;
  * {
  *   "grid": [["minecraft:story/mine_stone", null, "create:..."], ...],   // null = empty square, never shown
  *   "start": [[x, y], ...],              // squares revealed from the beginning (default: the centre)
+ *   "focus": [x, y],                     // where a grid too big for the screen opens (default: the first start square)
  *   "hearts_every_levels": 0,            // legacy: +1 heart per N levels; 0 disables
  *   "commands_on_level": {"25": ["give @s minecraft:diamond"]},   // run as the player when reaching that level
  *   "clear_vanilla_xp_rewards": false    // take the advancement's own XP reward away again
@@ -30,15 +31,17 @@ public final class GridConfig {
 
     private final List<List<@Nullable ResourceLocation>> rows;
     private final List<int[]> start;
+    @Nullable private final int[] focus;
     public final int heartsEveryLevels;
     public final Map<Integer, List<String>> commandsOnLevel;
     public final boolean clearVanillaXpRewards;
     private final List<Cell> cells;
     private final Map<ResourceLocation, Cell> byId;
 
-    private GridConfig(List<List<ResourceLocation>> rows, List<int[]> start, int heartsEveryLevels,
+    private GridConfig(List<List<ResourceLocation>> rows, List<int[]> start, @Nullable int[] focus, int heartsEveryLevels,
                        Map<Integer, List<String>> commandsOnLevel, boolean clearVanillaXpRewards) {
         this.rows = rows;
+        this.focus = focus;
         this.heartsEveryLevels = heartsEveryLevels;
         this.commandsOnLevel = commandsOnLevel;
         this.clearVanillaXpRewards = clearVanillaXpRewards;
@@ -80,6 +83,11 @@ public final class GridConfig {
                 start.add(new int[]{xy.get(0).getAsInt(), xy.get(1).getAsInt()});
             }
         }
+        int[] focus = null;
+        if (root.has("focus") && root.get("focus").isJsonArray()) {
+            JsonArray xy = root.getAsJsonArray("focus");
+            focus = new int[]{xy.get(0).getAsInt(), xy.get(1).getAsInt()};
+        }
         int hearts = root.has("hearts_every_levels") ? root.get("hearts_every_levels").getAsInt() : 0;
         Map<Integer, List<String>> commands = new TreeMap<>();
         if (root.has("commands_on_level")) {
@@ -90,7 +98,7 @@ public final class GridConfig {
             }
         }
         boolean clearXp = root.has("clear_vanilla_xp_rewards") && root.get("clear_vanilla_xp_rewards").getAsBoolean();
-        return new GridConfig(rows, start, hearts, commands, clearXp);
+        return new GridConfig(rows, start, focus, hearts, commands, clearXp);
     }
 
     public int width() { return rows.isEmpty() ? 0 : rows.get(0).size(); }
@@ -103,6 +111,8 @@ public final class GridConfig {
     public List<Cell> cells() { return cells; }
     @Nullable public Cell cell(ResourceLocation id) { return byId.get(id); }
     public boolean contains(ResourceLocation id) { return byId.containsKey(id); }
+    /** Where a grid too big for the screen opens: "focus", else the first start square. */
+    public int[] focus() { return focus != null ? focus : start.get(0); }
     public boolean isStart(int x, int y) {
         for (int[] s : start) if (s[0] == x && s[1] == y) return true;
         return false;

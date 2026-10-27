@@ -1,0 +1,17 @@
+{
+ "display": {
+  "icon": {
+   "id": "minecraft:filled_map"
+  },
+  "title": "Radarcraft: Biomes",
+  "description": "Every biome is a square on the Radarcraft grid",
+  "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+  "show_toast": false,
+  "announce_to_chat": false
+ },
+ "criteria": {
+  "tick": {
+   "trigger": "minecraft:tick"
+  }
+ }
+}

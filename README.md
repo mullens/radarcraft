@@ -57,7 +57,7 @@ If double-clicking opens Notepad instead of running: right-click → *Run with P
 
 | Mod | What it does for you |
 |-----|----------------------|
-| **Radarcraft RPG** | Replaces the skill trees. A hidden grid of 165 real achievements from across the pack (bosses, dimensions, exploration, Create feats): each one you complete is a point and reveals the four squares next to it. Achievements you already earned count. More points come from **Renown**, a permanent level that grows with all the XP you earn, slowly, like Minecraft's own levels. Points buy upgrades (hearts, speed, reach, double jump, Second Wind, smelting pickaxe...); big ones cost several points. Take them off again any time, for free. Open it with the **Radar head** (a little tuxedo cat) next to the Quests book in your inventory, the **Radarcraft** button on the Advancements screen, or **M**. |
+| **Radarcraft RPG** | Replaces the skill trees. A hidden grid of 793 squares in three areas: **biomes** (stand in each of the 218 biomes, modded dimensions included), **achievements** (165 real ones from across the pack: bosses, dimensions, Create feats) and **photos** (photograph each of 410 kinds of mob with the Exposure camera). Related squares sit together in blocks, and each block shows its first square from the start. Every square you complete is a point and reveals the squares next to it. Achievements you already earned count. More points come from **Renown**, a permanent level that grows with all the XP you earn. Points buy upgrades (hearts, speed, reach, double jump, Second Wind, smelting pickaxe...), most in small steps; shift-click to move 10 at a time. Take them off again any time, for free. **On an FTB Teams party, squares are shared**: one done by anyone counts for everyone, while upgrades and Renown stay your own. Open it with the **Radar head** (a little tuxedo cat) next to the Quests book in your inventory, the **Radarcraft** button on the Advancements screen, or **M**. Drag the grid to move around, scroll to zoom. |
 | **Level Loss Only** | Dying keeps your whole inventory. Your XP levels still drop to zero and spill as orbs, like vanilla. |
 | **Cherished Mobs** | Friendly mobs are tough and slowly heal (half a heart every 15 seconds). Anything you name with a name tag can never die, not even in the void. `/kill` is the only way to remove a named mob. |
 | **Radars** | Radar is a real tuxedo cat. Name any mob "Radar" with a name tag: it becomes a little tuxedo cat that points toward the first of six giant boss cats hidden across the world, each 500 to 1000 blocks beyond the last. Beat a boss and it turns back into a cat that points to the next one, and leaves a loot chest that gets better with every fight (everyone gets their own roll). |
@@ -70,7 +70,7 @@ If double-clicking opens Notepad instead of running: right-click → *Run with P
 
 ![The Radar head button in the inventory sidebar](docs/images/rpg-radar-head.png)
 
-The grid starts hidden. Every achievement you complete reveals the squares next to it:
+The grid starts hidden. Every square you complete reveals the squares next to it:
 
 <img src="docs/images/rpg-grid.png" width="640" alt="The achievement grid">
 

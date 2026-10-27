@@ -1,5 +1,6 @@
 package com.lucasmods.checklist.client;
 
+import com.lucasmods.checklist.Checklist;
 import com.lucasmods.checklist.ChecklistConfig;
 import com.lucasmods.checklist.ClientState;
 import com.lucasmods.checklist.GridConfig;
@@ -31,8 +32,12 @@ import java.util.List;
 public final class ChecklistScreen extends Screen {
     private static final int HEADER_H = 34;
     private static final int FOOTER_H = 30;
-    private static final int MAX_CELL = 26;
-    private static final int MIN_CELL = 12;
+    private static final int MAX_CELL = 32;
+    private static final int MIN_CELL = 8;
+    /** Big grids open at this size (icons visible) on the first start square; drag to move, scroll to zoom. */
+    private static final int DEFAULT_CELL = 22;
+    /** Where the grid view was when the screen last closed, so reopening it keeps zoom and position (-1: not yet). */
+    private static int savedCell = -1, savedX, savedY;
 
     private static final int BG = 0xC0101010;
     private static final int PANEL = 0xFF2A2A2A;
@@ -79,8 +84,8 @@ public final class ChecklistScreen extends Screen {
     private List<Cell> cells = new ArrayList<>();
     private List<GridSyncPayload.Square> cellsSource = List.of();
     private int cell, gridX, gridY, gridW, gridH;
-    private int panX, panY;
     private boolean dragging;
+    private double dragAccX, dragAccY;
     private int upgradesScroll, upgradesContentH;
     private final List<HitBox> hits = new ArrayList<>();
     private Button gridTab, upgradesTab;
@@ -98,17 +103,42 @@ public final class ChecklistScreen extends Screen {
         catalog = ChecklistConfig.upgrades();
         rebuildCells();
         int avail = width - 20;
-        cell = Mth.clamp(Math.min(avail / Math.max(1, grid.width()), (height - HEADER_H - FOOTER_H - 10) / Math.max(1, grid.height())), MIN_CELL, MAX_CELL);
-        gridW = cell * grid.width();
-        gridH = cell * grid.height();
-        gridX = (width - gridW) / 2;
-        gridY = HEADER_H + (height - HEADER_H - FOOTER_H - gridH) / 2;
+        int fit = Math.min(avail / Math.max(1, grid.width()), (height - HEADER_H - FOOTER_H - 10) / Math.max(1, grid.height()));
+        if (savedCell > 0) {
+            setCell(savedCell);
+            gridX = savedX;
+            gridY = savedY;
+        } else if (fit >= DEFAULT_CELL) { // small grid: fit it, centred
+            setCell(Math.min(fit, MAX_CELL));
+            gridX = (width - gridW) / 2;
+            gridY = HEADER_H + (height - HEADER_H - FOOTER_H - gridH) / 2;
+        } else { // big grid: centre the first start square
+            setCell(DEFAULT_CELL);
+            int[] focus = grid.focus();
+            gridX = width / 2 - focus[0] * cell - cell / 2;
+            gridY = HEADER_H + (height - HEADER_H - FOOTER_H) / 2 - focus[1] * cell - cell / 2;
+        }
+        clampView();
 
         int bw = 70;
         gridTab = addRenderableWidget(Button.builder(Component.literal("Grid"), b -> switchTab(Tab.GRID)).bounds(8, 6, bw, 20).build());
         upgradesTab = addRenderableWidget(Button.builder(Component.literal("Upgrades"), b -> switchTab(Tab.UPGRADES)).bounds(8 + bw + 4, 6, bw, 20).build());
         addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, b -> onClose()).bounds(width / 2 - 40, height - 24, 80, 20).build());
         switchTab(tab);
+    }
+
+    private void setCell(int size) {
+        cell = Mth.clamp(size, MIN_CELL, MAX_CELL);
+        gridW = cell * grid.width();
+        gridH = cell * grid.height();
+    }
+
+    /** Keeps at least a few squares of the grid inside the view. */
+    private void clampView() {
+        int keep = cell * 3;
+        gridX = Mth.clamp(gridX, Math.min(10, width - 10 - gridW), Math.max(10, width - 10 - keep));
+        gridX = Math.max(gridX, 10 + keep - gridW);
+        gridY = Mth.clamp(gridY, HEADER_H + keep - gridH, height - FOOTER_H - keep);
     }
 
     private void switchTab(Tab t) {
@@ -190,6 +220,10 @@ public final class ChecklistScreen extends Screen {
             List<Component> lines = new ArrayList<>();
             lines.add(Component.literal("Points come from two places").withStyle(ChatFormatting.WHITE));
             lines.add(Component.literal("Squares: each done grid square is 1 point (" + level + ")").withStyle(ChatFormatting.GREEN));
+            if (!ClientState.team.isEmpty()) {
+                lines.add(Component.literal("Team " + ClientState.team + " shares squares: one done by anyone counts for all.").withStyle(ChatFormatting.AQUA));
+                lines.add(Component.literal("Upgrades and Renown stay your own.").withStyle(ChatFormatting.GRAY));
+            }
             lines.add(Component.literal("Renown: each Renown level is 1 point (" + ClientState.renownLevel + ")").withStyle(ChatFormatting.LIGHT_PURPLE));
             lines.add(Component.literal("Renown grows with every bit of XP you earn: kills, bosses,").withStyle(ChatFormatting.GRAY));
             lines.add(Component.literal("mining, smelting, breeding, fishing. It is never lost.").withStyle(ChatFormatting.GRAY));
@@ -197,6 +231,7 @@ public final class ChecklistScreen extends Screen {
                 lines.add(Component.literal(String.format("Next Renown level: %d / %d XP", ClientState.renownInto, ClientState.renownNeed)).withStyle(ChatFormatting.DARK_PURPLE));
             }
             lines.add(Component.literal("Upgrades can be removed any time for a full refund.").withStyle(ChatFormatting.DARK_GRAY));
+            lines.add(Component.literal("Shift-click - or + to change 10 ranks at a time.").withStyle(ChatFormatting.DARK_GRAY));
             headerTooltip = lines;
         }
     }
@@ -213,8 +248,9 @@ public final class ChecklistScreen extends Screen {
         g.enableScissor(0, top, width, bottom);
         Cell hovered = null;
         for (Cell c : cells) {
-            int x = gridX + panX + c.square().x() * cell;
-            int y = gridY + panY + c.square().y() * cell;
+            int x = gridX + c.square().x() * cell;
+            int y = gridY + c.square().y() * cell;
+            if (x + cell < 0 || x > width || y + cell < top || y > bottom) continue;
             boolean hover = mouseX >= x && mouseX < x + cell && mouseY >= y && mouseY < y + cell && mouseY >= top && mouseY < bottom;
             if (hover) hovered = c;
             renderCell(g, c, x, y, hover);
@@ -232,12 +268,14 @@ public final class ChecklistScreen extends Screen {
         if (c.state() == CellState.HIDDEN) {
             g.fill(x + 1, y + 1, x + 1 + inner, y + 1 + inner, HIDDEN);
             g.renderOutline(x + 1, y + 1, inner, inner, hover ? LOCKED_BORDER : HIDDEN_BORDER);
-            g.drawCenteredString(font, "?", x + cell / 2, y + (cell - 8) / 2, TEXT_DIM);
+            if (cell >= 14) g.drawCenteredString(font, "?", x + cell / 2, y + (cell - 8) / 2, TEXT_DIM);
             return;
         }
         int border = c.state() == CellState.DONE ? frameColor(s.frame()) : LOCKED_BORDER;
         g.fill(x + 1, y + 1, x + 1 + inner, y + 1 + inner, PANEL);
-        if (!s.icon().isEmpty() && cell >= 20) {
+        if (cell < 14) { // zoomed out: no text, done squares filled with their frame colour
+            if (c.state() == CellState.DONE) g.fill(x + 2, y + 2, x + inner, y + inner, (border & 0x00FFFFFF) | 0x99000000);
+        } else if (!s.icon().isEmpty() && cell >= 18) {
             int ix = x + (cell - 16) / 2;
             int iy = y + (cell - 16) / 2;
             g.renderItem(s.icon(), ix, iy);
@@ -263,15 +301,29 @@ public final class ChecklistScreen extends Screen {
         List<Component> lines = new ArrayList<>();
         if (c.state() == CellState.HIDDEN) {
             lines.add(Component.literal("???").withStyle(ChatFormatting.GRAY));
+            lines.add(Component.literal(kind(ResourceLocation.parse(c.square().id())) + " · " + modName(sourceMod(ResourceLocation.parse(c.square().id()))))
+                    .withStyle(ChatFormatting.BLUE, ChatFormatting.ITALIC));
             lines.add(Component.literal("Complete a neighbouring square to reveal this one").withStyle(ChatFormatting.DARK_GRAY));
             return lines;
         }
         GridSyncPayload.Square s = c.square();
         lines.add(s.title().copy().withStyle(c.state() == CellState.DONE ? ChatFormatting.GREEN : ChatFormatting.WHITE));
         if (!s.description().getString().isEmpty()) lines.add(s.description().copy().withStyle(ChatFormatting.GRAY));
-        lines.add(Component.literal(modName(ResourceLocation.parse(s.id()).getNamespace())).withStyle(ChatFormatting.BLUE, ChatFormatting.ITALIC));
-        lines.add(Component.literal(c.state() == CellState.DONE ? "Done" : "Not yet").withStyle(c.state() == CellState.DONE ? ChatFormatting.GREEN : ChatFormatting.YELLOW));
+        lines.add(Component.literal(modName(sourceMod(ResourceLocation.parse(s.id())))).withStyle(ChatFormatting.BLUE, ChatFormatting.ITALIC));
+        lines.add(Component.literal(c.state() != CellState.DONE ? "Not yet" : s.doneBy().isEmpty() ? "Done" : "Done by " + s.doneBy())
+                .withStyle(c.state() == CellState.DONE ? ChatFormatting.GREEN : ChatFormatting.YELLOW));
         return lines;
+    }
+
+    private static String kind(ResourceLocation id) {
+        if (!id.getNamespace().equals(Checklist.MODID)) return "Achievement";
+        return id.getPath().startsWith("biome/") ? "Biome" : id.getPath().startsWith("photo/") ? "Photo" : "Square";
+    }
+
+    /** The mod a square is about: Radarcraft's own biome and photo squares ({@code checklist:biome/<mod>/...}) name it in the path. */
+    private static String sourceMod(ResourceLocation id) {
+        String[] parts = id.getPath().split("/");
+        return id.getNamespace().equals(Checklist.MODID) && parts.length >= 3 ? parts[1] : id.getNamespace();
     }
 
     private static String modName(String namespace) {
@@ -391,8 +443,10 @@ public final class ChecklistScreen extends Screen {
 
         int bx = x + w - 48;
         int finalRank = rank;
-        pseudoButton(g, bx, mid, 20, 14, "-", canRemove, mouseX, mouseY, clipTop, clipBottom, () -> setRank(u, finalRank - 1));
-        pseudoButton(g, bx + 24, mid, 20, 14, "+", canAdd, mouseX, mouseY, clipTop, clipBottom, () -> setRank(u, finalRank + 1));
+        // shift-click: 10 ranks at a time (adding stops at what the points cover)
+        pseudoButton(g, bx, mid, 20, 14, "-", canRemove, mouseX, mouseY, clipTop, clipBottom, () -> setRank(u, finalRank - step()));
+        pseudoButton(g, bx + 24, mid, 20, 14, "+", canAdd, mouseX, mouseY, clipTop, clipBottom,
+                () -> setRank(u, finalRank + Math.max(1, Math.min(step(), ClientState.available() / Math.max(1, u.cost)))));
     }
 
     private String nameOf(String id) {
@@ -427,6 +481,8 @@ public final class ChecklistScreen extends Screen {
         g.drawCenteredString(font, label, x + w / 2, y + (h - 8) / 2, enabled ? TEXT : 0xFF5A5A5A);
         if (enabled && visible) hits.add(new HitBox(x, visTop, w, visBottom - visTop, action));
     }
+
+    private static int step() { return hasShiftDown() ? 10 : 1; }
 
     private void setRank(UpgradeCatalog.Upgrade u, int rank) {
         rank = Mth.clamp(rank, 0, u.ranks);
@@ -464,9 +520,14 @@ public final class ChecklistScreen extends Screen {
 
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
-        if (dragging && tab == Tab.GRID && (gridW > width - 20 || gridH > height - HEADER_H - FOOTER_H)) {
-            panX = Mth.clamp(panX + (int) dragX, Math.min(0, width - 20 - gridW), Math.max(0, width - 20 - gridW) / 2);
-            panY = Mth.clamp(panY + (int) dragY, Math.min(0, height - HEADER_H - FOOTER_H - gridH), 0);
+        if (dragging && tab == Tab.GRID) {
+            dragAccX += dragX;
+            dragAccY += dragY;
+            gridX += (int) dragAccX;
+            gridY += (int) dragAccY;
+            dragAccX -= (int) dragAccX;
+            dragAccY -= (int) dragAccY;
+            clampView();
             return true;
         }
         return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
@@ -474,6 +535,14 @@ public final class ChecklistScreen extends Screen {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+        if (tab == Tab.GRID && scrollY != 0) { // zoom around the mouse
+            double gx = (mouseX - gridX) / cell, gy = (mouseY - gridY) / cell;
+            setCell(cell + (scrollY > 0 ? 2 : -2));
+            gridX = (int) Math.round(mouseX - gx * cell);
+            gridY = (int) Math.round(mouseY - gy * cell);
+            clampView();
+            return true;
+        }
         if (tab == Tab.UPGRADES) {
             int view = height - FOOTER_H - HEADER_H;
             upgradesScroll = Mth.clamp(upgradesScroll - (int) (scrollY * 16), 0, Math.max(0, upgradesContentH - view));
@@ -484,6 +553,9 @@ public final class ChecklistScreen extends Screen {
 
     @Override
     public void onClose() {
+        savedCell = cell;
+        savedX = gridX;
+        savedY = gridY;
         minecraft.setScreen(lastScreen);
     }
 

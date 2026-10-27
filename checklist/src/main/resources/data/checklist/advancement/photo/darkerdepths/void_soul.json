@@ -1,0 +1,46 @@
+{
+ "neoforge:conditions": [
+  {
+   "type": "neoforge:mod_loaded",
+   "modid": "darkerdepths"
+  },
+  {
+   "type": "neoforge:mod_loaded",
+   "modid": "exposure"
+  }
+ ],
+ "parent": "checklist:photo/root",
+ "display": {
+  "icon": {
+   "id": "darkerdepths:void_soul_spawn_egg"
+  },
+  "title": {
+   "translate": "checklist.square.photo",
+   "with": [
+    {
+     "translate": "entity.darkerdepths.void_soul",
+     "fallback": "Void Soul"
+    }
+   ]
+  },
+  "description": "Take a photo with this mob in the frame (Exposure camera)",
+  "frame": "task",
+  "show_toast": true,
+  "announce_to_chat": false,
+  "hidden": true
+ },
+ "criteria": {
+  "photo": {
+   "trigger": "exposure:frame_exposed",
+   "conditions": {
+    "frame": {
+     "entities_in_frame": [
+      {
+       "type": "darkerdepths:void_soul"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

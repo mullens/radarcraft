@@ -1,0 +1,23 @@
+{
+ "neoforge:conditions": [
+  {
+   "type": "neoforge:mod_loaded",
+   "modid": "exposure"
+  }
+ ],
+ "display": {
+  "icon": {
+   "id": "exposure:camera"
+  },
+  "title": "Radarcraft: Photos",
+  "description": "Every kind of mob is a square on the Radarcraft grid: photograph it",
+  "background": "minecraft:textures/gui/advancements/backgrounds/husbandry.png",
+  "show_toast": false,
+  "announce_to_chat": false
+ },
+ "criteria": {
+  "tick": {
+   "trigger": "minecraft:tick"
+  }
+ }
+}

@@ -18,7 +18,7 @@ import java.util.List;
  * exist or what a revealed-but-distant square looks like.
  */
 public record GridSyncPayload(List<Square> squares) implements CustomPacketPayload {
-    public record Square(int x, int y, String id, Component title, Component description, ItemStack icon, int frame, boolean done) {}
+    public record Square(int x, int y, String id, Component title, Component description, ItemStack icon, int frame, boolean done, String doneBy) {}
 
     public static final Type<GridSyncPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Checklist.MODID, "grid"));
     public static final StreamCodec<RegistryFriendlyByteBuf, GridSyncPayload> CODEC = StreamCodec.of(GridSyncPayload::write, GridSyncPayload::read);
@@ -34,6 +34,7 @@ public record GridSyncPayload(List<Square> squares) implements CustomPacketPaylo
             ItemStack.OPTIONAL_STREAM_CODEC.encode(buf, s.icon);
             buf.writeByte(s.frame);
             buf.writeBoolean(s.done);
+            buf.writeUtf(s.doneBy);
         }
     }
 
@@ -43,7 +44,7 @@ public record GridSyncPayload(List<Square> squares) implements CustomPacketPaylo
         for (int i = 0; i < n; i++) {
             list.add(new Square(buf.readVarInt(), buf.readVarInt(), buf.readUtf(),
                     ComponentSerialization.STREAM_CODEC.decode(buf), ComponentSerialization.STREAM_CODEC.decode(buf),
-                    ItemStack.OPTIONAL_STREAM_CODEC.decode(buf), buf.readByte(), buf.readBoolean()));
+                    ItemStack.OPTIONAL_STREAM_CODEC.decode(buf), buf.readByte(), buf.readBoolean(), buf.readUtf()));
         }
         return new GridSyncPayload(list);
     }

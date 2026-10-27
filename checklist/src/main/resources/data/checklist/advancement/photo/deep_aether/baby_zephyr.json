@@ -1,0 +1,46 @@
+{
+ "neoforge:conditions": [
+  {
+   "type": "neoforge:mod_loaded",
+   "modid": "deep_aether"
+  },
+  {
+   "type": "neoforge:mod_loaded",
+   "modid": "exposure"
+  }
+ ],
+ "parent": "checklist:photo/root",
+ "display": {
+  "icon": {
+   "id": "deep_aether:baby_zephyr_spawn_egg"
+  },
+  "title": {
+   "translate": "checklist.square.photo",
+   "with": [
+    {
+     "translate": "entity.deep_aether.baby_zephyr",
+     "fallback": "Baby Zephyr"
+    }
+   ]
+  },
+  "description": "Take a photo with this mob in the frame (Exposure camera)",
+  "frame": "task",
+  "show_toast": true,
+  "announce_to_chat": false,
+  "hidden": true
+ },
+ "criteria": {
+  "photo": {
+   "trigger": "exposure:frame_exposed",
+   "conditions": {
+    "frame": {
+     "entities_in_frame": [
+      {
+       "type": "deep_aether:baby_zephyr"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

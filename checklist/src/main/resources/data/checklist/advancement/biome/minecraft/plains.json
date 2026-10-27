@@ -1,0 +1,35 @@
+{
+ "parent": "checklist:biome/root",
+ "display": {
+  "icon": {
+   "id": "minecraft:poppy"
+  },
+  "title": {
+   "translate": "biome.minecraft.plains",
+   "fallback": "Plains"
+  },
+  "description": "Stand in this biome (the Overworld)",
+  "frame": "task",
+  "show_toast": true,
+  "announce_to_chat": false,
+  "hidden": true
+ },
+ "criteria": {
+  "visit": {
+   "trigger": "minecraft:location",
+   "conditions": {
+    "player": [
+     {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+       "location": {
+        "biomes": "minecraft:plains"
+       }
+      }
+     }
+    ]
+   }
+  }
+ }
+}

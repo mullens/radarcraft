@@ -1,0 +1,35 @@
+{
+ "parent": "checklist:biome/root",
+ "display": {
+  "icon": {
+   "id": "minecraft:stone"
+  },
+  "title": {
+   "translate": "biome.minecraft.stony_peaks",
+   "fallback": "Stony Peaks"
+  },
+  "description": "Stand in this biome (the Overworld)",
+  "frame": "task",
+  "show_toast": true,
+  "announce_to_chat": false,
+  "hidden": true
+ },
+ "criteria": {
+  "visit": {
+   "trigger": "minecraft:location",
+   "conditions": {
+    "player": [
+     {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+       "location": {
+        "biomes": "minecraft:stony_peaks"
+       }
+      }
+     }
+    ]
+   }
+  }
+ }
+}
