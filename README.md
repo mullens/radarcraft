@@ -38,6 +38,8 @@ If double-clicking opens Notepad instead of running: right-click → *Run with P
 - **Added**: Inventory Crafting Grid (3x3 crafting in your inventory) and the five mods below.
 - **Rarer loot**: modded chest loot, Artifacts and Simply Swords weapons are harder to find; goblin traders are ~10x rarer.
 - **Sky islands, quests, Create and all the Aeronautics addons** are unchanged.
+- **Radarcraft title screen** instead of the Skybound one; JourneyMap comes preconfigured the way Skybound had it;
+  the bleed-out/revive mechanic (PlayerRevive) is gone.
 
 ## The custom mods
 
