@@ -11,8 +11,8 @@ Go download their pack if you want the original.
 ## Install (Windows, CurseForge app)
 
 1. Install the [CurseForge app](https://www.curseforge.com/download/app) and sign in to Minecraft in it once.
-2. Download the pack zip from the [latest release](https://github.com/mullens/radarcraft/releases/latest)
-   (`radarcraft-<version>.zip`).
+2. Download the pack zip from the [latest release folder](https://github.com/mullens/radarcraft/tree/main/releases/latest)
+   (`radarcraft-<version>.zip`, click it, then the Download button).
 3. In the CurseForge app: **Minecraft → Create Custom Profile → Import**, pick the zip, wait. It installs NeoForge and
    downloads about 390 mods; give it a few minutes.
 4. **Play.** The server is already in your Multiplayer list.
@@ -22,8 +22,8 @@ takes two to three minutes; later starts are faster.
 
 ## Update
 
-Download `Update-Radarcraft.ps1` from the [latest release](https://github.com/mullens/radarcraft/releases/latest)
-(or from `scripts/friends/` here), put it anywhere, double-click it. Takes seconds. It:
+Download `Update-Radarcraft.ps1` from the [latest release folder](https://github.com/mullens/radarcraft/tree/main/releases/latest)
+(right-click → Save link as on the Raw button), put it anywhere, double-click it. Takes seconds. It:
 
 - removes mods that left the pack and old versions,
 - downloads mods that were added or changed, straight from CurseForge,

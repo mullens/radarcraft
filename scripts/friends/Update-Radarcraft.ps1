@@ -45,15 +45,16 @@ if ($LocalRelease) {
     $lockPath = Join-Path $LocalRelease "mods.lock.json"
     Say "Local release: $LocalRelease"
 } else {
+    # releases live in the repo: https://github.com/<repo>/tree/main/releases/latest
+    $base = "https://raw.githubusercontent.com/$Repo/main/releases/latest"
     $headers = @{ "User-Agent" = "Update-Radarcraft" }
-    $release = Invoke-RestMethod -Uri "https://api.github.com/repos/$Repo/releases/latest" -Headers $headers
-    Say "Latest release: $($release.tag_name)  ($($release.name))"
-    $zipAsset = $release.assets | Where-Object { $_.name -like "*.zip" } | Select-Object -First 1
-    $lockAsset = $release.assets | Where-Object { $_.name -eq "mods.lock.json" } | Select-Object -First 1
-    if (-not $zipAsset -or -not $lockAsset) { Write-Host "Release is missing the pack zip or mods.lock.json." -ForegroundColor Red; pause; exit 1 }
-    $zipPath = Join-Path $tmp $zipAsset.name; $lockPath = Join-Path $tmp "mods.lock.json"
-    Invoke-WebRequest -Uri $zipAsset.browser_download_url -Headers $headers -OutFile $zipPath
-    Invoke-WebRequest -Uri $lockAsset.browser_download_url -Headers $headers -OutFile $lockPath
+    $version = (Invoke-RestMethod -Uri "$base/VERSION" -Headers $headers).ToString().Trim()
+    Say "Latest release: $version"
+    $lockPath = Join-Path $tmp "mods.lock.json"
+    Invoke-WebRequest -Uri "$base/mods.lock.json" -Headers $headers -OutFile $lockPath
+    $zipName = "radarcraft-$version.zip"
+    $zipPath = Join-Path $tmp $zipName
+    Invoke-WebRequest -Uri "$base/$zipName" -Headers $headers -OutFile $zipPath
 }
 $lock = Get-Content $lockPath -Raw | ConvertFrom-Json
 Say "Pack $($lock.name) $($lock.version): $($lock.mods.Count) jars expected"
