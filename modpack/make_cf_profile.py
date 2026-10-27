@@ -65,7 +65,10 @@ def main():
     dst.mkdir(parents=True, exist_ok=True)
     (dst / "mods").mkdir(exist_ok=True)
     for old in (dst / "mods").glob("*.jar"):
-        old.unlink()
+        try:
+            old.unlink()
+        except PermissionError:
+            sys.exit(f"'{a.name}' is running (a jar is locked: {old.name}). Close the game, then re-run.")
 
     kept_addons = []
     n = 0
