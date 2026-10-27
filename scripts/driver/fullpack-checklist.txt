@@ -1,0 +1,16 @@
+# Full-pack check: Checklist button on Better Advancements screen, then the grid.
+waittitle
+connect localhost:25565
+wait 100
+log joined: screen={screen}
+screen advancements
+wait 15
+log advancements screen: screen={screen}
+screenshot fpc-advancements
+click 601 346
+wait 15
+log after button: screen={screen}
+screenshot fpc-grid
+screen none
+wait 5
+quit
