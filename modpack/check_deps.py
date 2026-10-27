@@ -58,11 +58,12 @@ def main():
     mods = json.load(open(HERE / "mods-audit.json", encoding="utf-8"))
     scrapped_files = {l.strip() for l in open(HERE / "out/server-remove.txt", encoding="utf-8") if l.strip()}
     known_files = {m["file"] for m in mods}
-    kept_jars = [INSTANCE / "mods" / m["file"] for m in mods if m["file"] not in scrapped_files]
+    sys.path.insert(0, str(HERE))
+    from packfiles import pack_jars
+    resolved, _missing = pack_jars(include_client_only=True)
+    kept_jars = [p for p, src in resolved if src != "overrides"]
+    own_jars = [p for p, src in resolved if src == "overrides"]
     scrapped_jars = [INSTANCE / "mods" / m["file"] for m in mods if m["file"] in scrapped_files]
-    own_jars = [p for p in (HERE.parent).glob("*/build/libs/*.jar") if not p.name.endswith(("-sources.jar", "-javadoc.jar"))]
-    # mods added via extra-mods.json, when their jars have been fetched into modpack/tools/downloads
-    own_jars += list((HERE / "tools" / "downloads").glob("*.jar"))
 
     provided_by = collections.defaultdict(list)
     requires = {}

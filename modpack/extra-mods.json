@@ -21,6 +21,16 @@
     "name": "FLIB (library for Inventory Crafting Grid)",
     "file": "flib-1.21.1-0.2.9.jar",
     "url": "https://www.curseforge.com/minecraft/mc-mods/flib",
-    "why": "Required by Inventory Crafting Grid (flib >= 0.2.0)."
+    "why": "Required by Inventory Crafting Grid (flib >= 0.2.0).",
+    "download": "https://mediafilez.forgecdn.net/files/8611/586/flib-1.21.1-0.2.9.jar"
+  },
+  {
+    "projectID": 417430,
+    "fileID": 9318571,
+    "name": "Vanilla Backport (upgrade 1.1.7 -> 1.2.2)",
+    "file": "VanillaBackport-neoforge-1.21.1-1.2.2.jar",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/vanillabackport",
+    "download": "https://mediafilez.forgecdn.net/files/9318/571/VanillaBackport-neoforge-1.21.1-1.2.2.jar",
+    "why": "Newest vanilla content on 1.21.1: Copper Age (copper tools/armor, golem, chests, shelves), Mounts of Mayhem, Chase the Skies, Chaos Cubed, Wilderness Bound."
   }
 ]

@@ -161,8 +161,15 @@ def main():
     # {"projectID": int, "fileID": int, "name": str, "url": str}
     extra_path = HERE / "extra-mods.json"
     extras = json.load(open(extra_path, encoding="utf-8")) if extra_path.exists() else []
+    # An extra whose projectID is already in the pack is an UPGRADE/DOWNGRADE of that mod: swap the file id in place.
+    upgrades = {}
     for e in extras:
-        files_out.append({"projectID": e["projectID"], "fileID": e["fileID"], "required": True})
+        existing = next((f for f in files_out if f["projectID"] == e["projectID"]), None)
+        if existing:
+            existing["fileID"] = e["fileID"]
+            upgrades[e["projectID"]] = e
+        else:
+            files_out.append({"projectID": e["projectID"], "fileID": e["fileID"], "required": True})
 
     out = Path(args.out).resolve()
     if os.name == "nt" and not str(out).startswith("\\\\?\\"):
@@ -197,6 +204,7 @@ def main():
     # Jars that live in the instance's mods folder but are NOT CurseForge projects (the original pack shipped them
     # as overrides), e.g. the Aetherial Islands worldgen datapack-jar that makes the pack "Skybound". Keep them.
     manifest_files = {a["fileNameOnDisk"] for a in addons.values() if a["categorySection"]["path"] == "mods"}
+    manifest_files |= {e["file"] for e in extras if e.get("file")}
     override_jars = []
     for jar in sorted((inst / "mods").glob("*.jar")):
         if jar.name not in manifest_files:
@@ -235,7 +243,11 @@ def main():
     lock = {"name": args.name, "version": args.version, "neoforge": manifest["minecraft"]["modLoaders"][0]["id"], "mods": []}
     for f in files_out:
         a = addons.get(f["projectID"])
-        if a and a["categorySection"]["path"] == "mods":
+        if a and a["categorySection"]["path"] == "mods" and f["projectID"] in upgrades:
+            e = upgrades[f["projectID"]]
+            lock["mods"].append({"file": e["file"], "name": a["name"], "projectID": f["projectID"], "fileID": f["fileID"],
+                                 "url": e.get("download"), "page": a.get("webSiteURL", ""), "source": "curseforge"})
+        elif a and a["categorySection"]["path"] == "mods":
             inst_file = a.get("installedFile", {})
             lock["mods"].append({"file": a["fileNameOnDisk"], "name": a["name"], "projectID": f["projectID"], "fileID": f["fileID"],
                                  "url": inst_file.get("downloadUrl") if a.get("allowModDistribution") is not False else None,
@@ -244,7 +256,7 @@ def main():
             e = next((x for x in extras if x["projectID"] == f["projectID"]), None)
             if e:
                 lock["mods"].append({"file": e.get("file", ""), "name": e["name"], "projectID": f["projectID"], "fileID": f["fileID"],
-                                     "url": None, "page": e.get("url", ""), "source": "curseforge"})
+                                     "url": e.get("download"), "page": e.get("url", ""), "source": "curseforge"})
     for jar in sorted((pack / "overrides" / "mods").glob("*.jar")):
         lock["mods"].append({"file": jar.name, "name": jar.stem, "projectID": 0, "fileID": 0, "url": None, "page": "", "source": "zip"})
     json.dump(lock, open(out / "mods.lock.json", "w", encoding="utf-8"), indent=1)

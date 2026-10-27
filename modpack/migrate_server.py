@@ -41,25 +41,20 @@ def main():
     by_project = {a["addonID"]: a for a in instance["installedAddons"]}
     extras = json.load(open(HERE / "extra-mods.json", encoding="utf-8")) if (HERE / "extra-mods.json").exists() else []
 
+    sys.path.insert(0, str(HERE))
+    from packfiles import pack_jars
+    jars, missing = pack_jars(include_client_only=False)
+    target = {p.name: p for p, _ in jars}
     present = {p.name for p in mods_dir.glob("*.jar")}
-    to_delete = [j for j in remove if j in present]
-    # kept pack mods the server lacks (compare by jar name; CurseForge keeps the same file names)
-    kept_names = []
-    for f in manifest["files"]:
-        a = by_project.get(f["projectID"])
-        if a and a["categorySection"]["path"] == "mods":
-            kept_names.append(a["fileNameOnDisk"])
-    to_add_pack = [n for n in kept_names if n not in present and (INSTANCE / "mods" / n).exists() and not is_client_only(n)]
-    client_on_server = sorted(n for n in present if is_client_only(n))
-    if client_on_server:
-        print(f"  NOTE: {len(client_on_server)} client-only jars are on this server and should be deleted too: {', '.join(client_on_server)}")
-        to_delete = sorted(set(to_delete) | set(client_on_server))
-    to_add_extra = [e for e in extras if e.get("file") and e["file"] not in present]
+    original = {a["fileNameOnDisk"] for a in by_project.values() if a["categorySection"]["path"] == "mods"}
+    # delete: scrapped jars, client-only jars, and original-pack jars no longer in the target set (old versions of
+    # upgraded mods). Jars the pack never knew about are left alone.
+    to_delete = sorted(j for j in present if j not in target and (j in remove or is_client_only(j) or j in original))
+    to_add_pack = sorted(n for n in target if n not in present)
+    to_add_extra = []  # added/upgraded mods now come from modpack/tools/downloads via packfiles
     to_add_own = []
-    for j in add_own:
-        src = next(iter((HERE.parent).glob(f"*/build/libs/{j}")), None)
-        if src:
-            to_add_own.append(src)
+    for m in missing:
+        print("  WARNING: missing jar:", m)
     configs = [HERE / n for n in ("checklist-grid.json", "checklist-upgrades.json") if (HERE / n).exists()]
 
     print(f"server: {server}\n  jars now: {len(present)}")
@@ -83,11 +78,11 @@ def main():
     for j in to_delete:
         (mods_dir / j).unlink(); print("deleted", j)
     for j in to_add_pack:
-        shutil.copy2(INSTANCE / "mods" / j, mods_dir / j); print("added", j)
-    for p in to_add_own:
-        for old in mods_dir.glob(p.name.split("-")[0] + "-*.jar"):
-            old.unlink(); print("replaced", old.name)
-        shutil.copy2(p, mods_dir / p.name); print("added", p.name)
+        shutil.copy2(target[j], mods_dir / j); print("added", j)
+    # our own jars keep the same file name across versions: always refresh them
+    for name, p in target.items():
+        if p.parent.name == "mods" and p.parent.parent.name == "overrides" and name in present:
+            shutil.copy2(p, mods_dir / name); print("refreshed", name)
     (server / "config").mkdir(exist_ok=True)
     for c in configs:
         shutil.copy2(c, server / "config" / c.name); print("config", c.name)

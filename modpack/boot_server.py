@@ -89,32 +89,22 @@ def diff(d, baseline_file):
 
 
 def sync(d):
+    sys.path.insert(0, str(HERE))
+    from packfiles import pack_jars
     pack = HERE / "out" / "pack"
-    manifest = json.load(open(pack / "manifest.json", encoding="utf-8"))
-    instance = json.load(open(INSTANCE / "minecraftinstance.json", encoding="utf-8"))
-    by_project = {a["addonID"]: a for a in instance["installedAddons"]}
     mods = d / "mods"
     if mods.exists():
         shutil.rmtree(mods)
     mods.mkdir()
+    jars, missing = pack_jars(include_client_only=True)
     n = 0; skipped = []
-    for f in manifest["files"]:
-        a = by_project.get(f["projectID"])
-        if a and a["categorySection"]["path"] == "mods":
-            src = INSTANCE / "mods" / a["fileNameOnDisk"]
-            if is_client_only(src.name):
-                skipped.append(src.name)
-            elif src.exists():
-                shutil.copy2(src, mods / src.name); n += 1
-            else:
-                print("WARNING: not in local instance, download it:", a["fileNameOnDisk"])
-        elif not a:
-            print("WARNING: new mod not available locally (download from CurseForge):", f)
-    for jar in (pack / "overrides" / "mods").glob("*.jar"):
-        if is_client_only(jar.name):
-            skipped.append(jar.name); continue
-        shutil.copy2(jar, mods / jar.name); n += 1
-    print(f"skipped {len(skipped)} client-only jars: {', '.join(skipped)}")
+    for p, _src in jars:
+        if is_client_only(p.name):
+            skipped.append(p.name); continue
+        shutil.copy2(p, mods / p.name); n += 1
+    for m in missing:
+        print("WARNING: missing jar:", m)
+    print(f"skipped {len(skipped)} client-only jars")
     for sub in ("config", "kubejs", "defaultconfigs"):
         src = pack / "overrides" / sub
         if src.exists():

@@ -70,29 +70,31 @@ def main():
         except PermissionError:
             sys.exit(f"'{a.name}' is running (a jar is locked: {old.name}). Close the game, then re-run.")
 
-    kept_addons = []
+    from packfiles import pack_jars
+    jars, missing = pack_jars(include_client_only=True)
     n = 0
+    for p, _src in jars:
+        shutil.copy2(p, dst / "mods" / p.name); n += 1
+    for m in missing:
+        print("WARNING: missing jar:", m)
+    kept_addons = []
     for f in manifest["files"]:
         ad = by_project.get(f["projectID"])
         if not ad:
-            print("WARNING: not in local instance, the app must download it:", f); continue
+            continue  # added mods: the jar is copied above; the app shows them as manually added
         sec = ad["categorySection"]["path"]
-        srcfile = SRC / sec / ad["fileNameOnDisk"]
-        if sec == "mods":
-            if srcfile.exists():
-                shutil.copy2(srcfile, dst / "mods" / srcfile.name); n += 1
-        elif sec == "shaderpacks":
+        if sec == "shaderpacks":
             (dst / sec).mkdir(exist_ok=True)
+            srcfile = SRC / sec / ad["fileNameOnDisk"]
             if srcfile.exists():
                 shutil.copy2(srcfile, dst / sec / srcfile.name)
-        else:
+        elif sec != "mods":
             continue
+        if sec == "mods" and ad.get("installedFile", {}).get("id") != f["fileID"]:
+            continue  # upgraded mod: leave it out of the app's metadata so the app doesn't revert it
         ad2 = json.loads(json.dumps(ad))
         ad2["modFolderPath"] = str(dst / sec)
-        ad2["instanceID"] = ad2.get("instanceID")
         kept_addons.append(ad2)
-    for jar in (pack / "overrides" / "mods").glob("*.jar"):
-        shutil.copy2(jar, dst / "mods" / jar.name); n += 1
     for sub in ("config", "kubejs", "defaultconfigs", "datapacks"):
         if (pack / "overrides" / sub).exists():
             if (dst / sub).exists():
