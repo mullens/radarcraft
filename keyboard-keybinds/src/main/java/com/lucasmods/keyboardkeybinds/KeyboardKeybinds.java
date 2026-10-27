@@ -88,8 +88,7 @@ public final class KeyboardKeybinds {
     private static final ResourceLocation SHORTCUT_ICON = ResourceLocation.fromNamespaceAndPath(MODID, "icon/keybinds");
 
     /**
-     * A keyboard icon on the pause screen (and an uncustomised title screen) that opens Key Binds in one click (Controlling swaps in its own
-     * screen as usual). It sits right below Create's goggles button; without Create, where the goggles would be:
+     * A keyboard icon on the pause screen (and an uncustomised title screen) that opens the keyboard view in one click. It sits right below Create's goggles button; without Create, where the goggles would be:
      * left of the Options button, one row down.
      */
     private static void addMenuShortcut(ScreenEvent.Init.Post event) {
@@ -110,7 +109,7 @@ public final class KeyboardKeybinds {
         }
         Screen parent = screen;
         SpriteIconButton button = SpriteIconButton.builder(Component.translatable("keyboardkeybinds.button.shortcut"),
-                        b -> Minecraft.getInstance().setScreen(new KeyBindsScreen(parent, Minecraft.getInstance().options)), true)
+                        b -> Minecraft.getInstance().setScreen(new KeyboardScreen(parent, Minecraft.getInstance().options)), true)
                 .sprite(SHORTCUT_ICON, 15, 15).size(20, 20).build();
         button.setPosition(x, y);
         button.setTooltip(Tooltip.create(Component.translatable("keyboardkeybinds.button.shortcut")));

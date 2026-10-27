@@ -21,7 +21,7 @@ screen pause
 wait 5
 widgets
 screenshot ui-pause
-clickwidget Key Binds
+clickwidget Keyboard Keybinds
 wait 5
 log after shortcut: screen={screen}
 screen none
