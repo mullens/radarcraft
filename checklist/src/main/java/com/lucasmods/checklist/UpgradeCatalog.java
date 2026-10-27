@@ -35,9 +35,11 @@ public final class UpgradeCatalog {
         public final List<Effect> effectsAtMax;
         public final List<String> excludes;
         @Nullable public final String special;
+        /** For specials: effect size per rank ("amount" in the JSON); NaN = the special's built-in default. */
+        public final double amount;
 
         Upgrade(String id, String name, String category, int ranks, int cost, String description, List<Modifier> modifiers,
-                List<Effect> effects, List<Effect> effectsAtMax, List<String> excludes, @Nullable String special) {
+                List<Effect> effects, List<Effect> effectsAtMax, List<String> excludes, @Nullable String special, double amount) {
             this.id = id;
             this.name = name;
             this.category = category;
@@ -49,10 +51,14 @@ public final class UpgradeCatalog {
             this.effectsAtMax = effectsAtMax;
             this.excludes = excludes;
             this.special = special;
+            this.amount = amount;
         }
 
         /** A single rank that costs more than one point is shown as an on/off switch. */
         public boolean isToggle() { return ranks == 1 && cost > 1; }
+
+        /** rank x amount per rank, or rank x fallback when the catalog gives no amount. */
+        public double total(int rank, double fallbackPerRank) { return rank * (Double.isNaN(amount) ? fallbackPerRank : amount); }
 
         /** Deterministic modifier id for the n-th modifier of this upgrade. */
         public ResourceLocation modifierId(int index) {
@@ -99,7 +105,8 @@ public final class UpgradeCatalog {
             map.put(id, new Upgrade(id, o.get("name").getAsString(), o.has("category") ? o.get("category").getAsString() : "General",
                     Math.max(1, o.get("ranks").getAsInt()), o.has("cost") ? Math.max(1, o.get("cost").getAsInt()) : 1, o.has("description") ? o.get("description").getAsString() : "",
                     mods, parseEffects(o, "effects"), parseEffects(o, "effects_at_max"), excludes,
-                    o.has("special") ? o.get("special").getAsString() : null));
+                    o.has("special") ? o.get("special").getAsString() : null,
+                    o.has("amount") ? o.get("amount").getAsDouble() : Double.NaN));
         }
         return new UpgradeCatalog(map);
     }

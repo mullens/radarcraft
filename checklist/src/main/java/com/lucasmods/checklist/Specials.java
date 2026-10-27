@@ -79,6 +79,14 @@ public final class Specials {
         return PlayerState.fastRank(player, id);
     }
 
+    /** The special's total strength: rank x its catalog "amount" (fallback: the original per-rank value). */
+    public static double total(net.minecraft.world.entity.player.Player player, String id, double fallbackPerRank) {
+        int r = PlayerState.fastRank(player, id);
+        if (r <= 0) return 0;
+        UpgradeCatalog.Upgrade u = ChecklistConfig.upgrades().get(id);
+        return u == null ? r * fallbackPerRank : u.total(r, fallbackPerRank);
+    }
+
     // ------------------------------------------------------------------ ticking specials
 
     @SubscribeEvent
@@ -100,7 +108,7 @@ public final class Specials {
     private static void magnet(ServerPlayer player) {
         int magnet = rank(player, "magnet");
         if (magnet <= 0 || player.tickCount % 2 != 0) return;
-        double radius = 1.5 * magnet;
+        double radius = total(player, "magnet", 1.5);
         ServerLevel level = player.serverLevel();
         for (ItemEntity item : level.getEntitiesOfClass(ItemEntity.class, player.getBoundingBox().inflate(radius), i -> !i.hasPickUpDelay())) {
             Vec3 dir = player.position().add(0, 0.8, 0).subtract(item.position());
@@ -154,8 +162,8 @@ public final class Specials {
 
     /** Tinkerer: repairs one durability on worn armour and held items, every 60 s / rank. */
     private static void tinkerer(ServerPlayer player) {
-        int r = rank(player, "tinkerer");
-        if (r <= 0 || player.tickCount % Math.max(1, 1200 / r) != 0) return;
+        double perMinute = total(player, "tinkerer", 1.0); // durability repaired per minute
+        if (perMinute <= 0 || player.tickCount % Math.max(1, (int) Math.round(1200 / perMinute)) != 0) return;
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             if (slot.getType() == EquipmentSlot.Type.ANIMAL_ARMOR) continue;
             ItemStack stack = player.getItemBySlot(slot);
@@ -178,7 +186,9 @@ public final class Specials {
             }
         }
         RandomSource random = level.getRandom();
-        for (int i = 0; i < 2 * r && !plants.isEmpty(); i++) {
+        double ticks = total(player, "green_thumb", 2.0); // growth ticks per 2 s; the fraction is a chance
+        int count = (int) ticks + (level.getRandom().nextDouble() < ticks - (int) ticks ? 1 : 0);
+        for (int i = 0; i < count && !plants.isEmpty(); i++) {
             BlockPos p = plants.get(random.nextInt(plants.size()));
             level.getBlockState(p).randomTick(level, p, random);
             if (random.nextInt(3) == 0) level.sendParticles(ParticleTypes.HAPPY_VILLAGER, p.getX() + 0.5, p.getY() + 0.5, p.getZ() + 0.5, 2, 0.25, 0.25, 0.25, 0);
@@ -228,15 +238,15 @@ public final class Specials {
         // Thorny: the player is hit in melee by a living attacker
         if (event.getEntity() instanceof ServerPlayer victim && source.getEntity() instanceof LivingEntity attacker
                 && source.getDirectEntity() == attacker && attacker != victim && !source.is(DamageTypes.THORNS)) {
-            int r = rank(victim, "thorny");
-            if (r > 0) attacker.hurt(victim.damageSources().thorns(victim), event.getAmount() * 0.10f * r);
+            double share = total(victim, "thorny", 0.10);
+            if (share > 0) attacker.hurt(victim.damageSources().thorns(victim), event.getAmount() * (float) share);
         }
         if (source.getEntity() instanceof ServerPlayer attacker && event.getEntity() != attacker) {
             float multiplier = 1.0f;
-            int lastStand = rank(attacker, "last_stand");
-            if (lastStand > 0 && attacker.getHealth() < attacker.getMaxHealth() * 0.3f) multiplier += 0.15f * lastStand;
-            int marksman = rank(attacker, "marksman");
-            if (marksman > 0 && source.getDirectEntity() instanceof Projectile projectile && projectile.getOwner() == attacker) multiplier += 0.10f * marksman;
+            double lastStand = total(attacker, "last_stand", 0.15);
+            if (lastStand > 0 && attacker.getHealth() < attacker.getMaxHealth() * 0.3f) multiplier += (float) lastStand;
+            double marksman = total(attacker, "marksman", 0.10);
+            if (marksman > 0 && source.getDirectEntity() instanceof Projectile projectile && projectile.getOwner() == attacker) multiplier += (float) marksman;
             if (multiplier != 1.0f) event.setAmount(event.getAmount() * multiplier);
         }
     }
@@ -245,13 +255,13 @@ public final class Specials {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onDeath(LivingDeathEvent event) {
         if (event.getEntity() instanceof Mob && event.getSource().getEntity() instanceof ServerPlayer killer) {
-            int r = rank(killer, "vampiric");
-            if (r > 0) killer.heal(r);
+            double heal = total(killer, "vampiric", 1.0);
+            if (heal > 0) killer.heal((float) heal);
         }
         if (event.getEntity() instanceof ServerPlayer player) {
             int r = rank(player, "soul_keeper");
             if (r <= 0 || player.level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) return;
-            int keep = (int) Math.floor(player.experienceLevel * Math.min(1.0, 0.10 * r));
+            int keep = (int) Math.floor(player.experienceLevel * Math.min(1.0, total(player, "soul_keeper", 0.10)));
             PlayerState state = PlayerState.load(player);
             state.soulKeptLevels = keep;
             state.save(player);
@@ -265,7 +275,7 @@ public final class Specials {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         int r = rank(player, "soul_keeper");
         if (r <= 0) return;
-        event.setDroppedExperience((int) Math.round(event.getDroppedExperience() * Math.max(0.0, 1.0 - 0.10 * r)));
+        event.setDroppedExperience((int) Math.round(event.getDroppedExperience() * Math.max(0.0, 1.0 - total(player, "soul_keeper", 0.10))));
     }
 
     /** Soul Keeper: give the kept levels back after respawn (works next to Level Loss Only, which keeps items, not XP). */
@@ -343,7 +353,7 @@ public final class Specials {
         int r = rank(player, "studious");
         if (r <= 0) return;
         ExperienceOrb orb = event.getOrb();
-        double bonus = orb.getValue() * 0.10 * r + studiousCarry.getOrDefault(player, 0.0);
+        double bonus = orb.getValue() * total(player, "studious", 0.10) + studiousCarry.getOrDefault(player, 0.0);
         int whole = (int) bonus;
         studiousCarry.put(player, bonus - whole);
         if (whole > 0) player.giveExperiencePoints(whole);

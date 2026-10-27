@@ -119,8 +119,7 @@ def apply_config_patches(overrides):
                 i = text.find(patch["after"])
                 if i < 0:
                     print(f"WARNING: {patch['after']!r} not found in {patch['file']}"); continue
-                eol = text.index("
-", i) + 1
+                eol = text.index(chr(10), i) + 1
                 text = text[:eol] + patch["text"] + text[eol:]
                 target.write_text(text, encoding="utf-8")
             print(f"patched {patch['file']}: inserted {patch['unless']}"); continue

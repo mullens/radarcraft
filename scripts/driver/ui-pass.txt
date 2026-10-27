@@ -30,9 +30,21 @@ wait 2
 chat /radarcraft_menu
 wait 5
 log after radarcraft_menu: screen={screen}
+chat /advancement grant @s only minecraft:story/root
+chat /advancement grant @s only minecraft:story/mine_stone
+chat /advancement grant @s only minecraft:story/upgrade_tools
+chat /advancement grant @s only minecraft:story/smelt_iron
+chat /advancement grant @s only minecraft:story/enter_the_nether
+chat /advancement grant @s only minecraft:story/mine_diamond
+# let the advancement toasts clear before the screenshots
+wait 500
 chat /checklist setrank hearts 3
+chat /checklist setrank thick_skin 2
 chat /checklist setrank fireproof 1
-chat /checklist setrank fleet_foot 2
+wait 10
+screen none
+chat /radarcraft_menu
+wait 5
 wait 5
 clickwidget Upgrades
 wait 5

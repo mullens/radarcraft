@@ -1,6 +1,6 @@
 # Radarcraft
 
-A fork of the **Create Aeronautics - Skybound** modpack, plus five mods made for it. Minecraft 1.21.1, NeoForge.
+A fork of the **Create Aeronautics - Skybound** modpack, plus six mods made for it. Minecraft 1.21.1, NeoForge.
 This page is for the people playing on the server. (Developer notes: [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).)
 
 Radarcraft would not exist without [Create Aeronautics - Skybound](https://www.curseforge.com/minecraft/modpacks/create-aeronautics-skybound)
@@ -38,17 +38,18 @@ If double-clicking opens Notepad instead of running: right-click → *Run with P
 
 ## What's different from Skybound
 
-- **42 mods removed**: most of the second tech tree (Modern Industrialization, Modern Dynamics, Security Craft, ...;
-  Powah and Flux Networks stay), duplicate storage systems, the old skill trees with the hearts, pack-branding menus,
+- **36 mods removed**: Security Craft, the quarry (Additional Enchanted Miner) and the XP obelisk, duplicate storage
+  systems, the old skill trees with the hearts, pack-branding menus,
   Punchy, Crafting on a Stick, More Useful Copper, Freeze the Happy Ghasts (no version for the new Vanilla Backport)
   and Visual Workbench (crafting tables hand your items back again when you close them, like vanilla).
 - **Added**: Inventory Crafting Grid (3x3 crafting in your inventory), the Accessories Compatibility Layer (one
   accessory screen for everything: Curios trinkets, Aether gloves and pendants, all in the Accessories slots), and the
-  five mods below.
+  six mods below.
 - **Newest vanilla content**: Vanilla Backport is updated to 1.2.2, which brings the Copper Age (copper tools and
   armor, copper golem, copper chests, shelves), Mounts of Mayhem, Chase the Skies (happy ghasts) and more to 1.21.1.
 - **Rarer loot**: modded chest loot, Artifacts and Simply Swords weapons are harder to find; goblin traders are ~10x rarer.
-- **Sky islands, quests, Create and all the Aeronautics addons** are unchanged.
+- **Sky islands, quests, Create and all the Aeronautics addons** are unchanged, and so is the second tech tree:
+  Modern Industrialization, Modern Dynamics pipes, Powah, Flux Networks and the wireless chargers.
 - **Radarcraft title screen** instead of the Skybound one; JourneyMap comes preconfigured the way Skybound had it;
   the bleed-out/revive mechanic (PlayerRevive) is gone.
 
@@ -73,7 +74,7 @@ The grid starts hidden. Every achievement you complete reveals the squares next 
 
 <img src="docs/images/rpg-grid.png" width="640" alt="The achievement grid">
 
-Spend points on upgrades. Green squares are ranks you own; big upgrades are on/off switches:
+Spend points on upgrades. Most give a little per point, so you can spread points out; the big ones are on/off switches:
 
 <img src="docs/images/rpg-upgrades.png" width="720" alt="The upgrades list">
 
@@ -102,8 +103,8 @@ Red keys have real conflicts. Click one to fix everything on it in one place:
 A few mods are gone, and whatever they stored goes with them. Before the update day:
 
 - **Empty your crafting tables.** Items left lying in a crafting table disappear when Visual Workbench is removed.
-- **Empty and break machines from removed mods**: Modern Industrialization, Modern Dynamics pipes, Tom's Simple Storage,
-  Security Craft blocks, Nether Chested and wider ender chests, Super Ore Blocks. Their blocks turn into air.
+- **Empty and break machines from removed mods**: Tom's Simple Storage, Security Craft blocks, Additional Enchanted
+  Miner quarries, Experience Obelisks, Nether Chested and wider ender chests, Super Ore Blocks. Their blocks turn into air.
 - **Curios trinkets are safe**: everything you wear moves into the Accessories screen by itself.
 - **Your old skill points are not**: the Pufferfish skill trees are gone; Radarcraft RPG starts you with points for
   the achievements you already have plus Renown from your current XP.

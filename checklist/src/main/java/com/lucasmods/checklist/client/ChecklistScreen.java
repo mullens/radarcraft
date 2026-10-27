@@ -339,10 +339,9 @@ public final class ChecklistScreen extends Screen {
         g.fill(x, y, x + w, y + h, rank > 0 ? 0x30FFFFFF : 0x18FFFFFF);
         int textW = w - TEXT_RESERVE;
         g.drawString(font, u.name, x + 4, y + 2, rank > 0 ? TEXT : 0xFFDDDDDD, false);
-        // why the next rank cannot be taken goes after the name, so the description always stays readable
+        // an exclusion goes after the name; not enough points just shows as a red cost
         String warn = null;
         if (rank < u.ranks && excludedBy != null) warn = "not with " + excludedBy;
-        else if (rank < u.ranks && !affordable && (u.isToggle() || rank == 0)) warn = "needs " + u.cost + (u.cost == 1 ? " pt" : " pts") + ", you have " + ClientState.available();
         if (warn != null) {
             int wx = x + 4 + font.width(u.name) + 6;
             int room = x + textW - wx;
@@ -365,16 +364,30 @@ public final class ChecklistScreen extends Screen {
 
         // rank squares: each one outlined, so empty ones stay visible on the translucent row
         int pipX = x + w - 152;
-        int pipW = Math.min(8, (64 - u.ranks) / Math.max(1, u.ranks));
         int pipY = u.cost > 1 ? mid - 2 : mid + 3;
-        for (int i = 0; i < u.ranks; i++) {
-            int px = pipX + i * (pipW + 1);
-            boolean filled = i < rank;
-            g.fill(px, pipY, px + pipW, pipY + 8, filled ? PIP_ON : PIP_OFF);
-            g.renderOutline(px, pipY, pipW, 8, filled ? PIP_ON_BORDER : PIP_OFF_BORDER);
+        if (u.ranks <= 12) {
+            int pipW = Math.min(8, (64 - u.ranks) / Math.max(1, u.ranks));
+            for (int i = 0; i < u.ranks; i++) {
+                int px = pipX + i * (pipW + 1);
+                boolean filled = i < rank;
+                g.fill(px, pipY, px + pipW, pipY + 8, filled ? PIP_ON : PIP_OFF);
+                g.renderOutline(px, pipY, pipW, 8, filled ? PIP_ON_BORDER : PIP_OFF_BORDER);
+            }
+        } else {
+            // many small ranks: one outlined bar, with a faint notch every 4 ranks
+            int barW = 64;
+            g.fill(pipX, pipY, pipX + barW, pipY + 8, PIP_OFF);
+            int fillW = (int) Math.round((barW - 2) * rank / (double) u.ranks);
+            if (fillW > 0) g.fill(pipX + 1, pipY + 1, pipX + 1 + fillW, pipY + 7, PIP_ON);
+            for (int i = 4; i < u.ranks; i += 4) {
+                int nx = pipX + 1 + (int) Math.round((barW - 2) * i / (double) u.ranks);
+                g.fill(nx, pipY + 1, nx + 1, pipY + 7, i <= rank ? PIP_ON_BORDER : 0xFF3C3C3C);
+            }
+            g.renderOutline(pipX, pipY, barW, 8, rank > 0 ? PIP_ON_BORDER : PIP_OFF_BORDER);
         }
         if (u.cost > 1) g.drawString(font, u.cost + " pts / rank", pipX, mid + 8, affordable || rank > 0 ? BADGE : WARN, false);
-        g.drawString(font, rank + "/" + u.ranks, x + w - 78, mid + 3, TEXT_DIM, false);
+        // points in this upgrade out of its maximum (3 pts / rank, 3 ranks: 0/9)
+        g.drawString(font, rank * u.cost + "/" + u.ranks * u.cost, x + w - 78, mid + 3, TEXT_DIM, false);
 
         int bx = x + w - 48;
         int finalRank = rank;
