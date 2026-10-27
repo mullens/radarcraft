@@ -252,7 +252,69 @@ def button(label, hover, name):
     img.save(OUT / f"{name}.png", optimize=True)
 
 
+def panorama():
+    """Six 1024x1024 cube faces (panorama_0..5) replacing vanilla's trial-chamber title panorama, which 1.21 also
+    shows blurred behind every menu and loading screen. Faces 0-3 go around the horizon, 4 is up, 5 is down."""
+    S = 1024
+    random.seed(23)
+    strip = Image.new("RGBA", (S * 4, S))
+    px = strip.load()
+    for y in range(S):  # top of a side face looks 45 deg up, bottom 45 deg down; horizon at the middle
+        c = gradient_color(0.30 + 0.62 * y / S)
+        for x in range(S * 4):
+            px[x, y] = c + (255,)
+    d = ImageDraw.Draw(strip, "RGBA")
+    for _ in range(900):
+        x, y = random.randint(0, S * 4), random.randint(0, int(S * 0.42))
+        a = int(80 + 160 * random.random() * (1 - y / (S * 0.42)))
+        r = random.choice([1, 1, 2, 2, 3])
+        d.ellipse((x - r, y - r, x + r, y + r), fill=(255, 250, 235, a))
+    # moon on face 1, low warm haze along the horizon
+    glow = Image.new("RGBA", strip.size, (0, 0, 0, 0)); g = ImageDraw.Draw(glow)
+    mx, my, mr = S + 560, 330, 92
+    for k in range(10, 0, -1):
+        rr = mr + k * 16; g.ellipse((mx - rr, my - rr, mx + rr, my + rr), fill=(255, 226, 170, 9))
+    strip.alpha_composite(glow.filter(ImageFilter.GaussianBlur(26)))
+    d.ellipse((mx - mr, my - mr, mx + mr, my + mr), fill=(250, 238, 212, 255))
+    haze = Image.new("RGBA", strip.size, (0, 0, 0, 0)); hd = ImageDraw.Draw(haze)
+    for _ in range(60):
+        cx, cy = random.randint(0, S * 4), random.randint(int(S * 0.48), int(S * 0.70))
+        w, h = random.randint(260, 700), random.randint(36, 90)
+        hd.ellipse((cx - w // 2, cy - h // 2, cx + w // 2, cy + h // 2), fill=random.choice([(255, 196, 150, 60), (240, 150, 160, 50)]))
+    strip.alpha_composite(haze.filter(ImageFilter.GaussianBlur(26)))
+    # floating islands all around, far ones small and hazy
+    global W, H
+    W0, H0 = W, H
+    W, H = S * 4, S
+    for _ in range(16):
+        dist = random.uniform(0.35, 0.95)
+        width = int(380 * (1.2 - dist) + 60)
+        island(strip, random.randint(width // 2 + 20, S * 4 - width // 2 - 20), random.randint(int(S * 0.40), int(S * 0.62)), width, int(width * 0.6), dist,
+               waterfall=(random.randint(-width // 4, width // 4), int(width * 0.7)) if random.random() < 0.3 else None)
+    airship(strip, cx=2 * S + 520, cy=360)
+    W, H = W0, H0
+    for i in range(4):
+        strip.crop((i * S, 0, (i + 1) * S, S)).convert("RGB").save(OUT / f"panorama_{i}.png", optimize=True)
+    # up: dark starry dome; down: a dim cloud sea
+    up = Image.new("RGB", (S, S)); upx = up.load()
+    for y in range(S):
+        for x in range(S):
+            t = min(1.0, math.hypot(x - S / 2, y - S / 2) / (S * 0.71))
+            upx[x, y] = lerp((6, 8, 26), gradient_color(0.30), t)
+    ud = ImageDraw.Draw(up)
+    for _ in range(500):
+        x, y = random.randint(0, S), random.randint(0, S); r = random.choice([1, 1, 2])
+        ud.ellipse((x - r, y - r, x + r, y + r), fill=(255, 250, 235))
+    up.save(OUT / "panorama_4.png", optimize=True)
+    down = Image.new("RGBA", (S, S), gradient_color(0.93) + (255,)); dd = ImageDraw.Draw(down)
+    for _ in range(70):
+        cx, cy = random.randint(0, S), random.randint(0, S); w = random.randint(120, 380)
+        dd.ellipse((cx - w, cy - w // 3, cx + w, cy + w // 3), fill=random.choice([(150, 90, 120, 60), (90, 60, 100, 70)]))
+    down.filter(ImageFilter.GaussianBlur(20)).convert("RGB").save(OUT / "panorama_5.png", optimize=True)
+
+
 if __name__ == "__main__":
+    panorama()
     background()
     for name, label in (("s", "SINGLEPLAYER"), ("m", "MULTIPLAYER"), ("mod", "MODS"), ("o", "OPTIONS"), ("qg", "QUIT GAME"), ("rs", "REALMS")):
         button(label, False, name); button(label, True, name + "h")

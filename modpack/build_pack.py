@@ -75,7 +75,14 @@ def make_title_screen(overrides):
     src_layout.unlink()
     if (fm / "assets" / "1x").exists():
         shutil.rmtree(fm / "assets" / "1x")
-    shutil.copytree(art, fm / "assets" / "radarcraft", dirs_exist_ok=True)
+    shutil.copytree(art, fm / "assets" / "radarcraft", dirs_exist_ok=True, ignore=shutil.ignore_patterns("panorama_*.png"))
+    # Vanilla's title panorama (trial chambers in 1.21) is also the blurred backdrop of every menu and loading screen.
+    # KubeJS serves kubejs/assets as an always-on resource pack, so the Radarcraft panorama replaces it everywhere.
+    pano_dir = overrides / "kubejs" / "assets" / "minecraft" / "textures" / "gui" / "title" / "background"
+    pano_dir.mkdir(parents=True, exist_ok=True)
+    for i in range(6):
+        if (art / f"panorama_{i}.png").exists():
+            shutil.copy2(art / f"panorama_{i}.png", pano_dir / f"panorama_{i}.png")
     print("title screen: fm_radarcraft.txt +", len(list(art.glob('*.png'))), "images")
 
 
