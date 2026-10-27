@@ -38,9 +38,10 @@ If double-clicking opens Notepad instead of running: right-click → *Run with P
 
 ## What's different from Skybound
 
-- **41 mods removed**: most of the second tech tree (Modern Industrialization, Modern Dynamics, Security Craft, ...;
+- **42 mods removed**: most of the second tech tree (Modern Industrialization, Modern Dynamics, Security Craft, ...;
   Powah and Flux Networks stay), duplicate storage systems, the old skill trees with the hearts, pack-branding menus,
-  Punchy, Crafting on a Stick, More Useful Copper and Freeze the Happy Ghasts (no version for the new Vanilla Backport).
+  Punchy, Crafting on a Stick, More Useful Copper, Freeze the Happy Ghasts (no version for the new Vanilla Backport)
+  and Visual Workbench (crafting tables hand your items back again when you close them, like vanilla).
 - **Added**: Inventory Crafting Grid (3x3 crafting in your inventory), the Accessories Compatibility Layer (one
   accessory screen for everything: Curios trinkets, Aether gloves and pendants, all in the Accessories slots), and the
   five mods below.
@@ -55,11 +56,22 @@ If double-clicking opens Notepad instead of running: right-click → *Run with P
 
 | Mod | What it does for you |
 |-----|----------------------|
-| **Checklist** | Replaces the skill trees. A hidden grid of 165 real achievements from across the pack (bosses, dimensions, exploration, Create feats). Each one you complete is a level and a point, and reveals the four squares next to it. Points buy upgrade ranks (hearts, speed, reach, mining, magnet, size...). Take ranks off again any time, for free. Open it from the **Checklist** button on the Advancements screen. |
+| **Radarcraft RPG** | Replaces the skill trees. A hidden grid of 165 real achievements from across the pack (bosses, dimensions, exploration, Create feats): each one you complete is a point and reveals the four squares next to it. Achievements you already earned count. More points come from **Renown**, a permanent level that grows with all the XP you earn, slowly, like Minecraft's own levels. Points buy upgrades (hearts, speed, reach, double jump, Second Wind, smelting pickaxe...); big ones cost several points. Take them off again any time, for free. Open it with the **Radarcraft** button on the Advancements screen, or **M**. |
 | **Level Loss Only** | Dying keeps your whole inventory. Your XP levels still drop to zero and spill as orbs, like vanilla. |
 | **Cherished Mobs** | Friendly mobs are tough and regenerate. Anything you name with a name tag can never die, not even in the void. `/kill` is the only way to remove a named mob. |
-| **Radars** | Radar is a real tuxedo cat. Name any mob "Radar" with a name tag: it becomes a little tuxedo cat that points toward the first of six giant boss cats hidden across the world, each 500 to 1000 blocks beyond the last. Beat a boss and it turns back into a cat that points to the next one. |
-| **Keyboard Keybinds** | *Options → Controls → Key Binds* shows a keyboard. Red keys are real conflicts, yellow ones are overlaps the game handles fine. Click a key to see and change what's on it. |
+| **Radars** | Radar is a real tuxedo cat. Name any mob "Radar" with a name tag: it becomes a little tuxedo cat that points toward the first of six giant boss cats hidden across the world, each 500 to 1000 blocks beyond the last. Beat a boss and it turns back into a cat that points to the next one, and leaves a loot chest that gets better with every fight (everyone gets their own roll). |
+| **Keyboard Keybinds** | A **Keyboard** button on *Options → Controls → Key Binds* shows every key on a keyboard. Red keys are real conflicts, yellow ones are overlaps the game handles fine. Click a key to see everything on it, then Change, Unbind, or keep "Only this" in one click. |
+
+## Before the server switches to Radarcraft
+
+A few mods are gone, and whatever they stored goes with them. Before the update day:
+
+- **Empty your crafting tables.** Items left lying in a crafting table disappear when Visual Workbench is removed.
+- **Empty and break machines from removed mods**: Modern Industrialization, Modern Dynamics pipes, Tom's Simple Storage,
+  Security Craft blocks, Nether Chested and wider ender chests, Super Ore Blocks. Their blocks turn into air.
+- **Curios trinkets are safe**: everything you wear moves into the Accessories screen by itself.
+- **Your old skill points are not**: the Pufferfish skill trees are gone; Radarcraft RPG starts you with points for
+  the achievements you already have plus Renown from your current XP.
 
 ## Server
 
