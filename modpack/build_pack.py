@@ -119,7 +119,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--instance", default=str(DEFAULT_INSTANCE))
     ap.add_argument("--decisions", default=str(HERE / "decisions.json"))
-    ap.add_argument("--name", default="Create Aeronautics - Skybound (Lucas fork)")
+    ap.add_argument("--name", default="Radarcraft")
     ap.add_argument("--version", default="1.0.0")
     ap.add_argument("--out", default=str(HERE / "out"))
     ap.add_argument("--no-local-mods", action="store_true", help="don't bundle this repo's own mod jars")
@@ -174,7 +174,7 @@ def main():
     new_manifest = dict(manifest)
     new_manifest["name"] = args.name
     new_manifest["version"] = args.version
-    new_manifest["author"] = "Lucas"
+    new_manifest["author"] = "mullens"
     new_manifest["files"] = files_out
     json.dump(new_manifest, open(pack / "manifest.json", "w", encoding="utf-8"), indent=2)
 

@@ -5,6 +5,14 @@
     "name": "Inventory Crafting Grid (3x3 crafting in your inventory)",
     "file": "invcrafting-1.21.1-2.0.0.jar",
     "url": "https://www.curseforge.com/minecraft/mc-mods/inventory-crafting-grid",
-    "why": "Lucas wants a 3x3 crafting grid in the regular inventory; existing mod, NeoForge 1.21.1 file 2.0.0 (May 2026), works on client and server."
+    "why": "A 3x3 crafting grid in the regular inventory; existing mod, NeoForge 1.21.1 file 2.0.0 (May 2026), works on client and server."
+  },
+  {
+    "projectID": 1315611,
+    "fileID": 9217111,
+    "name": "Accessories Compatibility Layer",
+    "file": "accessories_compat_layer-neoforge-0.1.13+1.21.1.jar",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/accessories-compat-layer",
+    "why": "One accessory screen: wraps Curios (Artifacts, Ars Nouveau, Charm of Undying, Aeronautics compat...) into Accessories, which The Aether bundles anyway. Requires Accessories + Curios."
   }
 ]

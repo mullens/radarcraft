@@ -1,6 +1,6 @@
 """Create a CurseForge app profile of the trimmed pack by cloning the existing Skybound instance (no downloads).
 
-    python modpack/make_cf_profile.py [--name "Skybound Lucas Fork"] [--add-server "Local test" localhost:25565]
+    python modpack/make_cf_profile.py [--name "Radarcraft"] [--add-server "Local test" localhost:25565]
 
 Copies the kept mod jars from the original instance, adds our jars and the pack's (patched) config/kubejs,
 writes a minecraftinstance.json that the CurseForge app accepts as an unlocked custom profile, and pre-adds a
@@ -50,7 +50,7 @@ def write_servers(path, servers):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--name", default="Skybound Lucas Fork")
+    ap.add_argument("--name", default="Radarcraft")
     ap.add_argument("--add-server", nargs=2, metavar=("NAME", "IP"), default=["Local test server", "localhost:25565"])
     a = ap.parse_args()
 
@@ -131,7 +131,7 @@ def main():
     inst["lastPlayed"] = "0001-01-01T00:00:00"
     inst["playedCount"] = 0
     inst["timePlayed"] = 0
-    inst["customAuthor"] = "Lucas"
+    inst["customAuthor"] = "mullens"
     inst["profileImagePath"] = None
     json.dump(inst, open(dst / "minecraftinstance.json", "w", encoding="utf-8"), indent=2)
     json.dump(manifest, open(dst / "manifest.json", "w", encoding="utf-8"), indent=2)

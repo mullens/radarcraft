@@ -39,7 +39,7 @@ def main():
         shutil.copy2(z, dist / z.name)
     if (ROOT / "modpack" / "out" / "mods.lock.json").exists():
         shutil.copy2(ROOT / "modpack" / "out" / "mods.lock.json", dist / "mods.lock.json")
-    updater = ROOT / "scripts" / "friends" / "Update-Skybound.ps1"
+    updater = ROOT / "scripts" / "friends" / "Update-Radarcraft.ps1"
     if updater.exists():
         shutil.copy2(updater, dist / updater.name)   # friends grab the updater from the release page too
     print("release files in", dist)

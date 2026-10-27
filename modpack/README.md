@@ -7,7 +7,7 @@ A trimmed fork of **Create Aeronautics - Skybound** v17.1.0 (NeoForge 21.1, Mine
 | File | What it is |
 |---|---|
 | `mods-audit.json` | every mod of the original pack: group, recommendation, dependency ids |
-| `decisions.json` | Lucas's keep/scrap choices, exported from the audit checklist (overrides the recommendation) |
+| `decisions.json` | the keep/scrap choices, exported from the audit checklist (overrides the recommendation) |
 | `extra-mods.json` | mods added on top of the original pack (CurseForge project + file ids) |
 | `build_pack.py` | builds the pack: `python modpack/build_pack.py` |
 | `sync_server.py` | deletes scrapped jars on the UltraServers mods folder and uploads our jars over SFTP (NOT to be run until the server is backed up and friends are told) |
@@ -29,7 +29,7 @@ Reads the original pack from the local CurseForge instance, applies `decisions.j
 (a library stays only if something kept still needs it), adds `extra-mods.json`, and bundles any jars found in
 `*/build/libs/` (our own mods) under `overrides/mods`. Output in `modpack/out/`:
 
-- `create-aeronautics-skybound-lucas-fork-<version>.zip`: import it in the CurseForge app (Create Custom Profile, Import).
+- `radarcraft-<version>.zip`: import it in the CurseForge app (Create Custom Profile, Import).
 - `report.md`: everything kept and scrapped, with reasons.
 - `server-remove.txt` / `server-add.txt`: jar names to delete from / add to the server.
 
@@ -75,7 +75,7 @@ halve modded drops everywhere.
 
 ## Decisions so far
 
-Lucas reviewed all 426 mods and kept 388. Scrapped: the non-Create tech stack (Modern Industrialization, Modern Dynamics,
+Review outcome: 426 mods audited, 384 kept. Scrapped: the non-Create tech stack (Modern Industrialization, Modern Dynamics,
 Powah, Flux Networks, Wireless Chargers, Charging Gadgets, Cognition, Security Craft, Additional Enchanted Miner), duplicate
 accessory and storage systems (Accessories, Tom's Simple Storage, Nether Chested, Super Ore Block), pack branding
 (BisectHosting menu, loading tips, toasts, AutoMessage, StartInv, Immersive UI, Underlay, Modern World Creation, Loading

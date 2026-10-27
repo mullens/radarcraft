@@ -1,21 +1,22 @@
 <#
-Update-Skybound.ps1  -  double-click to bring your CurseForge profile up to date with the latest pack release.
+Update-Radarcraft.ps1  -  double-click to bring your CurseForge profile up to date with the latest pack release.
 
 What it does, every time
   1. finds your CurseForge profile for the pack (name below)
   2. downloads the latest release's pack zip + mods.lock.json from GitHub
   3. makes your mods folder match the lock: removes jars that are no longer in the pack (removed mods, old versions),
-     downloads added/upgraded/downgraded mods straight from CurseForge, and copies Lucas's own mods out of the zip
+     downloads added/upgraded/downgraded mods straight from CurseForge, and copies the pack's own mods out of the zip
   4. refreshes config/, kubejs/ and defaultconfigs/ from the zip (your options.txt, saves and screenshots are untouched)
 Mods whose authors forbid third-party downloads (about 24 of 385) cannot be fetched by a script: if one of those
 changed, the script lists them with their CurseForge page so you can drop the file into the mods folder, or you
 re-import the new zip in the CurseForge app instead.
+Radarcraft is a fork of Create Aeronautics - Skybound by Lupin (Team LUP).
 
 Setup: nothing, unless the profile name below does not match the one shown in the CurseForge app.
-Testing (Lucas): .\Update-Skybound.ps1 -LocalRelease C:\path\to\dist\1.0.0 -ProfileName "Skybound Lucas Fork"
+Testing: .\Update-Radarcraft.ps1 -LocalRelease C:\path\to\dist\1.0.0 -ProfileName "Radarcraft"
 #>
 param(
-    [string]$ProfileName = "Create Aeronautics - Skybound (Lucas fork)",
+    [string]$ProfileName = "Radarcraft",
     [string]$Repo = "mullens/radarcraft",
     [string]$LocalRelease = "",     # folder holding the zip + mods.lock.json instead of GitHub (for testing)
     [switch]$DryRun
@@ -37,14 +38,14 @@ $modsDir = Join-Path $profileDir.FullName "mods"
 New-Item -ItemType Directory -Force $modsDir | Out-Null
 
 # --- fetch release files ---
-$tmp = Join-Path $env:TEMP "skybound-update"
+$tmp = Join-Path $env:TEMP "radarcraft-update"
 New-Item -ItemType Directory -Force $tmp | Out-Null
 if ($LocalRelease) {
     $zipPath = (Get-ChildItem $LocalRelease -Filter "*.zip" | Select-Object -First 1).FullName
     $lockPath = Join-Path $LocalRelease "mods.lock.json"
     Say "Local release: $LocalRelease"
 } else {
-    $headers = @{ "User-Agent" = "Update-Skybound" }
+    $headers = @{ "User-Agent" = "Update-Radarcraft" }
     $release = Invoke-RestMethod -Uri "https://api.github.com/repos/$Repo/releases/latest" -Headers $headers
     Say "Latest release: $($release.tag_name)  ($($release.name))"
     $zipAsset = $release.assets | Where-Object { $_.name -like "*.zip" } | Select-Object -First 1
@@ -80,7 +81,7 @@ try {
             if ($entry) { [System.IO.Compression.ZipFileExtensions]::ExtractToFile($entry, $dest, $true); Say "  added    $($m.file) (from zip)" }
             else { Warn "  missing in zip: $($m.file)" }
         } elseif ($m.url) {
-            Invoke-WebRequest -Uri $m.url -OutFile $dest -Headers @{ "User-Agent" = "Update-Skybound" }
+            Invoke-WebRequest -Uri $m.url -OutFile $dest -Headers @{ "User-Agent" = "Update-Radarcraft" }
             Say "  added    $($m.file) (CurseForge)"
         } else {
             $manual += $m

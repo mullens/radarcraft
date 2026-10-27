@@ -1,4 +1,4 @@
-# Lucas's Minecraft mods
+# Radarcraft mods: developer notes
 
 NeoForge mods for Minecraft **1.21.1**, one Gradle project per mod, sharing a root build.
 

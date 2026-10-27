@@ -1,6 +1,6 @@
-"""Launch the real game for Lucas from his CurseForge profile, visible, with sound, offline-authenticated.
+"""Launch the real game from the CurseForge profile, visible, with sound, offline-authenticated.
 
-    python scripts/play.py [--profile "Skybound Lucas Fork"] [--name Mullenovo] [--xmx 10G]
+    python scripts/play.py [--profile "Radarcraft"] [--name Mullenovo] [--xmx 10G]
 
 Same jars the CurseForge app uses (its Install folder, read-only), but started from here so that the assistant can
 launch it without the CurseForge app. Offline auth: fine for the local test server (online-mode=false) and
@@ -17,7 +17,7 @@ JAVA = next(Path(r"C:\Users\lucas\.gradle\jdks").glob("*21*/bin/java.exe"))
 args = sys.argv[1:]
 def opt(name, default):
     return args[args.index(name) + 1] if name in args else default
-profile = INSTANCES / opt("--profile", "Skybound Lucas Fork")
+profile = INSTANCES / opt("--profile", "Radarcraft")
 player = opt("--name", "Mullenovo")
 xmx = opt("--xmx", "10G")
 
@@ -87,7 +87,7 @@ log.write(" ".join(cmd) + "\n\n"); log.flush()
 flags = 0x00000008 | 0x00000200 if os.name == "nt" else 0  # DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP
 proc = subprocess.Popen(cmd, cwd=str(profile), stdout=log, stderr=subprocess.STDOUT, creationflags=flags)
 (profile / "game.pid").write_text(str(proc.pid))
-# focus guard: during loading, give focus straight back to whatever Lucas was using
+# focus guard: during loading, give focus straight back to whatever was in use
 guard = Path(__file__).resolve().parent / "no-focus-steal.ps1"
 subprocess.Popen(["powershell", "-NoProfile", "-WindowStyle", "Hidden", "-ExecutionPolicy", "Bypass", "-File", str(guard), "-GamePid", str(proc.pid)],
                  creationflags=flags, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
