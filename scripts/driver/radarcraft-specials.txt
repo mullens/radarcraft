@@ -1,0 +1,86 @@
+# Radarcraft RPG specials (dev mini pack): double jump, Smelter's Touch, Soul Keeper next to Level Loss Only,
+# Renown from a player kill. Run: gradlew :dev-driver:runClient -PdriverScript=scripts/driver/radarcraft-specials.txt
+wait 40
+world radarcraft2
+wait 40
+chat /gamemode survival
+chat /time set day
+chat /xp add @s 5000 points
+wait 10
+chat /checklist setrank double_jump 1
+chat /checklist setrank smelters_touch 1
+chat /checklist setrank soul_keeper 2
+wait 10
+chat /checklist upgrades
+chat /checklist renown
+
+# --- double jump: jump, release, press again in mid-air; track height
+wait 20
+log ground: {pos}
+holdkey key.jump down
+wait 2
+holdkey key.jump up
+wait 2
+log t4: {pos}
+wait 2
+log t6: {pos}
+holdkey key.jump down
+wait 1
+holdkey key.jump up
+wait 2
+log t9: {pos}
+wait 2
+log t11: {pos}
+wait 2
+log t13: {pos}
+wait 2
+log t15: {pos}
+wait 30
+log landed: {pos} health={health}
+
+# --- single jump for comparison
+wait 10
+holdkey key.jump down
+wait 2
+holdkey key.jump up
+wait 2
+log single t4: {pos}
+wait 2
+log single t6: {pos}
+wait 2
+log single t8: {pos}
+wait 30
+
+# --- Smelter's Touch: iron ore, oak log and sand broken with an iron pickaxe
+chat /give @s minecraft:iron_pickaxe
+wait 5
+chat /setblock ~3 ~ ~ minecraft:iron_ore
+chat /setblock ~3 ~1 ~ minecraft:oak_log
+chat /setblock ~-3 ~ ~ minecraft:sand
+wait 5
+breakblock 3 0 0
+breakblock 3 1 0
+breakblock -3 0 0
+wait 5
+log smelted drops: {drops}
+wait 40
+log hotbar after pickup: {hotbar}
+
+# --- Renown from killing a mob
+chat /checklist renown
+chat /summon minecraft:zombie ~2 ~ ~ {NoAI:1b}
+wait 5
+chat /damage @e[type=minecraft:zombie,limit=1,sort=nearest] 100 minecraft:player_attack by @s
+wait 60
+chat /checklist renown
+
+# --- Soul Keeper rank 2 (keeps 50% of levels) with Level Loss Only (keeps items)
+chat /xp set @s 20 levels
+wait 5
+log before death: xp={xp} items={items} hotbar={hotbar}
+chat /kill @s
+wait 20
+respawn
+wait 60
+log after respawn: xp={xp} items={items} hotbar={hotbar}
+quit

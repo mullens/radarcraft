@@ -1,0 +1,55 @@
+# Radarcraft RPG retroactive credit + Renown seed + points UI (dev mini pack).
+# Needs: dev-driver/run/config/checklist-grid.json = scripts/driver/checklist-grid-dev.json, checklist-upgrades.json =
+# modpack/checklist-upgrades.json. A helper swaps in scripts/driver/checklist-grid-dev-swapped.json when the log says
+# SWAPGRID and then creates dev-driver/run/gridswap.flag (see docs/DEVELOPMENT.md).
+# Run: gradlew :dev-driver:runClient -PdriverScript=scripts/driver/radarcraft-retro.txt
+wait 40
+world radarcraft
+wait 40
+log phase 1, playing without credit yet: hotbar={hotbar}
+chat /advancement grant @s only minecraft:story/root
+chat /advancement grant @s only minecraft:story/mine_stone
+chat /advancement grant @s only minecraft:story/upgrade_tools
+chat /advancement grant @s only minecraft:story/smelt_iron
+chat /advancement grant @s only minecraft:husbandry/root
+wait 20
+chat /xp add @s 1000 points
+chat /summon minecraft:zombie ~3 ~ ~ {NoAI:1b}
+wait 5
+chat /damage @e[type=minecraft:zombie,limit=1,sort=nearest] 100 minecraft:player_attack by @s
+wait 20
+log after phase 1: hotbar={hotbar} xp={xp}
+chat /checklist level
+chat /checklist forget
+wait 10
+log RELOG: player forgets Radarcraft, relogs (simulates the first login after installing the mod)
+disconnect
+wait 60
+openworld radarcraft
+wait 60
+log after relog: hotbar={hotbar}
+chat /checklist level
+chat /checklist renown
+wait 10
+screen checklist
+wait 20
+screenshot rc-grid
+click 117 16
+wait 10
+screenshot rc-upgrades
+click 495 203
+wait 10
+screenshot rc-toggle-on
+key ESCAPE
+wait 5
+chat /checklist upgrades
+chat /checklist level
+log SWAPGRID
+waitfile C:/Users/lucas/vibecraft/dev-driver/run/gridswap.flag 1200
+chat /checklist reload
+wait 20
+chat /checklist level
+log after reload: hotbar={hotbar}
+chat /radarcraft renown
+wait 10
+quit

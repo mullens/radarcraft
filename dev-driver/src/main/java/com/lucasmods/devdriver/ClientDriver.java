@@ -56,6 +56,10 @@ import java.util.function.Predicate;
  * disconnect             leave the server/world (pause-menu Disconnect)
  * openaccessories        open the Accessories mod's screen
  * bind MAPPING KEY       set a key mapping, e.g. bind key.keyboardkeybinds.open k
+ * holdkey MAPPING down|up   hold or release a key mapping (e.g. key.jump)
+ * openworld FOLDER       load an existing singleplayer world
+ * breakblock DX DY DZ    the player breaks the block at that offset from their feet (singleplayer)
+ *                        log placeholders also: {pos} {drops}
  * presskey KEY           one in-game press of the key mappings bound to KEY
  * slots                  log the open container's non-inventory slots (Curios/Accessories names, items)
  * clickslot inv N | clickslot name NAME [k]   left-click a slot through the server (pick up / place)
@@ -181,6 +185,26 @@ public final class ClientDriver {
                 CreateWorldScreen.openFresh(mc, null);
                 lines.add(pc, "_createworld " + rest);
                 await(m -> m.screen instanceof CreateWorldScreen, 20 * 300);
+            }
+            case "openworld" -> { // openworld FOLDER: load an existing singleplayer world (after disconnect)
+                mc.createWorldOpenFlows().openWorld(rest.trim(), () -> mc.setScreen(new TitleScreen()));
+                lines.add(pc, "waitworld");
+            }
+            case "holdkey" -> { // holdkey MAPPING down|up: hold or release a key mapping (e.g. key.jump), as if the key were held
+                var mapping = java.util.Arrays.stream(mc.options.keyMappings).filter(m -> m.getName().equals(args[0])).findFirst()
+                        .orElseThrow(() -> new IllegalStateException("no key mapping " + args[0]));
+                mapping.setDown(args[1].equalsIgnoreCase("down"));
+            }
+            case "breakblock" -> { // breakblock DX DY DZ: the player breaks the block at that offset from their feet, server-side, with the held tool
+                var server = mc.getSingleplayerServer();
+                if (server == null) throw new IllegalStateException("breakblock needs a singleplayer world");
+                var uuid = mc.player.getUUID();
+                var pos = mc.player.blockPosition().offset(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+                server.execute(() -> {
+                    var sp = server.getPlayerList().getPlayer(uuid);
+                    boolean ok = sp != null && sp.gameMode.destroyBlock(pos);
+                    DevDriverMod.LOGGER.info("{} breakblock {} -> {}", DevDriverMod.TAG, pos.toShortString(), ok);
+                });
             }
             case "_createworld" -> {
                 CreateWorldScreen s = (CreateWorldScreen) requireScreen(mc);
@@ -385,6 +409,19 @@ public final class ClientDriver {
         if (mc.player == null) {
             for (String k : new String[]{"xp", "items", "health", "hotbar", "entities", "maxhealth", "speed"}) text = text.replace("{" + k + "}", "?");
             return text;
+        }
+        if (text.contains("{pos}")) {
+            text = text.replace("{pos}", String.format(Locale.ROOT, "%.2f,%.2f,%.2f", mc.player.getX(), mc.player.getY(), mc.player.getZ()));
+        }
+        if (text.contains("{drops}")) {
+            // item entities within 6 blocks: count x id
+            StringBuilder sb = new StringBuilder();
+            for (Entity e : mc.level.getEntities(mc.player, mc.player.getBoundingBox().inflate(6), e -> e instanceof net.minecraft.world.entity.item.ItemEntity)) {
+                ItemStack stack = ((net.minecraft.world.entity.item.ItemEntity) e).getItem();
+                if (sb.length() > 0) sb.append(", ");
+                sb.append(stack.getCount()).append("x").append(net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem()));
+            }
+            text = text.replace("{drops}", sb.length() == 0 ? "none" : sb.toString());
         }
         if (text.contains("{entities}")) {
             // every living non-player entity within 32 blocks horizontally (any height), with health and y

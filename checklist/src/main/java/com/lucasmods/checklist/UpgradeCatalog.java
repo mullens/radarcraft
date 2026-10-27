@@ -14,9 +14,9 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * The upgrade catalog from config/checklist-upgrades.json: one point buys one rank, ranks can be
- * removed again at any time. Everything is attribute modifiers and permanent potion effects, except
- * the two "special" upgrades (second_wind, magnet) which have code behind them.
+ * The upgrade catalog from config/checklist-upgrades.json: each rank costs {@code cost} points (default 1) and can be
+ * removed again at any time for a full refund. Most upgrades are attribute modifiers and permanent potion effects;
+ * upgrades with a {@code special} id have code behind them (see {@link Specials}).
  */
 public final class UpgradeCatalog {
     public record Modifier(ResourceLocation attribute, AttributeModifier.Operation operation, double amountPerRank) {}
@@ -27,6 +27,8 @@ public final class UpgradeCatalog {
         public final String name;
         public final String category;
         public final int ranks;
+        /** Points per rank. */
+        public final int cost;
         public final String description;
         public final List<Modifier> modifiers;
         public final List<Effect> effects;
@@ -34,12 +36,13 @@ public final class UpgradeCatalog {
         public final List<String> excludes;
         @Nullable public final String special;
 
-        Upgrade(String id, String name, String category, int ranks, String description, List<Modifier> modifiers,
+        Upgrade(String id, String name, String category, int ranks, int cost, String description, List<Modifier> modifiers,
                 List<Effect> effects, List<Effect> effectsAtMax, List<String> excludes, @Nullable String special) {
             this.id = id;
             this.name = name;
             this.category = category;
             this.ranks = ranks;
+            this.cost = cost;
             this.description = description;
             this.modifiers = modifiers;
             this.effects = effects;
@@ -47,6 +50,9 @@ public final class UpgradeCatalog {
             this.excludes = excludes;
             this.special = special;
         }
+
+        /** A single rank that costs more than one point is shown as an on/off switch. */
+        public boolean isToggle() { return ranks == 1 && cost > 1; }
 
         /** Deterministic modifier id for the n-th modifier of this upgrade. */
         public ResourceLocation modifierId(int index) {
@@ -57,17 +63,22 @@ public final class UpgradeCatalog {
     private final Map<String, Upgrade> upgrades;
     private final List<String> categories;
     public final int totalRanks;
+    /** Points needed to max out everything. */
+    public final int totalCost;
 
     private UpgradeCatalog(Map<String, Upgrade> upgrades) {
         this.upgrades = Collections.unmodifiableMap(upgrades);
         List<String> cats = new ArrayList<>();
         int total = 0;
+        int cost = 0;
         for (Upgrade u : upgrades.values()) {
             if (!cats.contains(u.category)) cats.add(u.category);
             total += u.ranks;
+            cost += u.ranks * u.cost;
         }
         this.categories = Collections.unmodifiableList(cats);
         this.totalRanks = total;
+        this.totalCost = cost;
     }
 
     public static UpgradeCatalog parse(JsonObject root) {
@@ -86,7 +97,7 @@ public final class UpgradeCatalog {
             List<String> excludes = new ArrayList<>();
             if (o.has("excludes")) for (JsonElement e : o.getAsJsonArray("excludes")) excludes.add(e.getAsString());
             map.put(id, new Upgrade(id, o.get("name").getAsString(), o.has("category") ? o.get("category").getAsString() : "General",
-                    Math.max(1, o.get("ranks").getAsInt()), o.has("description") ? o.get("description").getAsString() : "",
+                    Math.max(1, o.get("ranks").getAsInt()), o.has("cost") ? Math.max(1, o.get("cost").getAsInt()) : 1, o.has("description") ? o.get("description").getAsString() : "",
                     mods, parseEffects(o, "effects"), parseEffects(o, "effects_at_max"), excludes,
                     o.has("special") ? o.get("special").getAsString() : null));
         }
@@ -115,4 +126,17 @@ public final class UpgradeCatalog {
     public Map<String, Upgrade> all() { return upgrades; }
     @Nullable public Upgrade get(String id) { return upgrades.get(id); }
     public List<String> categories() { return categories; }
+
+    /** Points per rank of an upgrade id; unknown ids count 1 so stale data never makes points vanish. */
+    public int cost(String id) {
+        Upgrade u = upgrades.get(id);
+        return u == null ? 1 : u.cost;
+    }
+
+    /** Points spent on a set of ranks. */
+    public int spent(Map<String, Integer> ranks) {
+        int n = 0;
+        for (Map.Entry<String, Integer> e : ranks.entrySet()) n += e.getValue() * cost(e.getKey());
+        return n;
+    }
 }

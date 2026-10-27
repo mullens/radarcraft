@@ -1,0 +1,29 @@
+# Full-pack check of Radarcraft RPG against the dev full-pack server (scripts/launch-fullpack-server.py, port 25566):
+# first-login baseline line, Radarcraft button on Better Advancements, header, upgrades with toggles, a double jump.
+# Run: python scripts/launch-fullpack.py scripts/driver/fullpack-radarcraft.txt --xmx 10G --timeout 25
+waittitle
+connect localhost:25566
+wait 400
+log joined: screen={screen}
+chat /checklist level
+chat /radarcraft renown
+wait 20
+screen advancements
+wait 20
+log advancements screen: screen={screen}
+clickwidget Radarcraft
+wait 20
+log after button: screen={screen}
+screenshot fpr-grid
+click 117 16
+wait 10
+screenshot fpr-upgrades
+key ESCAPE
+wait 10
+screen none
+chat /checklist setrank second_wind 1
+chat /checklist setrank double_jump 1
+wait 10
+chat /checklist level
+wait 10
+quit

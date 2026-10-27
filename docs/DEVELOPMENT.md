@@ -8,7 +8,7 @@ NeoForge mods for Minecraft **1.21.1**, one Gradle project per mod, sharing a ro
 | **Keyboard Keybinds** | `keyboard-keybinds/` | client only | Adds a **Keyboard** button to *Options → Controls → Key Binds* (vanilla's list or Controlling's) that opens a visual keyboard. Every key shows what is bound to it; real conflicts are red, intentional overlaps are yellow. |
 | **Cherished Mobs** | `cherished-mobs/` | server (clients need nothing) | Friendly mobs take 20% damage (like a full Protection V set) and regenerate. Any name-tagged mob is invincible, cannot die, and is pulled back if it falls out of the world. |
 | **Radars** | `radars/` | both | Name any mob "Radar" and it becomes Radar the cat, who points toward six giant boss cats hidden across the world. Beat one to tame it back down and learn where the next one lives. |
-| **Checklist** | `checklist/` | both | A challenge grid of curated advancements. Every completed square is one level and one point; points buy upgrade ranks you can take back at any time. Replaces skill trees with achievements. |
+| **Radarcraft RPG** | `checklist/` | both | A challenge grid of curated advancements plus Renown, a permanent level from all the XP you earn. Every done square and every Renown level is a point; points buy upgrades you can take back at any time. (Mod id `checklist`, kept from its first name.) |
 
 ## Requirements
 
@@ -82,7 +82,8 @@ Client scripts are one command per line (`waittitle`, `wait`, `click X Y`, `scro
 `chat /give @s diamond`, `world NAME`, `connect HOST:PORT`, `respawn`, `screen keybinds|inventory|advancements|checklist|none`,
 `screenshot NAME`, `gochest` (/tp beside the nearest chest), `usechest` (open it), `widgets` / `clickwidget TEXT` (list or click
 any screen's buttons by class, label or tooltip), `slots` / `clickslot inv N | name NAME` (list or click container slots,
-including Curios and Accessories slots by name, through the server), `openaccessories`, `disconnect`, `waitfile PATH`, `bind MAPPING KEY` / `presskey KEY` (set a key mapping, fire it in-game), `dumpchannels FILE`, `log`, `expect`, `show`, `hide`, `quit`); server scripts use `wait`, `waitfile PATH` (hold until another process creates the file), `cmd <command>`,
+including Curios and Accessories slots by name, through the server), `openaccessories`, `disconnect`, `openworld FOLDER`, `waitfile PATH`, `bind MAPPING KEY` / `presskey KEY` (set a key mapping, fire it in-game),
+`holdkey MAPPING down|up`, `breakblock DX DY DZ` (the player breaks a block with the held tool), placeholders `{pos}` `{drops}`, `dumpchannels FILE`, `log`, `expect`, `show`, `hide`, `quit`); server scripts use `wait`, `waitfile PATH` (hold until another process creates the file), `cmd <command>`,
 `log` with `{named}` / `{namedcount}`, `expect`, `dumpchannels FILE`, `quit`. Screenshots are written by Minecraft itself
 to `dev-driver/run/screenshots/NAME.png`; results and `PASS`/`FAIL` lines go to the game log, prefixed `[DevDriver]`. The full
 command lists are in the Javadoc of `ClientDriver.java` and `ServerDriver.java`.
@@ -185,7 +186,27 @@ Decisions made without a spec: glow instead of per-variant tint (the glow outlin
 plain cat with 20 HP that is invulnerable anyway; bosses target survival players only, so creative testing is safe; the
 tamed cats answer any right-click, sneaking or not.
 
-## Checklist: the grid, the points, the files
+## Radarcraft RPG (mod id `checklist`): the grid, Renown, the points, the files
+
+Everything the player sees says **Radarcraft** (button, screen, keybind "Open Radarcraft", default M). The mod id,
+the config file names, the NBT key and the `/checklist` command root stay `checklist`, so existing configs and player
+data survive the rename; `/radarcraft` is an alias for `/checklist`.
+
+**Points = done squares + Renown level.** Renown is a second, permanent level from a separate XP pool: every positive
+vanilla XP gain (`PlayerXpEvent.XpChange`: kills, bosses, mining, smelting, breeding, fishing, `/xp add ... points`)
+adds to it, it is never lost on death, and its level uses Minecraft's own total-XP curve (L ≤ 16: L² + 6L;
+L ≤ 31: 2.5L² − 40.5L + 360; else 4.5L² − 162.5L + 2220), capped at 165 (97,920 XP). Level-ups print a purple
+"Renown N (+1 point)" line, with a chime from Renown 10. `/xp ... levels` does not count (it is a level change, not XP).
+
+**Retroactive credit.** On login the server credits every done grid square that was never counted for that player,
+silently; `commands_on_level` thresholds already passed are marked as given without running; and, the first time,
+Renown is seeded from `totalExperience` + 5 × the `minecraft:custom mob_kills` stat (an approximation of past kill
+XP). A player logging in with Radarcraft for the first time gets one gold line instead of chat spam, e.g.
+"Radarcraft: 23 squares already done from your past adventures and Renown 15 from your past experience, 38 points to
+spend." `/checklist reload` does the same for squares a changed grid now counts ("the grid changed: N more squares are
+already done"). Players whose data predates the credited list are credited silently (they already saw the squares).
+Live earns still announce "Square N / total: title (+1 point)" with the toast sound.
+
 
 Two JSON files drive everything, read by both the client and the server from `config/`; the modpack ships them, so
 nothing has to be synced by hand. Missing files are written from the bundled defaults (the Skybound fork's real grid
@@ -225,25 +246,51 @@ and catalog). `/checklist reload` re-reads both.
 }]}
 ```
 
-- One point per rank, `amount` is per rank (modifier amount = amount × rank, applied as one modifier with the id
+- `cost`: points per rank (default 1). A single-rank upgrade with `cost` > 1 is shown as an ON/OFF switch with a
+  "N pts" badge; multi-rank upgrades with `cost` > 1 keep pips and `-` / `+` and show "N pts / rank". Removing a rank
+  refunds its cost.
+- `amount` is per rank (modifier amount = amount × rank, applied as one modifier with the id
   `checklist:<upgrade id>`), `operation` is `add_value`, `add_multiplied_base` or `add_multiplied_total`.
 - `effects` are permanent, ambient, particle-free potion effects while any rank is held (amplifier + rank − 1);
   `effects_at_max` only at the top rank. `excludes` lists upgrades that cannot be held at the same time.
-- `special`: `second_wind` (a killing blow leaves you at one health, five-minute cooldown) or `magnet` (dropped items
-  drift toward you from 1.5 blocks per rank). Everything else is pure data; see `modpack/upgrades.md` for the design.
+- `special`: code-backed upgrades, all in `Specials.java` except Hearty Appetite (a mixin, exhaustion has no event):
+  `second_wind` (a killing blow leaves you at one health, five-minute cooldown), `magnet` (items drift to you, 1.5
+  blocks per rank), `iron_stomach` (no Hunger/Nausea from food), `antidote` (no Poison/Wither), `cold_blooded` (no
+  freezing), `double_jump` (a fresh jump press in mid-air jumps again, once per airtime; client jumps, server validates
+  and clears fall damage), `shadow_step` (sneak still for 1 s: invisible, mobs lose and cannot take you as a target
+  until you move), `ender_calm` (endermen ignore your gaze), `smelters_touch` (blocks broken with a tool, not sneaking,
+  no Silk Touch, drop their smelting result plus the recipe XP), `soul_keeper` (keep 25 % × rank of your XP levels
+  through death, the dropped orbs shrink by the same share; Level Loss Only keeps items, not XP, so both apply),
+  `tinkerer` (repair 1 durability on armour and held items every 20 s / rank), `studious` (+10 % × rank XP per orb,
+  fractions carried), `vampiric` (heal 1 HP × rank per mob kill), `thorny` (reflect 10 % × rank of melee damage),
+  `last_stand` (+15 % × rank damage below 30 % health), `marksman` (+10 % × rank to your projectiles),
+  `green_thumb` (random-tick 2 × rank crops or saplings within 6 blocks every 2 s), `hearty_appetite` (exhaustion
+  × (1 − 0.15 × rank)). Everything else is pure data; see `modpack/upgrades.md` for the design.
 - Ranks live in the player's persistent NBT (they survive death and restarts), modifiers are re-derived from them on
-  login, respawn, reload and every change, never stacked. If a grid edit lowers a player's level below the points spent,
-  the most recently taken ranks are removed until it fits. Removing a rank is free and instant.
+  login, respawn, reload and every change, never stacked. If the points ever drop below the points spent (a grid
+  edit), the most recently taken ranks are removed until it fits. Removing a rank is free and instant.
 
 ### Screen and commands
 
-The screen opens from the **Checklist** button on the vanilla Advancements screen or a keybind (unbound by default).
-Grid tab: level and progress bar, the grid, hover for title / description / mod / Done or Not yet. Upgrades tab:
-points available / spent / total, categories, rank pips and `-` / `+` per upgrade.
+The screen opens from the **Radarcraft** button on the Advancements screen (vanilla or Better Advancements) or the
+"Open Radarcraft" key (M). The header shows Squares done / total and Renown level, each with a thin bar (Renown's is
+the progress to the next level), and "Points: available · spent · total"; hovering it explains both sources. Grid tab:
+the grid, hover for title / description / mod / Done or Not yet. Upgrades tab: categories, switches or pips with
+`-` / `+`, costs, and in red why a rank cannot be taken (not enough points, excluded).
 
-`/checklist level [player]`, `/checklist upgrades [player]`, `/checklist respec [player]`, and for operators
-`/checklist reload`, `/checklist reveal` (dev: show the whole grid to yourself) and `/checklist grant <x> <y>`
-(dev: award that square's advancement).
+`/checklist level [player]` (squares, Renown, points), `/checklist renown [player]`, `/checklist upgrades [player]`,
+`/checklist respec [player]`, and for operators `/checklist reload`, `/checklist reveal` (dev: show the whole grid to
+yourself), `/checklist grant <x> <y>` (dev: award that square's advancement), `/checklist setrank <upgrade> <rank>
+[player]` (same point rules as the screen) and `/checklist forget [player]` (wipe a player's Radarcraft data so the
+next login runs the first-time baseline again). Everything also works as `/radarcraft ...`.
+
+Tests: `scripts/driver/radarcraft-retro.txt` (retroactive credit, Renown seed, summary line, switch UI, grid change on
+reload; a small shell loop swaps in `scripts/driver/checklist-grid-dev-swapped.json` when the log prints `SWAPGRID`
+and creates `dev-driver/run/gridswap.flag`), `radarcraft-specials.txt` (Smelter's Touch, Soul Keeper with Level Loss
+Only, Renown from a kill), `radarcraft-doublejump.txt` (height every tick, single vs double jump) and
+`fullpack-radarcraft.txt` (against the dev full-pack server). The dev run needs `modpack/checklist-upgrades.json` as
+`dev-driver/run/config/checklist-upgrades.json` (all of it is vanilla) and the small dev grid.
+
 
 ## Keyboard Keybinds: how conflicts are judged
 
@@ -279,7 +326,7 @@ settings.gradle         lists the mod subprojects
 <mod>/src/main/java     sources
 <mod>/src/main/templates/META-INF/neoforge.mods.toml   mod metadata (placeholders filled by Gradle)
 dev-driver/             dev-only mod that runs scripts/driver/*.txt against the client (never published)
-scripts/driver/         client scripts (keybinds, keybinds-button, levelloss, cherished, radars, radars-loot, checklist, park), server scripts (server-cherished, server-radars-loot), checklist-grid-dev.json
+scripts/driver/         client scripts (keybinds, keybinds-button, levelloss, cherished, radars, radars-loot, checklist, radarcraft-*, park), server scripts (server-cherished, server-radars-loot), checklist-grid-dev.json
 scripts/gen-radar-loot.py  writes the six Radars loot tables from the TIERS table inside it
 scripts/launch-fullpack-server.py  production full-pack dedicated server (dev-driver/run-fullpack-server) with our jars
 scripts/nbt-dump.py     dump or search a player .dat, e.g. `python scripts/nbt-dump.py <file> curios accessories`

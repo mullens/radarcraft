@@ -8,10 +8,14 @@ import java.util.Map;
 
 /** What the server last told this client. Plain data, safe to reference from common code. */
 public final class ClientState {
+    /** Done grid squares. */
     public static volatile int level = 0;
     public static volatile int total = 0;
     public static volatile boolean revealAll = false;
     public static volatile Map<String, Integer> ranks = new HashMap<>();
+    public static volatile int renownLevel = 0;
+    public static volatile long renownInto = 0;
+    public static volatile long renownNeed = 0;
     /** The grid as the server last sent it: known squares with display data and done flags. */
     public static volatile List<GridSyncPayload.Square> squares = List.of();
 
@@ -19,11 +23,11 @@ public final class ClientState {
 
     public static int rank(String id) { return ranks.getOrDefault(id, 0); }
 
-    public static int spent() {
-        int n = 0;
-        for (int v : ranks.values()) n += v;
-        return n;
-    }
+    /** Points spent, using the catalog's cost per rank. */
+    public static int spent() { return ChecklistConfig.upgrades().spent(ranks); }
 
-    public static int available() { return Math.max(0, level - spent()); }
+    /** All points: squares plus Renown levels. */
+    public static int points() { return level + renownLevel; }
+
+    public static int available() { return Math.max(0, points() - spent()); }
 }

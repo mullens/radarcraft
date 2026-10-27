@@ -1,6 +1,7 @@
 package com.lucasmods.checklist;
 
 import com.lucasmods.checklist.client.ChecklistClient;
+import com.lucasmods.checklist.net.DoubleJumpPayload;
 import com.lucasmods.checklist.net.GridSyncPayload;
 import com.lucasmods.checklist.net.SetRankPayload;
 import com.lucasmods.checklist.net.SyncPayload;
@@ -15,8 +16,9 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.slf4j.Logger;
 
 /**
- * Checklist: a challenge grid of curated advancements (Kirby Air Ride style). Every completed square
- * is one level and one point; points buy upgrade ranks that can be taken back at any time.
+ * Radarcraft RPG (mod id {@code checklist}, kept so existing configs and player data survive): a challenge grid of
+ * curated advancements (Kirby Air Ride style) plus Renown, a permanent level from all XP ever earned. Every done square
+ * and every Renown level is one point; points buy upgrade ranks that can be taken back at any time.
  * Squares are revealed when done, next to a done square, or listed as start squares.
  */
 @Mod(Checklist.MODID)
@@ -27,21 +29,26 @@ public final class Checklist {
     public Checklist(IEventBus modBus, ModContainer container) {
         modBus.addListener(Checklist::registerPayloads);
         NeoForge.EVENT_BUS.register(ChecklistServer.class);
+        NeoForge.EVENT_BUS.register(Specials.class);
         NeoForge.EVENT_BUS.register(ChecklistCommands.class);
         if (FMLEnvironment.dist.isClient()) {
             ChecklistClient.register(modBus);
         }
-        LOGGER.info("Checklist loaded: achievements are the gate.");
+        LOGGER.info("Radarcraft RPG loaded: squares and Renown are the gate.");
     }
 
     private static void registerPayloads(RegisterPayloadHandlersEvent event) {
-        PayloadRegistrar registrar = event.registrar("1");
+        PayloadRegistrar registrar = event.registrar("2");
         registrar.playToServer(SetRankPayload.TYPE, SetRankPayload.CODEC, ChecklistServer::handleSetRank);
+        registrar.playToServer(DoubleJumpPayload.TYPE, DoubleJumpPayload.CODEC, Specials::handleDoubleJump);
         registrar.playToClient(SyncPayload.TYPE, SyncPayload.CODEC, (payload, context) -> context.enqueueWork(() -> {
             ClientState.level = payload.level();
             ClientState.total = payload.total();
             ClientState.revealAll = payload.revealAll();
             ClientState.ranks = payload.ranks();
+            ClientState.renownLevel = payload.renownLevel();
+            ClientState.renownInto = payload.renownInto();
+            ClientState.renownNeed = payload.renownNeed();
         }));
         registrar.playToClient(GridSyncPayload.TYPE, GridSyncPayload.CODEC, (payload, context) -> context.enqueueWork(() -> ClientState.squares = payload.squares()));
     }

@@ -1,0 +1,60 @@
+# Double jump timeline: one log per tick. Run: gradlew :dev-driver:runClient -PdriverScript=scripts/driver/radarcraft-doublejump.txt
+wait 40
+world radarcraft3
+wait 40
+chat /gamemode survival
+chat /xp add @s 2000 points
+wait 10
+wait 20
+log single jump:
+holdkey key.jump down
+log single t1: {pos}
+holdkey key.jump up
+log single t3: {pos}
+log single t4: {pos}
+log single t5: {pos}
+log single t6: {pos}
+log single t7: {pos}
+log single t8: {pos}
+log single t9: {pos}
+log single t10: {pos}
+log single t11: {pos}
+log single t12: {pos}
+log single t13: {pos}
+log single t14: {pos}
+log single t15: {pos}
+log single t16: {pos}
+log single t17: {pos}
+log single t18: {pos}
+log single t19: {pos}
+log single t20: {pos}
+log single t21: {pos}
+wait 30
+chat /checklist setrank double_jump 1
+wait 20
+log double jump:
+holdkey key.jump down
+log double t1: {pos}
+holdkey key.jump up
+log double t3: {pos}
+log double t4: {pos}
+log double t5: {pos}
+holdkey key.jump down
+holdkey key.jump up
+log double t8: {pos}
+log double t9: {pos}
+log double t10: {pos}
+log double t11: {pos}
+log double t12: {pos}
+log double t13: {pos}
+log double t14: {pos}
+log double t15: {pos}
+log double t16: {pos}
+log double t17: {pos}
+log double t18: {pos}
+log double t19: {pos}
+log double t20: {pos}
+log double t21: {pos}
+wait 30
+log landed: {pos} health={health}
+quit

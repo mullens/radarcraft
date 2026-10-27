@@ -23,9 +23,10 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * The Checklist screen: a "Grid" tab (challenge grid with adjacency reveal) and an "Upgrades" tab
- * (spend and refund points). Grid contents and done flags come from the server's grid sync; level,
- * total and ranks from the small sync packet; the catalog from the local config file.
+ * The Radarcraft screen: a "Grid" tab (challenge grid with adjacency reveal) and an "Upgrades" tab
+ * (spend and refund points). Grid contents and done flags come from the server's grid sync; squares, Renown
+ * and ranks from the small sync packet; the catalog (names, costs) from the local config file.
+ * Points = done squares + Renown levels. Upgrades with one rank that cost more than one point are on/off switches.
  */
 public final class ChecklistScreen extends Screen {
     private static final int HEADER_H = 34;
@@ -51,6 +52,12 @@ public final class ChecklistScreen extends Screen {
     private static final int BTN_DISABLED = 0xFF242424;
     private static final int PIP_ON = 0xFF55FF55;
     private static final int PIP_OFF = 0xFF444444;
+    private static final int RENOWN_FILL = 0xFFC77DFF;
+    private static final int TOGGLE_ON = 0xFF2E7D32;
+    private static final int TOGGLE_ON_HOVER = 0xFF43A047;
+    private static final int BADGE = 0xFFFFD54F;
+    private static final int WARN = 0xFFFF7070;
+    private static final int TABS_RIGHT = 8 + 70 + 4 + 70;
 
     private enum Tab { GRID, UPGRADES }
     private enum CellState { HIDDEN, REVEALED, DONE }
@@ -73,9 +80,10 @@ public final class ChecklistScreen extends Screen {
     private final List<HitBox> hits = new ArrayList<>();
     private Button gridTab, upgradesTab;
     @Nullable private UpgradeCatalog.Upgrade hoveredUpgrade;
+    @Nullable private List<Component> headerTooltip;
 
     public ChecklistScreen(@Nullable Screen lastScreen) {
-        super(Component.literal("Checklist"));
+        super(Component.literal("Radarcraft"));
         this.lastScreen = lastScreen;
     }
 
@@ -141,10 +149,12 @@ public final class ChecklistScreen extends Screen {
         super.render(g, mouseX, mouseY, partialTick);
         hits.clear();
         hoveredUpgrade = null;
+        headerTooltip = null;
         rebuildCells();
-        renderHeader(g);
+        renderHeader(g, mouseX, mouseY);
         if (tab == Tab.GRID) renderGrid(g, mouseX, mouseY);
         else renderUpgrades(g, mouseX, mouseY);
+        if (headerTooltip != null) g.renderComponentTooltip(font, headerTooltip, mouseX, mouseY);
     }
 
     @Override
@@ -153,18 +163,43 @@ public final class ChecklistScreen extends Screen {
         g.fill(0, 0, width, height, BG);
     }
 
-    private void renderHeader(GuiGraphics g) {
+    /**
+     * Two rows right of the tabs: squares and Renown with thin progress bars, then the points line.
+     * Hovering anywhere on it explains where points come from.
+     */
+    private void renderHeader(GuiGraphics g, int mouseX, int mouseY) {
+        int left = TABS_RIGHT + 12;
+        int right = width - 8;
+        int half = (right - left) / 2;
         int level = ClientState.level;
         int total = Math.max(ClientState.total, 1);
-        String text = tab == Tab.GRID
-                ? String.format("Level %d / %d", level, ClientState.total)
-                : String.format("Points: %d available / %d spent / %d total", ClientState.available(), ClientState.spent(), level);
-        g.drawCenteredString(font, text, width / 2, 8, TEXT);
-        int barW = Math.min(240, width - 180);
-        int barX = (width - barW) / 2;
-        g.fill(barX, 20, barX + barW, 26, BAR_BG);
-        g.fill(barX, 20, barX + (int) (barW * (level / (double) total)), 26, BAR_FILL);
-        g.renderOutline(barX, 20, barW, 6, 0xFF000000);
+        g.drawString(font, String.format("Squares %d / %d", level, ClientState.total), left, 3, TEXT, false);
+        bar(g, left, 13, half - 10, level / (double) total, BAR_FILL);
+        int rx = left + half;
+        g.drawString(font, String.format("Renown Lv %d", ClientState.renownLevel), rx, 3, TEXT, false);
+        double renownFrac = ClientState.renownNeed <= 0 ? 1.0 : ClientState.renownInto / (double) ClientState.renownNeed;
+        bar(g, rx, 13, half - 10, renownFrac, RENOWN_FILL);
+        String points = String.format("Points: %d available \u00b7 %d spent \u00b7 %d total", ClientState.available(), ClientState.spent(), ClientState.points());
+        g.drawString(font, points, left, 21, ClientState.available() > 0 ? BADGE : TEXT_DIM, false);
+        if (mouseX >= left && mouseX < right && mouseY >= 0 && mouseY < HEADER_H - 2) {
+            List<Component> lines = new ArrayList<>();
+            lines.add(Component.literal("Points come from two places").withStyle(ChatFormatting.WHITE));
+            lines.add(Component.literal("Squares: each done grid square is 1 point (" + level + ")").withStyle(ChatFormatting.GREEN));
+            lines.add(Component.literal("Renown: each Renown level is 1 point (" + ClientState.renownLevel + ")").withStyle(ChatFormatting.LIGHT_PURPLE));
+            lines.add(Component.literal("Renown grows with every bit of XP you earn: kills, bosses,").withStyle(ChatFormatting.GRAY));
+            lines.add(Component.literal("mining, smelting, breeding, fishing. It is never lost.").withStyle(ChatFormatting.GRAY));
+            if (ClientState.renownNeed > 0) {
+                lines.add(Component.literal(String.format("Next Renown level: %d / %d XP", ClientState.renownInto, ClientState.renownNeed)).withStyle(ChatFormatting.DARK_PURPLE));
+            }
+            lines.add(Component.literal("Upgrades can be removed any time for a full refund.").withStyle(ChatFormatting.DARK_GRAY));
+            headerTooltip = lines;
+        }
+    }
+
+    private static void bar(GuiGraphics g, int x, int y, int w, double frac, int color) {
+        if (w <= 0) return;
+        g.fill(x, y, x + w, y + 3, BAR_BG);
+        g.fill(x, y, x + (int) (w * Math.max(0, Math.min(1, frac))), y + 3, color);
     }
 
     private void renderGrid(GuiGraphics g, int mouseX, int mouseY) {
@@ -262,6 +297,9 @@ public final class ChecklistScreen extends Screen {
             List<Component> lines = new ArrayList<>();
             lines.add(Component.literal(hoveredUpgrade.name).withStyle(ChatFormatting.WHITE));
             lines.add(Component.literal(hoveredUpgrade.description).withStyle(ChatFormatting.GRAY));
+            lines.add(Component.literal(hoveredUpgrade.isToggle() ? hoveredUpgrade.cost + " points"
+                    : hoveredUpgrade.cost + (hoveredUpgrade.cost == 1 ? " point" : " points") + " per rank, " + hoveredUpgrade.ranks + (hoveredUpgrade.ranks == 1 ? " rank" : " ranks"))
+                    .withStyle(ChatFormatting.YELLOW));
             if (!hoveredUpgrade.excludes.isEmpty()) lines.add(Component.literal("Excludes: " + String.join(", ", hoveredUpgrade.excludes)).withStyle(ChatFormatting.RED));
             g.renderComponentTooltip(font, lines, mouseX, mouseY);
         }
@@ -269,31 +307,75 @@ public final class ChecklistScreen extends Screen {
 
     private void renderUpgradeRow(GuiGraphics g, UpgradeCatalog.Upgrade u, int x, int y, int w, int mouseX, int mouseY, int clipTop, int clipBottom) {
         int rank = ClientState.rank(u.id);
-        boolean excluded = false;
-        for (String other : u.excludes) if (ClientState.rank(other) > 0) excluded = true;
-        for (UpgradeCatalog.Upgrade o : catalog.all().values()) if (o.excludes.contains(u.id) && ClientState.rank(o.id) > 0) excluded = true;
-        boolean canAdd = rank < u.ranks && ClientState.available() > 0 && !excluded;
+        String excludedBy = null;
+        for (String other : u.excludes) if (ClientState.rank(other) > 0) excludedBy = nameOf(other);
+        for (UpgradeCatalog.Upgrade o : catalog.all().values()) if (o.excludes.contains(u.id) && ClientState.rank(o.id) > 0) excludedBy = o.name;
+        boolean affordable = ClientState.available() >= u.cost;
+        boolean canAdd = rank < u.ranks && affordable && excludedBy == null;
         boolean canRemove = rank > 0;
 
         g.fill(x, y, x + w, y + 22, rank > 0 ? 0x30FFFFFF : 0x18FFFFFF);
         g.drawString(font, u.name, x + 4, y + 2, rank > 0 ? TEXT : 0xFFDDDDDD, false);
-        String desc = excluded ? "Excluded by " + String.join(", ", u.excludes) : u.description;
+        // second line: description, or why the next rank cannot be taken
+        String desc = u.description;
+        int descColor = TEXT_DIM;
+        if (rank < u.ranks && excludedBy != null) {
+            desc = "Cannot be combined with " + excludedBy;
+            descColor = WARN;
+        } else if (rank < u.ranks && !affordable && (u.isToggle() || rank == 0)) {
+            desc = "Needs " + u.cost + " points (you have " + ClientState.available() + ")";
+            descColor = WARN;
+        }
         int textW = w - 160;
-        g.drawString(font, font.width(desc) > textW ? font.plainSubstrByWidth(desc, textW - 6) + ".." : desc, x + 4, y + 12, TEXT_DIM, false);
+        g.drawString(font, font.width(desc) > textW ? font.plainSubstrByWidth(desc, textW - 6) + ".." : desc, x + 4, y + 12, descColor, false);
         if (mouseX >= x && mouseX < x + w - 160 && mouseY >= Math.max(y, clipTop) && mouseY < Math.min(y + 22, clipBottom)) hoveredUpgrade = u;
+
+        if (u.isToggle()) {
+            // on/off switch with a cost badge
+            String badge = u.cost + " pts";
+            g.drawString(font, badge, x + w - 64 - font.width(badge) - 6, y + 7, BADGE, false);
+            boolean on = rank > 0;
+            boolean enabled = on || canAdd;
+            toggleButton(g, x + w - 64, y + 4, 58, 14, on, enabled, mouseX, mouseY, clipTop, clipBottom, () -> setRank(u, on ? 0 : 1));
+            return;
+        }
 
         int pipX = x + w - 150;
         int pipW = Math.min(8, 60 / Math.max(1, u.ranks));
+        int pipY = u.cost > 1 ? y + 3 : y + 7;
         for (int i = 0; i < u.ranks; i++) {
             int px = pipX + i * (pipW + 1);
-            g.fill(px, y + 7, px + pipW, y + 15, i < rank ? PIP_ON : PIP_OFF);
+            g.fill(px, pipY, px + pipW, pipY + 8, i < rank ? PIP_ON : PIP_OFF);
         }
+        if (u.cost > 1) g.drawString(font, u.cost + " pts / rank", pipX, y + 13, BADGE, false);
         g.drawString(font, rank + "/" + u.ranks, x + w - 78, y + 7, TEXT_DIM, false);
 
         int bx = x + w - 48;
         int finalRank = rank;
         pseudoButton(g, bx, y + 4, 20, 14, "-", canRemove, mouseX, mouseY, clipTop, clipBottom, () -> setRank(u, finalRank - 1));
         pseudoButton(g, bx + 24, y + 4, 20, 14, "+", canAdd, mouseX, mouseY, clipTop, clipBottom, () -> setRank(u, finalRank + 1));
+    }
+
+    private String nameOf(String id) {
+        UpgradeCatalog.Upgrade u = catalog.get(id);
+        return u == null ? id : u.name;
+    }
+
+    private void toggleButton(GuiGraphics g, int x, int y, int w, int h, boolean on, boolean enabled, int mouseX, int mouseY, int clipTop, int clipBottom, Runnable action) {
+        int visTop = Math.max(y, clipTop);
+        int visBottom = Math.min(y + h, clipBottom);
+        boolean visible = visBottom > visTop;
+        boolean hover = enabled && visible && mouseX >= x && mouseX < x + w && mouseY >= visTop && mouseY < visBottom;
+        int fill = !enabled ? BTN_DISABLED : on ? (hover ? TOGGLE_ON_HOVER : TOGGLE_ON) : (hover ? BTN_HOVER : BTN);
+        g.fill(x, y, x + w, y + h, fill);
+        g.renderOutline(x, y, w, h, 0xFF101010);
+        // the knob sits right when on, left when off
+        int knobX = on ? x + w - 12 : x + 2;
+        g.fill(knobX, y + 2, knobX + 10, y + h - 2, enabled ? 0xFFE0E0E0 : 0xFF5A5A5A);
+        String label = on ? "ON" : "OFF";
+        int labelX = on ? x + (w - 12) / 2 : x + 12 + (w - 12) / 2;
+        g.drawCenteredString(font, label, labelX, y + (h - 8) / 2, enabled ? TEXT : 0xFF5A5A5A);
+        if (enabled && visible) hits.add(new HitBox(x, visTop, w, visBottom - visTop, action));
     }
 
     private void pseudoButton(GuiGraphics g, int x, int y, int w, int h, String label, boolean enabled, int mouseX, int mouseY, int clipTop, int clipBottom, Runnable action) {
