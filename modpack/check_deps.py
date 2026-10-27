@@ -54,6 +54,90 @@ def read_toml(jar):
     return provided, requires
 
 
+def _parse_tomls(z):
+    """Yield (toml text, manifest Implementation-Version) for a zip and its nested jars."""
+    import io
+    impl = None
+    if "META-INF/MANIFEST.MF" in z.namelist():
+        mm = re.search(r"^Implementation-Version:\s*(\S+)", z.read("META-INF/MANIFEST.MF").decode("utf-8", "replace"), re.M)
+        impl = mm.group(1) if mm else None
+    for n in z.namelist():
+        if n in ("META-INF/neoforge.mods.toml", "META-INF/mods.toml"):
+            yield z.read(n).decode("utf-8", "replace"), impl
+        elif n.endswith(".jar"):
+            try:
+                inner = zipfile.ZipFile(io.BytesIO(z.read(n)))
+            except zipfile.BadZipFile:
+                continue
+            with inner:
+                yield from _parse_tomls(inner)
+
+
+def read_meta(jar):
+    """({modid: version}, [(owner, dep, versionRange)]) for required deps, incl. nested jars."""
+    versions, ranges = {}, []
+    try:
+        z = zipfile.ZipFile(jar)
+    except zipfile.BadZipFile:
+        return versions, ranges
+    with z:
+        for t, impl in _parse_tomls(z):
+            for m in re.finditer(r'^\s*\[\[mods\]\][^\n]*$(.*?)(?=^\s*\[\[|\Z)', t, re.M | re.S):
+                mid = re.search(r'^\s*modId\s*=\s*"([^"]+)"', m.group(1), re.M)
+                ver = re.search(r'^\s*version\s*=\s*"([^"]+)"', m.group(1), re.M)
+                if mid:
+                    v = ver.group(1) if ver else None
+                    if v and "${" in v:
+                        v = impl
+                    versions.setdefault(mid.group(1), v)
+            for m in re.finditer(r'^\s*\[\[dependencies\.([^\]]+)\]\][^\n]*$(.*?)(?=^\s*\[\[|\Z)', t, re.M | re.S):
+                body = m.group(2)
+                dep = re.search(r'^\s*modId\s*=\s*"([^"]+)"', body, re.M)
+                typ = re.search(r'^\s*type\s*=\s*"([^"]+)"', body, re.M)
+                rng = re.search(r'^\s*versionRange\s*=\s*"([^"]+)"', body, re.M)
+                if dep and rng and (typ is None or typ.group(1).lower() == "required"):
+                    ranges.append((m.group(1).strip('"'), dep.group(1), rng.group(1)))
+    return versions, ranges
+
+
+def _vkey(v):
+    v = re.sub(r"^1\.(1[6-9]|2\d)(\.\d+)?-(?=\d)", "", v.strip())  # "1.21.1-3.7.2" -> "3.7.2" (MC-prefixed versions)
+    v = v.split("+")[0]
+    v = re.sub(r"-(neoforge|forge|fabric)$", "", v)
+    main, _, qual = v.partition("-")
+    nums = tuple(int(x) for x in re.findall(r"\d+", main)) or (0,)
+    nums = nums + (0,) * (4 - len(nums)) if len(nums) < 4 else nums
+    q = qual.lower()
+    rank = 0 if q.startswith("alpha") else 1 if q.startswith("beta") else 2 if q.startswith(("rc", "pre")) else 3
+    qn = tuple(int(x) for x in re.findall(r"\d+", q)) if rank < 3 else ()
+    return nums + (rank,) + qn
+
+
+def in_range(version, rng):
+    """Maven-style range check; '*' and unparseable ranges pass."""
+    rng = rng.strip()
+    if rng in ("*", "") or "${" in rng or version is None:
+        return True
+    if rng[0] not in "[(" and rng[-1] in ")]":
+        rng = "[" + rng                                     # tolerate a missing opening bracket
+    if rng[0] not in "[(":
+        return _vkey(version) >= _vkey(rng)
+    ok = False
+    for part in re.findall(r"[\[(][^\])]*[\])]", rng):
+        lo_inc, hi_inc = part[0] == "[", part[-1] == "]"
+        lo, _, hi = part[1:-1].partition(",")
+        if "," not in part:
+            hi = lo
+        v = _vkey(version)
+        good = True
+        if lo.strip():
+            good &= v >= _vkey(lo) if lo_inc else v > _vkey(lo)
+        if hi.strip():
+            good &= v <= _vkey(hi) if hi_inc else v < _vkey(hi)
+        ok |= good
+    return ok
+
+
 def main():
     mods = json.load(open(HERE / "mods-audit.json", encoding="utf-8"))
     scrapped_files = {l.strip() for l in open(HERE / "out/server-remove.txt", encoding="utf-8") if l.strip()}
@@ -88,6 +172,20 @@ def main():
             problems += 1
             where = f"SCRAPPED ({scrapped_provides[dep]})" if dep in scrapped_provides else "not in the pack at all"
             print(f"MISSING: {jar} [{owner}] requires '{dep}' ({side}) -> {where}")
+    # version ranges
+    versions, all_ranges = {}, []
+    for jar in kept_jars + own_jars:
+        v, r = read_meta(jar)
+        for k, val in v.items():  # JarJar loads the newest copy of a mod id, so keep the highest version seen
+            if val and (k not in versions or versions[k] is None or _vkey(val) > _vkey(versions[k])):
+                versions[k] = val
+        all_ranges += [(jar.name, o, d, rg) for o, d, rg in r]
+    for jar, owner, dep, rng in sorted(set(all_ranges)):
+        if dep in BUILTIN or dep not in versions:
+            continue
+        if not in_range(versions[dep], rng):
+            problems += 1
+            print(f"VERSION: {jar} [{owner}] requires {dep} {rng}, pack has {versions[dep]}")
     dupes = {k: v for k, v in provided_by.items() if len(v) > 1}
     for k, v in sorted(dupes.items()):
         print(f"DUPLICATE mod id '{k}': {v}")
