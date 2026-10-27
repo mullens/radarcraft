@@ -1,6 +1,6 @@
 {
  "name": "Radarcraft",
- "version": "1.0.1",
+ "version": "1.0.2",
  "neoforge": "neoforge-21.1.248",
  "mods": [
   {
@@ -328,11 +328,11 @@
    "source": "curseforge"
   },
   {
-   "file": "happy_ghasts_boost-merged-1.21.1-1.0.1.jar",
+   "file": "happy_ghasts_boost-merged-1.21.1-1.2.0.jar",
    "name": "Happy Ghasts Boost",
    "projectID": 1360543,
-   "fileID": 7938458,
-   "url": "https://edge.forgecdn.net/files/7938/458/happy_ghasts_boost-merged-1.21.1-1.0.1.jar",
+   "fileID": 9288688,
+   "url": "https://mediafilez.forgecdn.net/files/9288/688/happy_ghasts_boost-merged-1.21.1-1.2.0.jar",
    "page": "https://www.curseforge.com/minecraft/mc-mods/happy-ghasts-boost",
    "source": "curseforge"
   },
@@ -967,11 +967,11 @@
    "source": "curseforge"
   },
   {
-   "file": "Platform-neoforge-1.21.1-1.3.3.jar",
+   "file": "Platform-neoforge-1.21.1-1.4.2.jar",
    "name": "Platform",
    "projectID": 997634,
-   "fileID": 8075942,
-   "url": "https://edge.forgecdn.net/files/8075/942/Platform-neoforge-1.21.1-1.3.3.jar",
+   "fileID": 9318519,
+   "url": "https://mediafilez.forgecdn.net/files/9318/519/Platform-neoforge-1.21.1-1.4.2.jar",
    "page": "https://www.curseforge.com/minecraft/mc-mods/platform",
    "source": "curseforge"
   },
@@ -1549,15 +1549,6 @@
    "fileID": 7268159,
    "url": "https://edge.forgecdn.net/files/7268/159/BEB-NeoForge-1.21-6.0.0.jar",
    "page": "https://www.curseforge.com/minecraft/mc-mods/beautiful-enchanted-books",
-   "source": "curseforge"
-  },
-  {
-   "file": "FHG-NeoForge-1.21.1-1.0.0.jar",
-   "name": "Freeze the Happy Ghasts",
-   "projectID": 1308047,
-   "fileID": 7174247,
-   "url": "https://edge.forgecdn.net/files/7174/247/FHG-NeoForge-1.21.1-1.0.0.jar",
-   "page": "https://www.curseforge.com/minecraft/mc-mods/freeze-the-happy-ghasts",
    "source": "curseforge"
   },
   {
@@ -3010,11 +3001,11 @@
    "source": "curseforge"
   },
   {
-   "file": "VanillaBackport-neoforge-1.21.1-1.1.7.10.jar",
+   "file": "VanillaBackport-neoforge-1.21.1-1.2.2.jar",
    "name": "Vanilla Backport",
    "projectID": 417430,
-   "fileID": 8229724,
-   "url": "https://edge.forgecdn.net/files/8229/724/VanillaBackport-neoforge-1.21.1-1.1.7.10.jar",
+   "fileID": 9318571,
+   "url": "https://mediafilez.forgecdn.net/files/9318/571/VanillaBackport-neoforge-1.21.1-1.2.2.jar",
    "page": "https://www.curseforge.com/minecraft/mc-mods/vanillabackport",
    "source": "curseforge"
   },
@@ -3415,15 +3406,6 @@
    "source": "curseforge"
   },
   {
-   "file": "more_useful_copper-merged-1.21.1-3.0.0.jar",
-   "name": "More Useful Copper - MAJOR UPDATE 3.0!",
-   "projectID": 983503,
-   "fileID": 7853483,
-   "url": "https://edge.forgecdn.net/files/7853/483/more_useful_copper-merged-1.21.1-3.0.0.jar",
-   "page": "https://www.curseforge.com/minecraft/mc-mods/more-useful-copper-2-0",
-   "source": "curseforge"
-  },
-  {
    "file": "betterarcheology-neoforge-1.21.1-1.3.9.jar",
    "name": "Better Archeology",
    "projectID": 835687,
@@ -3509,7 +3491,7 @@
    "name": "FLIB (library for Inventory Crafting Grid)",
    "projectID": 661261,
    "fileID": 8611586,
-   "url": null,
+   "url": "https://mediafilez.forgecdn.net/files/8611/586/flib-1.21.1-0.2.9.jar",
    "page": "https://www.curseforge.com/minecraft/mc-mods/flib",
    "source": "curseforge"
   },
