@@ -4,6 +4,21 @@
  "saturation_cap": true,
  "foods": {
   "aether:blue_berry": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:slow_falling",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:jump_boost",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "aether:blue_gummy_swet": {
    "tier": 2,
    "effects": [
     {
@@ -13,23 +28,13 @@
     }
    ]
   },
-  "aether:blue_gummy_swet": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:slow_falling",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
   "aether:candy_cane": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:slow_falling",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
@@ -44,12 +49,12 @@
    ]
   },
   "aether:gingerbread_man": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:slow_falling",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
@@ -69,16 +74,22 @@
    ]
   },
   "aether:healing_stone": {
-   "tier": 2,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:jump_boost",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "aether:white_apple": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:slow_falling",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
@@ -197,12 +208,12 @@
    "effects": []
   },
   "aquaculture:sushi": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:water_breathing",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
@@ -219,12 +230,12 @@
    "effects": []
   },
   "aquaculture:turtle_soup": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:water_breathing",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
@@ -245,32 +256,27 @@
    "effects": []
   },
   "ars_nouveau:source_berry_pie": {
-   "tier": 5,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:jump_boost",
      "amplifier": 0,
-     "seconds": 480
-    },
-    {
-     "effect": "minecraft:health_boost",
-     "amplifier": 0,
-     "seconds": 480
+     "seconds": 150
     }
    ]
   },
   "ars_nouveau:source_berry_roll": {
-   "tier": 4,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:absorption",
      "amplifier": 0,
-     "seconds": 300
+     "seconds": 150
     }
    ]
   },
   "ars_nouveau:sourceberry_bush": {
-   "tier": 2,
+   "tier": 0,
    "effects": []
   },
   "artifacts:eternal_steak": {
@@ -292,12 +298,24 @@
    "effects": []
   },
   "beachparty:cocoa_cocktail": {
-   "tier": 1,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:speed",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "beachparty:coconut_cocktail": {
-   "tier": 1,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "beachparty:coconut_open": {
    "tier": 0,
@@ -314,46 +332,62 @@
    ]
   },
   "beachparty:honey_cocktail": {
-   "tier": 1,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:absorption",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "beachparty:melon_cocktail": {
-   "tier": 1,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "beachparty:pumpkin_cocktail": {
-   "tier": 2,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "beachparty:raw_mussel_meat": {
    "tier": 0,
    "effects": []
   },
   "beachparty:sweetberries_cocktail": {
-   "tier": 1,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "block_factorys_bosses:dragon_shank": {
    "tier": 0,
    "effects": []
   },
   "camping:marshmallow": {
-   "tier": 0,
-   "effects": []
-  },
-  "camping:roasted_marshmallow": {
    "tier": 1,
    "effects": []
   },
+  "camping:roasted_marshmallow": {
+   "tier": 2,
+   "effects": []
+  },
   "create:bar_of_chocolate": {
-   "tier": 0,
-   "effects": []
-  },
-  "create:builders_tea": {
-   "tier": 0,
-   "effects": []
-  },
-  "create:chocolate_glazed_berries": {
    "tier": 1,
    "effects": [
     {
@@ -363,33 +397,47 @@
     }
    ]
   },
+  "create:builders_tea": {
+   "tier": 1,
+   "effects": []
+  },
+  "create:chocolate_glazed_berries": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
   "create:honeyed_apple": {
-   "tier": 3,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:regeneration",
      "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "create:sweet_roll": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:speed",
+     "amplifier": 0,
      "seconds": 240
     },
     {
-     "effect": "minecraft:absorption",
+     "effect": "minecraft:jump_boost",
      "amplifier": 0,
      "seconds": 150
     }
    ]
   },
-  "create:sweet_roll": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:speed",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
   "creatingspace:space_food": {
-   "tier": 1,
+   "tier": 2,
    "effects": []
   },
   "crittersandcompanions:acorn": {
@@ -401,12 +449,12 @@
    "effects": []
   },
   "deep_aether:antidote": {
-   "tier": 3,
+   "tier": 4,
    "effects": [
     {
      "effect": "minecraft:jump_boost",
      "amplifier": 0,
-     "seconds": 150
+     "seconds": 300
     }
    ]
   },
@@ -421,32 +469,47 @@
    ]
   },
   "deep_aether:cooked_aerglow_fish": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:slow_falling",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:jump_boost",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "deep_aether:cooked_quail": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:slow_falling",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:jump_boost",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "deep_aether:enchanted_antidote": {
-   "tier": 4,
+   "tier": 5,
    "effects": [
     {
      "effect": "minecraft:jump_boost",
      "amplifier": 0,
-     "seconds": 300
+     "seconds": 480
+    },
+    {
+     "effect": "minecraft:health_boost",
+     "amplifier": 0,
+     "seconds": 480
     }
    ]
   },
@@ -486,60 +549,83 @@
    ]
   },
   "deep_aether:raw_aerglow_fish": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:slow_falling",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
   "deep_aether:raw_quail": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:slow_falling",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
   "deeperdarker:angler_fish": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:night_vision",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
   "deeperdarker:bloom_berries": {
-   "tier": 1,
+   "tier": 2,
    "effects": []
   },
   "deeperdarker:cooked_angler_fish": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:night_vision",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "delighto_flight:charged_rose_tea": {
-   "tier": 1,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:speed",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "delighto_flight:cheese_cloud_berry_jam": {
-   "tier": 1,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:jump_boost",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "delighto_flight:chicken_soup_with_lotus_seeds": {
-   "tier": 1,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "delighto_flight:cloud_berries": {
    "tier": 0,
@@ -550,25 +636,36 @@
    "effects": []
   },
   "delighto_flight:cloud_berry_steamed_bun": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:slow_falling",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:jump_boost",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "delighto_flight:cloud_bread": {
-   "tier": 1,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:jump_boost",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "delighto_flight:ham_salad": {
-   "tier": 1,
+   "tier": 3,
    "effects": []
   },
   "delighto_flight:lotus_leaf_rice": {
-   "tier": 0,
+   "tier": 1,
    "effects": []
   },
   "delighto_flight:lotus_root": {
@@ -576,12 +673,17 @@
    "effects": []
   },
   "delighto_flight:lotus_root_salad": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:regeneration",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
@@ -590,46 +692,74 @@
    "effects": []
   },
   "delighto_flight:lotus_root_soup_with_pork_ribs": {
-   "tier": 1,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "delighto_flight:lotus_seed_cake": {
-   "tier": 2,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:speed",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:jump_boost",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "delighto_flight:lotus_seed_sweet_porridge": {
-   "tier": 1,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:jump_boost",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "delighto_flight:mushroom_hotpot": {
-   "tier": 0,
-   "effects": []
-  },
-  "delighto_flight:new_orleans_phantom_wing": {
    "tier": 2,
    "effects": []
   },
+  "delighto_flight:new_orleans_phantom_wing": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
+  },
   "delighto_flight:rain_stew": {
-   "tier": 1,
+   "tier": 3,
    "effects": []
   },
   "delighto_flight:sparktricity_soda": {
-   "tier": 1,
+   "tier": 3,
    "effects": []
   },
   "delighto_flight:stuffed_lotus_root": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:strength",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
@@ -638,7 +768,7 @@
    "effects": []
   },
   "delighto_flight:thunder_fruit_stew": {
-   "tier": 0,
+   "tier": 1,
    "effects": []
   },
   "eat_an_omelette:enchanted_golden_omelette": {
@@ -646,7 +776,7 @@
    "effects": []
   },
   "eat_an_omelette:golden_omelette": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "eat_an_omelette:omelette": {
@@ -688,12 +818,17 @@
    "effects": []
   },
   "ecologics:tropical_stew": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:regeneration",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
@@ -702,20 +837,25 @@
    "effects": []
   },
   "endersdelight:amberveil_stew": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "endersdelight:amberveiled_curry": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "endersdelight:chicken_curry": {
-   "tier": 4,
+   "tier": 5,
    "effects": [
     {
      "effect": "minecraft:resistance",
      "amplifier": 0,
-     "seconds": 300
+     "seconds": 480
+    },
+    {
+     "effect": "minecraft:health_boost",
+     "amplifier": 0,
+     "seconds": 480
     }
    ]
   },
@@ -774,20 +914,20 @@
    ]
   },
   "endersdelight:ender_paella": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "endersdelight:endermite_stew": {
-   "tier": 2,
+   "tier": 4,
    "effects": []
   },
   "endersdelight:mite_crust": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:slow_falling",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
@@ -802,44 +942,41 @@
    ]
   },
   "endersdelight:shulker_filet": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:slow_falling",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
   "endersdelight:shulker_mollusk": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:slow_falling",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
   "endersdelight:steak_fries": {
-   "tier": 2,
+   "tier": 4,
    "effects": [
     {
      "effect": "minecraft:slow_falling",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 420
+    },
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 300
     }
    ]
   },
   "endersdelight:strange_eclair": {
-   "tier": 2,
-   "effects": []
-  },
-  "endersdelight:stuffed_shulker_bowl": {
-   "tier": 1,
-   "effects": []
-  },
-  "endersdelight:twisted_cereal": {
    "tier": 3,
    "effects": [
     {
@@ -849,111 +986,166 @@
     }
    ]
   },
-  "endersdelight:uncanny_cookies": {
+  "endersdelight:stuffed_shulker_bowl": {
    "tier": 2,
+   "effects": []
+  },
+  "endersdelight:twisted_cereal": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
+  },
+  "endersdelight:uncanny_cookies": {
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:slow_falling",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "endersdelight:veil_of_flames_risotto": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
+  },
+  "eternal_starlight:abyssal_fruit": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
      "amplifier": 0,
      "seconds": 120
     }
    ]
   },
-  "endersdelight:veil_of_flames_risotto": {
+  "eternal_starlight:aurora_deer_steak": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "eternal_starlight:blossom_of_stars": {
+   "tier": 2,
+   "effects": []
+  },
+  "eternal_starlight:bouldershroom_stew": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:luck",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
+  },
+  "eternal_starlight:cooked_aurora_deer_steak": {
    "tier": 3,
    "effects": [
     {
-     "effect": "minecraft:resistance",
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:luck",
      "amplifier": 0,
      "seconds": 150
     }
    ]
   },
-  "eternal_starlight:abyssal_fruit": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "eternal_starlight:aurora_deer_steak": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "eternal_starlight:blossom_of_stars": {
-   "tier": 1,
-   "effects": []
-  },
-  "eternal_starlight:bouldershroom_stew": {
-   "tier": 2,
-   "effects": []
-  },
-  "eternal_starlight:cooked_aurora_deer_steak": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
   "eternal_starlight:cooked_luminaris": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:night_vision",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:luck",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "eternal_starlight:cooked_luminofish": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:water_breathing",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:dolphins_grace",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "eternal_starlight:cooked_ratlin_meat": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:night_vision",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:luck",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "eternal_starlight:cooked_rookfish": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:water_breathing",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:dolphins_grace",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "eternal_starlight:cooked_shadow_snail_meat": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:night_vision",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:luck",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
@@ -973,46 +1165,21 @@
    ]
   },
   "eternal_starlight:crinoa_porridge": {
-   "tier": 5,
+   "tier": 4,
    "effects": [
     {
      "effect": "minecraft:night_vision",
-     "amplifier": 1,
-     "seconds": 360
+     "amplifier": 0,
+     "seconds": 420
     },
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 480
-    },
-    {
-     "effect": "minecraft:health_boost",
-     "amplifier": 0,
-     "seconds": 480
+     "seconds": 300
     }
    ]
   },
   "eternal_starlight:doomeden_carrion": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "eternal_starlight:jinglestem_crisp": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "eternal_starlight:jinglestem_sandwich": {
    "tier": 2,
    "effects": [
     {
@@ -1022,47 +1189,77 @@
     }
    ]
   },
-  "eternal_starlight:luminaris": {
-   "tier": 1,
+  "eternal_starlight:jinglestem_crisp": {
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:night_vision",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:luck",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "eternal_starlight:jinglestem_sandwich": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 420
+    },
+    {
+     "effect": "minecraft:luck",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
+  },
+  "eternal_starlight:luminaris": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 120
     }
    ]
   },
   "eternal_starlight:luminofish": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:water_breathing",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
   "eternal_starlight:lunar_berries": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:night_vision",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
   "eternal_starlight:lunaris_cactus_fruit": {
-   "tier": 1,
+   "tier": 2,
    "effects": []
   },
   "eternal_starlight:lunaris_cactus_gel": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:night_vision",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
@@ -1082,90 +1279,6 @@
    ]
   },
   "eternal_starlight:pungency_fruit": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "eternal_starlight:pungency_stew": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "eternal_starlight:ratlin_meat": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "eternal_starlight:roasted_forgotten_nocturnal_millet": {
-   "tier": 1,
-   "effects": []
-  },
-  "eternal_starlight:rookfish": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:water_breathing",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "eternal_starlight:rookfish_skewer": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:water_breathing",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "eternal_starlight:rotten_flesh_jerky": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "eternal_starlight:rotten_ham": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "eternal_starlight:seeker_tentacle": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "eternal_starlight:shadow_escargot": {
    "tier": 2,
    "effects": [
     {
@@ -1175,13 +1288,113 @@
     }
    ]
   },
-  "eternal_starlight:shadow_snail_meat": {
-   "tier": 1,
+  "eternal_starlight:pungency_stew": {
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:night_vision",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:luck",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "eternal_starlight:ratlin_meat": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "eternal_starlight:roasted_forgotten_nocturnal_millet": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:luck",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "eternal_starlight:rookfish": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:water_breathing",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "eternal_starlight:rookfish_skewer": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:water_breathing",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "eternal_starlight:rotten_flesh_jerky": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "eternal_starlight:rotten_ham": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "eternal_starlight:seeker_tentacle": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "eternal_starlight:shadow_escargot": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 420
+    },
+    {
+     "effect": "minecraft:luck",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
+  },
+  "eternal_starlight:shadow_snail_meat": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 120
     }
    ]
   },
@@ -1216,74 +1429,92 @@
    ]
   },
   "eternal_starlight:velvetumoss_ball": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "farmersdelight:apple_cider": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "farmersdelight:apple_pie_slice": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:jump_boost",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "farmersdelight:bacon": {
+   "tier": 1,
+   "effects": [
+    {
+     "effect": "minecraft:strength",
      "amplifier": 0,
      "seconds": 45
     }
    ]
   },
-  "farmersdelight:apple_cider": {
+  "farmersdelight:bacon_and_eggs": {
    "tier": 4,
    "effects": [
     {
-     "effect": "minecraft:haste",
+     "effect": "minecraft:resistance",
      "amplifier": 0,
      "seconds": 300
     }
    ]
   },
-  "farmersdelight:apple_pie_slice": {
-   "tier": 2,
-   "effects": []
-  },
-  "farmersdelight:bacon": {
-   "tier": 0,
-   "effects": []
-  },
-  "farmersdelight:bacon_and_eggs": {
-   "tier": 2,
-   "effects": []
-  },
   "farmersdelight:bacon_sandwich": {
-   "tier": 4,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:strength",
      "amplifier": 0,
-     "seconds": 420
+     "seconds": 240
     },
     {
      "effect": "minecraft:resistance",
      "amplifier": 0,
-     "seconds": 300
+     "seconds": 150
     }
    ]
   },
   "farmersdelight:baked_cod_stew": {
-   "tier": 4,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:dolphins_grace",
      "amplifier": 0,
-     "seconds": 300
+     "seconds": 150
     }
    ]
   },
   "farmersdelight:barbecue_stick": {
-   "tier": 4,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:strength",
      "amplifier": 0,
-     "seconds": 420
+     "seconds": 240
     },
     {
      "effect": "minecraft:resistance",
      "amplifier": 0,
-     "seconds": 300
+     "seconds": 150
     }
    ]
   },
@@ -1298,40 +1529,45 @@
    ]
   },
   "farmersdelight:beef_stew": {
-   "tier": 2,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "farmersdelight:bone_broth": {
-   "tier": 1,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "farmersdelight:cabbage": {
-   "tier": 2,
-   "effects": [
-    {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 120
-    }
-   ]
+   "tier": 0,
+   "effects": []
   },
   "farmersdelight:cabbage_leaf": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
+   "tier": 0,
+   "effects": []
   },
   "farmersdelight:cabbage_rolls": {
-   "tier": 2,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:haste",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:absorption",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
@@ -1344,30 +1580,46 @@
    "effects": []
   },
   "farmersdelight:chicken_sandwich": {
-   "tier": 2,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:strength",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "farmersdelight:chicken_soup": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "farmersdelight:chocolate_pie_slice": {
    "tier": 2,
    "effects": []
   },
-  "farmersdelight:chocolate_pie_slice": {
-   "tier": 1,
-   "effects": []
-  },
   "farmersdelight:cod_roll": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:water_breathing",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:dolphins_grace",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
@@ -1416,7 +1668,7 @@
    ]
   },
   "farmersdelight:cooked_rice": {
-   "tier": 1,
+   "tier": 2,
    "effects": []
   },
   "farmersdelight:cooked_salmon_slice": {
@@ -1430,32 +1682,47 @@
    ]
   },
   "farmersdelight:dog_food": {
-   "tier": 2,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:fire_resistance",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "farmersdelight:dumplings": {
-   "tier": 2,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:haste",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:absorption",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "farmersdelight:egg_sandwich": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:haste",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:absorption",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
@@ -1480,30 +1747,54 @@
    ]
   },
   "farmersdelight:fried_rice": {
-   "tier": 2,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:absorption",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "farmersdelight:fruit_salad": {
-   "tier": 4,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:health_boost",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "farmersdelight:gleaming_salad": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:regeneration",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "farmersdelight:glow_berry_custard": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:luck",
      "amplifier": 0,
      "seconds": 300
     }
    ]
   },
-  "farmersdelight:gleaming_salad": {
-   "tier": 0,
-   "effects": []
-  },
-  "farmersdelight:glow_berry_custard": {
-   "tier": 2,
-   "effects": []
-  },
   "farmersdelight:grilled_salmon": {
-   "tier": 2,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:dolphins_grace",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "farmersdelight:ham": {
    "tier": 0,
@@ -1525,14 +1816,41 @@
    ]
   },
   "farmersdelight:honey_cookie": {
-   "tier": 0,
-   "effects": []
+   "tier": 1,
+   "effects": [
+    {
+     "effect": "minecraft:regeneration",
+     "amplifier": 0,
+     "seconds": 45
+    }
+   ]
   },
   "farmersdelight:honey_glazed_ham": {
-   "tier": 0,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:absorption",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "farmersdelight:kelp_roll": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:water_breathing",
+     "amplifier": 0,
+     "seconds": 420
+    },
+    {
+     "effect": "minecraft:dolphins_grace",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
+  },
+  "farmersdelight:kelp_roll_slice": {
    "tier": 3,
    "effects": [
     {
@@ -1547,23 +1865,18 @@
     }
    ]
   },
-  "farmersdelight:kelp_roll_slice": {
-   "tier": 2,
-   "effects": [
-    {
-     "effect": "minecraft:water_breathing",
-     "amplifier": 0,
-     "seconds": 120
-    }
-   ]
-  },
   "farmersdelight:melon_popsicle": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:speed",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:jump_boost",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
@@ -1572,67 +1885,84 @@
    "effects": []
   },
   "farmersdelight:mixed_salad": {
-   "tier": 4,
-   "effects": [
-    {
-     "effect": "minecraft:health_boost",
-     "amplifier": 0,
-     "seconds": 300
-    }
-   ]
-  },
-  "farmersdelight:mushroom_rice": {
    "tier": 2,
    "effects": []
+  },
+  "farmersdelight:mushroom_rice": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:absorption",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "farmersdelight:mutton_chops": {
    "tier": 0,
    "effects": []
   },
   "farmersdelight:mutton_wrap": {
-   "tier": 2,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:strength",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "farmersdelight:nether_salad": {
-   "tier": 2,
+   "tier": 4,
    "effects": [
     {
      "effect": "minecraft:fire_resistance",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 420
+    },
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 300
     }
    ]
   },
   "farmersdelight:noodle_soup": {
-   "tier": 2,
-   "effects": []
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
   },
   "farmersdelight:onion": {
    "tier": 0,
    "effects": []
   },
   "farmersdelight:onion_soup": {
-   "tier": 2,
-   "effects": []
-  },
-  "farmersdelight:pasta_with_meatballs": {
-   "tier": 5,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:resistance",
      "amplifier": 0,
-     "seconds": 480
-    },
+     "seconds": 150
+    }
+   ]
+  },
+  "farmersdelight:pasta_with_meatballs": {
+   "tier": 4,
+   "effects": [
     {
-     "effect": "minecraft:health_boost",
+     "effect": "minecraft:resistance",
      "amplifier": 0,
-     "seconds": 480
+     "seconds": 300
     }
    ]
   },
@@ -1647,49 +1977,66 @@
    ]
   },
   "farmersdelight:pie_crust": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:speed",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:jump_boost",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "farmersdelight:pumpkin_pie_slice": {
-   "tier": 1,
-   "effects": []
-  },
-  "farmersdelight:pumpkin_slice": {
    "tier": 0,
    "effects": []
   },
-  "farmersdelight:pumpkin_soup": {
-   "tier": 2,
-   "effects": []
-  },
-  "farmersdelight:ratatouille": {
-   "tier": 4,
-   "effects": [
-    {
-     "effect": "minecraft:speed",
-     "amplifier": 0,
-     "seconds": 300
-    }
-   ]
-  },
-  "farmersdelight:raw_pasta": {
+  "farmersdelight:pumpkin_slice": {
    "tier": 1,
    "effects": [
     {
-     "effect": "minecraft:haste",
+     "effect": "minecraft:luck",
      "amplifier": 0,
      "seconds": 45
     }
    ]
   },
+  "farmersdelight:pumpkin_soup": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "farmersdelight:ratatouille": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:speed",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "farmersdelight:raw_pasta": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
   "farmersdelight:roast_chicken": {
-   "tier": 0,
+   "tier": 2,
    "effects": []
   },
   "farmersdelight:roasted_mutton_chops": {
@@ -1703,12 +2050,17 @@
    ]
   },
   "farmersdelight:salmon_roll": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:water_breathing",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:dolphins_grace",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
@@ -1717,7 +2069,7 @@
    "effects": []
   },
   "farmersdelight:shepherds_pie": {
-   "tier": 0,
+   "tier": 2,
    "effects": []
   },
   "farmersdelight:smoked_ham": {
@@ -1741,73 +2093,85 @@
    ]
   },
   "farmersdelight:steak_and_potatoes": {
-   "tier": 2,
-   "effects": []
-  },
-  "farmersdelight:stuffed_potato": {
-   "tier": 2,
-   "effects": [
-    {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 120
-    }
-   ]
-  },
-  "farmersdelight:stuffed_pumpkin": {
-   "tier": 0,
-   "effects": []
-  },
-  "farmersdelight:sweet_berry_cheesecake_slice": {
-   "tier": 2,
-   "effects": []
-  },
-  "farmersdelight:sweet_berry_cookie": {
-   "tier": 0,
-   "effects": []
-  },
-  "farmersdelight:tomato": {
-   "tier": 2,
-   "effects": [
-    {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 120
-    }
-   ]
-  },
-  "farmersdelight:tomato_sauce": {
    "tier": 4,
    "effects": [
     {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 420
-    },
-    {
-     "effect": "minecraft:regeneration",
+     "effect": "minecraft:speed",
      "amplifier": 0,
      "seconds": 300
     }
    ]
   },
+  "farmersdelight:stuffed_potato": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:luck",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:regeneration",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "farmersdelight:stuffed_pumpkin": {
+   "tier": 1,
+   "effects": []
+  },
+  "farmersdelight:sweet_berry_cheesecake_slice": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:jump_boost",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
+  },
+  "farmersdelight:sweet_berry_cookie": {
+   "tier": 1,
+   "effects": [
+    {
+     "effect": "minecraft:speed",
+     "amplifier": 0,
+     "seconds": 45
+    }
+   ]
+  },
+  "farmersdelight:tomato": {
+   "tier": 0,
+   "effects": []
+  },
+  "farmersdelight:tomato_sauce": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:luck",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
   "farmersdelight:vegetable_noodles": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
+  },
+  "farmersdelight:vegetable_soup": {
    "tier": 3,
    "effects": [
     {
      "effect": "minecraft:resistance",
      "amplifier": 0,
      "seconds": 150
-    }
-   ]
-  },
-  "farmersdelight:vegetable_soup": {
-   "tier": 4,
-   "effects": [
-    {
-     "effect": "minecraft:resistance",
-     "amplifier": 0,
-     "seconds": 300
     }
    ]
   },
@@ -1914,7 +2278,7 @@
    "effects": []
   },
   "golden_foods:golden_baked_potato": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_beetroot": {
@@ -1922,11 +2286,11 @@
    "effects": []
   },
   "golden_foods:golden_beetroot_soup": {
-   "tier": 5,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_bread": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_chorus_fruit": {
@@ -1934,63 +2298,63 @@
    "effects": []
   },
   "golden_foods:golden_cooked_beef": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_cooked_chicken": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_cooked_cod": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_cooked_mutton": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_cooked_porkchop": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_cooked_rabbit": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_cooked_salmon": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_cookie": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_dried_kelp": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_glow_berries": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_honey_bottle": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_melon_slice": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_milk_bucket": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_mushroom_stew": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_pumpkin_pie": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "golden_foods:golden_rabbit_stew": {
@@ -1998,7 +2362,7 @@
    "effects": []
   },
   "golden_foods:golden_sweet_berries": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "mcwholidays:candy_cane": {
@@ -2016,40 +2380,25 @@
    "effects": []
   },
   "mynethersdelight:bacon-wrapped_sausage_on_a_stick": {
-   "tier": 2,
+   "tier": 4,
    "effects": [
     {
      "effect": "minecraft:fire_resistance",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 420
+    },
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 300
     }
    ]
   },
   "mynethersdelight:bleeding_tartar": {
-   "tier": 2,
+   "tier": 4,
    "effects": []
   },
   "mynethersdelight:blue_tenderloin_steak": {
-   "tier": 3,
-   "effects": [
-    {
-     "effect": "minecraft:strength",
-     "amplifier": 0,
-     "seconds": 150
-    }
-   ]
-  },
-  "mynethersdelight:boiled_egg": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:fire_resistance",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "mynethersdelight:breakfast_sampler": {
    "tier": 4,
    "effects": [
     {
@@ -2059,53 +2408,111 @@
     }
    ]
   },
+  "mynethersdelight:boiled_egg": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:fire_resistance",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "mynethersdelight:breakfast_sampler": {
+   "tier": 5,
+   "effects": [
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 480
+    },
+    {
+     "effect": "minecraft:health_boost",
+     "amplifier": 0,
+     "seconds": 480
+    }
+   ]
+  },
   "mynethersdelight:bullet_pepper": {
    "tier": 2,
    "effects": []
   },
   "mynethersdelight:burnt_roll": {
-   "tier": 1,
-   "effects": []
-  },
-  "mynethersdelight:chilidog": {
-   "tier": 2,
-   "effects": []
-  },
-  "mynethersdelight:cooked_loin": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:fire_resistance",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "mynethersdelight:crimson_stroganoff": {
-   "tier": 4,
-   "effects": []
-  },
-  "mynethersdelight:deviled_egg": {
-   "tier": 2,
-   "effects": []
-  },
-  "mynethersdelight:dried_ghast_with_milk": {
-   "tier": 2,
-   "effects": [
-    {
-     "effect": "minecraft:fire_resistance",
-     "amplifier": 0,
-     "seconds": 120
-    }
-   ]
-  },
-  "mynethersdelight:egg_soup": {
    "tier": 3,
    "effects": [
     {
      "effect": "minecraft:strength",
      "amplifier": 0,
      "seconds": 150
+    }
+   ]
+  },
+  "mynethersdelight:chilidog": {
+   "tier": 4,
+   "effects": []
+  },
+  "mynethersdelight:cooked_loin": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:fire_resistance",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "mynethersdelight:crimson_stroganoff": {
+   "tier": 5,
+   "effects": [
+    {
+     "effect": "minecraft:health_boost",
+     "amplifier": 0,
+     "seconds": 480
+    }
+   ]
+  },
+  "mynethersdelight:deviled_egg": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
+  },
+  "mynethersdelight:dried_ghast_with_milk": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:fire_resistance",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "mynethersdelight:egg_soup": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 300
     }
    ]
   },
@@ -2118,12 +2525,17 @@
    "effects": []
   },
   "mynethersdelight:fries_ghasta": {
-   "tier": 2,
+   "tier": 4,
    "effects": [
     {
      "effect": "minecraft:fire_resistance",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 420
+    },
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 300
     }
    ]
   },
@@ -2138,70 +2550,71 @@
    ]
   },
   "mynethersdelight:ghast_salad": {
-   "tier": 2,
-   "effects": []
-  },
-  "mynethersdelight:ghast_sourdough": {
    "tier": 3,
    "effects": [
-    {
-     "effect": "minecraft:fire_resistance",
-     "amplifier": 0,
-     "seconds": 240
-    },
     {
      "effect": "minecraft:strength",
      "amplifier": 0,
      "seconds": 150
+    }
+   ]
+  },
+  "mynethersdelight:ghast_sourdough": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:fire_resistance",
+     "amplifier": 0,
+     "seconds": 120
     }
    ]
   },
   "mynethersdelight:ghasta": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:fire_resistance",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
   "mynethersdelight:giant_takoyaki": {
-   "tier": 3,
+   "tier": 4,
    "effects": [
     {
      "effect": "minecraft:fire_resistance",
      "amplifier": 0,
-     "seconds": 240
+     "seconds": 420
     },
     {
      "effect": "minecraft:strength",
      "amplifier": 0,
-     "seconds": 150
+     "seconds": 300
     }
    ]
   },
   "mynethersdelight:golden_egg": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "mynethersdelight:hoglin_loin": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:fire_resistance",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
   "mynethersdelight:hoglin_sausage": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:fire_resistance",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
@@ -2218,16 +2631,21 @@
    "effects": []
   },
   "mynethersdelight:hot_wings_bucket": {
-   "tier": 3,
+   "tier": 2,
    "effects": []
   },
   "mynethersdelight:hotdog": {
-   "tier": 2,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:fire_resistance",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
@@ -2242,35 +2660,99 @@
    ]
   },
   "mynethersdelight:hotdog_with_nether_salad": {
-   "tier": 3,
+   "tier": 4,
    "effects": [
     {
      "effect": "minecraft:fire_resistance",
      "amplifier": 0,
-     "seconds": 240
+     "seconds": 420
     },
     {
      "effect": "minecraft:strength",
      "amplifier": 0,
-     "seconds": 150
+     "seconds": 300
     }
    ]
   },
   "mynethersdelight:magma_cake_slice": {
-   "tier": 2,
+   "tier": 4,
    "effects": []
   },
   "mynethersdelight:minced_strider": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:fire_resistance",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
   "mynethersdelight:nether_burger": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:fire_resistance",
+     "amplifier": 0,
+     "seconds": 420
+    },
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
+  },
+  "mynethersdelight:plate_of_cold_striderloaf": {
+   "tier": 2,
+   "effects": []
+  },
+  "mynethersdelight:plate_of_ghasta_with_cream": {
+   "tier": 2,
+   "effects": []
+  },
+  "mynethersdelight:plate_of_striderloaf": {
+   "tier": 2,
+   "effects": []
+  },
+  "mynethersdelight:plate_of_stuffed_hoglin": {
+   "tier": 2,
+   "effects": []
+  },
+  "mynethersdelight:plate_of_stuffed_hoglin_ham": {
+   "tier": 2,
+   "effects": []
+  },
+  "mynethersdelight:plate_of_stuffed_hoglin_snout": {
+   "tier": 2,
+   "effects": []
+  },
+  "mynethersdelight:red_loin_on_a_stick": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:fire_resistance",
+     "amplifier": 0,
+     "seconds": 420
+    },
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
+  },
+  "mynethersdelight:roast_ear": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:fire_resistance",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "mynethersdelight:roasted_sausage": {
    "tier": 3,
    "effects": [
     {
@@ -2285,75 +2767,41 @@
     }
    ]
   },
-  "mynethersdelight:plate_of_cold_striderloaf": {
-   "tier": 1,
-   "effects": []
-  },
-  "mynethersdelight:plate_of_ghasta_with_cream": {
-   "tier": 1,
-   "effects": []
-  },
-  "mynethersdelight:plate_of_striderloaf": {
-   "tier": 1,
-   "effects": []
-  },
-  "mynethersdelight:plate_of_stuffed_hoglin": {
-   "tier": 1,
-   "effects": []
-  },
-  "mynethersdelight:plate_of_stuffed_hoglin_ham": {
-   "tier": 1,
-   "effects": []
-  },
-  "mynethersdelight:plate_of_stuffed_hoglin_snout": {
-   "tier": 1,
-   "effects": []
-  },
-  "mynethersdelight:red_loin_on_a_stick": {
-   "tier": 2,
-   "effects": [
-    {
-     "effect": "minecraft:fire_resistance",
-     "amplifier": 0,
-     "seconds": 120
-    }
-   ]
-  },
-  "mynethersdelight:roast_ear": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:fire_resistance",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "mynethersdelight:roasted_sausage": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:fire_resistance",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
   "mynethersdelight:rock_soup": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "mynethersdelight:sausage_and_potatoes": {
-   "tier": 2,
+   "tier": 4,
    "effects": [
     {
      "effect": "minecraft:fire_resistance",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 420
+    },
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 300
     }
    ]
   },
   "mynethersdelight:scotch_eggs": {
+   "tier": 5,
+   "effects": [
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 480
+    },
+    {
+     "effect": "minecraft:health_boost",
+     "amplifier": 0,
+     "seconds": 480
+    }
+   ]
+  },
+  "mynethersdelight:sizzling_pudding": {
    "tier": 4,
    "effects": [
     {
@@ -2363,32 +2811,28 @@
     }
    ]
   },
-  "mynethersdelight:sizzling_pudding": {
-   "tier": 2,
-   "effects": []
-  },
   "mynethersdelight:slices_of_bread": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:fire_resistance",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
   "mynethersdelight:spicy_cotton": {
-   "tier": 3,
+   "tier": 4,
    "effects": [
     {
      "effect": "minecraft:strength",
      "amplifier": 0,
-     "seconds": 150
+     "seconds": 300
     }
    ]
   },
   "mynethersdelight:spicy_curry": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "mynethersdelight:spicy_hoglin_stew": {
@@ -2396,7 +2840,7 @@
    "effects": []
   },
   "mynethersdelight:spicy_noodle_soup": {
-   "tier": 3,
+   "tier": 4,
    "effects": []
   },
   "mynethersdelight:spicy_skewer": {
@@ -2410,36 +2854,41 @@
    ]
   },
   "mynethersdelight:strider_egg": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:fire_resistance",
      "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "mynethersdelight:strider_slice": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:fire_resistance",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "mynethersdelight:strider_stew": {
-   "tier": 3,
-   "effects": []
-  },
-  "mynethersdelight:strider_with_grilled_fungus": {
-   "tier": 3,
-   "effects": [
+     "seconds": 240
+    },
     {
      "effect": "minecraft:strength",
      "amplifier": 0,
      "seconds": 150
+    }
+   ]
+  },
+  "mynethersdelight:strider_slice": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:fire_resistance",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "mynethersdelight:strider_stew": {
+   "tier": 4,
+   "effects": []
+  },
+  "mynethersdelight:strider_with_grilled_fungus": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 300
     }
    ]
   },
@@ -2454,22 +2903,39 @@
    ]
   },
   "mynethersdelight:tear_popsicle": {
-   "tier": 2,
-   "effects": []
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
   },
   "mynethersdelight:toasts": {
-   "tier": 2,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:fire_resistance",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "mynethersdelight:twisted_ghasta": {
-   "tier": 2,
-   "effects": []
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:strength",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
   },
   "naturalist:anglerfish": {
    "tier": 0,
@@ -2668,8 +3134,14 @@
    "effects": []
   },
   "refurbished_furniture:bread_slice": {
-   "tier": 0,
-   "effects": []
+   "tier": 1,
+   "effects": [
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 45
+    }
+   ]
   },
   "refurbished_furniture:cheese": {
    "tier": 1,
@@ -2682,60 +3154,76 @@
    ]
   },
   "refurbished_furniture:cheese_sandwich": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:haste",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:absorption",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "refurbished_furniture:cheese_toastie": {
-   "tier": 2,
+   "tier": 4,
    "effects": [
     {
      "effect": "minecraft:haste",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 420
+    },
+    {
+     "effect": "minecraft:absorption",
+     "amplifier": 0,
+     "seconds": 300
     }
    ]
   },
   "refurbished_furniture:glow_berry_jam_toast": {
-   "tier": 2,
+   "tier": 4,
    "effects": [
     {
      "effect": "minecraft:speed",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 420
+    },
+    {
+     "effect": "minecraft:jump_boost",
+     "amplifier": 0,
+     "seconds": 300
     }
    ]
   },
   "refurbished_furniture:meatlovers_pizza_slice": {
-   "tier": 1,
-   "effects": []
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "refurbished_furniture:sweet_berry_jam_toast": {
-   "tier": 2,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:speed",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:jump_boost",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "refurbished_furniture:toast": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:haste",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "refurbished_furniture:vegetable_pizza_slice": {
    "tier": 2,
    "effects": [
     {
@@ -2745,27 +3233,48 @@
     }
    ]
   },
+  "refurbished_furniture:vegetable_pizza_slice": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:absorption",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
   "supplementaries:candy": {
-   "tier": 0,
-   "effects": []
-  },
-  "supplementaries:lumisene_bottle": {
-   "tier": 2,
-   "effects": []
-  },
-  "supplementaries:soap": {
    "tier": 1,
    "effects": [
     {
-     "effect": "minecraft:strength",
+     "effect": "minecraft:speed",
      "amplifier": 0,
      "seconds": 45
     }
    ]
   },
-  "the_bumblezone:bee_bread": {
-   "tier": 1,
+  "supplementaries:lumisene_bottle": {
+   "tier": 4,
    "effects": []
+  },
+  "supplementaries:soap": {
+   "tier": 0,
+   "effects": []
+  },
+  "the_bumblezone:bee_bread": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:absorption",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
   },
   "the_bumblezone:bee_soup": {
    "tier": 4,
@@ -2778,12 +3287,12 @@
    ]
   },
   "the_bumblezone:honey_crystal_shards": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:regeneration",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
@@ -2792,142 +3301,28 @@
    "effects": []
   },
   "the_bumblezone:sugar_water_bottle": {
-   "tier": 1,
+   "tier": 2,
    "effects": []
   },
   "undergarden:blisterberry": {
-   "tier": 1,
+   "tier": 2,
    "effects": [
     {
      "effect": "minecraft:night_vision",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 120
     }
    ]
   },
   "undergarden:blood_globule": {
-   "tier": 1,
+   "tier": 2,
    "effects": []
   },
   "undergarden:bloody_stew": {
-   "tier": 2,
+   "tier": 4,
    "effects": []
   },
   "undergarden:cooked_gwibling": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "undergarden:droopvine_item": {
-   "tier": 1,
-   "effects": []
-  },
-  "undergarden:dweller_steak": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "undergarden:gloomgourd_pie": {
-   "tier": 2,
-   "effects": []
-  },
-  "undergarden:gloomper_leg": {
-   "tier": 1,
-   "effects": []
-  },
-  "undergarden:goo_ball": {
-   "tier": 2,
-   "effects": []
-  },
-  "undergarden:gronglet": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "undergarden:indigo_stew": {
-   "tier": 2,
-   "effects": []
-  },
-  "undergarden:inky_stew": {
-   "tier": 2,
-   "effects": []
-  },
-  "undergarden:raw_dweller_meat": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "undergarden:raw_gloomper_leg": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "undergarden:raw_gwibling": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "undergarden:roasted_underbeans": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "undergarden:rogdoric_gronglet": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "undergarden:rotten_blisterberry": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "undergarden:slop_bowl": {
    "tier": 3,
    "effects": [
     {
@@ -2942,51 +3337,194 @@
     }
    ]
   },
-  "undergarden:underbeans": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "undergarden:utheric_gronglet": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:night_vision",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "undergarden:veiled_stew": {
+  "undergarden:droopvine_item": {
    "tier": 2,
    "effects": []
   },
-  "vinery:aegis_wine": {
+  "undergarden:dweller_steak": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "undergarden:gloomgourd_pie": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
+  },
+  "undergarden:gloomper_leg": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "undergarden:goo_ball": {
+   "tier": 2,
+   "effects": []
+  },
+  "undergarden:gronglet": {
    "tier": 2,
    "effects": [
     {
-     "effect": "minecraft:luck",
+     "effect": "minecraft:night_vision",
      "amplifier": 0,
      "seconds": 120
     }
    ]
   },
-  "vinery:apple_cider": {
-   "tier": 1,
+  "undergarden:indigo_stew": {
+   "tier": 4,
    "effects": [
     {
-     "effect": "minecraft:luck",
+     "effect": "minecraft:resistance",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 300
     }
    ]
   },
-  "vinery:apple_mash": {
+  "undergarden:inky_stew": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:health_boost",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
+  },
+  "undergarden:raw_dweller_meat": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "undergarden:raw_gloomper_leg": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "undergarden:raw_gwibling": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "undergarden:roasted_underbeans": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "undergarden:rogdoric_gronglet": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "undergarden:rotten_blisterberry": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "undergarden:slop_bowl": {
+   "tier": 4,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 420
+    },
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 300
+    }
+   ]
+  },
+  "undergarden:underbeans": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 120
+    }
+   ]
+  },
+  "undergarden:utheric_gronglet": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:resistance",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "undergarden:veiled_stew": {
+   "tier": 4,
+   "effects": []
+  },
+  "vinery:aegis_wine": {
    "tier": 3,
    "effects": [
     {
@@ -2998,6 +3536,31 @@
      "effect": "minecraft:haste",
      "amplifier": 0,
      "seconds": 150
+    }
+   ]
+  },
+  "vinery:apple_cider": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:luck",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "vinery:apple_mash": {
+   "tier": 2,
+   "effects": [
+    {
+     "effect": "minecraft:luck",
+     "amplifier": 0,
+     "seconds": 120
     }
    ]
   },
@@ -3017,17 +3580,17 @@
    ]
   },
   "vinery:bolvar_wine": {
-   "tier": 4,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 420
+     "seconds": 240
     },
     {
      "effect": "minecraft:haste",
      "amplifier": 0,
-     "seconds": 300
+     "seconds": 150
     }
    ]
   },
@@ -3047,37 +3610,36 @@
    ]
   },
   "vinery:chenet_wine": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "vinery:cherry": {
-   "tier": 2,
-   "effects": [
-    {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 120
-    }
-   ]
-  },
-  "vinery:cherry_wine": {
-   "tier": 4,
-   "effects": [
-    {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 420
+     "seconds": 240
     },
     {
      "effect": "minecraft:haste",
      "amplifier": 0,
-     "seconds": 300
+     "seconds": 150
+    }
+   ]
+  },
+  "vinery:cherry": {
+   "tier": 0,
+   "effects": []
+  },
+  "vinery:cherry_wine": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:luck",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
@@ -3097,52 +3659,77 @@
    ]
   },
   "vinery:clark_wine": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "vinery:creepers_crush": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "vinery:cristel_wine": {
-   "tier": 2,
+   "tier": 4,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 420
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 300
     }
    ]
   },
   "vinery:eiswein": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "vinery:glowing_wine": {
-   "tier": 2,
+   "tier": 4,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 120
+     "seconds": 420
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 300
     }
    ]
   },
@@ -3167,117 +3754,134 @@
    ]
   },
   "vinery:jo_special_mixture": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "vinery:jungle_grapes_red": {
-   "tier": 2,
-   "effects": [
-    {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 120
-    }
-   ]
-  },
-  "vinery:jungle_grapes_white": {
-   "tier": 2,
-   "effects": [
-    {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 120
-    }
-   ]
-  },
-  "vinery:kelp_cider": {
-   "tier": 1,
-   "effects": [
-    {
-     "effect": "minecraft:water_breathing",
-     "amplifier": 0,
-     "seconds": 45
-    }
-   ]
-  },
-  "vinery:lilitu_wine": {
-   "tier": 4,
-   "effects": [
-    {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 420
+     "seconds": 240
     },
     {
      "effect": "minecraft:haste",
      "amplifier": 0,
-     "seconds": 300
+     "seconds": 150
+    }
+   ]
+  },
+  "vinery:jungle_grapes_red": {
+   "tier": 0,
+   "effects": []
+  },
+  "vinery:jungle_grapes_white": {
+   "tier": 0,
+   "effects": []
+  },
+  "vinery:kelp_cider": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:water_breathing",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:dolphins_grace",
+     "amplifier": 0,
+     "seconds": 150
+    }
+   ]
+  },
+  "vinery:lilitu_wine": {
+   "tier": 3,
+   "effects": [
+    {
+     "effect": "minecraft:luck",
+     "amplifier": 0,
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "vinery:magnetic_wine": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "vinery:mead": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "vinery:mellohi_wine": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "vinery:noir_wine": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "vinery:red_grape": {
-   "tier": 2,
-   "effects": [
-    {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 120
-    }
-   ]
+   "tier": 0,
+   "effects": []
   },
   "vinery:red_wine": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
@@ -3286,94 +3890,84 @@
    "effects": []
   },
   "vinery:savanna_grapes_red": {
-   "tier": 2,
-   "effects": [
-    {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 120
-    }
-   ]
+   "tier": 0,
+   "effects": []
   },
   "vinery:savanna_grapes_white": {
-   "tier": 2,
-   "effects": [
-    {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 120
-    }
-   ]
+   "tier": 0,
+   "effects": []
   },
   "vinery:solaris_wine": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "vinery:stal_wine": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "vinery:strad_wine": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "vinery:taiga_grapes_red": {
-   "tier": 2,
-   "effects": [
-    {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 120
-    }
-   ]
+   "tier": 0,
+   "effects": []
   },
   "vinery:taiga_grapes_white": {
-   "tier": 2,
-   "effects": [
-    {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 120
-    }
-   ]
+   "tier": 0,
+   "effects": []
   },
   "vinery:villagers_fright": {
-   "tier": 1,
+   "tier": 3,
    "effects": [
     {
      "effect": "minecraft:luck",
      "amplifier": 0,
-     "seconds": 45
+     "seconds": 240
+    },
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0,
+     "seconds": 150
     }
    ]
   },
   "vinery:white_grape": {
-   "tier": 2,
-   "effects": [
-    {
-     "effect": "minecraft:luck",
-     "amplifier": 0,
-     "seconds": 120
-    }
-   ]
+   "tier": 0,
+   "effects": []
   },
   "wildernature:bison_meat": {
    "tier": 0,

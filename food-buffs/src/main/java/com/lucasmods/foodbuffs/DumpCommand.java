@@ -36,15 +36,39 @@ public final class DumpCommand {
         CommandDispatcher<CommandSourceStack> d = event.getDispatcher();
         d.register(Commands.literal("foodbuffs").requires(s -> s.hasPermission(2))
                 .then(Commands.literal("dump").executes(c -> dump(c.getSource())))
+                .then(Commands.literal("setfood")
+                        .then(Commands.argument("food", com.mojang.brigadier.arguments.IntegerArgumentType.integer(0, 20))
+                                .then(Commands.argument("saturation", com.mojang.brigadier.arguments.FloatArgumentType.floatArg(0, 20))
+                                        .executes(c -> {
+                                            var p = c.getSource().getPlayerOrException();
+                                            p.getFoodData().setFoodLevel(com.mojang.brigadier.arguments.IntegerArgumentType.getInteger(c, "food"));
+                                            p.getFoodData().setSaturation(com.mojang.brigadier.arguments.FloatArgumentType.getFloat(c, "saturation"));
+                                            return 1;
+                                        }))))
                 .then(Commands.literal("eat").executes(c -> {
                     // test helper: right-click the main-hand item server-side, exactly like the player would, so the
                     // normal food checks, eating time, events and effects all run; the result is reported on finish
                     var player = c.getSource().getPlayerOrException();
                     var stack = player.getMainHandItem();
                     var before = player.getFoodData();
+                    var fp = stack.getFoodProperties(player);
+                    String why = fp == null ? "not food" : "canAlwaysEat=" + fp.canAlwaysEat() + " canEat=" + player.canEat(fp.canAlwaysEat())
+                            + " food=" + before.getFoodLevel() + " invulnerable=" + player.getAbilities().invulnerable;
+                    FoodBuffs.LOGGER.info("[FoodBuffs test] {}: {}", BuiltInRegistries.ITEM.getKey(stack.getItem()), why);
                     SaturationCap.report(player, before.getFoodLevel(), before.getSaturationLevel());
                     var result = stack.use(player.level(), player, net.minecraft.world.InteractionHand.MAIN_HAND);
                     boolean started = player.isUsingItem();
+                    if (started) {
+                        // the client never holds "use" here, so finish through the game's own completion path
+                        // (fires the use-finish events, eats, applies effects) instead of waiting for the hold
+                        try {
+                            var m = net.minecraft.world.entity.LivingEntity.class.getDeclaredMethod("completeUsingItem");
+                            m.setAccessible(true);
+                            m.invoke(player);
+                        } catch (ReflectiveOperationException e) {
+                            c.getSource().sendFailure(Component.literal("Food Buffs test: could not complete eating: " + e));
+                        }
+                    }
                     c.getSource().sendSuccess(() -> Component.literal("Food Buffs test: " + stack.getHoverName().getString()
                             + (started ? " - eating" : " - refused (" + result.getResult() + ")")), false);
                     return started ? 1 : 0;

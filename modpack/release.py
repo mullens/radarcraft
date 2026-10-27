@@ -11,7 +11,7 @@ import argparse, shutil, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-MODS = ["level-loss-only", "keyboard-keybinds", "cherished-mobs", "radars", "checklist"]
+MODS = ["level-loss-only", "keyboard-keybinds", "cherished-mobs", "radars", "checklist", "food-buffs"]
 
 
 def main():
@@ -34,7 +34,7 @@ def main():
         for jar in (ROOT / m / "build" / "libs").glob("*.jar"):
             if not jar.name.endswith(("-sources.jar", "-javadoc.jar")):
                 shutil.copy2(jar, dist / jar.name)
-    for name in ("checklist-grid.json", "checklist-upgrades.json"):
+    for name in ("checklist-grid.json", "checklist-upgrades.json", "foodbuffs.json"):
         if (ROOT / "modpack" / name).exists():
             shutil.copy2(ROOT / "modpack" / name, dist / name)
     for z in (ROOT / "modpack" / "out").glob("*.zip"):

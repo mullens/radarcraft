@@ -14,6 +14,7 @@ evaluationDependsOn(':keyboard-keybinds')
 evaluationDependsOn(':cherished-mobs')
 evaluationDependsOn(':radars')
 evaluationDependsOn(':checklist')
+evaluationDependsOn(':food-buffs')
 
 dependencies {
     implementation project(':level-loss-only')
@@ -21,6 +22,7 @@ dependencies {
     implementation project(':cherished-mobs')
     implementation project(':radars')
     implementation project(':checklist')
+    implementation project(':food-buffs')
 }
 
 neoForge {
@@ -44,6 +46,9 @@ neoForge {
         }
         checklist {
             sourceSet(project(':checklist').sourceSets.main)
+        }
+        foodbuffs {
+            sourceSet(project(':food-buffs').sourceSets.main)
         }
     }
 

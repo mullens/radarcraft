@@ -55,7 +55,7 @@ def main():
     to_add_own = []
     for m in missing:
         print("  WARNING: missing jar:", m)
-    configs = [HERE / n for n in ("checklist-grid.json", "checklist-upgrades.json") if (HERE / n).exists()]
+    configs = [HERE / n for n in ("checklist-grid.json", "checklist-upgrades.json", "foodbuffs.json") if (HERE / n).exists()]
 
     print(f"server: {server}\n  jars now: {len(present)}")
     print(f"  delete ({len(to_delete)}):"); [print("   -", j) for j in to_delete]

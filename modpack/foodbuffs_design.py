@@ -45,8 +45,10 @@ def cost(item, depth=0, stack=()):
         return 0.0
     if item in memo:
         return memo[item]
-    if depth > 7 or item in stack:
+    if depth > 7:
         return 4.0
+    if item in stack:
+        return math.inf   # compression loop (tomato -> crate -> tomato): not a real way to make it
     raw = 1.0
     ns = item.split(":")[0]
     if ns in DIM or DIM_ITEM.search(item.split(":")[1]):
@@ -60,11 +62,20 @@ def cost(item, depth=0, stack=()):
             if not opts:
                 continue
             ings.append(min(cost(o, depth + 1, stack + (item,)) for o in opts))
+        if any(math.isinf(x) for x in ings):
+            continue
         distinct = len(r["ingredients"])
         total = step + 0.6 * sum(ings) + max(ings + [0]) * 0.4 + 0.25 * max(0, distinct - 2)
         total /= max(1.0, r.get("count", 1)) ** 0.5
         if best is None or total < best:
             best = total
+    if best is None and item in FOODS:
+        # feast servings come from placing the feast block, not a recipe: a quarter of the feast's cost each
+        ns2, path = item.split(':', 1)
+        for block in (f'{ns2}:{path}_block', f'{ns2}:{path}_feast', f'{ns2}:{path.removesuffix("_slice")}', f'{ns2}:{path.removesuffix("_slice")}_block'):
+            if block != item and block in PROD:
+                best = cost(block, depth + 1, stack + (item,)) / 4 + 0.5
+                break
     c = raw if best is None else max(best, 0.5) if raw <= 1 else max(best, raw)
     # vanilla materials that are not food (ice, sugar, wheat, melon...) are gathered, not crafted: never more than raw
     if ns == "minecraft" and item not in FOODS:
@@ -124,7 +135,7 @@ def main():
     v_top = vanilla[int(len(vanilla) * 0.9)]
     modded = sorted((v, k) for k, v in scores.items() if not k.startswith("minecraft:"))
     hard = [v for v, k in modded if v > v_top]
-    cut = [hard[int(len(hard) * q)] for q in (0.35, 0.7, 0.92)] if hard else [v_top + 1, v_top + 2, v_top + 3]
+    cut = [hard[int(len(hard) * q)] for q in (0.5, 0.85, 0.96)] if hard else [v_top + 1, v_top + 2, v_top + 3]
 
     def tier(v):
         if v <= v_med: return 0

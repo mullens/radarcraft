@@ -1,0 +1,41 @@
+# Food Buffs: modded food can be eaten when full, gives its buffs, and never raises saturation above its own value.
+# Needs Farmer's Delight in dev-driver/run/mods. Run: gradlew :dev-driver:runClient -PdriverScript=scripts/driver/foodbuffs.txt
+# Each eat logs "[FoodBuffs test] ate ...: food a -> b, saturation x -> y (food's own saturation s), effects: ..."
+waittitle
+world foodtest
+waitworld
+chat /gamemode survival
+# 1) vanilla bread while full: vanilla rule, must be refused (do it before any Farmer's Delight Nourishment)
+chat /foodbuffs setfood 20 5
+chat /item replace entity @s weapon.mainhand with minecraft:bread
+wait 5
+chat /foodbuffs eat
+wait 20
+# 2) cheap modded food while full, saturation 5: may be eaten, saturation must STAY 5 (vanilla would give 5.6)
+chat /foodbuffs setfood 20 5
+chat /item replace entity @s weapon.mainhand with farmersdelight:tomato
+wait 5
+chat /foodbuffs eat
+wait 20
+# 3) beef stew (own saturation 19.2) while full, saturation 5: vanilla would give 20, the cap gives 19.2
+chat /foodbuffs setfood 20 5
+chat /item replace entity @s weapon.mainhand with farmersdelight:beef_stew
+wait 5
+chat /foodbuffs eat
+wait 20
+# 4) hungry (food 6, saturation 0) + tier-4 fish stew: normal eating, buffs applied
+chat /effect clear @s
+chat /foodbuffs setfood 6 0
+chat /item replace entity @s weapon.mainhand with farmersdelight:fish_stew
+wait 5
+chat /foodbuffs eat
+wait 20
+# tooltip check: hold a tier-5 dish and open the inventory
+chat /item replace entity @s weapon.mainhand with farmersdelight:pasta_with_meatballs
+screen inventory
+wait 3
+move 248 246
+wait 3
+screenshot fb-tooltip
+screen none
+quit

@@ -220,7 +220,7 @@ def main():
             override_jars.append(jar.name)
 
     # Checklist mod grid (authored by modpack/make_grid.py) ships as a config file on both sides
-    for name in ("checklist-grid.json", "checklist-upgrades.json"):
+    for name in ("checklist-grid.json", "checklist-upgrades.json", "foodbuffs.json"):
         src = HERE / name
         if src.exists():
             (pack / "overrides" / "config").mkdir(exist_ok=True)
