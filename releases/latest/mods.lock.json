@@ -1,6 +1,6 @@
 {
  "name": "Radarcraft",
- "version": "1.0.0",
+ "version": "1.0.1",
  "neoforge": "neoforge-21.1.248",
  "mods": [
   {
@@ -514,6 +514,15 @@
    "fileID": 5723250,
    "url": "https://edge.forgecdn.net/files/5723/250/betterfpsdist-1.21-6.0.jar",
    "page": "https://www.curseforge.com/minecraft/mc-mods/better-fps-render-distance",
+   "source": "curseforge"
+  },
+  {
+   "file": "FluxNetworks-1.21.1-8.0.0.jar",
+   "name": "Flux Networks",
+   "projectID": 248020,
+   "fileID": 6089446,
+   "url": "https://edge.forgecdn.net/files/6089/446/FluxNetworks-1.21.1-8.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/flux-networks",
    "source": "curseforge"
   },
   {
@@ -2200,6 +2209,15 @@
    "source": "curseforge"
   },
   {
+   "file": "guideme-21.1.19.jar",
+   "name": "GuideME",
+   "projectID": 1173950,
+   "fileID": 8897145,
+   "url": "https://edge.forgecdn.net/files/8897/145/guideme-21.1.19.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/guideme",
+   "source": "curseforge"
+  },
+  {
    "file": "georges_flying_island-1.0.1-neoforge-1.21.1.jar",
    "name": "George's flying island",
    "projectID": 1066583,
@@ -3259,6 +3277,15 @@
    "fileID": 6467772,
    "url": "https://edge.forgecdn.net/files/6467/772/resourcefulconfig-neoforge-1.21-3.0.11.jar",
    "page": "https://www.curseforge.com/minecraft/mc-mods/resourceful-config",
+   "source": "curseforge"
+  },
+  {
+   "file": "Powah-6.2.10.jar",
+   "name": "Powah! (Rearchitected)",
+   "projectID": 633483,
+   "fileID": 8011715,
+   "url": "https://edge.forgecdn.net/files/8011/715/Powah-6.2.10.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/powah-rearchitected",
    "source": "curseforge"
   },
   {
