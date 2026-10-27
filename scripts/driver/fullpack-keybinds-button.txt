@@ -1,0 +1,17 @@
+# Full-pack check of the Keyboard button on Controlling's Key Binds list (final integration check).
+# Run: python scripts/launch-fullpack.py scripts/driver/fullpack-keybinds-button.txt --xmx 10G --timeout 20
+waittitle
+screen keybinds
+wait 20
+log list: screen={screen}
+widgets
+screenshot fkb-list
+clickwidget Keyboard
+wait 20
+log after Keyboard click: screen={screen}
+screenshot fkb-keyboard
+clickwidget List View
+wait 20
+log after List View: screen={screen}
+screenshot fkb-back
+quit

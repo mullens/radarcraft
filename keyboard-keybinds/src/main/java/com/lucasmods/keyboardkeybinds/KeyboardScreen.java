@@ -27,7 +27,6 @@ import java.util.Locale;
  */
 public final class KeyboardScreen extends Screen {
     /** Set right before opening the vanilla list so the Opening handler lets it through once. */
-    static boolean openingClassic = false;
 
     private static final int FILL_UNBOUND = 0xFF2B2B2B;
     private static final int FILL_BOUND = 0xFF2E5C8A;
@@ -459,6 +458,10 @@ public final class KeyboardScreen extends Screen {
     public void onClose() {
         options.save();
         minecraft.setScreen(lastScreen);
+        // Back on a key binds list (vanilla or Controlling): rebuild it so its rows show the binds changed here.
+        if (lastScreen != null && KeyboardKeybinds.isKeyBindsScreen(lastScreen)) {
+            lastScreen.resize(minecraft, minecraft.getWindow().getGuiScaledWidth(), minecraft.getWindow().getGuiScaledHeight());
+        }
     }
 
     // ------------------------------------------------------------------ actions
@@ -516,10 +519,14 @@ public final class KeyboardScreen extends Screen {
         recompute();
     }
 
+    /** "List View": back to the list this was opened from; opened directly (key, dev flag), open a fresh list instead. */
     private void openClassic() {
+        if (lastScreen != null && KeyboardKeybinds.isKeyBindsScreen(lastScreen)) {
+            onClose();
+            return;
+        }
         options.save();
-        openingClassic = true;
-        minecraft.setScreen(new KeyBindsScreen(this, options));
+        minecraft.setScreen(new KeyBindsScreen(lastScreen, options)); // Controlling swaps in its own list here if installed
     }
 
     private void changed() {

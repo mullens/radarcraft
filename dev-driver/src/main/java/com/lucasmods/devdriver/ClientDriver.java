@@ -55,6 +55,8 @@ import java.util.function.Predicate;
  * expect PLACEHOLDER V   log PASS/FAIL comparing a placeholder with V
  * disconnect             leave the server/world (pause-menu Disconnect)
  * openaccessories        open the Accessories mod's screen
+ * bind MAPPING KEY       set a key mapping, e.g. bind key.keyboardkeybinds.open k
+ * presskey KEY           one in-game press of the key mappings bound to KEY
  * slots                  log the open container's non-inventory slots (Curios/Accessories names, items)
  * clickslot inv N | clickslot name NAME [k]   left-click a slot through the server (pick up / place)
  * waitfile PATH [ticks]  wait until a file exists (outside signal)
@@ -254,12 +256,26 @@ public final class ClientDriver {
                 List<net.minecraft.client.gui.components.AbstractWidget> widgets = new ArrayList<>();
                 collectWidgets(screen, widgets);
                 String needle = rest.trim().toLowerCase(java.util.Locale.ROOT);
-                var hit = widgets.stream().filter(w -> (w.getClass().getName() + " " + w.getMessage().getString() + " " + widgetTooltip(w))
-                        .toLowerCase(java.util.Locale.ROOT).contains(needle)).findFirst()
+                // an exact label match wins (list rows can carry the same word in a tooltip), then any substring match
+                var hit = widgets.stream().filter(w -> w.getMessage().getString().equalsIgnoreCase(needle)).findFirst()
+                        .or(() -> widgets.stream().filter(w -> (w.getClass().getName() + " " + w.getMessage().getString() + " " + widgetTooltip(w))
+                                .toLowerCase(java.util.Locale.ROOT).contains(needle)).findFirst())
                         .orElseThrow(() -> new IllegalStateException("no widget matching '" + needle + "' on " + screen.getClass().getSimpleName()));
                 DevDriverMod.LOGGER.info("{} clicking {} '{}' at {},{}", DevDriverMod.TAG, hit.getClass().getSimpleName(), hit.getMessage().getString(),
                         hit.getX() + hit.getWidth() / 2.0, hit.getY() + hit.getHeight() / 2.0);
                 click(mc, hit.getX() + hit.getWidth() / 2.0, hit.getY() + hit.getHeight() / 2.0, 0);
+            }
+            case "bind" -> { // bind MAPPING_NAME KEY: set a key mapping (e.g. bind key.keyboardkeybinds.open k), like the controls screen does
+                var key = InputConstants.getKey("key.keyboard." + args[1].toLowerCase(Locale.ROOT).replace('_', '.'));
+                var mapping = java.util.Arrays.stream(mc.options.keyMappings).filter(m -> m.getName().equals(args[0])).findFirst()
+                        .orElseThrow(() -> new IllegalStateException("no key mapping " + args[0]));
+                mapping.setKey(key);
+                net.minecraft.client.KeyMapping.resetMapping();
+                DevDriverMod.LOGGER.info("{} bound {} to {}", DevDriverMod.TAG, args[0], key.getName());
+            }
+            case "presskey" -> { // presskey KEY: one in-game press of whatever key mappings use KEY (no screen involved)
+                var key = InputConstants.getKey("key.keyboard." + args[0].toLowerCase(Locale.ROOT).replace('_', '.'));
+                net.minecraft.client.KeyMapping.click(key);
             }
             case "openaccessories" -> { // open the Accessories mod's own screen (reflection, so the driver has no dependency)
                 Object ok = Class.forName("io.wispforest.accessories.client.AccessoriesClient").getMethod("attemptToOpenScreen").invoke(null);

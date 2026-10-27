@@ -1,0 +1,36 @@
+# Keyboard Keybinds as a bonus view: the Keyboard button on the Key Binds list (vanilla or Controlling), List View / Esc
+# back to that list, and the optional open key. For Controlling, drop Controlling + Searchables into dev-driver/run/mods.
+# Run: gradlew :dev-driver:runClient -PdriverScript=scripts/driver/keybinds-button.txt
+wait 40
+screen keybinds
+wait 10
+log list: screen={screen}
+widgets
+screenshot kkb-list
+clickwidget Keyboard
+wait 10
+log after Keyboard click: screen={screen}
+screenshot kkb-keyboard
+clickwidget List View
+wait 10
+log after List View: screen={screen}
+widgets
+screenshot kkb-back
+clickwidget Keyboard
+wait 10
+key ESCAPE
+wait 10
+log after Esc: screen={screen}
+screen none
+world kkbutton
+waitworld
+bind key.keyboardkeybinds.open k
+presskey k
+wait 10
+log after open key: screen={screen}
+screenshot kkb-direct
+clickwidget List View
+wait 10
+log List View from direct open: screen={screen}
+screenshot kkb-direct-list
+quit

@@ -5,7 +5,7 @@ NeoForge mods for Minecraft **1.21.1**, one Gradle project per mod, sharing a ro
 | Mod | Folder | Side | What it does |
 |-----|--------|------|--------------|
 | **Level Loss Only** | `level-loss-only/` | server (clients need nothing) | On death you keep every item. Your XP still drops as orbs and your levels reset, exactly like vanilla without `keepInventory`. Curse of Vanishing items still vanish. |
-| **Keyboard Keybinds** | `keyboard-keybinds/` | client only | Replaces *Options → Controls → Key Binds* with a visual keyboard. Every key shows what is bound to it; real conflicts are red, intentional overlaps are yellow. |
+| **Keyboard Keybinds** | `keyboard-keybinds/` | client only | Adds a **Keyboard** button to *Options → Controls → Key Binds* (vanilla's list or Controlling's) that opens a visual keyboard. Every key shows what is bound to it; real conflicts are red, intentional overlaps are yellow. |
 | **Cherished Mobs** | `cherished-mobs/` | server (clients need nothing) | Friendly mobs take 20% damage (like a full Protection V set) and regenerate. Any name-tagged mob is invincible, cannot die, and is pulled back if it falls out of the world. |
 | **Radars** | `radars/` | both | Name any mob "Radar" and it becomes Radar the cat, who points toward six giant boss cats hidden across the world. Beat one to tame it back down and learn where the next one lives. |
 | **Checklist** | `checklist/` | both | A challenge grid of curated advancements. Every completed square is one level and one point; points buy upgrade ranks you can take back at any time. Replaces skill trees with achievements. |
@@ -82,7 +82,7 @@ Client scripts are one command per line (`waittitle`, `wait`, `click X Y`, `scro
 `chat /give @s diamond`, `world NAME`, `connect HOST:PORT`, `respawn`, `screen keybinds|inventory|advancements|checklist|none`,
 `screenshot NAME`, `gochest` (/tp beside the nearest chest), `usechest` (open it), `widgets` / `clickwidget TEXT` (list or click
 any screen's buttons by class, label or tooltip), `slots` / `clickslot inv N | name NAME` (list or click container slots,
-including Curios and Accessories slots by name, through the server), `openaccessories`, `disconnect`, `waitfile PATH`, `dumpchannels FILE`, `log`, `expect`, `show`, `hide`, `quit`); server scripts use `wait`, `waitfile PATH` (hold until another process creates the file), `cmd <command>`,
+including Curios and Accessories slots by name, through the server), `openaccessories`, `disconnect`, `waitfile PATH`, `bind MAPPING KEY` / `presskey KEY` (set a key mapping, fire it in-game), `dumpchannels FILE`, `log`, `expect`, `show`, `hide`, `quit`); server scripts use `wait`, `waitfile PATH` (hold until another process creates the file), `cmd <command>`,
 `log` with `{named}` / `{namedcount}`, `expect`, `dumpchannels FILE`, `quit`. Screenshots are written by Minecraft itself
 to `dev-driver/run/screenshots/NAME.png`; results and `PASS`/`FAIL` lines go to the game log, prefixed `[DevDriver]`. The full
 command lists are in the Javadoc of `ClientDriver.java` and `ServerDriver.java`.
@@ -247,6 +247,14 @@ points available / spent / total, categories, rank pips and `-` / `+` per upgrad
 
 ## Keyboard Keybinds: how conflicts are judged
 
+The keyboard is a bonus view, not a replacement: the Key Binds list (vanilla's, or Controlling's `NewKeyBindsScreen`)
+stays in charge and gets a **Keyboard** button in its top-right corner (18 px tall, so it ends above Controlling's search
+bar at any GUI scale; it is drawn again after the screen renders in case a mod paints over it). *List View*, *Done* and Esc
+go back to that list, which is rebuilt so its rows show what changed on the keyboard. An optional key, *Open keyboard
+view* (unbound by default), opens the keyboard straight from the game; *List View* then opens a fresh list.
+Test: `scripts/driver/keybinds-button.txt` in dev with Controlling and Searchables in `dev-driver/run/mods`,
+`scripts/driver/fullpack-keybinds-button.txt` on the full pack.
+
 NeoForge gives every key mapping a *conflict context* (in-game, in menus, or everywhere) and an
 optional modifier (Ctrl/Shift/Alt). The screen uses those to sort shared keys into tiers:
 
@@ -271,7 +279,7 @@ settings.gradle         lists the mod subprojects
 <mod>/src/main/java     sources
 <mod>/src/main/templates/META-INF/neoforge.mods.toml   mod metadata (placeholders filled by Gradle)
 dev-driver/             dev-only mod that runs scripts/driver/*.txt against the client (never published)
-scripts/driver/         client scripts (keybinds, levelloss, cherished, radars, radars-loot, checklist, park), server scripts (server-cherished, server-radars-loot), checklist-grid-dev.json
+scripts/driver/         client scripts (keybinds, keybinds-button, levelloss, cherished, radars, radars-loot, checklist, park), server scripts (server-cherished, server-radars-loot), checklist-grid-dev.json
 scripts/gen-radar-loot.py  writes the six Radars loot tables from the TIERS table inside it
 scripts/launch-fullpack-server.py  production full-pack dedicated server (dev-driver/run-fullpack-server) with our jars
 scripts/nbt-dump.py     dump or search a player .dat, e.g. `python scripts/nbt-dump.py <file> curios accessories`
