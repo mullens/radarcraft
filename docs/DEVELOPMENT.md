@@ -71,12 +71,33 @@ The `dev-driver/` subproject is a dev-only mod that loads **all** mods of this r
 ./gradlew :dev-driver:runServer -PdriverScript=scripts/driver/server-cherished.txt   # fully headless; needs dev-driver/run/eula.txt
 ```
 
-Client scripts are one command per line (`wait`, `click X Y`, `key ENTER`, `type`, `chat /give @s diamond`,
-`world NAME`, `respawn`, `screen keybinds|inventory|advancements|none`, `screenshot NAME`, `log`, `expect`,
-`show`, `hide`, `quit`); server scripts use `wait`, `cmd <command>`, `log` with `{named}` / `{namedcount}`,
-`expect`, `quit`. Screenshots are written by Minecraft itself to `dev-driver/run/screenshots/NAME.png`;
-results and `PASS`/`FAIL` lines go to the game log, prefixed `[DevDriver]`. The full command lists are in the
-Javadoc of `ClientDriver.java` and `ServerDriver.java`.
+Client scripts are one command per line (`waittitle`, `wait`, `click X Y`, `scroll X Y AMOUNT`, `key ENTER`, `type`,
+`chat /give @s diamond`, `world NAME`, `connect HOST:PORT`, `respawn`, `screen keybinds|inventory|advancements|checklist|none`,
+`screenshot NAME`, `dumpchannels FILE`, `log`, `expect`, `show`, `hide`, `quit`); server scripts use `wait`, `cmd <command>`,
+`log` with `{named}` / `{namedcount}`, `expect`, `dumpchannels FILE`, `quit`. Screenshots are written by Minecraft itself
+to `dev-driver/run/screenshots/NAME.png`; results and `PASS`/`FAIL` lines go to the game log, prefixed `[DevDriver]`. The full
+command lists are in the Javadoc of `ClientDriver.java` and `ServerDriver.java`.
+
+**Always start a client script with `waittitle`.** NeoForge registers every mod's network channels only at the end of
+the first resource reload, which in a big pack happens minutes after the game loop starts ticking. A script that
+connects earlier gets a bogus "channels missing on the client" / "Incompatible client" mismatch. `dumpchannels` on both
+sides is the way to check (compare `NetworkRegistry.setup=` and the entry counts).
+
+### Testing the whole modpack
+
+Dev runs cannot load the production pack: mods whose mixins target compiler-generated names break against the
+recompiled Minecraft that ModDevGradle uses. For the real thing:
+
+```bash
+python scripts/assemble-fullpack.py                    # pack jars + config/kubejs/defaultconfigs -> dev-driver/run-fullpack
+python scripts/launch-fullpack.py scripts/driver/fullpack-server.txt --xmx 10G --timeout 25
+```
+
+`launch-fullpack.py` starts the production NeoForge client from the CurseForge install (libraries, assets, JDK 21 from
+Gradle) against `dev-driver/run-fullpack`, with this repo's mod jars and the dev-driver jar copied into its mods folder,
+hidden and muted as usual, offline as player `Dev`. It writes `launch.log` and `game.pid` into the run dir and takes a
+`jstack` thread dump on timeout. 8 GB of heap was not enough for the pack once; use 10. Joining a server needs that
+server to run `online-mode=false`; `/radars spawn` and the other operator commands need the Dev player to be an operator.
 
 Typical loop: edit → run a driver script in the background → read the log → open the PNGs → fix → repeat.
 The client window is launched at 1280×720 with GUI scale 2, so GUI coordinates (640×360) stay stable.
