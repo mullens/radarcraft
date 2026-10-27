@@ -26,7 +26,7 @@ import java.util.Map;
  * We build on that and sort every overlap into one of two tiers:</p>
  * <ul>
  *   <li><b>HARD</b>: NeoForge says both mappings can fire from the same key press in the same
- *       situation. Shown red, unless the user marked the pair as intentional.</li>
+ *       situation. Shown red.</li>
  *   <li><b>SOFT</b>: the key is shared, but the game keeps the two apart (different context,
  *       different modifier, or one mapping's key is merely the other's modifier). Shown yellow
  *       so the overlap is visible but not alarming.</li>
@@ -42,12 +42,10 @@ public final class BindingAnalysis {
 
     /**
      * @param other     the mapping sharing the key
-     * @param severity  effective severity (an ignored HARD conflict is reported as SOFT)
-     * @param ignorable true when this is a HARD conflict the user may mark as intentional
-     * @param ignored   true when the user has marked it as intentional
+     * @param severity  HARD (both fire together) or SOFT (the game keeps them apart)
      * @param reason    short human explanation
      */
-    public record Overlap(KeyMapping other, Severity severity, boolean ignorable, boolean ignored, Component reason) {}
+    public record Overlap(KeyMapping other, Severity severity, Component reason) {}
 
     private final Map<InputConstants.Key, List<KeyMapping>> byKey = new HashMap<>();
     private final Map<KeyMapping, List<Overlap>> overlaps = new IdentityHashMap<>();
@@ -59,7 +57,7 @@ public final class BindingAnalysis {
         this.sorted = sorted;
     }
 
-    public static BindingAnalysis compute(KeyMapping[] mappings, IgnoredConflicts ignored) {
+    public static BindingAnalysis compute(KeyMapping[] mappings) {
         KeyMapping[] copy = mappings.clone();
         Arrays.sort(copy);
         BindingAnalysis analysis = new BindingAnalysis(List.of(copy));
@@ -79,9 +77,9 @@ public final class BindingAnalysis {
             for (int j = i + 1; j < copy.length; j++) {
                 KeyMapping b = copy[j];
                 if (b.isUnbound()) continue;
-                Overlap ab = classify(a, b, ignored);
+                Overlap ab = classify(a, b);
                 if (ab == null) continue;
-                Overlap ba = new Overlap(a, ab.severity(), ab.ignorable(), ab.ignored(), ab.reason());
+                Overlap ba = new Overlap(a, ab.severity(), ab.reason());
                 analysis.overlaps.get(a).add(ab);
                 analysis.overlaps.get(b).add(ba);
                 analysis.mappingSeverity.merge(a, ab.severity(), Severity::max);
@@ -99,7 +97,7 @@ public final class BindingAnalysis {
      * contexts never overlap (a menu-only key versus an in-game key). The game itself keeps those
      * apart when dispatching input, so here they are a SOFT overlap, not a conflict.
      */
-    private static Overlap classify(KeyMapping a, KeyMapping b, IgnoredConflicts ignored) {
+    private static Overlap classify(KeyMapping a, KeyMapping b) {
         boolean sameKey = a.getKey().equals(b.getKey());
         IKeyConflictContext ca = a.getKeyConflictContext();
         IKeyConflictContext cb = b.getKeyConflictContext();
@@ -109,7 +107,7 @@ public final class BindingAnalysis {
 
         if (!contextsOverlap) {
             if (!sameKey) return null;
-            return new Overlap(b, Severity.SOFT, false, false,
+            return new Overlap(b, Severity.SOFT,
                     Component.translatable("keyboardkeybinds.reason.context", contextName(ca), contextName(cb)));
         }
 
@@ -119,7 +117,7 @@ public final class BindingAnalysis {
             if (ma.matches(b.getKey()) || mb.matches(a.getKey())) {
                 KeyMapping modifierOwner = ma.matches(b.getKey()) ? a : b;
                 KeyMapping bare = modifierOwner == a ? b : a;
-                return new Overlap(b, Severity.SOFT, false, false,
+                return new Overlap(b, Severity.SOFT,
                         Component.translatable("keyboardkeybinds.reason.modifier_key",
                                 bare.getDisplayName(), modifierOwner.getDisplayName()));
             }
@@ -127,18 +125,17 @@ public final class BindingAnalysis {
         }
 
         // Same key, and both can be live at the same time.
-        boolean isIgnored = ignored.isIgnored(a, b);
         if (ma == mb) {
-            return new Overlap(b, isIgnored ? Severity.SOFT : Severity.HARD, true, isIgnored,
+            return new Overlap(b, Severity.HARD,
                     Component.translatable("keyboardkeybinds.reason.both", sharedContextName(a, b)));
         }
         boolean inGame = ca.conflicts(KeyConflictContext.IN_GAME) || cb.conflicts(KeyConflictContext.IN_GAME);
         if (inGame && (ma == KeyModifier.NONE || mb == KeyModifier.NONE)) {
             // In-game, holding Ctrl and pressing Q also presses plain Q.
-            return new Overlap(b, isIgnored ? Severity.SOFT : Severity.HARD, true, isIgnored,
+            return new Overlap(b, Severity.HARD,
                     Component.translatable("keyboardkeybinds.reason.modifier_in_game"));
         }
-        return new Overlap(b, Severity.SOFT, false, false, Component.translatable("keyboardkeybinds.reason.modifier"));
+        return new Overlap(b, Severity.SOFT, Component.translatable("keyboardkeybinds.reason.modifier"));
     }
 
     /** The narrower of the two contexts, which is where both mappings are live at once. */

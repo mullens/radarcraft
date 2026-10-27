@@ -1,0 +1,21 @@
+# Keyboard Keybinds selected-key panel: 8 actions on B, equal rows, snapshot list, Only this / Unbind / Change.
+# Run: gradlew :dev-driver:runClient -PdriverScript=scripts/driver/kk-panel.txt
+# Keyboard at x=72,y=18, unit 22 (640x360 GUI): B is shift row (y 4.5u), 6.25u in -> centre (220, 128).
+wait 40
+bind key.jump b
+bind key.sneak b
+bind key.drop b
+bind key.chat b
+bind key.playerlist b
+bind key.advancements b
+bind key.socialInteractions b
+bind key.inventory b
+screen keybinds
+wait 10
+clickwidget Keyboard
+wait 10
+log screen={screen}
+click 220 128
+wait 3
+screenshot kk-b-8
+quit

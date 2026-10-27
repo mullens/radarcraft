@@ -60,7 +60,6 @@ public final class KeyboardScreen extends Screen {
 
     private final Screen lastScreen;
     private final Options options;
-    private final IgnoredConflicts ignored = IgnoredConflicts.load();
 
     private KeyboardLayout layout;
     private int unit, kbX, kbY, kbW, kbH;
@@ -70,6 +69,12 @@ public final class KeyboardScreen extends Screen {
     @Nullable private InputConstants.Key selectedKey;
     @Nullable private KeyMapping focused;
     @Nullable private KeyMapping listening;
+    /**
+     * The bindings that were on {@link #selectedKey} when it was selected. Bindings changed or unbound from this panel
+     * stay listed (dimmed, with their new key) until another key is selected, so a crowded key can be worked down.
+     */
+    private final List<KeyMapping> snapshot = new ArrayList<>();
+    @Nullable private List<Component> pendingTooltip;
 
     // Press/release tracking while listening, same scheme as NeoForge's own KeyBindsScreen,
     // so that "hold Ctrl, press Q, release" yields Ctrl+Q.
@@ -165,10 +170,12 @@ public final class KeyboardScreen extends Screen {
         }
         renderKeyboard(g, mouseX, mouseY);
         renderLegend(g);
+        pendingTooltip = null;
         renderLeftPanel(g, mouseX, mouseY);
         renderRightPanel(g, mouseX, mouseY);
         searchBox.render(g, mouseX, mouseY, partialTick); // sits inside the right panel, so drawn after it
         renderCellTooltip(g, mouseX, mouseY);
+        if (pendingTooltip != null) g.renderComponentTooltip(font, pendingTooltip, mouseX, mouseY);
     }
 
     private void renderKeyboard(GuiGraphics g, int mouseX, int mouseY) {
@@ -231,19 +238,35 @@ public final class KeyboardScreen extends Screen {
         g.fill(leftX, panelTop, leftX + leftW, panelBottom, PANEL_BG);
         g.renderOutline(leftX, panelTop, leftW, panelBottom - panelTop, PANEL_BORDER);
 
+        List<KeyMapping> rows = panelRows();
+        int headerColor = TEXT;
         Component header;
-        List<KeyMapping> rows;
-        if (focused != null && focused.isUnbound()) {
-            header = Component.translatable("keyboardkeybinds.panel.unbound", focused.getDisplayName());
-            rows = List.of(focused);
-        } else if (selectedKey != null) {
-            header = Component.translatable("keyboardkeybinds.panel.key", selectedKey.getDisplayName());
-            rows = analysis.bindingsOn(selectedKey);
+        if (selectedKey != null) {
+            List<KeyMapping> live = analysis.bindingsOn(selectedKey);
+            int conflicts = 0;
+            boolean overlap = false;
+            for (KeyMapping km : live) {
+                BindingAnalysis.Severity s = analysis.severityOf(km);
+                if (s == BindingAnalysis.Severity.HARD) conflicts++;
+                else if (s == BindingAnalysis.Severity.SOFT) overlap = true;
+            }
+            String count = live.size() == 1 ? Component.translatable("keyboardkeybinds.panel.bindings.one").getString()
+                    : Component.translatable("keyboardkeybinds.panel.bindings", live.size()).getString();
+            String state = "";
+            if (conflicts > 0) {
+                state = "  ·  " + Component.translatable("keyboardkeybinds.panel.conflict", conflicts).getString();
+                headerColor = TEXT_HARD;
+            } else if (overlap) {
+                state = "  ·  " + Component.translatable("keyboardkeybinds.panel.overlap").getString();
+                headerColor = TEXT_SOFT;
+            }
+            header = Component.literal(selectedKey.getDisplayName().getString() + "  ·  " + count + state);
+        } else if (!rows.isEmpty()) {
+            header = Component.translatable("keyboardkeybinds.panel.unbound", rows.get(0).getDisplayName());
         } else {
             header = Component.translatable("keyboardkeybinds.hint");
-            rows = List.of();
         }
-        g.drawString(font, truncate(header.getString(), leftW - 8), leftX + 4, panelTop + 4, TEXT, false);
+        g.drawString(font, truncate(header.getString(), leftW - 8), leftX + 4, panelTop + 4, headerColor, false);
 
         int top = panelTop + LEFT_HEADER_H;
         int bottom = panelBottom - 1;
@@ -259,41 +282,82 @@ public final class KeyboardScreen extends Screen {
         leftContentH = y + leftScroll - top;
     }
 
+    /** Snapshot rows first (in their original order), then anything that has since arrived on the selected key. */
+    private List<KeyMapping> panelRows() {
+        List<KeyMapping> rows = new ArrayList<>(snapshot);
+        if (selectedKey != null) {
+            for (KeyMapping km : analysis.bindingsOn(selectedKey)) if (!rows.contains(km)) rows.add(km);
+        }
+        return rows;
+    }
+
+    /** True while the binding is still on the selected key (false once it has been moved away or unbound here). */
+    private boolean stillHere(KeyMapping km) {
+        return selectedKey == null ? km.isUnbound() || km == focused : !km.isUnbound() && km.getKey().equals(selectedKey);
+    }
+
     private int renderBindingRow(GuiGraphics g, KeyMapping km, int x, int y, int w, int mouseX, int mouseY, int clipTop, int clipBottom) {
-        List<BindingAnalysis.Overlap> overlaps = analysis.overlapsOf(km);
-        int h = ROW_H + overlaps.size() * LINE_H;
+        boolean here = stillHere(km);
+        int bx = x + w;
+        bx = pseudoButtonRight(g, bx, y + 2, Component.translatable("keyboardkeybinds.only"), here && othersHere(km),
+                mouseX, mouseY, clipTop, clipBottom, () -> keepOnly(km));
+        bx = pseudoButtonRight(g, bx - 3, y + 2, Component.translatable("keyboardkeybinds.unbind"), !km.isUnbound(),
+                mouseX, mouseY, clipTop, clipBottom, () -> unbind(km));
+        bx = pseudoButtonRight(g, bx - 3, y + 2, Component.translatable("keyboardkeybinds.reset"), !km.isDefault(),
+                mouseX, mouseY, clipTop, clipBottom, () -> reset(km));
+        bx = pseudoButtonRight(g, bx - 3, y + 2, Component.translatable("keyboardkeybinds.change"), listening != km,
+                mouseX, mouseY, clipTop, clipBottom, () -> startListening(km));
+
+        int dotX = x;
+        int textX = x + 9;
+        int textW = bx - textX - 4;
+        Component name = listening == km ? Component.translatable("keyboardkeybinds.listening") : km.getDisplayName();
+        List<net.minecraft.util.FormattedCharSequence> lines = font.split(name, Math.max(20, textW));
+        int nameH = Math.max(1, lines.size()) * LINE_H;
+        int h = Math.max(ROW_H, nameH + LINE_H + 4);
         if (km == focused) g.fill(x - 2, y, x + w + 2, y + h - 2, ROW_FOCUS);
 
-        int bx = x + w;
-        bx = pseudoButtonRight(g, bx, y + 2, Component.translatable("keyboardkeybinds.unbind"), !km.isUnbound(), mouseX, mouseY, clipTop, clipBottom, () -> unbind(km));
-        bx = pseudoButtonRight(g, bx - 3, y + 2, Component.translatable("keyboardkeybinds.reset"), !km.isDefault(), mouseX, mouseY, clipTop, clipBottom, () -> reset(km));
-        bx = pseudoButtonRight(g, bx - 3, y + 2, Component.translatable("keyboardkeybinds.change"), listening != km, mouseX, mouseY, clipTop, clipBottom, () -> startListening(km));
-        int textW = bx - x - 4;
-
-        if (listening == km) {
-            g.drawString(font, truncate(Component.translatable("keyboardkeybinds.listening").getString(), textW), x, y + 2, TEXT_LISTEN, false);
-        } else {
-            g.drawString(font, truncate(km.getDisplayName().getString(), textW), x, y + 2, TEXT, false);
+        // status dot: red = conflicts with another binding, yellow = shares the key harmlessly
+        BindingAnalysis.Severity sev = here ? analysis.severityOf(km) : BindingAnalysis.Severity.NONE;
+        if (sev != BindingAnalysis.Severity.NONE) {
+            int c = sev == BindingAnalysis.Severity.HARD ? FILL_HARD : FILL_SOFT;
+            g.fill(dotX, y + 3, dotX + 6, y + 9, c);
+            g.renderOutline(dotX, y + 3, 6, 6, OUTLINE);
         }
-        String info = (km.isUnbound() ? Component.translatable("keyboardkeybinds.unbound") : km.getTranslatedKeyMessage()).getString()
-                + "  |  " + Component.translatable(km.getCategory()).getString()
-                + "  |  " + BindingAnalysis.contextName(km.getKeyConflictContext()).getString();
-        g.drawString(font, truncate(info, w), x, y + 12, TEXT_DIM, false);
-
-        int ly = y + ROW_H - 2;
-        for (BindingAnalysis.Overlap o : overlaps) {
-            boolean hard = o.severity() == BindingAnalysis.Severity.HARD;
-            int lineW = w;
-            if (o.ignorable()) {
-                Component label = Component.translatable(o.ignored() ? "keyboardkeybinds.intentional.unmark" : "keyboardkeybinds.intentional.mark");
-                int left = pseudoButtonRight(g, x + w, ly - 1, label, true, mouseX, mouseY, clipTop, clipBottom, () -> toggleIgnore(km, o.other()));
-                lineW = left - x - 6;
-            }
-            Component line = Component.translatable(hard ? "keyboardkeybinds.conflict" : "keyboardkeybinds.overlap", o.other().getDisplayName(), o.reason());
-            g.drawString(font, truncate(line.getString(), lineW), x + 4, ly, hard ? TEXT_HARD : TEXT_SOFT, false);
+        int color = listening == km ? TEXT_LISTEN : here ? TEXT : TEXT_DIM;
+        int ly = y + 2;
+        for (net.minecraft.util.FormattedCharSequence line : lines) {
+            g.drawString(font, line, textX, ly, color, false);
             ly += LINE_H;
         }
+        String keyText = km.isUnbound() ? Component.translatable("keyboardkeybinds.unbound").getString() : km.getTranslatedKeyMessage().getString();
+        String info = (here ? keyText : "→ " + keyText)
+                + "  |  " + Component.translatable(km.getCategory()).getString()
+                + "  |  " + BindingAnalysis.contextName(km.getKeyConflictContext()).getString();
+        g.drawString(font, truncate(info, w - 9), textX, y + 2 + nameH, here ? TEXT_DIM : TEXT_BOUND, false);
+
+        // hover: everything about this binding, including why it shares the key with the others
+        boolean hover = mouseX >= x && mouseX < bx - 2 && mouseY >= Math.max(y, clipTop) && mouseY < Math.min(y + h - 2, clipBottom);
+        if (hover && listening == null) {
+            List<Component> tip = new ArrayList<>();
+            tip.add(km.getDisplayName().copy().withStyle(ChatFormatting.WHITE));
+            tip.add(Component.literal(keyText + "  |  " + Component.translatable(km.getCategory()).getString()
+                    + "  |  " + BindingAnalysis.contextName(km.getKeyConflictContext()).getString()).withStyle(ChatFormatting.GRAY));
+            if (here) {
+                for (BindingAnalysis.Overlap o : analysis.overlapsOf(km)) {
+                    ChatFormatting f = o.severity() == BindingAnalysis.Severity.HARD ? ChatFormatting.RED : ChatFormatting.YELLOW;
+                    tip.add(Component.literal("• ").append(o.other().getDisplayName()).append(": ").append(o.reason()).withStyle(f));
+                }
+            }
+            pendingTooltip = tip;
+        }
         return y + h + 2;
+    }
+
+    private boolean othersHere(KeyMapping km) {
+        if (selectedKey == null) return false;
+        for (KeyMapping other : analysis.bindingsOn(selectedKey)) if (other != km) return true;
+        return false;
     }
 
     /** Draws a small button whose right edge is at {@code right}; returns its left edge. */
@@ -396,12 +460,19 @@ public final class KeyboardScreen extends Screen {
         KeyboardLayout.Cell cell = cellAt(mouseX, mouseY);
         if (cell != null) {
             unfocusSearch();
-            selectedKey = cell.key();
             focused = null;
-            leftScroll = 0;
+            selectKey(cell.key());
             return true;
         }
         return false;
+    }
+
+    /** Select a key and freeze its current bindings as the panel's list. */
+    private void selectKey(@Nullable InputConstants.Key key) {
+        selectedKey = key;
+        snapshot.clear();
+        if (key != null) snapshot.addAll(analysis.bindingsOn(key));
+        leftScroll = 0;
     }
 
     @Override
@@ -468,8 +539,12 @@ public final class KeyboardScreen extends Screen {
 
     private void select(KeyMapping km) {
         focused = km;
-        selectedKey = km.isUnbound() ? selectedKey : km.getKey();
-        leftScroll = 0;
+        if (km.isUnbound()) {
+            selectKey(null);
+            snapshot.add(km);
+        } else {
+            selectKey(km.getKey());
+        }
     }
 
     private void startListening(KeyMapping km) {
@@ -489,15 +564,26 @@ public final class KeyboardScreen extends Screen {
         lastPressedModifier = InputConstants.UNKNOWN;
         keyHeld = false;
         modifierHeld = false;
-        focused = km;
-        if (!key.equals(InputConstants.UNKNOWN)) selectedKey = key;
+        focused = km;   // the panel stays on the selected key; the row now shows "-> new key"
         changed();
     }
 
     private void reset(KeyMapping km) {
         km.setToDefault();
+        options.setKey(km, km.getKey());
         focused = km;
-        if (!km.isUnbound()) selectedKey = km.getKey();
+        changed();
+    }
+
+    /** Keep this binding on the selected key and unbind every other binding there. */
+    private void keepOnly(KeyMapping keep) {
+        if (selectedKey == null) return;
+        for (KeyMapping other : new ArrayList<>(analysis.bindingsOn(selectedKey))) {
+            if (other == keep) continue;
+            other.setKeyModifierAndCode(KeyModifier.NONE, InputConstants.UNKNOWN);
+            options.setKey(other, InputConstants.UNKNOWN);
+        }
+        focused = keep;
         changed();
     }
 
@@ -509,14 +595,13 @@ public final class KeyboardScreen extends Screen {
     }
 
     private void resetAll() {
-        for (KeyMapping km : options.keyMappings) km.setToDefault();
+        for (KeyMapping km : options.keyMappings) {
+            km.setToDefault();
+            options.setKey(km, km.getKey());
+        }
         listening = null;
         changed();
-    }
-
-    private void toggleIgnore(KeyMapping a, KeyMapping b) {
-        ignored.toggle(a, b);
-        recompute();
+        selectKey(selectedKey); // the whole layout changed: start the panel's list over
     }
 
     /** "List View": back to the list this was opened from; opened directly (key, dev flag), open a fresh list instead. */
@@ -536,7 +621,7 @@ public final class KeyboardScreen extends Screen {
     }
 
     private void recompute() {
-        analysis = BindingAnalysis.compute(options.keyMappings, ignored);
+        analysis = BindingAnalysis.compute(options.keyMappings);
     }
 
     private void refreshSearch() {

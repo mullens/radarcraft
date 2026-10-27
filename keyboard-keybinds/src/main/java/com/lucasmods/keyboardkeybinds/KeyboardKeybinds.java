@@ -26,7 +26,7 @@ import java.util.WeakHashMap;
 
 /**
  * Keyboard Keybinds: a visual keyboard view of the key binds, as a bonus next to the normal Key Binds list (vanilla's or
- * Controlling's). Every key shows what is bound to it, real conflicts are red and intentional overlaps are yellow.
+ * Controlling's). Every key shows what is bound to it, real conflicts are red and harmless overlaps are yellow.
  * The list screen stays in charge; this mod only adds a "Keyboard" button to it, plus an optional key that opens the
  * keyboard directly. Client-side only.
  */
