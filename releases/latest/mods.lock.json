@@ -1,0 +1,3544 @@
+{
+ "name": "Radarcraft",
+ "version": "1.0.0",
+ "neoforge": "neoforge-21.1.248",
+ "mods": [
+  {
+   "file": "polymorph-neoforge-1.1.0+1.21.1.jar",
+   "name": "Polymorph",
+   "projectID": 388800,
+   "fileID": 6794589,
+   "url": "https://edge.forgecdn.net/files/6794/589/polymorph-neoforge-1.1.0%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/polymorph",
+   "source": "curseforge"
+  },
+  {
+   "file": "sodium-neoforge-0.8.13+mc1.21.1.jar",
+   "name": "Sodium",
+   "projectID": 394468,
+   "fileID": 8756580,
+   "url": "https://edge.forgecdn.net/files/8756/580/sodium-neoforge-0.8.13%2bmc1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/sodium",
+   "source": "curseforge"
+  },
+  {
+   "file": "coroutil-neoforge-1.21.0-1.3.9.jar",
+   "name": "CoroUtil",
+   "projectID": 237749,
+   "fileID": 7796187,
+   "url": "https://edge.forgecdn.net/files/7796/187/coroutil-neoforge-1.21.0-1.3.9.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/coroutil",
+   "source": "curseforge"
+  },
+  {
+   "file": "refurbished_furniture-neoforge-1.21.1-1.0.22.jar",
+   "name": "MrCrayfish's Furniture Mod: Refurbished",
+   "projectID": 897116,
+   "fileID": 7473565,
+   "url": "https://edge.forgecdn.net/files/7473/565/refurbished_furniture-neoforge-1.21.1-1.0.22.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/refurbished-furniture",
+   "source": "curseforge"
+  },
+  {
+   "file": "yeetusexperimentus-neoforge-87.0.0.jar",
+   "name": "Yeetus Experimentus",
+   "projectID": 635427,
+   "fileID": 5444189,
+   "url": "https://edge.forgecdn.net/files/5444/189/yeetusexperimentus-neoforge-87.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/yeetusexperimentus",
+   "source": "curseforge"
+  },
+  {
+   "file": "villagesandpillages-neoforge-2.0.0+mc1.21.1.jar",
+   "name": "Villages&Pillages",
+   "projectID": 915531,
+   "fileID": 9028199,
+   "url": "https://edge.forgecdn.net/files/9028/199/villagesandpillages-neoforge-2.0.0%2bmc1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/villages-and-pillages",
+   "source": "curseforge"
+  },
+  {
+   "file": "mezz_config-1.21.1-neoforge-0.6.8-standalone.jar",
+   "name": "MezzConfig",
+   "projectID": 1689768,
+   "fileID": 9048666,
+   "url": "https://edge.forgecdn.net/files/9048/666/mezz_config-1.21.1-neoforge-0.6.8-standalone.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/mezzconfig",
+   "source": "curseforge"
+  },
+  {
+   "file": "new_slab_variants-merged-1.21.1-3.0.1.jar",
+   "name": "New Slab Variants | +250 New Slabs!",
+   "projectID": 896385,
+   "fileID": 5747588,
+   "url": "https://edge.forgecdn.net/files/5747/588/new_slab_variants-merged-1.21.1-3.0.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/new-slab-variants",
+   "source": "curseforge"
+  },
+  {
+   "file": "justenoughbreeding-neoforge-1.21.1-3.3.1.jar",
+   "name": "Just Enough Breeding (JEBr)",
+   "projectID": 899386,
+   "fileID": 9037421,
+   "url": "https://edge.forgecdn.net/files/9037/421/justenoughbreeding-neoforge-1.21.1-3.3.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/justenoughbreeding",
+   "source": "curseforge"
+  },
+  {
+   "file": "recipeessentials-1.21.1-4.7.jar",
+   "name": "Recipe Essentials",
+   "projectID": 907856,
+   "fileID": 8463998,
+   "url": "https://edge.forgecdn.net/files/8463/998/recipeessentials-1.21.1-4.7.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/recipe-essentials-forge-fabric",
+   "source": "curseforge"
+  },
+  {
+   "file": "konkrete_neoforge_1.9.9_MC_1.21.jar",
+   "name": "Konkrete",
+   "projectID": 410295,
+   "fileID": 5453385,
+   "url": "https://edge.forgecdn.net/files/5453/385/konkrete_neoforge_1.9.9_MC_1.21.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/konkrete",
+   "source": "curseforge"
+  },
+  {
+   "file": "gml-6.0.2.jar",
+   "name": "GroovyModLoader (GML)",
+   "projectID": 661517,
+   "fileID": 5902913,
+   "url": "https://edge.forgecdn.net/files/5902/913/gml-6.0.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/gml",
+   "source": "curseforge"
+  },
+  {
+   "file": "YungsApi-1.21.1-NeoForge-5.1.6.jar",
+   "name": "YUNG's API (NeoForge) [1.20.4-1.21.1 ONLY]",
+   "projectID": 1015100,
+   "fileID": 6715463,
+   "url": "https://edge.forgecdn.net/files/6715/463/YungsApi-1.21.1-NeoForge-5.1.6.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/yungs-api-neoforge",
+   "source": "curseforge"
+  },
+  {
+   "file": "immersive_melodies-neoforge-0.8.0+1.21.1.jar",
+   "name": "Immersive Melodies",
+   "projectID": 904471,
+   "fileID": 8898367,
+   "url": "https://edge.forgecdn.net/files/8898/367/immersive_melodies-neoforge-0.8.0%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/immersive-melodies",
+   "source": "curseforge"
+  },
+  {
+   "file": "createaeronauticscurios-neoforge-1.21.1-2.3.jar",
+   "name": "Create Aeronautics x Curios API Compat",
+   "projectID": 1532334,
+   "fileID": 9076258,
+   "url": "https://edge.forgecdn.net/files/9076/258/createaeronauticscurios-neoforge-1.21.1-2.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-x-curios-api-compat",
+   "source": "curseforge"
+  },
+  {
+   "file": "chat_heads-0.15.7-neoforge-1.21.jar",
+   "name": "Chat Heads",
+   "projectID": 407206,
+   "fileID": 8642154,
+   "url": "https://edge.forgecdn.net/files/8642/154/chat_heads-0.15.7-neoforge-1.21.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/chat-heads",
+   "source": "curseforge"
+  },
+  {
+   "file": "enchdesc-neoforge-1.21.1-21.1.11.jar",
+   "name": "Enchantment Descriptions",
+   "projectID": 250419,
+   "fileID": 8693034,
+   "url": "https://edge.forgecdn.net/files/8693/34/enchdesc-neoforge-1.21.1-21.1.11.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/enchantment-descriptions",
+   "source": "curseforge"
+  },
+  {
+   "file": "trimeffects-neoforge-mc1.21-2.1.1.jar",
+   "name": "TrimsEffects - 2.1 NOW AVAILABLE!",
+   "projectID": 870275,
+   "fileID": 6159954,
+   "url": "https://edge.forgecdn.net/files/6159/954/trimeffects-neoforge-mc1.21-2.1.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/trimseffects",
+   "source": "curseforge"
+  },
+  {
+   "file": "waystones-neoforge-1.21.1-21.1.46.jar",
+   "name": "Waystones",
+   "projectID": 245755,
+   "fileID": 8969751,
+   "url": "https://edge.forgecdn.net/files/8969/751/waystones-neoforge-1.21.1-21.1.46.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/waystones",
+   "source": "curseforge"
+  },
+  {
+   "file": "clickadv-1.21-3.8.jar",
+   "name": "Clickable advancements",
+   "projectID": 511733,
+   "fileID": 5551404,
+   "url": "https://edge.forgecdn.net/files/5551/404/clickadv-1.21-3.8.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/clickable-advancements",
+   "source": "curseforge"
+  },
+  {
+   "file": "deeperdarker-neoforge-1.21.1-1.4.1.jar",
+   "name": "Deeper and Darker",
+   "projectID": 659011,
+   "fileID": 8201775,
+   "url": "https://edge.forgecdn.net/files/8201/775/deeperdarker-neoforge-1.21.1-1.4.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/deeperdarker",
+   "source": "curseforge"
+  },
+  {
+   "file": "creatingspace-1.21.1-1.7.22.jar",
+   "name": "Create : Creating Space",
+   "projectID": 858897,
+   "fileID": 8882869,
+   "url": "https://edge.forgecdn.net/files/8882/869/creatingspace-1.21.1-1.7.22.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-creating-space",
+   "source": "curseforge"
+  },
+  {
+   "file": "medieval_buildings-1.21.1-1.1.1-neoforge.jar",
+   "name": "Medieval Buildings - New Structures!",
+   "projectID": 924590,
+   "fileID": 6952841,
+   "url": "https://edge.forgecdn.net/files/6952/841/medieval_buildings-1.21.1-1.1.1-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/medieval-buildings",
+   "source": "curseforge"
+  },
+  {
+   "file": "BetterAnimationsCollection-v21.1.1-1.21.1-NeoForge.jar",
+   "name": "Better Animations Collection",
+   "projectID": 323976,
+   "fileID": 7041300,
+   "url": "https://edge.forgecdn.net/files/7041/300/BetterAnimationsCollection-v21.1.1-1.21.1-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/better-animations-collection",
+   "source": "curseforge"
+  },
+  {
+   "file": "time_on_display-merged-1.21-2.0.0.jar",
+   "name": "Time On Display",
+   "projectID": 958881,
+   "fileID": 5609781,
+   "url": "https://edge.forgecdn.net/files/5609/781/time_on_display-merged-1.21-2.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/time-on-display",
+   "source": "curseforge"
+  },
+  {
+   "file": "cbcaeronauticsmissiles-0.2.0.jar",
+   "name": "Create: Simulated Missiles | Create Aeronautics | Create Big Cannons Compat | Create: Radars Compat",
+   "projectID": 1654531,
+   "fileID": 8746555,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-simulated-missiles-create-aeronautics",
+   "source": "curseforge"
+  },
+  {
+   "file": "ldlib2-neoforge-1.21.1-2.2.42-all.jar",
+   "name": "LDLib",
+   "projectID": 626676,
+   "fileID": 9059591,
+   "url": "https://edge.forgecdn.net/files/9059/591/ldlib2-neoforge-1.21.1-2.2.42-all.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ldlib",
+   "source": "curseforge"
+  },
+  {
+   "file": "SubtleEffects-neoforge-1.21.1-1.15.1.jar",
+   "name": "Subtle Effects",
+   "projectID": 1023913,
+   "fileID": 9150589,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/subtle-effects",
+   "source": "curseforge"
+  },
+  {
+   "file": "simulatedcoasters-0.1.5.jar",
+   "name": "Create: Coasters Simulated",
+   "projectID": 1601871,
+   "fileID": 8655742,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-coasters-simulated",
+   "source": "curseforge"
+  },
+  {
+   "file": "sablecollisiondamage-1.0.8.jar",
+   "name": "Sable: Collision damage (Create Aeronautics)",
+   "projectID": 1521697,
+   "fileID": 8253180,
+   "url": "https://edge.forgecdn.net/files/8253/180/sablecollisiondamage-1.0.8.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/sable-collision-damage-create-aeronautics",
+   "source": "curseforge"
+  },
+  {
+   "file": "healthy_water-merged-1.21.1-1.0.1.jar",
+   "name": "Healthy Water",
+   "projectID": 921753,
+   "fileID": 5980648,
+   "url": "https://edge.forgecdn.net/files/5980/648/healthy_water-merged-1.21.1-1.0.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/healthy-water",
+   "source": "curseforge"
+  },
+  {
+   "file": "redirected-neoforge-1.0.0-1.21.1.jar",
+   "name": "Redirected",
+   "projectID": 1191845,
+   "fileID": 6148845,
+   "url": "https://edge.forgecdn.net/files/6148/845/redirected-neoforge-1.0.0-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/redirected",
+   "source": "curseforge"
+  },
+  {
+   "file": "eat_an_omelette-merged-1.21.1-1.5.0.jar",
+   "name": "Eat an Omelette",
+   "projectID": 859307,
+   "fileID": 5875969,
+   "url": "https://edge.forgecdn.net/files/5875/969/eat_an_omelette-merged-1.21.1-1.5.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/eat-an-omelette",
+   "source": "curseforge"
+  },
+  {
+   "file": "pandalib-neoforge-1.21.1-0.6.2.jar",
+   "name": "PandaLib",
+   "projectID": 975460,
+   "fileID": 8787579,
+   "url": "https://edge.forgecdn.net/files/8787/579/pandalib-neoforge-1.21.1-0.6.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/pandalib",
+   "source": "curseforge"
+  },
+  {
+   "file": "sky_tiger_air_ballon-1.0.0-neoforge-1.21.1.jar",
+   "name": "Sky Tiger Air Balloon",
+   "projectID": 1453300,
+   "fileID": 7572571,
+   "url": "https://edge.forgecdn.net/files/7572/571/sky_tiger_air_ballon-1.0.0-neoforge-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/sky-tiger-air-balloon",
+   "source": "curseforge"
+  },
+  {
+   "file": "Neoforge-Aeronautics-Calibrated-1.4.0.jar",
+   "name": "Aeronautics: Calibrated",
+   "projectID": 1532869,
+   "fileID": 8489575,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/aeronautics-calibrated",
+   "source": "curseforge"
+  },
+  {
+   "file": "happy_ghasts_boost-merged-1.21.1-1.0.1.jar",
+   "name": "Happy Ghasts Boost",
+   "projectID": 1360543,
+   "fileID": 7938458,
+   "url": "https://edge.forgecdn.net/files/7938/458/happy_ghasts_boost-merged-1.21.1-1.0.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/happy-ghasts-boost",
+   "source": "curseforge"
+  },
+  {
+   "file": "withoutstructures-1.0.0.jar",
+   "name": "Without Structures",
+   "projectID": 1629142,
+   "fileID": 8527984,
+   "url": "https://edge.forgecdn.net/files/8527/984/withoutstructures-1.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/without-structures",
+   "source": "curseforge"
+  },
+  {
+   "file": "colourfulearth-1.21-1.0.0-NeoForge.jar",
+   "name": "Colourful Earth",
+   "projectID": 882731,
+   "fileID": 5546483,
+   "url": "https://edge.forgecdn.net/files/5546/483/colourfulearth-1.21-1.0.0-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/colourful-earth",
+   "source": "curseforge"
+  },
+  {
+   "file": "MyNethersDelight-1.21.1-1.10.4.1.jar",
+   "name": "My Nether's Delight",
+   "projectID": 1003673,
+   "fileID": 8854319,
+   "url": "https://edge.forgecdn.net/files/8854/319/MyNethersDelight-1.21.1-1.10.4.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/my-nethers-delight",
+   "source": "curseforge"
+  },
+  {
+   "file": "prickle-neoforge-1.21.1-21.1.11.jar",
+   "name": "Prickle",
+   "projectID": 1023259,
+   "fileID": 6961457,
+   "url": "https://edge.forgecdn.net/files/6961/457/prickle-neoforge-1.21.1-21.1.11.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/prickle",
+   "source": "curseforge"
+  },
+  {
+   "file": "entity_model_features-3.3.12-1.21-neoforge.jar",
+   "name": "[EMF] Entity Model Features [Fabric & Forge]",
+   "projectID": 844662,
+   "fileID": 9188526,
+   "url": "https://edge.forgecdn.net/files/9188/526/entity_model_features-3.3.12-1.21-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/entity-model-features",
+   "source": "curseforge"
+  },
+  {
+   "file": "jmi-neoforge-1.21.1-1.9.1.jar",
+   "name": "JourneyMap Integration",
+   "projectID": 525447,
+   "fileID": 9121304,
+   "url": "https://edge.forgecdn.net/files/9121/304/jmi-neoforge-1.21.1-1.9.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/journeymap-integration",
+   "source": "curseforge"
+  },
+  {
+   "file": "accents-neoforge-1.21.1-2.0.3.jar",
+   "name": "Accents",
+   "projectID": 1446887,
+   "fileID": 8922100,
+   "url": "https://edge.forgecdn.net/files/8922/100/accents-neoforge-1.21.1-2.0.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/accents",
+   "source": "curseforge"
+  },
+  {
+   "file": "deep_aether-1.21.1-1.1.5.1.jar",
+   "name": "Deep Aether",
+   "projectID": 852465,
+   "fileID": 7843283,
+   "url": "https://edge.forgecdn.net/files/7843/283/deep_aether-1.21.1-1.1.5.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/deep-aether",
+   "source": "curseforge"
+  },
+  {
+   "file": "biolith-neoforge-3.0.14.jar",
+   "name": "Biolith",
+   "projectID": 852512,
+   "fileID": 8435635,
+   "url": "https://edge.forgecdn.net/files/8435/635/biolith-neoforge-3.0.14.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/biolith",
+   "source": "curseforge"
+  },
+  {
+   "file": "BarteringStation-v21.1.0-1.21.1-NeoForge.jar",
+   "name": "Bartering Station",
+   "projectID": 666940,
+   "fileID": 5733754,
+   "url": "https://edge.forgecdn.net/files/5733/754/BarteringStation-v21.1.0-1.21.1-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/bartering-station",
+   "source": "curseforge"
+  },
+  {
+   "file": "mcw-paintings-1.1.0-mc1.21.1neoforge.jar",
+   "name": "Macaw's Paintings",
+   "projectID": 438116,
+   "fileID": 7845033,
+   "url": "https://edge.forgecdn.net/files/7845/33/mcw-paintings-1.1.0-mc1.21.1neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/macaws-paintings",
+   "source": "curseforge"
+  },
+  {
+   "file": "new_shield_variants-neoforge-1.21.1-2.2.0.jar",
+   "name": "New Shield Variants | Shields with Effects!",
+   "projectID": 884272,
+   "fileID": 8302655,
+   "url": "https://edge.forgecdn.net/files/8302/655/new_shield_variants-neoforge-1.21.1-2.2.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/new-shield-variants",
+   "source": "curseforge"
+  },
+  {
+   "file": "BetterAdvancements-NeoForge-1.21.1-0.4.3.21.jar",
+   "name": "Better Advancements",
+   "projectID": 272515,
+   "fileID": 5850587,
+   "url": "https://edge.forgecdn.net/files/5850/587/BetterAdvancements-NeoForge-1.21.1-0.4.3.21.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/better-advancements",
+   "source": "curseforge"
+  },
+  {
+   "file": "dummmmmmy-1.21-2.1.2-neoforge.jar",
+   "name": "MmmMmmMmmMmm (Target Dummy)",
+   "projectID": 225738,
+   "fileID": 8903254,
+   "url": "https://edge.forgecdn.net/files/8903/254/dummmmmmy-1.21-2.1.2-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/mmmmmmmmmmmm",
+   "source": "curseforge"
+  },
+  {
+   "file": "limitedchunks-1.21-4.1.jar",
+   "name": "Limited Chunkloading - Chunk cleanup",
+   "projectID": 456640,
+   "fileID": 5571339,
+   "url": "https://edge.forgecdn.net/files/5571/339/limitedchunks-1.21-4.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/limited-chunkloading",
+   "source": "curseforge"
+  },
+  {
+   "file": "JustEnoughProfessions-neoforge-1.21.1-4.0.5.jar",
+   "name": "Just Enough Professions (JEP)",
+   "projectID": 417645,
+   "fileID": 7966681,
+   "url": "https://edge.forgecdn.net/files/7966/681/JustEnoughProfessions-neoforge-1.21.1-4.0.5.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/just-enough-professions-jep",
+   "source": "curseforge"
+  },
+  {
+   "file": "sophisticatedcore-1.21.1-1.5.12.2400.jar",
+   "name": "Sophisticated Core",
+   "projectID": 618298,
+   "fileID": 9166063,
+   "url": "https://edge.forgecdn.net/files/9166/63/sophisticatedcore-1.21.1-1.5.12.2400.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/sophisticated-core",
+   "source": "curseforge"
+  },
+  {
+   "file": "aether_protect_your_moa-1.21.1-1.0.0-neoforge.jar",
+   "name": "Aether Addon: Protect Your Moa",
+   "projectID": 1016303,
+   "fileID": 6040716,
+   "url": "https://edge.forgecdn.net/files/6040/716/aether_protect_your_moa-1.21.1-1.0.0-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/aether-protect-your-moa",
+   "source": "curseforge"
+  },
+  {
+   "file": "disenchanting_table-merged-1.21.1-5.0.2.jar",
+   "name": "Dis-Enchanting Table",
+   "projectID": 933354,
+   "fileID": 6581607,
+   "url": "https://edge.forgecdn.net/files/6581/607/disenchanting_table-merged-1.21.1-5.0.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/dis-enchanting-table",
+   "source": "curseforge"
+  },
+  {
+   "file": "betterfpsdist-1.21-6.0.jar",
+   "name": "Better Fps - Render Distance",
+   "projectID": 551520,
+   "fileID": 5723250,
+   "url": "https://edge.forgecdn.net/files/5723/250/betterfpsdist-1.21-6.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/better-fps-render-distance",
+   "source": "curseforge"
+  },
+  {
+   "file": "Stoneworks-v21.1.0-1.21.1-NeoForge.jar",
+   "name": "Stoneworks",
+   "projectID": 852663,
+   "fileID": 5731747,
+   "url": "https://edge.forgecdn.net/files/5731/747/Stoneworks-v21.1.0-1.21.1-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/stoneworks",
+   "source": "curseforge"
+  },
+  {
+   "file": "YungsBetterOceanMonuments-1.21.1-NeoForge-4.1.2.jar",
+   "name": "YUNG's Better Ocean Monuments (NeoForge) [1.20.4 - 1.21.1 ONLY]",
+   "projectID": 1015115,
+   "fileID": 5924487,
+   "url": "https://edge.forgecdn.net/files/5924/487/YungsBetterOceanMonuments-1.21.1-NeoForge-4.1.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/yungs-better-ocean-monuments-neoforge",
+   "source": "curseforge"
+  },
+  {
+   "file": "nyfsspiders-neoforge-1.21.1-3.0.2.jar",
+   "name": "Nyf's Spiders",
+   "projectID": 686058,
+   "fileID": 9013702,
+   "url": "https://edge.forgecdn.net/files/9013/702/nyfsspiders-neoforge-1.21.1-3.0.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/nyfs-spiders",
+   "source": "curseforge"
+  },
+  {
+   "file": "txnilib-neoforge-1.0.24-1.21.1.jar",
+   "name": "TxniLib",
+   "projectID": 1104882,
+   "fileID": 6533725,
+   "url": "https://edge.forgecdn.net/files/6533/725/txnilib-neoforge-1.0.24-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/txnilib",
+   "source": "curseforge"
+  },
+  {
+   "file": "AmbientSounds_NEOFORGE_v6.3.10_mc1.21.1.jar",
+   "name": "AmbientSounds 6",
+   "projectID": 254284,
+   "fileID": 9099001,
+   "url": "https://edge.forgecdn.net/files/9099/1/AmbientSounds_NEOFORGE_v6.3.10_mc1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ambientsounds",
+   "source": "curseforge"
+  },
+  {
+   "file": "fzzy_config-0.7.7+1.21+neoforge.jar",
+   "name": "Fzzy Config",
+   "projectID": 1005914,
+   "fileID": 8883390,
+   "url": "https://edge.forgecdn.net/files/8883/390/fzzy_config-0.7.7%2b1.21%2bneoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/fzzy-config",
+   "source": "curseforge"
+  },
+  {
+   "file": "kubejs-neoforge-2101.7.2-build.377.jar",
+   "name": "KubeJS",
+   "projectID": 238086,
+   "fileID": 8843626,
+   "url": "https://edge.forgecdn.net/files/8843/626/kubejs-neoforge-2101.7.2-build.377.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/kubejs",
+   "source": "curseforge"
+  },
+  {
+   "file": "cable_facades-1.21.1-NeoForge-2.1.4.jar",
+   "name": "Cable Facades",
+   "projectID": 1140577,
+   "fileID": 8734901,
+   "url": "https://edge.forgecdn.net/files/8734/901/cable_facades-1.21.1-NeoForge-2.1.4.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/cable-facades",
+   "source": "curseforge"
+  },
+  {
+   "file": "YungsBetterNetherFortresses-1.21.1-NeoForge-3.1.5.jar",
+   "name": "YUNG's Better Nether Fortresses (NeoForge) [1.20.4 - 1.21.1 ONLY]",
+   "projectID": 1015118,
+   "fileID": 6606621,
+   "url": "https://edge.forgecdn.net/files/6606/621/YungsBetterNetherFortresses-1.21.1-NeoForge-3.1.5.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/yungs-better-nether-fortresses-neoforge",
+   "source": "curseforge"
+  },
+  {
+   "file": "curios-neoforge-9.5.1+1.21.1.jar",
+   "name": "Curios API",
+   "projectID": 309927,
+   "fileID": 6529130,
+   "url": "https://edge.forgecdn.net/files/6529/130/curios-neoforge-9.5.1%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/curios",
+   "source": "curseforge"
+  },
+  {
+   "file": "entity_texture_features-7.2.6-1.21-neoforge.jar",
+   "name": "[ETF] Entity Texture Features - [Fabric & Forge]",
+   "projectID": 568563,
+   "fileID": 9188408,
+   "url": "https://edge.forgecdn.net/files/9188/408/entity_texture_features-7.2.6-1.21-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/entity-texture-features-fabric",
+   "source": "curseforge"
+  },
+  {
+   "file": "createdieselgenerators-1.21.1-1.3.15.jar",
+   "name": "Create: Diesel Generators",
+   "projectID": 869316,
+   "fileID": 8542167,
+   "url": "https://edge.forgecdn.net/files/8542/167/createdieselgenerators-1.21.1-1.3.15.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-diesel-generators",
+   "source": "curseforge"
+  },
+  {
+   "file": "just-hammers-neoforge-21.1.4.jar",
+   "name": "JustHammers",
+   "projectID": 681606,
+   "fileID": 7435250,
+   "url": "https://edge.forgecdn.net/files/7435/250/just-hammers-neoforge-21.1.4.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/justhammers",
+   "source": "curseforge"
+  },
+  {
+   "file": "blur-neoforge-6.3.1+1.21.1.jar",
+   "name": "Blur+",
+   "projectID": 393563,
+   "fileID": 8339814,
+   "url": "https://edge.forgecdn.net/files/8339/814/blur-neoforge-6.3.1%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/blur-fabric",
+   "source": "curseforge"
+  },
+  {
+   "file": "mcw-trapdoors-1.1.5-mc1.21.1neoforge.jar",
+   "name": "Macaw's Trapdoors",
+   "projectID": 400933,
+   "fileID": 7256148,
+   "url": "https://edge.forgecdn.net/files/7256/148/mcw-trapdoors-1.1.5-mc1.21.1neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/macaws-trapdoors",
+   "source": "curseforge"
+  },
+  {
+   "file": "anvilcore-10.1 Release-neoforge-1.21.1.jar",
+   "name": "AnvilCore \ud83d\udd28 [DISCONTINUED]",
+   "projectID": 1470821,
+   "fileID": 7771419,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/anvilcore",
+   "source": "curseforge"
+  },
+  {
+   "file": "EasyShulkerBoxes-v21.1.3-1.21.1-NeoForge.jar",
+   "name": "Easy Shulker Boxes",
+   "projectID": 594006,
+   "fileID": 6697879,
+   "url": "https://edge.forgecdn.net/files/6697/879/EasyShulkerBoxes-v21.1.3-1.21.1-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/easy-shulker-boxes",
+   "source": "curseforge"
+  },
+  {
+   "file": "Explorify v1.6.5.mod.jar",
+   "name": "Explorify \u2013 Dungeons & Structures",
+   "projectID": 698309,
+   "fileID": 8082824,
+   "url": "https://edge.forgecdn.net/files/8082/824/Explorify%20v1.6.5.mod.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/explorify",
+   "source": "curseforge"
+  },
+  {
+   "file": "caelus-neoforge-7.0.1+1.21.1.jar",
+   "name": "Caelus API",
+   "projectID": 308989,
+   "fileID": 5694215,
+   "url": "https://edge.forgecdn.net/files/5694/215/caelus-neoforge-7.0.1%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/caelus",
+   "source": "curseforge"
+  },
+  {
+   "file": "BadOptimizations-2.4.1-1.21.1.jar",
+   "name": "BadOptimizations",
+   "projectID": 949555,
+   "fileID": 7338300,
+   "url": "https://edge.forgecdn.net/files/7338/300/BadOptimizations-2.4.1-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/badoptimizations",
+   "source": "curseforge"
+  },
+  {
+   "file": "justzoom_neoforge_3.0.1_MC_1.21.1.jar",
+   "name": "Just Zoom",
+   "projectID": 561885,
+   "fileID": 9062488,
+   "url": "https://edge.forgecdn.net/files/9062/488/justzoom_neoforge_3.0.1_MC_1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/just-zoom",
+   "source": "curseforge"
+  },
+  {
+   "file": "VisualWorkbench-v21.1.2-1.21.1-NeoForge.jar",
+   "name": "Visual Workbench",
+   "projectID": 500273,
+   "fileID": 8793655,
+   "url": "https://edge.forgecdn.net/files/8793/655/VisualWorkbench-v21.1.2-1.21.1-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/visual-workbench",
+   "source": "curseforge"
+  },
+  {
+   "file": "Create-Structures-Arise-1.21.1-NeoForge-176.49.49.jar",
+   "name": "Create: Structures Arise",
+   "projectID": 1010066,
+   "fileID": 8837992,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-structures-arise",
+   "source": "curseforge"
+  },
+  {
+   "file": "appleskin-neoforge-mc1.21-3.0.9.jar",
+   "name": "AppleSkin",
+   "projectID": 248787,
+   "fileID": 7854442,
+   "url": "https://edge.forgecdn.net/files/7854/442/appleskin-neoforge-mc1.21-3.0.9.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/appleskin",
+   "source": "curseforge"
+  },
+  {
+   "file": "naturalist-2.0.5-neoforge-1.21.1.jar",
+   "name": "Naturalist",
+   "projectID": 627986,
+   "fileID": 9004373,
+   "url": "https://edge.forgecdn.net/files/9004/373/naturalist-2.0.5-neoforge-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/naturalist",
+   "source": "curseforge"
+  },
+  {
+   "file": "attributefix-neoforge-1.21.1-21.1.3.jar",
+   "name": "AttributeFix",
+   "projectID": 280510,
+   "fileID": 7115922,
+   "url": "https://edge.forgecdn.net/files/7115/922/attributefix-neoforge-1.21.1-21.1.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/attributefix",
+   "source": "curseforge"
+  },
+  {
+   "file": "TradingPost-v21.1.1-1.21.1-NeoForge.jar",
+   "name": "Trading Post",
+   "projectID": 539057,
+   "fileID": 7143451,
+   "url": "https://edge.forgecdn.net/files/7143/451/TradingPost-v21.1.1-1.21.1-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/trading-post",
+   "source": "curseforge"
+  },
+  {
+   "file": "mcw-mcwfences-1.2.1-mc1.21.1neoforge.jar",
+   "name": "Macaw's Fences and Walls",
+   "projectID": 453925,
+   "fileID": 7308338,
+   "url": "https://edge.forgecdn.net/files/7308/338/mcw-mcwfences-1.2.1-mc1.21.1neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/macaws-fences-and-walls",
+   "source": "curseforge"
+  },
+  {
+   "file": "YungsBetterStrongholds-1.21.1-NeoForge-5.1.3.jar",
+   "name": "YUNG's Better Strongholds (NeoForge) [1.20.4 - 1.21.1 ONLY]",
+   "projectID": 1015105,
+   "fileID": 6272264,
+   "url": "https://edge.forgecdn.net/files/6272/264/YungsBetterStrongholds-1.21.1-NeoForge-5.1.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/yungs-better-strongholds-neoforge",
+   "source": "curseforge"
+  },
+  {
+   "file": "voidtotem-neoforge-1.21.1-4.0.0.jar",
+   "name": "Void Totem (Forge)",
+   "projectID": 449655,
+   "fileID": 6269187,
+   "url": "https://edge.forgecdn.net/files/6269/187/voidtotem-neoforge-1.21.1-4.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/voidtotem",
+   "source": "curseforge"
+  },
+  {
+   "file": "mcw-holidays-1.1.2-mc1.21.1neoforge.jar",
+   "name": "Macaw's Holidays",
+   "projectID": 930232,
+   "fileID": 7304374,
+   "url": "https://edge.forgecdn.net/files/7304/374/mcw-holidays-1.1.2-mc1.21.1neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/macaws-holidays",
+   "source": "curseforge"
+  },
+  {
+   "file": "sable-neoforge-1.21.1-2.0.6.jar",
+   "name": "Sable",
+   "projectID": 1312371,
+   "fileID": 9043865,
+   "url": "https://edge.forgecdn.net/files/9043/865/sable-neoforge-1.21.1-2.0.6.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/sable",
+   "source": "curseforge"
+  },
+  {
+   "file": "t_and_t-fabric-neoforge-1.13.11.jar",
+   "name": "Towns and Towers",
+   "projectID": 626761,
+   "fileID": 8657120,
+   "url": "https://edge.forgecdn.net/files/8657/120/t_and_t-fabric-neoforge-1.13.11.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/towns-and-towers",
+   "source": "curseforge"
+  },
+  {
+   "file": "framework-neoforge-1.21.1-0.13.11.jar",
+   "name": "Framework",
+   "projectID": 549225,
+   "fileID": 7530361,
+   "url": "https://edge.forgecdn.net/files/7530/361/framework-neoforge-1.21.1-0.13.11.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/framework",
+   "source": "curseforge"
+  },
+  {
+   "file": "CerbonsAPI-NeoForge-1.21-1.3.0.jar",
+   "name": "CERBON's API [Forge | Fabric | NeoForge]",
+   "projectID": 955605,
+   "fileID": 6483943,
+   "url": "https://edge.forgecdn.net/files/6483/943/CerbonsAPI-NeoForge-1.21-1.3.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/cerbons-api",
+   "source": "curseforge"
+  },
+  {
+   "file": "EasyAnvils-v21.1.0-1.21.1-NeoForge.jar",
+   "name": "Easy Anvils",
+   "projectID": 682567,
+   "fileID": 5733955,
+   "url": "https://edge.forgecdn.net/files/5733/955/EasyAnvils-v21.1.0-1.21.1-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/easy-anvils",
+   "source": "curseforge"
+  },
+  {
+   "file": "Iceberg-1.21.1-neoforge-1.3.2.jar",
+   "name": "Iceberg [Neo/Forge]",
+   "projectID": 520110,
+   "fileID": 6423863,
+   "url": "https://edge.forgecdn.net/files/6423/863/Iceberg-1.21.1-neoforge-1.3.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/iceberg",
+   "source": "curseforge"
+  },
+  {
+   "file": "MutantMonsters-v21.1.1-1.21.1-NeoForge.jar",
+   "name": "Mutant Monsters",
+   "projectID": 852665,
+   "fileID": 7232511,
+   "url": "https://edge.forgecdn.net/files/7232/511/MutantMonsters-v21.1.1-1.21.1-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/mutant-monsters",
+   "source": "curseforge"
+  },
+  {
+   "file": "letsdo-vinery-neoforge-1.5.5.jar",
+   "name": "[Let's Do] Vinery",
+   "projectID": 704465,
+   "fileID": 9089612,
+   "url": "https://edge.forgecdn.net/files/9089/612/letsdo-vinery-neoforge-1.5.5.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/lets-do-vinery",
+   "source": "curseforge"
+  },
+  {
+   "file": "escalated-1.3.2-mc.1.21.1.jar",
+   "name": "Create: Escalated",
+   "projectID": 1260145,
+   "fileID": 8679269,
+   "url": "https://edge.forgecdn.net/files/8679/269/escalated-1.3.2-mc.1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-escalated",
+   "source": "curseforge"
+  },
+  {
+   "file": "medieval_buildings_end_edition-1.21.1-1.0.4-neoforge.jar",
+   "name": "Medieval Buildings [End Edition]",
+   "projectID": 976817,
+   "fileID": 6986733,
+   "url": "https://edge.forgecdn.net/files/6986/733/medieval_buildings_end_edition-1.21.1-1.0.4-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/medieval-buildings-end-edition",
+   "source": "curseforge"
+  },
+  {
+   "file": "YungsBetterEndIsland-1.21.1-NeoForge-3.1.2.jar",
+   "name": "YUNG's Better End Island (NeoForge) [1.20.4 - 1.21.1 ONLY]",
+   "projectID": 1015127,
+   "fileID": 6300968,
+   "url": "https://edge.forgecdn.net/files/6300/968/YungsBetterEndIsland-1.21.1-NeoForge-3.1.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/yungs-better-end-island-neoforge",
+   "source": "curseforge"
+  },
+  {
+   "file": "trading_floor-3.0.16.jar",
+   "name": "Create: Trading Floor",
+   "projectID": 1102591,
+   "fileID": 7625579,
+   "url": "https://edge.forgecdn.net/files/7625/579/trading_floor-3.0.16.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-trading-floor",
+   "source": "curseforge"
+  },
+  {
+   "file": "mcw-bridges-3.1.2-mc1.21.1neoforge.jar",
+   "name": "Macaw's Bridges",
+   "projectID": 351725,
+   "fileID": 7627896,
+   "url": "https://edge.forgecdn.net/files/7627/896/mcw-bridges-3.1.2-mc1.21.1neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/macaws-bridges",
+   "source": "curseforge"
+  },
+  {
+   "file": "eatinganimation-1.21.0-6.0.1.jar",
+   "name": "Eating Animation [Neo/Forge]",
+   "projectID": 570544,
+   "fileID": 5567664,
+   "url": "https://edge.forgecdn.net/files/5567/664/eatinganimation-1.21.0-6.0.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/eating-animation-forge",
+   "source": "curseforge"
+  },
+  {
+   "file": "advancednetherite-neoforge-2.3.1-1.21.1.jar",
+   "name": "Advanced Netherite (Forge / NeoForge)",
+   "projectID": 495336,
+   "fileID": 7039369,
+   "url": "https://edge.forgecdn.net/files/7039/369/advancednetherite-neoforge-2.3.1-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/advanced-netherite",
+   "source": "curseforge"
+  },
+  {
+   "file": "elytraslot-neoforge-9.0.2+1.21.1.jar",
+   "name": "Elytra Slot",
+   "projectID": 317716,
+   "fileID": 5778461,
+   "url": "https://edge.forgecdn.net/files/5778/461/elytraslot-neoforge-9.0.2%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/elytra-slot",
+   "source": "curseforge"
+  },
+  {
+   "file": "betterworldloadingnf21-1.0.jar",
+   "name": "Better World Loading ([Neo]Forge)",
+   "projectID": 1286032,
+   "fileID": 6647966,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/better-world-loading-forge",
+   "source": "curseforge"
+  },
+  {
+   "file": "cherishedworlds-neoforge-10.1.1+1.21.1.jar",
+   "name": "Cherished Worlds",
+   "projectID": 308240,
+   "fileID": 6353949,
+   "url": "https://edge.forgecdn.net/files/6353/949/cherishedworlds-neoforge-10.1.1%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/cherished-worlds",
+   "source": "curseforge"
+  },
+  {
+   "file": "Platform-neoforge-1.21.1-1.3.3.jar",
+   "name": "Platform",
+   "projectID": 997634,
+   "fileID": 8075942,
+   "url": "https://edge.forgecdn.net/files/8075/942/Platform-neoforge-1.21.1-1.3.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/platform",
+   "source": "curseforge"
+  },
+  {
+   "file": "Cyberspace 5.0.2 (NF1.21.1).jar",
+   "name": "Cyberspace",
+   "projectID": 1206890,
+   "fileID": 8788652,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/cyberspace",
+   "source": "curseforge"
+  },
+  {
+   "file": "OctoLib-NEOFORGE-0.6.2+1.21.jar",
+   "name": "ShatterLib | OctoLib",
+   "projectID": 916747,
+   "fileID": 8040848,
+   "url": "https://edge.forgecdn.net/files/8040/848/OctoLib-NEOFORGE-0.6.2%2b1.21.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/shatterbyte-lib",
+   "source": "curseforge"
+  },
+  {
+   "file": "createoreexcavation-1.21-1.6.8.jar",
+   "name": "Create Ore Excavation",
+   "projectID": 649832,
+   "fileID": 7199305,
+   "url": "https://edge.forgecdn.net/files/7199/305/createoreexcavation-1.21-1.6.8.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-ore-excavation",
+   "source": "curseforge"
+  },
+  {
+   "file": "medieval_buildings_nether_edition-1.21.1-1.0.2-neoforge.jar",
+   "name": "Medieval Buildings [Nether Edition]",
+   "projectID": 1278431,
+   "fileID": 7435312,
+   "url": "https://edge.forgecdn.net/files/7435/312/medieval_buildings_nether_edition-1.21.1-1.0.2-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/medieval-buildings-nether-edition",
+   "source": "curseforge"
+  },
+  {
+   "file": "wallpaper-neoforge-1.21.1-3.jar",
+   "name": "Wallpaper Decor",
+   "projectID": 1624139,
+   "fileID": 8974229,
+   "url": "https://edge.forgecdn.net/files/8974/229/wallpaper-neoforge-1.21.1-3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/wallpaper-decor",
+   "source": "curseforge"
+  },
+  {
+   "file": "waystonessable-1.0.7.jar",
+   "name": "Waystones: Sable (Create Aeronautics Addon)",
+   "projectID": 1524471,
+   "fileID": 8632751,
+   "url": "https://edge.forgecdn.net/files/8632/751/waystonessable-1.0.7.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/waystones-sable",
+   "source": "curseforge"
+  },
+  {
+   "file": "Custom Nether Portals - Neoforge - MC 1.21.1- 3.0.0.jar",
+   "name": "Custom Nether Portals [Any Shape Nether Portals]",
+   "projectID": 1302224,
+   "fileID": 8982155,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/custom-nether-portals",
+   "source": "curseforge"
+  },
+  {
+   "file": "lithium-neoforge-0.15.4+mc1.21.1.jar",
+   "name": "Lithium (Fabric/NeoForge)",
+   "projectID": 360438,
+   "fileID": 8330365,
+   "url": "https://edge.forgecdn.net/files/8330/365/lithium-neoforge-0.15.4%2bmc1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/lithium",
+   "source": "curseforge"
+  },
+  {
+   "file": "collective-1.21.1-8.53.jar",
+   "name": "Collective",
+   "projectID": 342584,
+   "fileID": 9177224,
+   "url": "https://edge.forgecdn.net/files/9177/224/collective-1.21.1-8.53.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/collective",
+   "source": "curseforge"
+  },
+  {
+   "file": "mcw-roofs-2.3.2-mc1.21.1neoforge.jar",
+   "name": "Macaw's Roofs",
+   "projectID": 352039,
+   "fileID": 6494399,
+   "url": "https://edge.forgecdn.net/files/6494/399/mcw-roofs-2.3.2-mc1.21.1neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/macaws-roofs",
+   "source": "curseforge"
+  },
+  {
+   "file": "create-1.21.1-6.0.10.jar",
+   "name": "Create",
+   "projectID": 328085,
+   "fileID": 7963363,
+   "url": "https://edge.forgecdn.net/files/7963/363/create-1.21.1-6.0.10.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create",
+   "source": "curseforge"
+  },
+  {
+   "file": "CreativeCore_NEOFORGE_v2.13.51_mc1.21.1.jar",
+   "name": "CreativeCore",
+   "projectID": 257814,
+   "fileID": 9108041,
+   "url": "https://edge.forgecdn.net/files/9108/41/CreativeCore_NEOFORGE_v2.13.51_mc1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/creativecore",
+   "source": "curseforge"
+  },
+  {
+   "file": "skinlayers3d-neoforge-1.11.3-mc1.21.1.jar",
+   "name": "Skin Layers 3D",
+   "projectID": 521480,
+   "fileID": 8906440,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/skin-layers-3d",
+   "source": "curseforge"
+  },
+  {
+   "file": "mcw-mcwstairs-1.0.2-mc1.21.1neoforge.jar",
+   "name": "Macaw's Stairs",
+   "projectID": 1119394,
+   "fileID": 7317479,
+   "url": "https://edge.forgecdn.net/files/7317/479/mcw-mcwstairs-1.0.2-mc1.21.1neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/macaws-stairs",
+   "source": "curseforge"
+  },
+  {
+   "file": "ClimateRivers-v21.1.3-1.21.1-NeoForge.jar",
+   "name": "Climate Rivers",
+   "projectID": 1255421,
+   "fileID": 7116125,
+   "url": "https://edge.forgecdn.net/files/7116/125/ClimateRivers-v21.1.3-1.21.1-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/climate-rivers",
+   "source": "curseforge"
+  },
+  {
+   "file": "sky_whale_ship-neoforge-1.21.1.jar",
+   "name": "Sky Whale Ship",
+   "projectID": 1214459,
+   "fileID": 7177858,
+   "url": "https://edge.forgecdn.net/files/7177/858/sky_whale_ship-neoforge-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/sky-whale-ship",
+   "source": "curseforge"
+  },
+  {
+   "file": "emotecraft-for-MC1.21.1-2.4.12-neoforge.jar",
+   "name": "Emotecraft (Forge)",
+   "projectID": 403422,
+   "fileID": 6941989,
+   "url": "https://edge.forgecdn.net/files/6941/989/emotecraft-for-MC1.21.1-2.4.12-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/emotecraft-forge",
+   "source": "curseforge"
+  },
+  {
+   "file": "TerraBlender-neoforge-1.21.1-4.1.0.8.jar",
+   "name": "TerraBlender (NeoForge)",
+   "projectID": 940057,
+   "fileID": 6054947,
+   "url": "https://edge.forgecdn.net/files/6054/947/TerraBlender-neoforge-1.21.1-4.1.0.8.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/terrablender-neoforge",
+   "source": "curseforge"
+  },
+  {
+   "file": "mcwbiomesoplenty-neoforge-1.21.1-1.6.jar",
+   "name": "Macaw's Biomes O' Plenty",
+   "projectID": 533382,
+   "fileID": 8296109,
+   "url": "https://edge.forgecdn.net/files/8296/109/mcwbiomesoplenty-neoforge-1.21.1-1.6.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/macaws-biomes-o-plenty",
+   "source": "curseforge"
+  },
+  {
+   "file": "potion_combiner-1.21.1-Neoforge-1.0.0.jar",
+   "name": "Potion Combiner [Potion Blending Combiner]",
+   "projectID": 1391289,
+   "fileID": 7258831,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/potion-combiner",
+   "source": "curseforge"
+  },
+  {
+   "file": "jamlib-neoforge-1.3.6+1.21.1.jar",
+   "name": "JamLib",
+   "projectID": 623764,
+   "fileID": 7766752,
+   "url": "https://edge.forgecdn.net/files/7766/752/jamlib-neoforge-1.3.6%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/jamlib",
+   "source": "curseforge"
+  },
+  {
+   "file": "hunters_return-1.21.1-20.12.0.jar",
+   "name": "Hunter'sReturn",
+   "projectID": 318857,
+   "fileID": 8695096,
+   "url": "https://edge.forgecdn.net/files/8695/96/hunters_return-1.21.1-20.12.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/huntersreturn",
+   "source": "curseforge"
+  },
+  {
+   "file": "rhino-2101.2.7-build.85.jar",
+   "name": "Rhino",
+   "projectID": 416294,
+   "fileID": 8218748,
+   "url": "https://edge.forgecdn.net/files/8218/748/rhino-2101.2.7-build.85.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/rhino",
+   "source": "curseforge"
+  },
+  {
+   "file": "lootr-neoforge-1.21.1-1.11.38.127.jar",
+   "name": "Lootr (Forge & NeoForge)",
+   "projectID": 361276,
+   "fileID": 8968561,
+   "url": "https://edge.forgecdn.net/files/8968/561/lootr-neoforge-1.21.1-1.11.38.127.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/lootr",
+   "source": "curseforge"
+  },
+  {
+   "file": "ponderjs-neoforge-1.21.1-2.4.0.jar",
+   "name": "Ponder for KubeJS",
+   "projectID": 622888,
+   "fileID": 7436813,
+   "url": "https://edge.forgecdn.net/files/7436/813/ponderjs-neoforge-1.21.1-2.4.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ponder",
+   "source": "curseforge"
+  },
+  {
+   "file": "ArmorStatues-v21.1.0-1.21.1-NeoForge.jar",
+   "name": "Armor Statues",
+   "projectID": 682566,
+   "fileID": 5732769,
+   "url": "https://edge.forgecdn.net/files/5732/769/ArmorStatues-v21.1.0-1.21.1-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/armor-statues",
+   "source": "curseforge"
+  },
+  {
+   "file": "NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar",
+   "name": "No Chat Reports",
+   "projectID": 634062,
+   "fileID": 5885735,
+   "url": "https://edge.forgecdn.net/files/5885/735/NoChatReports-NEOFORGE-1.21.1-v2.9.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/no-chat-reports",
+   "source": "curseforge"
+  },
+  {
+   "file": "takesapillage-neoforge-1.0.13+mc1.21.1.jar",
+   "name": "It Takes a Pillage Continuation",
+   "projectID": 1111063,
+   "fileID": 9018153,
+   "url": "https://edge.forgecdn.net/files/9018/153/takesapillage-neoforge-1.0.13%2bmc1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/it-takes-a-pillage-continuation",
+   "source": "curseforge"
+  },
+  {
+   "file": "open-parties-and-claims-neoforge-1.21.1-0.32.7.jar",
+   "name": "Open Parties and Claims",
+   "projectID": 636608,
+   "fileID": 9066682,
+   "url": "https://edge.forgecdn.net/files/9066/682/open-parties-and-claims-neoforge-1.21.1-0.32.7.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/open-parties-and-claims",
+   "source": "curseforge"
+  },
+  {
+   "file": "artifacts-neoforge-13.2.5.jar",
+   "name": "Artifacts",
+   "projectID": 312353,
+   "fileID": 8791899,
+   "url": "https://edge.forgecdn.net/files/8791/899/artifacts-neoforge-13.2.5.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/artifacts",
+   "source": "curseforge"
+  },
+  {
+   "file": "KineticGrip-1.21.1-1.0.5.jar",
+   "name": "Create Aeronautics: Kinetic Grip",
+   "projectID": 1523676,
+   "fileID": 8265245,
+   "url": "https://edge.forgecdn.net/files/8265/245/KineticGrip-1.21.1-1.0.5.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-kinetic-grip",
+   "source": "curseforge"
+  },
+  {
+   "file": "aerowarptics-1.3.0.jar",
+   "name": "Create: AeroWarptics",
+   "projectID": 1659672,
+   "fileID": 8787426,
+   "url": "https://edge.forgecdn.net/files/8787/426/aerowarptics-1.3.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aerowarptics",
+   "source": "curseforge"
+  },
+  {
+   "file": "modelfix-1.21-1.10.jar",
+   "name": "Model Gap Fix",
+   "projectID": 676136,
+   "fileID": 5591286,
+   "url": "https://edge.forgecdn.net/files/5591/286/modelfix-1.21-1.10.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/model-gap-fix",
+   "source": "curseforge"
+  },
+  {
+   "file": "golden_foods-merged-1.21.1-2.4.0.jar",
+   "name": "Golden Foods!",
+   "projectID": 873866,
+   "fileID": 5860711,
+   "url": "https://edge.forgecdn.net/files/5860/711/golden_foods-merged-1.21.1-2.4.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/golden-foods",
+   "source": "curseforge"
+  },
+  {
+   "file": "create_aeronautics_throwable_rope_connector-0.4.3.jar",
+   "name": "Create Aeronautics: Throwable Rope Connector",
+   "projectID": 1529882,
+   "fileID": 8618590,
+   "url": "https://edge.forgecdn.net/files/8618/590/create_aeronautics_throwable_rope_connector-0.4.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-throwable-rope-connector",
+   "source": "curseforge"
+  },
+  {
+   "file": "DiagonalFences-v21.1.1-1.21.1-NeoForge.jar",
+   "name": "Diagonal Fences",
+   "projectID": 458048,
+   "fileID": 5918197,
+   "url": "https://edge.forgecdn.net/files/5918/197/DiagonalFences-v21.1.1-1.21.1-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/diagonal-fences",
+   "source": "curseforge"
+  },
+  {
+   "file": "mowziesmobs-1.21.1-1.8.2.jar",
+   "name": "Mowzie's Mobs",
+   "projectID": 250498,
+   "fileID": 7760267,
+   "url": "https://edge.forgecdn.net/files/7760/267/mowziesmobs-1.21.1-1.8.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/mowzies-mobs",
+   "source": "curseforge"
+  },
+  {
+   "file": "resourcefullib-neoforge-1.21-3.0.12.jar",
+   "name": "Resourceful Lib",
+   "projectID": 570073,
+   "fileID": 5973188,
+   "url": "https://edge.forgecdn.net/files/5973/188/resourcefullib-neoforge-1.21-3.0.12.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/resourceful-lib",
+   "source": "curseforge"
+  },
+  {
+   "file": "MoogsEndStructures-universal-1.21-2.1.1.jar",
+   "name": "MES - Moog's End Structures",
+   "projectID": 892382,
+   "fileID": 8902211,
+   "url": "https://edge.forgecdn.net/files/8902/211/MoogsEndStructures-universal-1.21-2.1.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/moogs-end-structures",
+   "source": "curseforge"
+  },
+  {
+   "file": "chineseflyingislandtower-1.1.0-neoforge-1.21.1.jar",
+   "name": "Chinese flying island tower",
+   "projectID": 1042026,
+   "fileID": 5749988,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/chinese-flying-island-tower",
+   "source": "curseforge"
+  },
+  {
+   "file": "bagus_lib-1.21.1-13.27.0.jar",
+   "name": "Bagus Lib",
+   "projectID": 866533,
+   "fileID": 8883079,
+   "url": "https://edge.forgecdn.net/files/8883/79/bagus_lib-1.21.1-13.27.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/bagus-lib",
+   "source": "curseforge"
+  },
+  {
+   "file": "CreateDragonsPlus-1.11.9.jar",
+   "name": "Create: Dragons Plus",
+   "projectID": 1216624,
+   "fileID": 8900055,
+   "url": "https://edge.forgecdn.net/files/8900/55/CreateDragonsPlus-1.11.9.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-dragons-plus",
+   "source": "curseforge"
+  },
+  {
+   "file": "ItemPhysic_NEOFORGE_v1.8.17_mc1.21.1.jar",
+   "name": "ItemPhysic Full",
+   "projectID": 258587,
+   "fileID": 8974794,
+   "url": "https://edge.forgecdn.net/files/8974/794/ItemPhysic_NEOFORGE_v1.8.17_mc1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/itemphysic",
+   "source": "curseforge"
+  },
+  {
+   "file": "CreeperOverhaul-neoforge-1.21.1-4.0.6.jar",
+   "name": "Creeper Overhaul",
+   "projectID": 561625,
+   "fileID": 6051279,
+   "url": "https://edge.forgecdn.net/files/6051/279/CreeperOverhaul-neoforge-1.21.1-4.0.6.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/creeper-overhaul",
+   "source": "curseforge"
+  },
+  {
+   "file": "portable_engine_liquid_fuel-2.0.0-neoforge-1.21.1.jar",
+   "name": "Create Aeronautics: Portable Engine Liquid Fuel",
+   "projectID": 1521213,
+   "fileID": 8002670,
+   "url": "https://edge.forgecdn.net/files/8002/670/portable_engine_liquid_fuel-2.0.0-neoforge-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-portable-engine-liquid-fuel",
+   "source": "curseforge"
+  },
+  {
+   "file": "flerovium-neoforge-1.21.1-1.1.2-all.jar",
+   "name": "Flerovium",
+   "projectID": 1142875,
+   "fileID": 8430037,
+   "url": "https://edge.forgecdn.net/files/8430/37/flerovium-neoforge-1.21.1-1.1.2-all.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/flerovium",
+   "source": "curseforge"
+  },
+  {
+   "file": "sparsestructures-neoforge-1.21.1-3.0.jar",
+   "name": "Sparse Structures",
+   "projectID": 911437,
+   "fileID": 6456912,
+   "url": "https://edge.forgecdn.net/files/6456/912/sparsestructures-neoforge-1.21.1-3.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/sparse-structures",
+   "source": "curseforge"
+  },
+  {
+   "file": "ftb-library-neoforge-2101.1.37.jar",
+   "name": "FTB Library (NeoForge)",
+   "projectID": 404465,
+   "fileID": 9008089,
+   "url": "https://edge.forgecdn.net/files/9008/89/ftb-library-neoforge-2101.1.37.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge",
+   "source": "curseforge"
+  },
+  {
+   "file": "BetterThirdPerson-neoforge-1.9.0.jar",
+   "name": "Better Third Person",
+   "projectID": 435044,
+   "fileID": 5833474,
+   "url": "https://edge.forgecdn.net/files/5833/474/BetterThirdPerson-neoforge-1.9.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/better-third-person",
+   "source": "curseforge"
+  },
+  {
+   "file": "smoothchunk-1.21-4.1.jar",
+   "name": "Server Performance - Smooth Chunk Save",
+   "projectID": 582327,
+   "fileID": 6296628,
+   "url": "https://edge.forgecdn.net/files/6296/628/smoothchunk-1.21-4.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/smooth-chunk-save",
+   "source": "curseforge"
+  },
+  {
+   "file": "MouseTweaks-neoforge-mc1.21-2.26.1.jar",
+   "name": "Mouse Tweaks",
+   "projectID": 60089,
+   "fileID": 5637846,
+   "url": "https://edge.forgecdn.net/files/5637/846/MouseTweaks-neoforge-mc1.21-2.26.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/mouse-tweaks",
+   "source": "curseforge"
+  },
+  {
+   "file": "puzzleslib-v21.1.64-mc1.21.1+neoforge.jar",
+   "name": "Puzzles Lib",
+   "projectID": 495476,
+   "fileID": 9130151,
+   "url": "https://edge.forgecdn.net/files/9130/151/puzzleslib-v21.1.64-mc1.21.1%2bneoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/puzzles-lib",
+   "source": "curseforge"
+  },
+  {
+   "file": "mace3d-neoforge-1.21.X-1.1.0.jar",
+   "name": "Awesome 3D Mace",
+   "projectID": 1037680,
+   "fileID": 5606951,
+   "url": "https://edge.forgecdn.net/files/5606/951/mace3d-neoforge-1.21.X-1.1.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/awesome-3d-mace",
+   "source": "curseforge"
+  },
+  {
+   "file": "block_factorys_bosses-2.1.2-neo-1.21.1.jar",
+   "name": "Bosses'Rise - Epic Souls like boss fights",
+   "projectID": 1314084,
+   "fileID": 8123167,
+   "url": "https://edge.forgecdn.net/files/8123/167/block_factorys_bosses-2.1.2-neo-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/bossesrise",
+   "source": "curseforge"
+  },
+  {
+   "file": "create_sky_village-0.0.38 NeoForge 1.21.1.jar",
+   "name": "Create: Sky Village",
+   "projectID": 1104939,
+   "fileID": 8004708,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-sky-village",
+   "source": "curseforge"
+  },
+  {
+   "file": "ritchiesprojectilelib-2.1.2-mc.1.21.1-neoforge.jar",
+   "name": "Ritchie's Projectile Library",
+   "projectID": 1279407,
+   "fileID": 7587771,
+   "url": "https://edge.forgecdn.net/files/7587/771/ritchiesprojectilelib-2.1.2-mc.1.21.1-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ritchies-projectile-library",
+   "source": "curseforge"
+  },
+  {
+   "file": "YungsBetterJungleTemples-1.21.1-NeoForge-3.1.2.jar",
+   "name": "YUNG's Better Jungle Temples (NeoForge) [1.20.4 - 1.21.1 ONLY]",
+   "projectID": 1015123,
+   "fileID": 5924482,
+   "url": "https://edge.forgecdn.net/files/5924/482/YungsBetterJungleTemples-1.21.1-NeoForge-3.1.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/yungs-better-jungle-temples-neoforge",
+   "source": "curseforge"
+  },
+  {
+   "file": "bettercombat-neoforge-2.4.0+1.21.1.jar",
+   "name": "Better Combat [Fabric & Forge]",
+   "projectID": 639842,
+   "fileID": 8430183,
+   "url": "https://edge.forgecdn.net/files/8430/183/bettercombat-neoforge-2.4.0%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/better-combat-by-daedelus",
+   "source": "curseforge"
+  },
+  {
+   "file": "ForgeEndertech-1.21.1-12.1.4.0-NeoForge-build.1161.jar",
+   "name": "ForgeEndertech",
+   "projectID": 244844,
+   "fileID": 8980655,
+   "url": "https://edge.forgecdn.net/files/8980/655/ForgeEndertech-1.21.1-12.1.4.0-NeoForge-build.1161.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/forgeendertech",
+   "source": "curseforge"
+  },
+  {
+   "file": "aerocopycats-1.1.1.jar",
+   "name": "Copycats+ aeronautics weight",
+   "projectID": 1520961,
+   "fileID": 7977632,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/copycats-aeronautics-weight",
+   "source": "curseforge"
+  },
+  {
+   "file": "GatewaysToEternity-1.21.1-5.1.0.jar",
+   "name": "Gateways to Eternity",
+   "projectID": 417802,
+   "fileID": 6926284,
+   "url": "https://edge.forgecdn.net/files/6926/284/GatewaysToEternity-1.21.1-5.1.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/gateways-to-eternity",
+   "source": "curseforge"
+  },
+  {
+   "file": "monolib-neoforge-1.21.1-4.1.2.jar",
+   "name": "MonoLib",
+   "projectID": 968432,
+   "fileID": 9050710,
+   "url": "https://edge.forgecdn.net/files/9050/710/monolib-neoforge-1.21.1-4.1.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/monolib",
+   "source": "curseforge"
+  },
+  {
+   "file": "FarmersDelight-1.21.1-1.3.4.jar",
+   "name": "Farmer's Delight",
+   "projectID": 398521,
+   "fileID": 8765184,
+   "url": "https://edge.forgecdn.net/files/8765/184/FarmersDelight-1.21.1-1.3.4.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/farmers-delight",
+   "source": "curseforge"
+  },
+  {
+   "file": "BEB-NeoForge-1.21-6.0.0.jar",
+   "name": "Beautiful Enchanted Books [MOD EDITION] | 6.0 UPDATE!",
+   "projectID": 1083202,
+   "fileID": 7268159,
+   "url": "https://edge.forgecdn.net/files/7268/159/BEB-NeoForge-1.21-6.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/beautiful-enchanted-books",
+   "source": "curseforge"
+  },
+  {
+   "file": "FHG-NeoForge-1.21.1-1.0.0.jar",
+   "name": "Freeze the Happy Ghasts",
+   "projectID": 1308047,
+   "fileID": 7174247,
+   "url": "https://edge.forgecdn.net/files/7174/247/FHG-NeoForge-1.21.1-1.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/freeze-the-happy-ghasts",
+   "source": "curseforge"
+  },
+  {
+   "file": "starterkit-1.21.1-8.3.jar",
+   "name": "Starter Kit",
+   "projectID": 390717,
+   "fileID": 9032655,
+   "url": "https://edge.forgecdn.net/files/9032/655/starterkit-1.21.1-8.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/starter-kit",
+   "source": "curseforge"
+  },
+  {
+   "file": "structureessentials-1.21.1-5.0.jar",
+   "name": "Structure Essentials",
+   "projectID": 832882,
+   "fileID": 7962596,
+   "url": "https://edge.forgecdn.net/files/7962/596/structureessentials-1.21.1-5.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/structure-essentials-forge-fabric",
+   "source": "curseforge"
+  },
+  {
+   "file": "beautify-neoforge-1.21.1-2.0.2.jar",
+   "name": "Beautify!",
+   "projectID": 633252,
+   "fileID": 5947973,
+   "url": "https://edge.forgecdn.net/files/5947/973/beautify-neoforge-1.21.1-2.0.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/beautify-decorate",
+   "source": "curseforge"
+  },
+  {
+   "file": "Better_Pickaxe_Trims-Neoforge-1.21.1-3.0.0.jar",
+   "name": "Better Pickaxe Trims",
+   "projectID": 1130125,
+   "fileID": 9172950,
+   "url": "https://edge.forgecdn.net/files/9172/950/Better_Pickaxe_Trims-Neoforge-1.21.1-3.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/better-pickaxe-trims",
+   "source": "curseforge"
+  },
+  {
+   "file": "jearchaeology-1.21.1-1.2.0.jar",
+   "name": "Just Enough Archaeology",
+   "projectID": 890755,
+   "fileID": 7768445,
+   "url": "https://edge.forgecdn.net/files/7768/445/jearchaeology-1.21.1-1.2.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/just-enough-archaeology",
+   "source": "curseforge"
+  },
+  {
+   "file": "aeronauticshotairfix-1.1.1.jar",
+   "name": "Aeronautics Hot Air Fix",
+   "projectID": 1633376,
+   "fileID": 8747268,
+   "url": "https://edge.forgecdn.net/files/8747/268/aeronauticshotairfix-1.1.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/aeronautics-hot-air-fix",
+   "source": "curseforge"
+  },
+  {
+   "file": "elementalmaces-neoforge-1.21-1.0.0.jar",
+   "name": "Elemental Maces | 4 New Maces with Effects!",
+   "projectID": 1046692,
+   "fileID": 5605495,
+   "url": "https://edge.forgecdn.net/files/5605/495/elementalmaces-neoforge-1.21-1.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/elemental-maces",
+   "source": "curseforge"
+  },
+  {
+   "file": "clientcrafting-1.21-2.1.jar",
+   "name": "Client Crafting",
+   "projectID": 888790,
+   "fileID": 7920161,
+   "url": "https://edge.forgecdn.net/files/7920/161/clientcrafting-1.21-2.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/client-crafting",
+   "source": "curseforge"
+  },
+  {
+   "file": "Better-Sword-Trims-Neoforge-1.21.1-3.0.0.jar",
+   "name": "Better Swords Trims",
+   "projectID": 1387379,
+   "fileID": 9172846,
+   "url": "https://edge.forgecdn.net/files/9172/846/Better-Sword-Trims-Neoforge-1.21.1-3.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/better-swords-trims",
+   "source": "curseforge"
+  },
+  {
+   "file": "kleeslabs-neoforge-1.21.1-21.1.11.jar",
+   "name": "KleeSlabs",
+   "projectID": 241895,
+   "fileID": 8163148,
+   "url": "https://edge.forgecdn.net/files/8163/148/kleeslabs-neoforge-1.21.1-21.1.11.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/kleeslabs",
+   "source": "curseforge"
+  },
+  {
+   "file": "SkyVillages-1.0.6-1.21.x-neoforge-release.jar",
+   "name": "Sky Villages [Forge]",
+   "projectID": 545467,
+   "fileID": 5647988,
+   "url": "https://edge.forgecdn.net/files/5647/988/SkyVillages-1.0.6-1.21.x-neoforge-release.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/sky-villages-forge",
+   "source": "curseforge"
+  },
+  {
+   "file": "longer_following_time-merged-1.21.1-1.2.0.jar",
+   "name": "Longer Following Time",
+   "projectID": 1148090,
+   "fileID": 8509047,
+   "url": "https://edge.forgecdn.net/files/8509/47/longer_following_time-merged-1.21.1-1.2.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/longer-following-time",
+   "source": "curseforge"
+  },
+  {
+   "file": "cleanswing-1.10-1.21.jar",
+   "name": "Clean Swing Through Grass",
+   "projectID": 915308,
+   "fileID": 8746293,
+   "url": "https://edge.forgecdn.net/files/8746/293/cleanswing-1.10-1.21.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/clean-swing-through-grass",
+   "source": "curseforge"
+  },
+  {
+   "file": "crabclaws-1.3.0-1.21.1+neoforge.jar",
+   "name": "Crab Claws - Place/Break blocks from a distance!",
+   "projectID": 961271,
+   "fileID": 7251324,
+   "url": "https://edge.forgecdn.net/files/7251/324/crabclaws-1.3.0-1.21.1%2bneoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/crab-claws",
+   "source": "curseforge"
+  },
+  {
+   "file": "mcw-furniture-3.4.1-mc1.21.1neoforge.jar",
+   "name": "Macaw's Furniture",
+   "projectID": 359540,
+   "fileID": 7255584,
+   "url": "https://edge.forgecdn.net/files/7255/584/mcw-furniture-3.4.1-mc1.21.1neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/macaws-furniture",
+   "source": "curseforge"
+  },
+  {
+   "file": "AetherVillages-1.21.1-1.0.8-neoforge.jar",
+   "name": "Aether Villages",
+   "projectID": 1073197,
+   "fileID": 5895490,
+   "url": "https://edge.forgecdn.net/files/5895/490/AetherVillages-1.21.1-1.0.8-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/aether-villages",
+   "source": "curseforge"
+  },
+  {
+   "file": "fastasyncworldsave-1.21-2.6.jar",
+   "name": "Fast Async World Save[Forge/Neo/Fabric]",
+   "projectID": 951499,
+   "fileID": 6935204,
+   "url": "https://edge.forgecdn.net/files/6935/204/fastasyncworldsave-1.21-2.6.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/fast-async-world-save-forge-fabric",
+   "source": "curseforge"
+  },
+  {
+   "file": "createdeliveryrequired-1.0.2.jar",
+   "name": "Create Aeronautics: Delivery Required",
+   "projectID": 1539794,
+   "fileID": 8127628,
+   "url": "https://edge.forgecdn.net/files/8127/628/createdeliveryrequired-1.0.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-delivery-required",
+   "source": "curseforge"
+  },
+  {
+   "file": "mcw-mcwwindows-2.4.2-mc1.21.1neoforge.jar",
+   "name": "Macaw's Windows",
+   "projectID": 363569,
+   "fileID": 7317672,
+   "url": "https://edge.forgecdn.net/files/7317/672/mcw-mcwwindows-2.4.2-mc1.21.1neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/macaws-windows",
+   "source": "curseforge"
+  },
+  {
+   "file": "CreateAeronauticsCopycatWing-1.21.1-1.0.4.jar",
+   "name": "Create Aeronautics: Copycat Wing",
+   "projectID": 1530305,
+   "fileID": 8835602,
+   "url": "https://edge.forgecdn.net/files/8835/602/CreateAeronauticsCopycatWing-1.21.1-1.0.4.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-copycat-wing",
+   "source": "curseforge"
+  },
+  {
+   "file": "weaponmaster_ydm-1.21.1-neoforge-4.2.7.jar",
+   "name": "YDM's Weapon Master",
+   "projectID": 608235,
+   "fileID": 6476374,
+   "url": "https://edge.forgecdn.net/files/6476/374/weaponmaster_ydm-1.21.1-neoforge-4.2.7.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ydms-weapon-master",
+   "source": "curseforge"
+  },
+  {
+   "file": "adorable_eggs-NeoForge-1.21.1-1.0.3.jar",
+   "name": "Adorable Eggs - New Spawn Eggs and Plushies",
+   "projectID": 1257245,
+   "fileID": 7812384,
+   "url": "https://edge.forgecdn.net/files/7812/384/adorable_eggs-NeoForge-1.21.1-1.0.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/adorable-eggs",
+   "source": "curseforge"
+  },
+  {
+   "file": "ars_technica-1.21.1-2.7.6.jar",
+   "name": "Ars Technica",
+   "projectID": 1096161,
+   "fileID": 7642730,
+   "url": "https://edge.forgecdn.net/files/7642/730/ars_technica-1.21.1-2.7.6.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ars-technica",
+   "source": "curseforge"
+  },
+  {
+   "file": "treephysics-neoforge-1.21.1-2.4.jar",
+   "name": "Tree Physics",
+   "projectID": 1522010,
+   "fileID": 8695244,
+   "url": "https://edge.forgecdn.net/files/8695/244/treephysics-neoforge-1.21.1-2.4.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/tree-physics",
+   "source": "curseforge"
+  },
+  {
+   "file": "particular-1.21.1-NeoForge-1.5.7.jar",
+   "name": "Particular \u2728 Reforged",
+   "projectID": 1219053,
+   "fileID": 8662697,
+   "url": "https://edge.forgecdn.net/files/8662/697/particular-1.21.1-NeoForge-1.5.7.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/particular-reforged",
+   "source": "curseforge"
+  },
+  {
+   "file": "create-aeronautics-bundled-1.21.1-1.3.2.jar",
+   "name": "Create Aeronautics",
+   "projectID": 676721,
+   "fileID": 8763471,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeronautics",
+   "source": "curseforge"
+  },
+  {
+   "file": "supplementaries-1.21.1-4.0.1-neoforge.jar",
+   "name": "Supplementaries",
+   "projectID": 412082,
+   "fileID": 9140379,
+   "url": "https://edge.forgecdn.net/files/9140/379/supplementaries-1.21.1-4.0.1-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/supplementaries",
+   "source": "curseforge"
+  },
+  {
+   "file": "create-enchantment-industry-2.4.2.jar",
+   "name": "Create: Enchantment Industry",
+   "projectID": 688768,
+   "fileID": 8241347,
+   "url": "https://edge.forgecdn.net/files/8241/347/create-enchantment-industry-2.4.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-enchantment-industry",
+   "source": "curseforge"
+  },
+  {
+   "file": "ender_pack-merged-1.21.1-2.2.0.jar",
+   "name": "EnderPack - New Backpack",
+   "projectID": 959446,
+   "fileID": 6404199,
+   "url": "https://edge.forgecdn.net/files/6404/199/ender_pack-merged-1.21.1-2.2.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/enderpack",
+   "source": "curseforge"
+  },
+  {
+   "file": "dyeable-components-1.0.4+mc1.21.1.jar",
+   "name": "Create Aeronautics: Dyeable Components",
+   "projectID": 1518023,
+   "fileID": 8344761,
+   "url": "https://edge.forgecdn.net/files/8344/761/dyeable-components-1.0.4%2bmc1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-dyeable-components",
+   "source": "curseforge"
+  },
+  {
+   "file": "IllagerInvasion-v21.1.6-1.21.1-NeoForge.jar",
+   "name": "Illager Invasion",
+   "projectID": 891324,
+   "fileID": 6492670,
+   "url": "https://edge.forgecdn.net/files/6492/670/IllagerInvasion-v21.1.6-1.21.1-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/illager-invasion",
+   "source": "curseforge"
+  },
+  {
+   "file": "jei-1.21.1-neoforge-19.64.0.454.jar",
+   "name": "Just Enough Items (JEI)",
+   "projectID": 238222,
+   "fileID": 9173201,
+   "url": "https://edge.forgecdn.net/files/9173/201/jei-1.21.1-neoforge-19.64.0.454.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/jei",
+   "source": "curseforge"
+  },
+  {
+   "file": "colorwheel-neoforge-1.3.0+mc1.21.1.jar",
+   "name": "Colorwheel",
+   "projectID": 1254143,
+   "fileID": 8990905,
+   "url": "https://edge.forgecdn.net/files/8990/905/colorwheel-neoforge-1.3.0%2bmc1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/colorwheel",
+   "source": "curseforge"
+  },
+  {
+   "file": "YungsBetterWitchHuts-1.21.1-NeoForge-4.1.1.jar",
+   "name": "YUNG's Better Witch Huts (NeoForge) [1.20.4 - 1.21.1 ONLY]",
+   "projectID": 1015144,
+   "fileID": 5812532,
+   "url": "https://edge.forgecdn.net/files/5812/532/YungsBetterWitchHuts-1.21.1-NeoForge-4.1.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/yungs-better-witch-huts-neoforge",
+   "source": "curseforge"
+  },
+  {
+   "file": "MoogsSoaringStructures-universal-1.21-2.2.0.jar",
+   "name": "MSS - Moog's Soaring Structures",
+   "projectID": 1040210,
+   "fileID": 8931330,
+   "url": "https://edge.forgecdn.net/files/8931/330/MoogsSoaringStructures-universal-1.21-2.2.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/mss-moogs-soaring-structures",
+   "source": "curseforge"
+  },
+  {
+   "file": "letsdo-beachparty-neoforge-2.1.5.jar",
+   "name": "[Let's Do] Beachparty",
+   "projectID": 858691,
+   "fileID": 8917680,
+   "url": "https://edge.forgecdn.net/files/8917/680/letsdo-beachparty-neoforge-2.1.5.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/lets-do-beachparty",
+   "source": "curseforge"
+  },
+  {
+   "file": "EquipmentCompare-1.21.1-neoforge-1.3.13.jar",
+   "name": "Equipment Compare [Neo/Forge]",
+   "projectID": 502561,
+   "fileID": 6375501,
+   "url": "https://edge.forgecdn.net/files/6375/501/EquipmentCompare-1.21.1-neoforge-1.3.13.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/equipment-compare",
+   "source": "curseforge"
+  },
+  {
+   "file": "veinmining-neoforge-5.0.0-beta.2+1.21.jar",
+   "name": "Vein Mining (Fabric/Forge/Quilt)",
+   "projectID": 431611,
+   "fileID": 5579900,
+   "url": "https://edge.forgecdn.net/files/5579/900/veinmining-neoforge-5.0.0-beta.2%2b1.21.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/vein-mining",
+   "source": "curseforge"
+  },
+  {
+   "file": "sophisticatedbackpacks-1.21.1-3.26.12.2208.jar",
+   "name": "Sophisticated Backpacks",
+   "projectID": 422301,
+   "fileID": 9154769,
+   "url": "https://edge.forgecdn.net/files/9154/769/sophisticatedbackpacks-1.21.1-3.26.12.2208.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/sophisticated-backpacks",
+   "source": "curseforge"
+  },
+  {
+   "file": "Ping-Wheel-1.12.2-neoforge-1.21.1.jar",
+   "name": "Ping Wheel",
+   "projectID": 734339,
+   "fileID": 7996932,
+   "url": "https://edge.forgecdn.net/files/7996/932/Ping-Wheel-1.12.2-neoforge-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ping-wheel",
+   "source": "curseforge"
+  },
+  {
+   "file": "Measurements-neoforge-1.21.1-3.0.3.jar",
+   "name": "Measurements",
+   "projectID": 478559,
+   "fileID": 6956811,
+   "url": "https://edge.forgecdn.net/files/6956/811/Measurements-neoforge-1.21.1-3.0.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/measurements",
+   "source": "curseforge"
+  },
+  {
+   "file": "BTP-NeoForge-1.21.1-2.0.1.jar",
+   "name": "Beautiful Potions [MOD EDITION] | 2.0 UPDATE! ",
+   "projectID": 1298070,
+   "fileID": 8457214,
+   "url": "https://edge.forgecdn.net/files/8457/214/BTP-NeoForge-1.21.1-2.0.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/beautiful-potions",
+   "source": "curseforge"
+  },
+  {
+   "file": "lithostitched-1.8.1-neoforge-21.1.jar",
+   "name": "Lithostitched",
+   "projectID": 936015,
+   "fileID": 9170709,
+   "url": "https://edge.forgecdn.net/files/9170/709/lithostitched-1.8.1-neoforge-21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/lithostitched",
+   "source": "curseforge"
+  },
+  {
+   "file": "ars_creo-1.21.1-5.4.0.jar",
+   "name": "Ars Creo",
+   "projectID": 575698,
+   "fileID": 8139067,
+   "url": "https://edge.forgecdn.net/files/8139/67/ars_creo-1.21.1-5.4.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ars-creo",
+   "source": "curseforge"
+  },
+  {
+   "file": "Placebo-1.21.1-9.9.4.jar",
+   "name": "Placebo",
+   "projectID": 283644,
+   "fileID": 9153039,
+   "url": "https://edge.forgecdn.net/files/9153/39/Placebo-1.21.1-9.9.4.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/placebo",
+   "source": "curseforge"
+  },
+  {
+   "file": "lootintegrations-1.21.1-4.7.jar",
+   "name": "Loot Integrations",
+   "projectID": 580689,
+   "fileID": 6640970,
+   "url": "https://edge.forgecdn.net/files/6640/970/lootintegrations-1.21.1-4.7.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/loot-integrations",
+   "source": "curseforge"
+  },
+  {
+   "file": "AI-Improvements-1.21-0.5.3.jar",
+   "name": "AI Improvements: Performance Tuning",
+   "projectID": 233019,
+   "fileID": 5426792,
+   "url": "https://edge.forgecdn.net/files/5426/792/AI-Improvements-1.21-0.5.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ai-improvements",
+   "source": "curseforge"
+  },
+  {
+   "file": "BiomesOPlenty-neoforge-1.21.1-21.1.0.14.jar",
+   "name": "Biomes O' Plenty",
+   "projectID": 220318,
+   "fileID": 8288121,
+   "url": "https://edge.forgecdn.net/files/8288/121/BiomesOPlenty-neoforge-1.21.1-21.1.0.14.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/biomes-o-plenty",
+   "source": "curseforge"
+  },
+  {
+   "file": "visuality-forge-3.0.0.jar",
+   "name": "Visuality: Reforged",
+   "projectID": 704256,
+   "fileID": 8559477,
+   "url": "https://edge.forgecdn.net/files/8559/477/visuality-forge-3.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/visuality-reforged",
+   "source": "curseforge"
+  },
+  {
+   "file": "ApothicAttributes-1.21.1-2.11.0.jar",
+   "name": "Apothic Attributes",
+   "projectID": 898963,
+   "fileID": 9006294,
+   "url": "https://edge.forgecdn.net/files/9006/294/ApothicAttributes-1.21.1-2.11.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/apothic-attributes",
+   "source": "curseforge"
+  },
+  {
+   "file": "MoogsVoyagerStructures-universal-1.21-5.1.3.jar",
+   "name": "MVS - Moog's Voyager Structures",
+   "projectID": 656977,
+   "fileID": 8970306,
+   "url": "https://edge.forgecdn.net/files/8970/306/MoogsVoyagerStructures-universal-1.21-5.1.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/moogs-voyager-structures",
+   "source": "curseforge"
+  },
+  {
+   "file": "create_aeronautics_automated_logistics-0.7.0.jar",
+   "name": "Create Aeronautics: Automated Logistics",
+   "projectID": 1537420,
+   "fileID": 9184782,
+   "url": "https://edge.forgecdn.net/files/9184/782/create_aeronautics_automated_logistics-0.7.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-automated-logistics",
+   "source": "curseforge"
+  },
+  {
+   "file": "create_power_loader-2.0.5-mc1.21.1.jar",
+   "name": "Create: Power Loader",
+   "projectID": 936020,
+   "fileID": 8126570,
+   "url": "https://edge.forgecdn.net/files/8126/570/create_power_loader-2.0.5-mc1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-power-loader",
+   "source": "curseforge"
+  },
+  {
+   "file": "Controlling-neoforge-1.21.1-19.0.5.jar",
+   "name": "Controlling",
+   "projectID": 250398,
+   "fileID": 6368976,
+   "url": "https://edge.forgecdn.net/files/6368/976/Controlling-neoforge-1.21.1-19.0.5.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/controlling",
+   "source": "curseforge"
+  },
+  {
+   "file": "create_hypertube-0.6.0-NEOFORGE.jar",
+   "name": "Create: Hypertubes",
+   "projectID": 1281336,
+   "fileID": 8541877,
+   "url": "https://edge.forgecdn.net/files/8541/877/create_hypertube-0.6.0-NEOFORGE.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/hypertubes",
+   "source": "curseforge"
+  },
+  {
+   "file": "DiagonalWindows-v21.1.1-1.21.1-NeoForge.jar",
+   "name": "Diagonal Windows",
+   "projectID": 891328,
+   "fileID": 5918192,
+   "url": "https://edge.forgecdn.net/files/5918/192/DiagonalWindows-v21.1.1-1.21.1-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/diagonal-windows",
+   "source": "curseforge"
+  },
+  {
+   "file": "goblintraders-neoforge-1.21.1-1.11.2.jar",
+   "name": "Goblin Traders",
+   "projectID": 363703,
+   "fileID": 6427515,
+   "url": "https://edge.forgecdn.net/files/6427/515/goblintraders-neoforge-1.21.1-1.11.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/goblin-traders",
+   "source": "curseforge"
+  },
+  {
+   "file": "ecologics-1.21.1-2.3.7.jar",
+   "name": "Ecologics",
+   "projectID": 570463,
+   "fileID": 8415537,
+   "url": "https://edge.forgecdn.net/files/8415/537/ecologics-1.21.1-2.3.7.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ecologics",
+   "source": "curseforge"
+  },
+  {
+   "file": "slime-jump-neoforge-1.21.1-1.0.0.jar",
+   "name": "Slime Jump",
+   "projectID": 1247376,
+   "fileID": 6443469,
+   "url": "https://edge.forgecdn.net/files/6443/469/slime-jump-neoforge-1.21.1-1.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/slime-jump",
+   "source": "curseforge"
+  },
+  {
+   "file": "createpropulsion-1.1.5.jar",
+   "name": "Create Propulsion: Simulated",
+   "projectID": 1522736,
+   "fileID": 8496246,
+   "url": "https://edge.forgecdn.net/files/8496/246/createpropulsion-1.1.5.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-propulsion-simulated",
+   "source": "curseforge"
+  },
+  {
+   "file": "ExplorersCompass-1.21.1-3.4.0-neoforge.jar",
+   "name": "Explorer's Compass",
+   "projectID": 491794,
+   "fileID": 7892943,
+   "url": "https://edge.forgecdn.net/files/7892/943/ExplorersCompass-1.21.1-3.4.0-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/explorers-compass",
+   "source": "curseforge"
+  },
+  {
+   "file": "eternalstarlight-0.9.1+1.21.1+neoforge.jar",
+   "name": "Eternal Starlight",
+   "projectID": 1080592,
+   "fileID": 8931080,
+   "url": "https://edge.forgecdn.net/files/8931/80/eternalstarlight-0.9.1%2b1.21.1%2bneoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/eternal-starlight",
+   "source": "curseforge"
+  },
+  {
+   "file": "colorwheel_patcher-neoforge-1.0.5+mc1.21.1.jar",
+   "name": "Colorwheel Patcher",
+   "projectID": 1285475,
+   "fileID": 7924942,
+   "url": "https://edge.forgecdn.net/files/7924/942/colorwheel_patcher-neoforge-1.0.5%2bmc1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/colorwheel-patcher",
+   "source": "curseforge"
+  },
+  {
+   "file": "simple_villager_follow-neoforge-1.21.1-1.0.0.jar",
+   "name": "Simple Villager Follow",
+   "projectID": 1295438,
+   "fileID": 6701734,
+   "url": "https://edge.forgecdn.net/files/6701/734/simple_villager_follow-neoforge-1.21.1-1.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/simple-villager-follow",
+   "source": "curseforge"
+  },
+  {
+   "file": "aether-1.21.1-1.5.10-neoforge.jar",
+   "name": "The Aether",
+   "projectID": 255308,
+   "fileID": 7043502,
+   "url": "https://edge.forgecdn.net/files/7043/502/aether-1.21.1-1.5.10-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/aether",
+   "source": "curseforge"
+  },
+  {
+   "file": "more_bows_and_arrows-merged-1.21.1-5.0.5.jar",
+   "name": "More Bows and Arrows | Major Update Available!",
+   "projectID": 888468,
+   "fileID": 8718465,
+   "url": "https://edge.forgecdn.net/files/8718/465/more_bows_and_arrows-merged-1.21.1-5.0.5.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/more-bows-and-arrows",
+   "source": "curseforge"
+  },
+  {
+   "file": "WitherSkeletonTweaks-1.21.1-10.1.1.jar",
+   "name": "Wither Skeleton Tweaks",
+   "projectID": 255902,
+   "fileID": 6751432,
+   "url": "https://edge.forgecdn.net/files/6751/432/WitherSkeletonTweaks-1.21.1-10.1.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/wither-skeleton-tweaks",
+   "source": "curseforge"
+  },
+  {
+   "file": "player-animation-lib-forge-2.0.4+1.21.1.jar",
+   "name": "playerAnimator",
+   "projectID": 658587,
+   "fileID": 7389814,
+   "url": "https://edge.forgecdn.net/files/7389/814/player-animation-lib-forge-2.0.4%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/playeranimator",
+   "source": "curseforge"
+  },
+  {
+   "file": "NaturesCompass-1.21.1-3.4.0-neoforge.jar",
+   "name": "Nature's Compass",
+   "projectID": 252848,
+   "fileID": 7892954,
+   "url": "https://edge.forgecdn.net/files/7892/954/NaturesCompass-1.21.1-3.4.0-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/natures-compass",
+   "source": "curseforge"
+  },
+  {
+   "file": "snowundertrees-1.21.1-1.5.1.jar",
+   "name": "Snow Under Trees",
+   "projectID": 353942,
+   "fileID": 8249253,
+   "url": "https://edge.forgecdn.net/files/8249/253/snowundertrees-1.21.1-1.5.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/snow-under-trees",
+   "source": "curseforge"
+  },
+  {
+   "file": "journeymap-neoforge-1.21.1-6.0.9.jar",
+   "name": "JourneyMap",
+   "projectID": 32274,
+   "fileID": 8923668,
+   "url": "https://edge.forgecdn.net/files/8923/668/journeymap-neoforge-1.21.1-6.0.9.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/journeymap",
+   "source": "curseforge"
+  },
+  {
+   "file": "zombie_variants-neoforge-1.0.3-1.21.1.jar",
+   "name": "Zombie Variants - 15 New Zombies!",
+   "projectID": 1299553,
+   "fileID": 6826478,
+   "url": "https://edge.forgecdn.net/files/6826/478/zombie_variants-neoforge-1.0.3-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/zombie-variants",
+   "source": "curseforge"
+  },
+  {
+   "file": "georges_flying_island-1.0.1-neoforge-1.21.1.jar",
+   "name": "George's flying island",
+   "projectID": 1066583,
+   "fileID": 5715235,
+   "url": "https://edge.forgecdn.net/files/5715/235/georges_flying_island-1.0.1-neoforge-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/georges-flying-island",
+   "source": "curseforge"
+  },
+  {
+   "file": "rightclickharvest-neoforge-4.6.1+1.21.1.jar",
+   "name": "RightClickHarvest",
+   "projectID": 452834,
+   "fileID": 7508749,
+   "url": "https://edge.forgecdn.net/files/7508/749/rightclickharvest-neoforge-4.6.1%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/rightclickharvest",
+   "source": "curseforge"
+  },
+  {
+   "file": "defaultoptions-neoforge-1.21.1-21.1.8.jar",
+   "name": "Default Options",
+   "projectID": 232131,
+   "fileID": 8498229,
+   "url": "https://edge.forgecdn.net/files/8498/229/defaultoptions-neoforge-1.21.1-21.1.8.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/default-options",
+   "source": "curseforge"
+  },
+  {
+   "file": "ferritecore-7.0.3-neoforge.jar",
+   "name": "FerriteCore ((Neo)Forge)",
+   "projectID": 429235,
+   "fileID": 7524151,
+   "url": "https://edge.forgecdn.net/files/7524/151/ferritecore-7.0.3-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ferritecore",
+   "source": "curseforge"
+  },
+  {
+   "file": "cupboard-1.21.1-4.2.jar",
+   "name": "Cupboard",
+   "projectID": 326652,
+   "fileID": 8889050,
+   "url": "https://edge.forgecdn.net/files/8889/50/cupboard-1.21.1-4.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/cupboard",
+   "source": "curseforge"
+  },
+  {
+   "file": "exposure-neoforge-1.21.1-1.9.19.jar",
+   "name": "Exposure",
+   "projectID": 871755,
+   "fileID": 8957000,
+   "url": "https://edge.forgecdn.net/files/8957/0/exposure-neoforge-1.21.1-1.9.19.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/exposure",
+   "source": "curseforge"
+  },
+  {
+   "file": "SimplyTooltips-neoforge-0.1.5.jar",
+   "name": "Simply Tooltips",
+   "projectID": 1475755,
+   "fileID": 8715141,
+   "url": "https://edge.forgecdn.net/files/8715/141/SimplyTooltips-neoforge-0.1.5.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/simply-tooltips",
+   "source": "curseforge"
+  },
+  {
+   "file": "Aquaculture-1.21.1-2.7.21.jar",
+   "name": "Aquaculture 2",
+   "projectID": 60028,
+   "fileID": 7901588,
+   "url": "https://edge.forgecdn.net/files/7901/588/Aquaculture-1.21.1-2.7.21.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/aquaculture",
+   "source": "curseforge"
+  },
+  {
+   "file": "mcw-mcwpaths-1.1.1-mc1.21.1neoforge.jar",
+   "name": "Macaw's Paths and Pavings",
+   "projectID": 629153,
+   "fileID": 7029451,
+   "url": "https://edge.forgecdn.net/files/7029/451/mcw-mcwpaths-1.1.1-mc1.21.1neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/macaws-paths-and-pavings",
+   "source": "curseforge"
+  },
+  {
+   "file": "servercore-neoforge-1.5.19+1.21.1.jar",
+   "name": "ServerCore",
+   "projectID": 550579,
+   "fileID": 8312220,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/servercore",
+   "source": "curseforge"
+  },
+  {
+   "file": "aero_cam_sync-1.4.0.jar",
+   "name": "Aeronautics Camera Sync",
+   "projectID": 1526820,
+   "fileID": 8772300,
+   "url": "https://edge.forgecdn.net/files/8772/300/aero_cam_sync-1.4.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/aeronautics-camera-sync",
+   "source": "curseforge"
+  },
+  {
+   "file": "crittersandcompanions-neoforge-1.21.1-2.7.0.jar",
+   "name": "Critters and Companions",
+   "projectID": 574913,
+   "fileID": 8646976,
+   "url": "https://edge.forgecdn.net/files/8646/976/crittersandcompanions-neoforge-1.21.1-2.7.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/critters-and-companions",
+   "source": "curseforge"
+  },
+  {
+   "file": "BetterF3-11.0.3-NeoForge-1.21.1.jar",
+   "name": "BetterF3",
+   "projectID": 401648,
+   "fileID": 5873258,
+   "url": "https://edge.forgecdn.net/files/5873/258/BetterF3-11.0.3-NeoForge-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/betterf3",
+   "source": "curseforge"
+  },
+  {
+   "file": "geckolib-neoforge-1.21.1-4.9.3.jar",
+   "name": "GeckoLib",
+   "projectID": 388172,
+   "fileID": 8893490,
+   "url": "https://edge.forgecdn.net/files/8893/490/geckolib-neoforge-1.21.1-4.9.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/geckolib",
+   "source": "curseforge"
+  },
+  {
+   "file": "AutoFeedAnimals-Neoforge-1.21.1-1.0.0.jar",
+   "name": "Auto Feed Animals",
+   "projectID": 1554735,
+   "fileID": 8155490,
+   "url": "https://edge.forgecdn.net/files/8155/490/AutoFeedAnimals-Neoforge-1.21.1-1.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/auto-feed-animals",
+   "source": "curseforge"
+  },
+  {
+   "file": "alternate_current-mc1.21-1.9.0.jar",
+   "name": "Alternate Current",
+   "projectID": 548115,
+   "fileID": 5665477,
+   "url": "https://edge.forgecdn.net/files/5665/477/alternate_current-mc1.21-1.9.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/alternate-current",
+   "source": "curseforge"
+  },
+  {
+   "file": "create_radar-0.4.9.4-1.21.1.jar",
+   "name": "Create: Radars",
+   "projectID": 1152836,
+   "fileID": 8227753,
+   "url": "https://edge.forgecdn.net/files/8227/753/create_radar-0.4.9.4-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-radars",
+   "source": "curseforge"
+  },
+  {
+   "file": "Jade-1.21.1-NeoForge-15.10.6.jar",
+   "name": "Jade \ud83d\udd0d",
+   "projectID": 324717,
+   "fileID": 8591319,
+   "url": "https://edge.forgecdn.net/files/8591/319/Jade-1.21.1-NeoForge-15.10.6.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/jade",
+   "source": "curseforge"
+  },
+  {
+   "file": "reeses-sodium-options-neoforge-2.2.4+mc1.21.1.jar",
+   "name": "Reese's Sodium Options",
+   "projectID": 511319,
+   "fileID": 8891797,
+   "url": "https://edge.forgecdn.net/files/8891/797/reeses-sodium-options-neoforge-2.2.4%2bmc1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/reeses-sodium-options",
+   "source": "curseforge"
+  },
+  {
+   "file": "aeroworks-1.5.0.jar",
+   "name": "Create: Aeroworks",
+   "projectID": 1522473,
+   "fileID": 8743051,
+   "url": "https://edge.forgecdn.net/files/8743/51/aeroworks-1.5.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeroworks",
+   "source": "curseforge"
+  },
+  {
+   "file": "aeroclaims-0.9.4.jar",
+   "name": "Create Aeronautics: Claims ",
+   "projectID": 1514529,
+   "fileID": 8836872,
+   "url": "https://edge.forgecdn.net/files/8836/872/aeroclaims-0.9.4.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/aeronautics-claims",
+   "source": "curseforge"
+  },
+  {
+   "file": "YungsExtras-1.21.1-NeoForge-5.1.1.jar",
+   "name": "YUNG's Extras (NeoForge) [1.20.4 - 1.21.1 ONLY]",
+   "projectID": 1015146,
+   "fileID": 5812546,
+   "url": "https://edge.forgecdn.net/files/5812/546/YungsExtras-1.21.1-NeoForge-5.1.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/yungs-extras-neoforge",
+   "source": "curseforge"
+  },
+  {
+   "file": "mcw-lights-1.1.5-mc1.21.1neoforge.jar",
+   "name": "Macaw's Lights and Lamps",
+   "projectID": 502372,
+   "fileID": 7304075,
+   "url": "https://edge.forgecdn.net/files/7304/75/mcw-lights-1.1.5-mc1.21.1neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/macaws-lights-and-lamps",
+   "source": "curseforge"
+  },
+  {
+   "file": "sophisticatedstorage-1.21.1-1.6.6.2181.jar",
+   "name": "Sophisticated Storage",
+   "projectID": 619320,
+   "fileID": 9166168,
+   "url": "https://edge.forgecdn.net/files/9166/168/sophisticatedstorage-1.21.1-1.6.6.2181.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/sophisticated-storage",
+   "source": "curseforge"
+  },
+  {
+   "file": "the_bumblezone-7.16.1+1.21.1-neoforge.jar",
+   "name": "The Bumblezone (NeoForge/Forge)",
+   "projectID": 362479,
+   "fileID": 8903075,
+   "url": "https://edge.forgecdn.net/files/8903/75/the_bumblezone-7.16.1%2b1.21.1-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/the-bumblezone-forge",
+   "source": "curseforge"
+  },
+  {
+   "file": "Clumps-neoforge-1.21.1-19.0.0.1.jar",
+   "name": "Clumps",
+   "projectID": 256717,
+   "fileID": 5623731,
+   "url": "https://edge.forgecdn.net/files/5623/731/Clumps-neoforge-1.21.1-19.0.0.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/clumps",
+   "source": "curseforge"
+  },
+  {
+   "file": "Ribbits-1.21.1-NeoForge-4.1.6.jar",
+   "name": "Ribbits",
+   "projectID": 622967,
+   "fileID": 7355196,
+   "url": "https://edge.forgecdn.net/files/7355/196/Ribbits-1.21.1-NeoForge-4.1.6.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ribbits",
+   "source": "curseforge"
+  },
+  {
+   "file": "aeroportals-1.21.1-1.3.4.jar",
+   "name": "Create: AeroPortals",
+   "projectID": 1549100,
+   "fileID": 9091605,
+   "url": "https://edge.forgecdn.net/files/9091/605/aeroportals-1.21.1-1.3.4.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeroportals",
+   "source": "curseforge"
+  },
+  {
+   "file": "MossyLib-1.6.0+1.21.1+neoforge.jar",
+   "name": "MossyLib",
+   "projectID": 1399257,
+   "fileID": 8938982,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/mossylib",
+   "source": "curseforge"
+  },
+  {
+   "file": "melody_neoforge_1.0.10_MC_1.21.jar",
+   "name": "Melody",
+   "projectID": 938643,
+   "fileID": 5453382,
+   "url": "https://edge.forgecdn.net/files/5453/382/melody_neoforge_1.0.10_MC_1.21.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/melody",
+   "source": "curseforge"
+  },
+  {
+   "file": "doubledoors-1.21.1-7.3.jar",
+   "name": "Double Doors",
+   "projectID": 348831,
+   "fileID": 9034449,
+   "url": "https://edge.forgecdn.net/files/9034/449/doubledoors-1.21.1-7.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/double-doors",
+   "source": "curseforge"
+  },
+  {
+   "file": "lambdynamiclights-4.8.11+1.21.1.jar",
+   "name": "LambDynamicLights",
+   "projectID": 393442,
+   "fileID": 8780227,
+   "url": "https://edge.forgecdn.net/files/8780/227/lambdynamiclights-4.8.11%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/lambdynamiclights",
+   "source": "curseforge"
+  },
+  {
+   "file": "createbigcannons-5.11.7+mc.1.21.1.jar",
+   "name": "Create Big Cannons",
+   "projectID": 646668,
+   "fileID": 8303106,
+   "url": "https://edge.forgecdn.net/files/8303/106/createbigcannons-5.11.7%2bmc.1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-big-cannons",
+   "source": "curseforge"
+  },
+  {
+   "file": "elytratrims-neoforge-3.10.0+1.21.1.jar",
+   "name": "Elytra Trims",
+   "projectID": 876199,
+   "fileID": 8011736,
+   "url": "https://edge.forgecdn.net/files/8011/736/elytratrims-neoforge-3.10.0%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/elytra-trims",
+   "source": "curseforge"
+  },
+  {
+   "file": "Paraglider-neoforge-21.1.5.jar",
+   "name": "Paragliders",
+   "projectID": 289240,
+   "fileID": 7795089,
+   "url": "https://edge.forgecdn.net/files/7795/89/Paraglider-neoforge-21.1.5.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/paragliders",
+   "source": "curseforge"
+  },
+  {
+   "file": "ftb-teams-neoforge-2101.1.11.jar",
+   "name": "FTB Teams (NeoForge)",
+   "projectID": 404468,
+   "fileID": 8724782,
+   "url": "https://edge.forgecdn.net/files/8724/782/ftb-teams-neoforge-2101.1.11.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge",
+   "source": "curseforge"
+  },
+  {
+   "file": "modernfix-neoforge-5.27.26+mc1.21.1.jar",
+   "name": "ModernFix",
+   "projectID": 790626,
+   "fileID": 9101836,
+   "url": "https://edge.forgecdn.net/files/9101/836/modernfix-neoforge-5.27.26%2bmc1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/modernfix",
+   "source": "curseforge"
+  },
+  {
+   "file": "bookshelf-neoforge-1.21.1-21.1.81.jar",
+   "name": "Bookshelf",
+   "projectID": 228525,
+   "fileID": 7606240,
+   "url": "https://edge.forgecdn.net/files/7606/240/bookshelf-neoforge-1.21.1-21.1.81.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/bookshelf",
+   "source": "curseforge"
+  },
+  {
+   "file": "gadgets-and-gizmos-bundled-V1.2.8.jar",
+   "name": "Create Aeronautics: Gadgets & Gizmos",
+   "projectID": 1537945,
+   "fileID": 9110305,
+   "url": "https://edge.forgecdn.net/files/9110/305/gadgets-and-gizmos-bundled-V1.2.8.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-gadgets-and-gizmos",
+   "source": "curseforge"
+  },
+  {
+   "file": "gnetum-3.3.6.jar",
+   "name": "Gnetum",
+   "projectID": 1220460,
+   "fileID": 8312039,
+   "url": "https://edge.forgecdn.net/files/8312/39/gnetum-3.3.6.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/gnetum",
+   "source": "curseforge"
+  },
+  {
+   "file": "iris-neoforge-1.8.14-beta.1+mc1.21.1.jar",
+   "name": "Iris Shaders",
+   "projectID": 455508,
+   "fileID": 8242804,
+   "url": "https://edge.forgecdn.net/files/8242/804/iris-neoforge-1.8.14-beta.1%2bmc1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/irisshaders",
+   "source": "curseforge"
+  },
+  {
+   "file": "immersive_furniture-neoforge-0.3.3+1.21.1.jar",
+   "name": "Immersive Furniture",
+   "projectID": 1283531,
+   "fileID": 8563588,
+   "url": "https://edge.forgecdn.net/files/8563/588/immersive_furniture-neoforge-0.3.3%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/immersive-furniture",
+   "source": "curseforge"
+  },
+  {
+   "file": "letsdo-wildernature-neoforge-1.1.8.jar",
+   "name": "[Let's Do]\u00a0WilderNature",
+   "projectID": 1071657,
+   "fileID": 9176454,
+   "url": "https://edge.forgecdn.net/files/9176/454/letsdo-wildernature-neoforge-1.1.8.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/lets-do-wildernature",
+   "source": "curseforge"
+  },
+  {
+   "file": "camping-neoforge-1.21.1-2.1.5.jar",
+   "name": "[Let's Do]\u00a0Camping",
+   "projectID": 1072398,
+   "fileID": 8919875,
+   "url": "https://edge.forgecdn.net/files/8919/875/camping-neoforge-1.21.1-2.1.5.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/lets-do-camping",
+   "source": "curseforge"
+  },
+  {
+   "file": "DiagonalWalls-v21.1.2-1.21.1-NeoForge.jar",
+   "name": "Diagonal Walls",
+   "projectID": 969422,
+   "fileID": 5918894,
+   "url": "https://edge.forgecdn.net/files/5918/894/DiagonalWalls-v21.1.2-1.21.1-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/diagonal-walls",
+   "source": "curseforge"
+  },
+  {
+   "file": "particle_core-0.3.3+1.21+neoforge.jar",
+   "name": "Particle Core",
+   "projectID": 985426,
+   "fileID": 7581040,
+   "url": "https://edge.forgecdn.net/files/7581/40/particle_core-0.3.3%2b1.21%2bneoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/particle-core",
+   "source": "curseforge"
+  },
+  {
+   "file": "charmofundying-neoforge-9.1.0+1.21.1.jar",
+   "name": "Charm of Undying (Fabric/Forge/Quilt)",
+   "projectID": 316873,
+   "fileID": 5846603,
+   "url": "https://edge.forgecdn.net/files/5846/603/charmofundying-neoforge-9.1.0%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/charm-of-undying",
+   "source": "curseforge"
+  },
+  {
+   "file": "addonslib-neoforge-1.21.1-1.14.jar",
+   "name": "AddonsLib",
+   "projectID": 1090999,
+   "fileID": 8359493,
+   "url": "https://edge.forgecdn.net/files/8359/493/addonslib-neoforge-1.21.1-1.14.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/addonslib",
+   "source": "curseforge"
+  },
+  {
+   "file": "MultiArrowEffects-Neoforge-1.21.1-2.0.0.jar",
+   "name": "Multi Arrow Effects [Multiple Effects on One Arrow]",
+   "projectID": 1396590,
+   "fileID": 9011029,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/multi-arrow-effects",
+   "source": "curseforge"
+  },
+  {
+   "file": "towed-1.2.0.jar",
+   "name": "Create: Towed",
+   "projectID": 1520427,
+   "fileID": 7997655,
+   "url": "https://edge.forgecdn.net/files/7997/655/towed-1.2.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-towed",
+   "source": "curseforge"
+  },
+  {
+   "file": "cristellib-neoforge-1.21.1-3.1.7.jar",
+   "name": "Cristel Lib",
+   "projectID": 856996,
+   "fileID": 8241767,
+   "url": "https://edge.forgecdn.net/files/8241/767/cristellib-neoforge-1.21.1-3.1.7.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/cristel-lib",
+   "source": "curseforge"
+  },
+  {
+   "file": "AmbientEnvironment-neoforge-1.21.1-18.0.0.2.jar",
+   "name": "Ambient Environment",
+   "projectID": 320163,
+   "fileID": 5799489,
+   "url": "https://edge.forgecdn.net/files/5799/489/AmbientEnvironment-neoforge-1.21.1-18.0.0.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ambient-environment",
+   "source": "curseforge"
+  },
+  {
+   "file": "accessories-neoforge-1.1.0-beta.53+1.21.1.jar",
+   "name": "Accessories",
+   "projectID": 938917,
+   "fileID": 7583320,
+   "url": "https://edge.forgecdn.net/files/7583/320/accessories-neoforge-1.1.0-beta.53%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/accessories",
+   "source": "curseforge"
+  },
+  {
+   "file": "cloth-config-15.0.140-neoforge.jar",
+   "name": "Cloth Config API (Fabric/Forge/NeoForge)",
+   "projectID": 348521,
+   "fileID": 5729127,
+   "url": "https://edge.forgecdn.net/files/5729/127/cloth-config-15.0.140-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/cloth-config",
+   "source": "curseforge"
+  },
+  {
+   "file": "climbable_ropes-2.1.4.jar",
+   "name": "Climbable Ropes for Create Aeronautics",
+   "projectID": 1528764,
+   "fileID": 8976817,
+   "url": "https://edge.forgecdn.net/files/8976/817/climbable_ropes-2.1.4.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-climbable-ropes",
+   "source": "curseforge"
+  },
+  {
+   "file": "sound-physics-remastered-neoforge-1.21.1-1.5.1.jar",
+   "name": "Sound Physics Remastered",
+   "projectID": 535489,
+   "fileID": 7032247,
+   "url": "https://edge.forgecdn.net/files/7032/247/sound-physics-remastered-neoforge-1.21.1-1.5.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/sound-physics-remastered",
+   "source": "curseforge"
+  },
+  {
+   "file": "YungsBetterDesertTemples-1.21.1-NeoForge-4.1.5.jar",
+   "name": "YUNG's Better Desert Temples (NeoForge) [1.20.4 - 1.21.1 ONLY]",
+   "projectID": 1015114,
+   "fileID": 6276955,
+   "url": "https://edge.forgecdn.net/files/6276/955/YungsBetterDesertTemples-1.21.1-NeoForge-4.1.5.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/yungs-better-desert-temples-neoforge",
+   "source": "curseforge"
+  },
+  {
+   "file": "entityculling-neoforge-1.11.3-mc1.21.1.jar",
+   "name": "Entity Culling Fabric/Forge",
+   "projectID": 448233,
+   "fileID": 9100286,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/entityculling",
+   "source": "curseforge"
+  },
+  {
+   "file": "darkerdepths-2.1.6.jar",
+   "name": "Darker Depths",
+   "projectID": 460681,
+   "fileID": 8628964,
+   "url": "https://edge.forgecdn.net/files/8628/964/darkerdepths-2.1.6.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/darker-depths",
+   "source": "curseforge"
+  },
+  {
+   "file": "RPG Potions - Neoforge - MC 1.21.1 - 1.2.0.jar",
+   "name": "RPG Potions \u2013 8 New Potions",
+   "projectID": 1374673,
+   "fileID": 7262045,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/rpg-potions",
+   "source": "curseforge"
+  },
+  {
+   "file": "Kobolds-4.0.1.jar",
+   "name": "Kobolds!",
+   "projectID": 484967,
+   "fileID": 8198851,
+   "url": "https://edge.forgecdn.net/files/8198/851/Kobolds-4.0.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/kobolds",
+   "source": "curseforge"
+  },
+  {
+   "file": "sliceanddice-4.3.4-neoforge.jar",
+   "name": "Create Slice & Dice",
+   "projectID": 659674,
+   "fileID": 8929365,
+   "url": "https://edge.forgecdn.net/files/8929/365/sliceanddice-4.3.4-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/slice-and-dice",
+   "source": "curseforge"
+  },
+  {
+   "file": "YungsBetterDungeons-1.21.1-NeoForge-5.1.4.jar",
+   "name": "YUNG's Better Dungeons (NeoForge) [1.20.4 - 1.21.1 ONLY]",
+   "projectID": 1015112,
+   "fileID": 5954804,
+   "url": "https://edge.forgecdn.net/files/5954/804/YungsBetterDungeons-1.21.1-NeoForge-5.1.4.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/yungs-better-dungeons-neoforge",
+   "source": "curseforge"
+  },
+  {
+   "file": "shellbound_for_airship-1.0.0-neoforge.jar",
+   "name": "ShellBound for AirShip",
+   "projectID": 1470681,
+   "fileID": 7689536,
+   "url": "https://edge.forgecdn.net/files/7689/536/shellbound_for_airship-1.0.0-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/shellbound-for-airship",
+   "source": "curseforge"
+  },
+  {
+   "file": "underwater_village-1.0.2-neoforge-1.21.1.jar",
+   "name": "Underwater Village - Oceanic Structures",
+   "projectID": 1228716,
+   "fileID": 6410823,
+   "url": "https://edge.forgecdn.net/files/6410/823/underwater_village-1.0.2-neoforge-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/underwater-village",
+   "source": "curseforge"
+  },
+  {
+   "file": "[NeoForge] Armadillo Scute Armor - MC 1.21 - 1.0.2.jar",
+   "name": "Armadillo Scute Armor",
+   "projectID": 1011359,
+   "fileID": 5577180,
+   "url": "https://edge.forgecdn.net/files/5577/180/%5bNeoForge%5d%20Armadillo%20Scute%20Armor%20-%20MC%201.21%20-%201.0.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/armadillo-scute-armor",
+   "source": "curseforge"
+  },
+  {
+   "file": "Better_Crossbows-Neoforge-1.21.1-2.0.0.jar",
+   "name": "Better Crossbows",
+   "projectID": 1402632,
+   "fileID": 9172982,
+   "url": "https://edge.forgecdn.net/files/9172/982/Better_Crossbows-Neoforge-1.21.1-2.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/better-crossbows",
+   "source": "curseforge"
+  },
+  {
+   "file": "watut-neoforge-1.21.0-1.2.7.jar",
+   "name": "What Are They Up To (Watut)",
+   "projectID": 945479,
+   "fileID": 6418577,
+   "url": "https://edge.forgecdn.net/files/6418/577/watut-neoforge-1.21.0-1.2.7.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/what-are-they-up-to",
+   "source": "curseforge"
+  },
+  {
+   "file": "explore_ruins_aether-1.0.0-neoforge-1.21.1.jar",
+   "name": "Explore Ruins: The Aether - Dungeons & Structures",
+   "projectID": 1327133,
+   "fileID": 6889560,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/explore-ruins-aether",
+   "source": "curseforge"
+  },
+  {
+   "file": "Geophilic v3.7.mod.jar",
+   "name": "Geophilic \u2013 Vanilla Biome Overhauls",
+   "projectID": 711216,
+   "fileID": 8966202,
+   "url": "https://edge.forgecdn.net/files/8966/202/Geophilic%20v3.7.mod.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/geophilic",
+   "source": "curseforge"
+  },
+  {
+   "file": "ForgeConfigAPIPort-v21.1.6-1.21.1-NeoForge.jar",
+   "name": "Forge Config API Port",
+   "projectID": 547434,
+   "fileID": 7213611,
+   "url": "https://edge.forgecdn.net/files/7213/611/ForgeConfigAPIPort-v21.1.6-1.21.1-NeoForge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/forge-config-api-port",
+   "source": "curseforge"
+  },
+  {
+   "file": "moonlight-1.21.1-3.7.2-neoforge.jar",
+   "name": "Moonlight Lib",
+   "projectID": 499980,
+   "fileID": 9122548,
+   "url": "https://edge.forgecdn.net/files/9122/548/moonlight-1.21.1-3.7.2-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/selene",
+   "source": "curseforge"
+  },
+  {
+   "file": "bountiful-neoforge-8.0.0-beta.2.jar",
+   "name": "Bountiful",
+   "projectID": 309516,
+   "fileID": 7919197,
+   "url": "https://edge.forgecdn.net/files/7919/197/bountiful-neoforge-8.0.0-beta.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/bountiful",
+   "source": "curseforge"
+  },
+  {
+   "file": "endersdelight-1.3.1.jar",
+   "name": "Ender's Delight",
+   "projectID": 827163,
+   "fileID": 8570814,
+   "url": "https://edge.forgecdn.net/files/8570/814/endersdelight-1.3.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/enders-delight",
+   "source": "curseforge"
+  },
+  {
+   "file": "wither_spawn_animation-1.6.2-neoforge-1.21.1.jar",
+   "name": "Wither Spawn Animation",
+   "projectID": 1084564,
+   "fileID": 7638136,
+   "url": "https://edge.forgecdn.net/files/7638/136/wither_spawn_animation-1.6.2-neoforge-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/wither-spawn-animation",
+   "source": "curseforge"
+  },
+  {
+   "file": "memorysettings-1.21-6.0.jar",
+   "name": "Memory Settings",
+   "projectID": 526901,
+   "fileID": 7934534,
+   "url": "https://edge.forgecdn.net/files/7934/534/memorysettings-1.21-6.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/memory-settings",
+   "source": "curseforge"
+  },
+  {
+   "file": "coastersengineered-1.21.1-1.1.1.jar",
+   "name": "Coasters: Engineered",
+   "projectID": 1643631,
+   "fileID": 8863559,
+   "url": "https://edge.forgecdn.net/files/8863/559/coastersengineered-1.21.1-1.1.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/coasters-engineered",
+   "source": "curseforge"
+  },
+  {
+   "file": "balm-neoforge-1.21.1-21.0.66.jar",
+   "name": "Balm",
+   "projectID": 531761,
+   "fileID": 8969738,
+   "url": "https://edge.forgecdn.net/files/8969/738/balm-neoforge-1.21.1-21.0.66.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/balm",
+   "source": "curseforge"
+  },
+  {
+   "file": "create_aeronautics_transmission_linkage-0.2.8.jar",
+   "name": "Create Aeronautics: Transmission & Linkage",
+   "projectID": 1548056,
+   "fileID": 8790451,
+   "url": "https://edge.forgecdn.net/files/8790/451/create_aeronautics_transmission_linkage-0.2.8.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-transmission-linkage",
+   "source": "curseforge"
+  },
+  {
+   "file": "ftb-quests-neoforge-2101.1.36.jar",
+   "name": "FTB Quests (NeoForge)",
+   "projectID": 289412,
+   "fileID": 8885017,
+   "url": "https://edge.forgecdn.net/files/8885/17/ftb-quests-neoforge-2101.1.36.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ftb-quests-forge",
+   "source": "curseforge"
+  },
+  {
+   "file": "interiors-0.6.1 v3.jar",
+   "name": "Create: Interiors",
+   "projectID": 906239,
+   "fileID": 8974633,
+   "url": "https://edge.forgecdn.net/files/8974/633/interiors-0.6.1%20v3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/interiors",
+   "source": "curseforge"
+  },
+  {
+   "file": "shield_generators-1.4.0.jar",
+   "name": "Create Aeronautics: Shield Generators | Create Big Cannons Compat |Force Field",
+   "projectID": 1559550,
+   "fileID": 8427886,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-shield-generator-force-field",
+   "source": "curseforge"
+  },
+  {
+   "file": "spark-1.10.124-neoforge.jar",
+   "name": "spark",
+   "projectID": 361579,
+   "fileID": 6225208,
+   "url": "https://edge.forgecdn.net/files/6225/208/spark-1.10.124-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/spark",
+   "source": "curseforge"
+  },
+  {
+   "file": "kotlinforforge-5.12.0-all.jar",
+   "name": "Kotlin for Forge",
+   "projectID": 351264,
+   "fileID": 8335665,
+   "url": "https://edge.forgecdn.net/files/8335/665/kotlinforforge-5.12.0-all.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/kotlin-for-forge",
+   "source": "curseforge"
+  },
+  {
+   "file": "The_Undergarden-1.21.1-0.9.6.jar",
+   "name": "The Undergarden",
+   "projectID": 379849,
+   "fileID": 7862546,
+   "url": "https://edge.forgecdn.net/files/7862/546/The_Undergarden-1.21.1-0.9.6.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/the-undergarden",
+   "source": "curseforge"
+  },
+  {
+   "file": "ImmediatelyFast-NeoForge-1.6.15+1.21.1.jar",
+   "name": "ImmediatelyFast",
+   "projectID": 686911,
+   "fileID": 9165518,
+   "url": "https://edge.forgecdn.net/files/9165/518/ImmediatelyFast-NeoForge-1.6.15%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/immediatelyfast",
+   "source": "curseforge"
+  },
+  {
+   "file": "GlitchCore-neoforge-1.21.1-2.1.0.2.jar",
+   "name": "GlitchCore",
+   "projectID": 955399,
+   "fileID": 8109792,
+   "url": "https://edge.forgecdn.net/files/8109/792/GlitchCore-neoforge-1.21.1-2.1.0.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/glitchcore",
+   "source": "curseforge"
+  },
+  {
+   "file": "GeophilicBackported-v1.3.3 1.21.1.jar",
+   "name": "Geophilic Backport - Vanilla Backport Compact",
+   "projectID": 1326075,
+   "fileID": 8039064,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/geophilic-backport-vanilla-backport-compact",
+   "source": "curseforge"
+  },
+  {
+   "file": "VanillaBackport-neoforge-1.21.1-1.1.7.10.jar",
+   "name": "Vanilla Backport",
+   "projectID": 417430,
+   "fileID": 8229724,
+   "url": "https://edge.forgecdn.net/files/8229/724/VanillaBackport-neoforge-1.21.1-1.1.7.10.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/vanillabackport",
+   "source": "curseforge"
+  },
+  {
+   "file": "NightLib-Neoforge-1.21.1-1.3.0.jar",
+   "name": "NightLib",
+   "projectID": 1704376,
+   "fileID": 8940259,
+   "url": "https://edge.forgecdn.net/files/8940/259/NightLib-Neoforge-1.21.1-1.3.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/nightlib",
+   "source": "curseforge"
+  },
+  {
+   "file": "structure_layout_optimizer-neoforge-1.0.12.jar",
+   "name": "Structure Layout Optimizer",
+   "projectID": 1087831,
+   "fileID": 7439136,
+   "url": "https://edge.forgecdn.net/files/7439/136/structure_layout_optimizer-neoforge-1.0.12.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/structure-layout-optimizer",
+   "source": "curseforge"
+  },
+  {
+   "file": "mcw-doors-1.1.5-mc1.21.1neoforge.jar",
+   "name": "Macaw's Doors",
+   "projectID": 378646,
+   "fileID": 7618651,
+   "url": "https://edge.forgecdn.net/files/7618/651/mcw-doors-1.1.5-mc1.21.1neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/macaws-doors",
+   "source": "curseforge"
+  },
+  {
+   "file": "create_submarine-3.3.0.jar",
+   "name": "Create  Deep Seas",
+   "projectID": 1533137,
+   "fileID": 9042070,
+   "url": "https://edge.forgecdn.net/files/9042/70/create_submarine-3.3.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-deep-seas",
+   "source": "curseforge"
+  },
+  {
+   "file": "createbetterfps-1.21.1-1.1.5.jar",
+   "name": "Create Better FPS",
+   "projectID": 1217518,
+   "fileID": 8908301,
+   "url": "https://edge.forgecdn.net/files/8908/301/createbetterfps-1.21.1-1.1.5.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-better-fps",
+   "source": "curseforge"
+  },
+  {
+   "file": "SereneSeasons-neoforge-1.21.1-10.1.0.3.jar",
+   "name": "Serene Seasons",
+   "projectID": 291874,
+   "fileID": 6182596,
+   "url": "https://edge.forgecdn.net/files/6182/596/SereneSeasons-neoforge-1.21.1-10.1.0.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/serene-seasons",
+   "source": "curseforge"
+  },
+  {
+   "file": "simplyswords-neoforge-1.70.2-1.21.1.jar",
+   "name": "Simply Swords [Fabric & Forge]",
+   "projectID": 659887,
+   "fileID": 8746001,
+   "url": "https://edge.forgecdn.net/files/8746/1/simplyswords-neoforge-1.70.2-1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/simply-swords",
+   "source": "curseforge"
+  },
+  {
+   "file": "BridgingMod-2.6.2+1.21.1.neoforge-release.jar",
+   "name": "Bridging Mod",
+   "projectID": 533942,
+   "fileID": 6269728,
+   "url": "https://edge.forgecdn.net/files/6269/728/BridgingMod-2.6.2%2b1.21.1.neoforge-release.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/bridging-mod",
+   "source": "curseforge"
+  },
+  {
+   "file": "chunksending-1.21-4.1.jar",
+   "name": "Chunk Sending",
+   "projectID": 831663,
+   "fileID": 9051336,
+   "url": "https://edge.forgecdn.net/files/9051/336/chunksending-1.21-4.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/chunk-sending-forge-fabric",
+   "source": "curseforge"
+  },
+  {
+   "file": "torchmaster-neoforge-1.21.1-21.1.13.jar",
+   "name": "Torchmaster",
+   "projectID": 254268,
+   "fileID": 8949981,
+   "url": "https://edge.forgecdn.net/files/8949/981/torchmaster-neoforge-1.21.1-21.1.13.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/torchmaster",
+   "source": "curseforge"
+  },
+  {
+   "file": "YungsBridges-1.21.1-NeoForge-5.1.1.jar",
+   "name": "YUNG's Bridges (NeoForge) [1.20.4 - 1.21.1 ONLY]",
+   "projectID": 1015149,
+   "fileID": 5812553,
+   "url": "https://edge.forgecdn.net/files/5812/553/YungsBridges-1.21.1-NeoForge-5.1.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/yungs-bridges-neoforge",
+   "source": "curseforge"
+  },
+  {
+   "file": "ars_nouveau-1.21.1-5.13.3.jar",
+   "name": "Ars Nouveau",
+   "projectID": 401955,
+   "fileID": 9052154,
+   "url": "https://edge.forgecdn.net/files/9052/154/ars_nouveau-1.21.1-5.13.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/ars-nouveau",
+   "source": "curseforge"
+  },
+  {
+   "file": "owo-lib-neoforge-0.12.15.5-beta.1+1.21.jar",
+   "name": "o\u03c9o (owo-lib)",
+   "projectID": 532610,
+   "fileID": 6785734,
+   "url": "https://edge.forgecdn.net/files/6785/734/owo-lib-neoforge-0.12.15.5-beta.1%2b1.21.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/owo-lib",
+   "source": "curseforge"
+  },
+  {
+   "file": "DelightoFlight-1.21.1-1.3.4.jar",
+   "name": "Delight o' Flight",
+   "projectID": 1347014,
+   "fileID": 8012635,
+   "url": "https://edge.forgecdn.net/files/8012/635/DelightoFlight-1.21.1-1.3.4.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/delighto-flight",
+   "source": "curseforge"
+  },
+  {
+   "file": "gpumemleakfix-1.21-1.8.jar",
+   "name": "fix GPU memory leak",
+   "projectID": 882495,
+   "fileID": 5513549,
+   "url": "https://edge.forgecdn.net/files/5513/549/gpumemleakfix-1.21-1.8.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/fix-gpu-memory-leak",
+   "source": "curseforge"
+  },
+  {
+   "file": "improved-village-placement-1.2.0-neoforge-21.1.jar",
+   "name": "Improved Village Placement",
+   "projectID": 1175325,
+   "fileID": 8404841,
+   "url": "https://edge.forgecdn.net/files/8404/841/improved-village-placement-1.2.0-neoforge-21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/improved-village-placement",
+   "source": "curseforge"
+  },
+  {
+   "file": "create_aeronautics_toolgun-0.3.6.jar",
+   "name": "create aeronautics\uff1atoolgun",
+   "projectID": 1521349,
+   "fileID": 8701394,
+   "url": "https://edge.forgecdn.net/files/8701/394/create_aeronautics_toolgun-0.3.6.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeronauticstoolgun",
+   "source": "curseforge"
+  },
+  {
+   "file": "notenoughanimations-neoforge-1.12.6-mc1.21.1.jar",
+   "name": "Not Enough Animations",
+   "projectID": 433760,
+   "fileID": 8925075,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/not-enough-animations",
+   "source": "curseforge"
+  },
+  {
+   "file": "createaddition-1.6.0.jar",
+   "name": "Create Crafts & Additions",
+   "projectID": 439890,
+   "fileID": 8188476,
+   "url": "https://edge.forgecdn.net/files/8188/476/createaddition-1.6.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/createaddition",
+   "source": "curseforge"
+  },
+  {
+   "file": "YungsBetterMineshafts-1.21.1-NeoForge-5.1.1.jar",
+   "name": "YUNG's Better Mineshafts (NeoForge) [1.20.4 - 1.21.1 ONLY]",
+   "projectID": 1015096,
+   "fileID": 5812193,
+   "url": "https://edge.forgecdn.net/files/5812/193/YungsBetterMineshafts-1.21.1-NeoForge-5.1.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/yungs-better-mineshafts-neoforge",
+   "source": "curseforge"
+  },
+  {
+   "file": "fragmentum-5.3.0+1.21.1-neoforge.jar",
+   "name": "Fragmentum \ud83e\udde9 NeoForge",
+   "projectID": 1123977,
+   "fileID": 9150745,
+   "url": "https://edge.forgecdn.net/files/9150/745/fragmentum-5.3.0%2b1.21.1-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/fragmentum-neoforge",
+   "source": "curseforge"
+  },
+  {
+   "file": "carryon-neoforge-1.21.1-2.2.6.13.jar",
+   "name": "Carry On",
+   "projectID": 274259,
+   "fileID": 8512888,
+   "url": "https://edge.forgecdn.net/files/8512/888/carryon-neoforge-1.21.1-2.2.6.13.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/carry-on",
+   "source": "curseforge"
+  },
+  {
+   "file": "EuphoriaPatcher-1.10.5-r5.9.3-neoforge.jar",
+   "name": "Euphoria Patches",
+   "projectID": 915902,
+   "fileID": 8884680,
+   "url": "https://edge.forgecdn.net/files/8884/680/EuphoriaPatcher-1.10.5-r5.9.3-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/euphoria-patches",
+   "source": "curseforge"
+  },
+  {
+   "file": "fallingleaves-1.21.1-2.5.1.jar",
+   "name": "Falling Leaves (NeoForge/Forge)",
+   "projectID": 463155,
+   "fileID": 6240977,
+   "url": "https://edge.forgecdn.net/files/6240/977/fallingleaves-1.21.1-2.5.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/falling-leaves-forge",
+   "source": "curseforge"
+  },
+  {
+   "file": "configured-neoforge-1.21.1-2.6.3.jar",
+   "name": "Configured",
+   "projectID": 457570,
+   "fileID": 7276577,
+   "url": "https://edge.forgecdn.net/files/7276/577/configured-neoforge-1.21.1-2.6.3.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/configured",
+   "source": "curseforge"
+  },
+  {
+   "file": "connectivity-1.21.1-7.7.jar",
+   "name": "Connectivity",
+   "projectID": 470193,
+   "fileID": 9008904,
+   "url": "https://edge.forgecdn.net/files/9008/904/connectivity-1.21.1-7.7.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/connectivity",
+   "source": "curseforge"
+  },
+  {
+   "file": "inventoryessentials-neoforge-1.21.1-21.1.20.jar",
+   "name": "Inventory Essentials",
+   "projectID": 368825,
+   "fileID": 9035078,
+   "url": "https://edge.forgecdn.net/files/9035/78/inventoryessentials-neoforge-1.21.1-21.1.20.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/inventory-essentials",
+   "source": "curseforge"
+  },
+  {
+   "file": "better-advanced-tooltips-2101.1.0-build.5.jar",
+   "name": "Better Advanced Tooltips",
+   "projectID": 1637623,
+   "fileID": 8576077,
+   "url": "https://edge.forgecdn.net/files/8576/77/better-advanced-tooltips-2101.1.0-build.5.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/better-advanced-tooltips",
+   "source": "curseforge"
+  },
+  {
+   "file": "resourcefulconfig-neoforge-1.21-3.0.11.jar",
+   "name": "Resourceful Config",
+   "projectID": 714059,
+   "fileID": 6467772,
+   "url": "https://edge.forgecdn.net/files/6467/772/resourcefulconfig-neoforge-1.21-3.0.11.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/resourceful-config",
+   "source": "curseforge"
+  },
+  {
+   "file": "kambrik-neoforge-8.0.0-beta.2.jar",
+   "name": "Kambrik",
+   "projectID": 455585,
+   "fileID": 7919192,
+   "url": "https://edge.forgecdn.net/files/7919/192/kambrik-neoforge-8.0.0-beta.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/kambrik",
+   "source": "curseforge"
+  },
+  {
+   "file": "yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar",
+   "name": "YetAnotherConfigLib",
+   "projectID": 667299,
+   "fileID": 7437845,
+   "url": "https://edge.forgecdn.net/files/7437/845/yet_another_config_lib_v3-3.8.2%2b1.21.1-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/yacl",
+   "source": "curseforge"
+  },
+  {
+   "file": "midnightlib-neoforge-1.10.0+1.21.1.jar",
+   "name": "MidnightLib",
+   "projectID": 488090,
+   "fileID": 9184487,
+   "url": "https://edge.forgecdn.net/files/9184/487/midnightlib-neoforge-1.10.0%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/midnightlib",
+   "source": "curseforge"
+  },
+  {
+   "file": "golemoverhaul-neoforge-1.21.1-1.1.1.jar",
+   "name": "Golem Overhaul",
+   "projectID": 618752,
+   "fileID": 8521968,
+   "url": "https://edge.forgecdn.net/files/8521/968/golemoverhaul-neoforge-1.21.1-1.1.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/golem-overhaul",
+   "source": "curseforge"
+  },
+  {
+   "file": "copycats-3.0.9+mc.1.21.1-neoforge.jar",
+   "name": "Create: Copycats+",
+   "projectID": 968398,
+   "fileID": 8822348,
+   "url": "https://edge.forgecdn.net/files/8822/348/copycats-3.0.9%2bmc.1.21.1-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/copycats",
+   "source": "curseforge"
+  },
+  {
+   "file": "fancymenu_neoforge_3.9.14_MC_1.21.1.jar",
+   "name": "FancyMenu",
+   "projectID": 367706,
+   "fileID": 9002957,
+   "url": "https://edge.forgecdn.net/files/9002/957/fancymenu_neoforge_3.9.14_MC_1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/fancymenu",
+   "source": "curseforge"
+  },
+  {
+   "file": "CreateNumismatics-1.1.0+neoforge-mc1.21.1.jar",
+   "name": "Create: Numismatics",
+   "projectID": 889722,
+   "fileID": 8745418,
+   "url": "https://edge.forgecdn.net/files/8745/418/CreateNumismatics-1.1.0%2bneoforge-mc1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/numismatics",
+   "source": "curseforge"
+  },
+  {
+   "file": "fast-ip-ping-v1.0.12-mc1.21.1-neoforge.jar",
+   "name": "Fast IP Ping",
+   "projectID": 904356,
+   "fileID": 8905303,
+   "url": "https://edge.forgecdn.net/files/8905/303/fast-ip-ping-v1.0.12-mc1.21.1-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/fast-ip-ping",
+   "source": "curseforge"
+  },
+  {
+   "file": "Perception-NEOFORGE-0.2.1+1.21.1.jar",
+   "name": "Perception",
+   "projectID": 1112793,
+   "fileID": 7761238,
+   "url": "https://edge.forgecdn.net/files/7761/238/Perception-NEOFORGE-0.2.1%2b1.21.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/perception",
+   "source": "curseforge"
+  },
+  {
+   "file": "cookingforblockheads-neoforge-1.21.1-21.1.24.jar",
+   "name": "Cooking for Blockheads",
+   "projectID": 231484,
+   "fileID": 8404453,
+   "url": "https://edge.forgecdn.net/files/8404/453/cookingforblockheads-neoforge-1.21.1-21.1.24.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/cooking-for-blockheads",
+   "source": "curseforge"
+  },
+  {
+   "file": "unlocked_typing-merged-1.21.1-3.0.1.jar",
+   "name": "Unlocked Typing",
+   "projectID": 1373339,
+   "fileID": 9062259,
+   "url": "https://edge.forgecdn.net/files/9062/259/unlocked_typing-merged-1.21.1-3.0.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/unlocked-typing",
+   "source": "curseforge"
+  },
+  {
+   "file": "architectury-13.0.11-neoforge.jar",
+   "name": "Architectury API",
+   "projectID": 419699,
+   "fileID": 8492726,
+   "url": "https://edge.forgecdn.net/files/8492/726/architectury-13.0.11-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/architectury-api",
+   "source": "curseforge"
+  },
+  {
+   "file": "alltheleaks-1.1.13+1.21.1-neoforge.jar",
+   "name": "AllTheLeaks (Memory Leak Fix)",
+   "projectID": 1091339,
+   "fileID": 8943912,
+   "url": "https://edge.forgecdn.net/files/8943/912/alltheleaks-1.1.13%2b1.21.1-neoforge.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/alltheleaks",
+   "source": "curseforge"
+  },
+  {
+   "file": "aeronauticscovers-1.21.1-NeoForge-1.0.1.jar",
+   "name": "Create Aeronautics: Covers",
+   "projectID": 1518758,
+   "fileID": 7971997,
+   "url": "https://edge.forgecdn.net/files/7971/997/aeronauticscovers-1.21.1-NeoForge-1.0.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-covers",
+   "source": "curseforge"
+  },
+  {
+   "file": "more_useful_copper-merged-1.21.1-3.0.0.jar",
+   "name": "More Useful Copper - MAJOR UPDATE 3.0!",
+   "projectID": 983503,
+   "fileID": 7853483,
+   "url": "https://edge.forgecdn.net/files/7853/483/more_useful_copper-merged-1.21.1-3.0.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/more-useful-copper-2-0",
+   "source": "curseforge"
+  },
+  {
+   "file": "betterarcheology-neoforge-1.21.1-1.3.9.jar",
+   "name": "Better Archeology",
+   "projectID": 835687,
+   "fileID": 9099893,
+   "url": "https://edge.forgecdn.net/files/9099/893/betterarcheology-neoforge-1.21.1-1.3.9.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/better-archeology",
+   "source": "curseforge"
+  },
+  {
+   "file": "stackable_stew_and_soup-neoforge-1.21.1-2.1.0.jar",
+   "name": "Stackable Stew and Soup",
+   "projectID": 886735,
+   "fileID": 8429872,
+   "url": "https://edge.forgecdn.net/files/8429/872/stackable_stew_and_soup-neoforge-1.21.1-2.1.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/stackable-stew-and-soup",
+   "source": "curseforge"
+  },
+  {
+   "file": "netherportalfix-neoforge-1.21.1-21.1.1.jar",
+   "name": "NetherPortalFix",
+   "projectID": 241160,
+   "fileID": 5623547,
+   "url": "https://edge.forgecdn.net/files/5623/547/netherportalfix-neoforge-1.21.1-21.1.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/netherportalfix",
+   "source": "curseforge"
+  },
+  {
+   "file": "wider_ender_chests-neoforge-1.21.1-1.0.4.jar",
+   "name": "Wider Ender Chests | 8 New Ender Chests!",
+   "projectID": 1010456,
+   "fileID": 8016653,
+   "url": "https://edge.forgecdn.net/files/8016/653/wider_ender_chests-neoforge-1.21.1-1.0.4.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/wider-ender-chests",
+   "source": "curseforge"
+  },
+  {
+   "file": "void_spawn_fix-1.2.0.jar",
+   "name": "Void Spawn Fix",
+   "projectID": 1629223,
+   "fileID": 8569553,
+   "url": "https://edge.forgecdn.net/files/8569/553/void_spawn_fix-1.2.0.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/void-spawn-fix",
+   "source": "curseforge"
+  },
+  {
+   "file": "Searchables-neoforge-1.21.1-1.0.2.jar",
+   "name": "Searchables",
+   "projectID": 858542,
+   "fileID": 5831692,
+   "url": "https://edge.forgecdn.net/files/5831/692/Searchables-neoforge-1.21.1-1.0.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/searchables",
+   "source": "curseforge"
+  },
+  {
+   "file": "MoogsStructureLib-neoforge-1.21.1-3.4.2.jar",
+   "name": "Moog's Structure Lib (moogs_structures)",
+   "projectID": 1337167,
+   "fileID": 9047179,
+   "url": "https://edge.forgecdn.net/files/9047/179/MoogsStructureLib-neoforge-1.21.1-3.4.2.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/moogs-structure-lib",
+   "source": "curseforge"
+  },
+  {
+   "file": "invcrafting-1.21.1-2.0.0.jar",
+   "name": "Inventory Crafting Grid (3x3 crafting in your inventory)",
+   "projectID": 232597,
+   "fileID": 8147538,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/inventory-crafting-grid",
+   "source": "curseforge"
+  },
+  {
+   "file": "accessories_compat_layer-neoforge-0.1.13+1.21.1.jar",
+   "name": "Accessories Compatibility Layer",
+   "projectID": 1315611,
+   "fileID": 9217111,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/accessories-compat-layer",
+   "source": "curseforge"
+  },
+  {
+   "file": "flib-1.21.1-0.2.9.jar",
+   "name": "FLIB (library for Inventory Crafting Grid)",
+   "projectID": 661261,
+   "fileID": 8611586,
+   "url": null,
+   "page": "https://www.curseforge.com/minecraft/mc-mods/flib",
+   "source": "curseforge"
+  },
+  {
+   "file": "aetherial-islands-2.0.2.jar",
+   "name": "aetherial-islands-2.0.2",
+   "projectID": 0,
+   "fileID": 0,
+   "url": null,
+   "page": "",
+   "source": "zip"
+  },
+  {
+   "file": "checklist-1.21.1-1.0.0.jar",
+   "name": "checklist-1.21.1-1.0.0",
+   "projectID": 0,
+   "fileID": 0,
+   "url": null,
+   "page": "",
+   "source": "zip"
+  },
+  {
+   "file": "cherishedmobs-1.21.1-1.0.0.jar",
+   "name": "cherishedmobs-1.21.1-1.0.0",
+   "projectID": 0,
+   "fileID": 0,
+   "url": null,
+   "page": "",
+   "source": "zip"
+  },
+  {
+   "file": "keyboardkeybinds-1.21.1-1.0.0.jar",
+   "name": "keyboardkeybinds-1.21.1-1.0.0",
+   "projectID": 0,
+   "fileID": 0,
+   "url": null,
+   "page": "",
+   "source": "zip"
+  },
+  {
+   "file": "levellossonly-1.21.1-1.0.0.jar",
+   "name": "levellossonly-1.21.1-1.0.0",
+   "projectID": 0,
+   "fileID": 0,
+   "url": null,
+   "page": "",
+   "source": "zip"
+  },
+  {
+   "file": "radars-1.21.1-1.0.0.jar",
+   "name": "radars-1.21.1-1.0.0",
+   "projectID": 0,
+   "fileID": 0,
+   "url": null,
+   "page": "",
+   "source": "zip"
+  }
+ ]
+}
