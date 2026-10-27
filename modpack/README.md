@@ -77,10 +77,10 @@ halve modded drops everywhere.
 
 Review outcome: 426 mods audited, 384 kept. Scrapped: the non-Create tech stack (Modern Industrialization, Modern Dynamics,
 Powah, Flux Networks, Wireless Chargers, Charging Gadgets, Cognition, Security Craft, Additional Enchanted Miner), duplicate
-accessory and storage systems (Accessories, Tom's Simple Storage, Nether Chested, Super Ore Block), pack branding
+storage systems (Tom's Simple Storage, Nether Chested, Super Ore Block), Crafting on a Stick, PlayerRevive, pack branding
 (BisectHosting menu, loading tips, toasts, AutoMessage, StartInv, Immersive UI, Underlay, Modern World Creation, Loading
 Backgrounds), Exclusive Weapons, Farmers Structures, Punchy (its item-swap flip animation), and four libraries nothing needed.
-Added: Inventory Crafting Grid (3x3 crafting in the inventory). The pack's KubeJS scripts and FTB quests reference only
+Added: Inventory Crafting Grid (+ its FLIB library) and the Accessories Compatibility Layer, so Curios trinkets and the Aether's Accessories slots share one screen (Accessories is kept for that; Curios stays underneath). The pack's KubeJS scripts and FTB quests reference only
 Create-family mods, so none of the removals break them.
 
 Resource packs from the original (the "Realistic 3D" packs) are dropped; the three shader packs stay.
