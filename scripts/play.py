@@ -72,10 +72,23 @@ def expand(values):
 
 jvm = [a for a in expand(vanilla["arguments"]["jvm"]) if a != "-XstartOnFirstThread"] + expand(neo["arguments"]["jvm"])
 game = [g for g in expand(vanilla["arguments"]["game"]) + expand(neo["arguments"]["game"]) if g != "--demo"]
+# never start fullscreen: Minecraft rewrites options.txt on exit, so this is re-asserted before every launch
+opts = profile / "options.txt"
+if opts.exists():
+    text = opts.read_text(encoding="utf-8", errors="replace")
+    if "fullscreen:true" in text:
+        opts.write_text(text.replace("fullscreen:true", "fullscreen:false"), encoding="utf-8")
+else:
+    opts.write_text("fullscreen:false\n", encoding="utf-8")
+
 cmd = [str(JAVA), f"-Xmx{xmx}", "-Xms2G"] + jvm + [neo["mainClass"]] + game
 log = open(profile / "launch.log", "w", encoding="utf-8", errors="replace")
 log.write(" ".join(cmd) + "\n\n"); log.flush()
 flags = 0x00000008 | 0x00000200 if os.name == "nt" else 0  # DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP
 proc = subprocess.Popen(cmd, cwd=str(profile), stdout=log, stderr=subprocess.STDOUT, creationflags=flags)
 (profile / "game.pid").write_text(str(proc.pid))
+# focus guard: during loading, give focus straight back to whatever Lucas was using
+guard = Path(__file__).resolve().parent / "no-focus-steal.ps1"
+subprocess.Popen(["powershell", "-NoProfile", "-WindowStyle", "Hidden", "-ExecutionPolicy", "Bypass", "-File", str(guard), "-GamePid", str(proc.pid)],
+                 creationflags=flags, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 print(f"launched {neo['id']} as {player} from {profile.name} (pid {proc.pid}); log: {profile / 'launch.log'}")
