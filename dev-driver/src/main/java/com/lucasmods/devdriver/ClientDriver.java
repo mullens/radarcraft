@@ -53,6 +53,13 @@ import java.util.function.Predicate;
  * respawn                click the Respawn button on the death screen
  * log TEXT               log TEXT; placeholders {xp} {items} {screen} {health} {hotbar} {entities} {maxhealth} {speed}
  * expect PLACEHOLDER V   log PASS/FAIL comparing a placeholder with V
+ * disconnect             leave the server/world (pause-menu Disconnect)
+ * openaccessories        open the Accessories mod's screen
+ * slots                  log the open container's non-inventory slots (Curios/Accessories names, items)
+ * clickslot inv N | clickslot name NAME [k]   left-click a slot through the server (pick up / place)
+ * waitfile PATH [ticks]  wait until a file exists (outside signal)
+ * widgets                log every widget on the current screen
+ * clickwidget TEXT       click the first widget whose class/message/tooltip contains TEXT
  * gochest                /tp beside the nearest chest within 32 blocks
  * usechest               right-click the nearest chest within 6 blocks (opens it)
  * show / hide            show or hide the game window
@@ -143,7 +150,7 @@ public final class ClientDriver {
         DevDriverMod.LOGGER.info("{} game window {}", DevDriverMod.TAG, visible ? "shown" : "hidden (background mode)");
     }
 
-    private void execute(Minecraft mc, String line) {
+    private void execute(Minecraft mc, String line) throws Exception {
         String[] parts = line.split("\\s+", 2);
         String cmd = parts[0].toLowerCase(Locale.ROOT);
         String rest = parts.length > 1 ? parts[1] : "";
@@ -227,6 +234,76 @@ public final class ClientDriver {
                 DevDriverMod.LOGGER.info("{} using chest at {}", DevDriverMod.TAG, chest.toShortString());
                 mc.gameMode.useItemOn(mc.player, net.minecraft.world.InteractionHand.MAIN_HAND,
                         new net.minecraft.world.phys.BlockHitResult(net.minecraft.world.phys.Vec3.atCenterOf(chest), net.minecraft.core.Direction.UP, chest, false));
+            }
+            case "waitfile" -> { // waitfile PATH [maxTicks]
+                java.nio.file.Path path = java.nio.file.Path.of(args[0]);
+                await(m -> java.nio.file.Files.exists(path), args.length > 1 ? Integer.parseInt(args[1]) : 20 * 1800);
+            }
+            case "widgets" -> { // log every widget of the current screen: class, bounds, message
+                Screen screen = requireScreen(mc);
+                List<net.minecraft.client.gui.components.AbstractWidget> widgets = new ArrayList<>();
+                collectWidgets(screen, widgets);
+                DevDriverMod.LOGGER.info("{} {} has {} widget(s)", DevDriverMod.TAG, screen.getClass().getSimpleName(), widgets.size());
+                for (var w : widgets) {
+                    DevDriverMod.LOGGER.info("{}   {} at {},{} {}x{} '{}' tooltip='{}'", DevDriverMod.TAG, w.getClass().getName(),
+                            w.getX(), w.getY(), w.getWidth(), w.getHeight(), w.getMessage().getString(), widgetTooltip(w));
+                }
+            }
+            case "clickwidget" -> { // clickwidget SUBSTRING: click the centre of the first widget whose class name, message or tooltip contains it
+                Screen screen = requireScreen(mc);
+                List<net.minecraft.client.gui.components.AbstractWidget> widgets = new ArrayList<>();
+                collectWidgets(screen, widgets);
+                String needle = rest.trim().toLowerCase(java.util.Locale.ROOT);
+                var hit = widgets.stream().filter(w -> (w.getClass().getName() + " " + w.getMessage().getString() + " " + widgetTooltip(w))
+                        .toLowerCase(java.util.Locale.ROOT).contains(needle)).findFirst()
+                        .orElseThrow(() -> new IllegalStateException("no widget matching '" + needle + "' on " + screen.getClass().getSimpleName()));
+                DevDriverMod.LOGGER.info("{} clicking {} '{}' at {},{}", DevDriverMod.TAG, hit.getClass().getSimpleName(), hit.getMessage().getString(),
+                        hit.getX() + hit.getWidth() / 2.0, hit.getY() + hit.getHeight() / 2.0);
+                click(mc, hit.getX() + hit.getWidth() / 2.0, hit.getY() + hit.getHeight() / 2.0, 0);
+            }
+            case "openaccessories" -> { // open the Accessories mod's own screen (reflection, so the driver has no dependency)
+                Object ok = Class.forName("io.wispforest.accessories.client.AccessoriesClient").getMethod("attemptToOpenScreen").invoke(null);
+                DevDriverMod.LOGGER.info("{} AccessoriesClient.attemptToOpenScreen() -> {}", DevDriverMod.TAG, ok);
+            }
+            case "slots" -> { // log every slot of the open container menu that is not the player's own 36-slot inventory
+                var screen = requireScreen(mc);
+                if (!(screen instanceof net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<?> cs)) throw new IllegalStateException("not a container screen");
+                var menu = cs.getMenu();
+                int shown = 0;
+                for (var slot : menu.slots) {
+                    if (slot.container == mc.player.getInventory() && slot.getContainerSlot() < 36) continue;
+                    ItemStackInfo info = new ItemStackInfo(slot);
+                    DevDriverMod.LOGGER.info("{}   slot #{} {} name={} active={} item={}", DevDriverMod.TAG, slot.index, slot.getClass().getSimpleName(),
+                            info.name, slot.isActive(), info.item);
+                    shown++;
+                }
+                DevDriverMod.LOGGER.info("{} {} on {}: {} non-inventory slot(s)", DevDriverMod.TAG, menu.getClass().getSimpleName(), screen.getClass().getSimpleName(), shown);
+            }
+            case "clickslot" -> { // clickslot inv N | clickslot name NAME [k]: left-click (pick up / place) a slot through the server
+                var screen = requireScreen(mc);
+                if (!(screen instanceof net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<?> cs)) throw new IllegalStateException("not a container screen");
+                var menu = cs.getMenu();
+                net.minecraft.world.inventory.Slot target = null;
+                if (args[0].equals("inv")) {
+                    int n = Integer.parseInt(args[1]);
+                    for (var slot : menu.slots) if (slot.container == mc.player.getInventory() && slot.getContainerSlot() == n) { target = slot; break; }
+                } else {
+                    String name = args[1];
+                    int k = args.length > 2 ? Integer.parseInt(args[2]) : 0;
+                    for (var slot : menu.slots) {
+                        if (!slot.isActive()) continue;
+                        ItemStackInfo info = new ItemStackInfo(slot);
+                        if (name.equals(info.name) && !info.cosmetic && k-- == 0) { target = slot; break; }
+                    }
+                }
+                if (target == null) throw new IllegalStateException("no slot " + String.join(" ", args));
+                DevDriverMod.LOGGER.info("{} clicking slot #{} {} (carried before: {})", DevDriverMod.TAG, target.index, target.getClass().getSimpleName(), menu.getCarried());
+                mc.gameMode.handleInventoryMouseClick(menu.containerId, target.index, 0, net.minecraft.world.inventory.ClickType.PICKUP, mc.player);
+            }
+            case "disconnect" -> { // leave the current server/world like the pause menu's Disconnect button
+                if (mc.level != null) mc.level.disconnect();
+                mc.disconnect();
+                mc.setScreen(new net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen(new TitleScreen()));
             }
             case "show" -> setWindowVisible(mc, true);
             case "hide" -> setWindowVisible(mc, false);
@@ -333,5 +410,59 @@ public final class ClientDriver {
         }
         if (best == null) throw new IllegalStateException("no chest within " + radius + " blocks");
         return best;
+    }
+
+    private static void collectWidgets(net.minecraft.client.gui.components.events.ContainerEventHandler container,
+                                       List<net.minecraft.client.gui.components.AbstractWidget> out) {
+        for (var child : container.children()) {
+            if (child instanceof net.minecraft.client.gui.components.AbstractWidget w) out.add(w);
+            if (child instanceof net.minecraft.client.gui.components.events.ContainerEventHandler c) collectWidgets(c, out);
+        }
+    }
+
+    private static String widgetTooltip(net.minecraft.client.gui.components.AbstractWidget w) {
+        try {
+            var t = w.getTooltip();
+            if (t == null) return "";
+            StringBuilder sb = new StringBuilder();
+            for (var seq : t.toCharSequence(Minecraft.getInstance())) {
+                if (sb.length() > 0) sb.append(" | ");
+                seq.accept((i, style, cp) -> { sb.appendCodePoint(cp); return true; });
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    /** Slot name (Curios getIdentifier / Accessories slotName), cosmetic flag and item, found by reflection. */
+    private static final class ItemStackInfo {
+        final String name;
+        final boolean cosmetic;
+        final String item;
+
+        ItemStackInfo(net.minecraft.world.inventory.Slot slot) {
+            String n = "";
+            boolean c = false;
+            for (String m : new String[]{"getIdentifier", "slotName"}) {
+                try {
+                    Object v = slot.getClass().getMethod(m).invoke(slot);
+                    if (v != null) { n = v.toString(); break; }
+                } catch (ReflectiveOperationException ignored) {
+                }
+            }
+            for (String m : new String[]{"isCosmeticSlot", "isCosmetic"}) {
+                try {
+                    c = (Boolean) slot.getClass().getMethod(m).invoke(slot);
+                    break;
+                } catch (ReflectiveOperationException | ClassCastException ignored) {
+                }
+            }
+            if (slot.getClass().getSimpleName().toLowerCase(Locale.ROOT).contains("cosmetic")) c = true;
+            name = n;
+            cosmetic = c;
+            var stack = slot.getItem();
+            item = stack.isEmpty() ? "-" : stack.getCount() + "x" + net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem());
+        }
     }
 }

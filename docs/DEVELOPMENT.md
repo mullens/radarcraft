@@ -80,7 +80,9 @@ PowerShell 5.1, which otherwise splits `-PdriverScript=…/x.txt` at the dot and
 
 Client scripts are one command per line (`waittitle`, `wait`, `click X Y`, `scroll X Y AMOUNT`, `key ENTER`, `type`,
 `chat /give @s diamond`, `world NAME`, `connect HOST:PORT`, `respawn`, `screen keybinds|inventory|advancements|checklist|none`,
-`screenshot NAME`, `gochest` (/tp beside the nearest chest), `usechest` (open it), `dumpchannels FILE`, `log`, `expect`, `show`, `hide`, `quit`); server scripts use `wait`, `cmd <command>`,
+`screenshot NAME`, `gochest` (/tp beside the nearest chest), `usechest` (open it), `widgets` / `clickwidget TEXT` (list or click
+any screen's buttons by class, label or tooltip), `slots` / `clickslot inv N | name NAME` (list or click container slots,
+including Curios and Accessories slots by name, through the server), `openaccessories`, `disconnect`, `waitfile PATH`, `dumpchannels FILE`, `log`, `expect`, `show`, `hide`, `quit`); server scripts use `wait`, `waitfile PATH` (hold until another process creates the file), `cmd <command>`,
 `log` with `{named}` / `{namedcount}`, `expect`, `dumpchannels FILE`, `quit`. Screenshots are written by Minecraft itself
 to `dev-driver/run/screenshots/NAME.png`; results and `PASS`/`FAIL` lines go to the game log, prefixed `[DevDriver]`. The full
 command lists are in the Javadoc of `ClientDriver.java` and `ServerDriver.java`.
@@ -89,6 +91,14 @@ command lists are in the Javadoc of `ClientDriver.java` and `ServerDriver.java`.
 the first resource reload, which in a big pack happens minutes after the game loop starts ticking. A script that
 connects earlier gets a bogus "channels missing on the client" / "Incompatible client" mismatch. `dumpchannels` on both
 sides is the way to check (compare `NetworkRegistry.setup=` and the entry counts).
+
+### Mini modpack first, full pack last
+
+Iterate on a feature with the minimal dev-driver runs above: only this repo's mods, plus at most the one or two pack
+mods the feature interacts with, dropped into `dev-driver/run/mods` (Controlling and Better Advancements for the screen
+hooks, Lootr for loot chests...). Those boot in under a minute. Use the full-pack launcher below once per feature, as the
+final integration check, or when the question is about a pack mod's own behaviour. Full-pack boots take three to five
+minutes and 10 GB of heap.
 
 ### Testing the whole modpack
 
@@ -100,6 +110,9 @@ python scripts/assemble-fullpack.py                    # pack jars + config/kube
 python scripts/launch-fullpack.py scripts/driver/fullpack-server.txt --xmx 10G --timeout 25
 ```
 
+`launch-fullpack-server.py start <server script>` boots the production dedicated server in `dev-driver/run-fullpack-server`
+(set up once with `modpack/boot_server.py setup/sync`; port 25566, Dev is op there) with our jars copied in; `signal`
+creates the stop flag a `waitfile` line in the server script waits for, `wait` blocks until it has exited.
 `launch-fullpack.py` starts the production NeoForge client from the CurseForge install (libraries, assets, JDK 21 from
 Gradle) against `dev-driver/run-fullpack`, with this repo's mod jars and the dev-driver jar copied into its mods folder,
 hidden and muted as usual, offline as player `Dev`. It writes `launch.log` and `game.pid` into the run dir and takes a
@@ -260,6 +273,8 @@ settings.gradle         lists the mod subprojects
 dev-driver/             dev-only mod that runs scripts/driver/*.txt against the client (never published)
 scripts/driver/         client scripts (keybinds, levelloss, cherished, radars, radars-loot, checklist, park), server scripts (server-cherished, server-radars-loot), checklist-grid-dev.json
 scripts/gen-radar-loot.py  writes the six Radars loot tables from the TIERS table inside it
+scripts/launch-fullpack-server.py  production full-pack dedicated server (dev-driver/run-fullpack-server) with our jars
+scripts/nbt-dump.py     dump or search a player .dat, e.g. `python scripts/nbt-dump.py <file> curios accessories`
 scripts/*.ps1           mute-game.ps1 (mixer mute), screenshot.ps1 (PrintWindow capture), send-input.ps1 (emergency only)
 scripts/dev-options.txt muted/windowed options.txt written into every run/ folder before each launch
 ```

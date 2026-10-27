@@ -1,0 +1,69 @@
+# Phase A (live-server state: Curios 9.5.1 + the Accessories beta.48 that The Aether bundles, no cclayer).
+# Equip one item per Curios slot type by real slot clicks (server-validated), plus Aether gloves in Aether's screen.
+# Run with the dev full-pack server up: python scripts/launch-fullpack.py scripts/driver/fullpack-migrate-a.txt --xmx 10G --timeout 25
+waittitle
+connect localhost:25566
+wait 600
+chat /clear @s
+wait 10
+chat /give @s artifacts:crystal_heart
+chat /give @s artifacts:cross_necklace
+chat /give @s artifacts:power_glove
+chat /give @s artifacts:running_shoes
+chat /give @s artifacts:cowboy_hat
+chat /give @s minecraft:totem_of_undying
+chat /give @s aether:iron_gloves
+wait 20
+log before: maxhealth={maxhealth} hotbar={hotbar}
+chat /attribute @s minecraft:generic.attack_damage get
+screen inventory
+wait 20
+clickwidget CuriosButton
+wait 20
+log curios screen: {screen}
+slots
+clickslot inv 0
+wait 5
+clickslot name belt
+wait 5
+clickslot inv 1
+wait 5
+clickslot name necklace
+wait 5
+clickslot inv 2
+wait 5
+clickslot name hands
+wait 5
+clickslot inv 3
+wait 5
+clickslot name feet
+wait 5
+clickslot inv 4
+wait 5
+clickslot name head
+wait 5
+clickslot inv 5
+wait 5
+clickslot name charm
+wait 10
+slots
+screenshot mig-a-curios
+key ESCAPE
+wait 10
+screen inventory
+wait 10
+clickwidget AccessoryButton
+wait 20
+log aether screen: {screen}
+clickslot inv 6
+wait 5
+clickslot name aether:gloves_slot
+wait 10
+slots
+screenshot mig-a-aether
+key ESCAPE
+wait 20
+log after: maxhealth={maxhealth} hotbar={hotbar}
+chat /attribute @s minecraft:generic.attack_damage get
+wait 20
+quit

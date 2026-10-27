@@ -1,0 +1,8 @@
+# Full-pack dedicated server for the Curios -> Accessories migration test. Stays up until scripts/launch-fullpack-server.py signal.
+# Run: python scripts/launch-fullpack-server.py start scripts/driver/server-migrate.txt --xmx 8G
+wait 100
+cmd forceload add -48 -48 48 48
+log server up, waiting for the stop flag
+waitfile C:/Users/lucas/vibecraft/dev-driver/run-fullpack-server/stop.flag 36000
+wait 100
+quit

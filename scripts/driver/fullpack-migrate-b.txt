@@ -1,0 +1,44 @@
+# Phase B (Accessories beta.53 standalone + Accessories Compatibility Layer added on client and server): same player
+# logs in twice; log what every screen shows and whether the effects still apply.
+# Run with the dev full-pack server up: python scripts/launch-fullpack.py scripts/driver/fullpack-migrate-b.txt --xmx 10G --timeout 25
+waittitle
+connect localhost:25566
+wait 600
+log joined: maxhealth={maxhealth} hotbar={hotbar}
+chat /attribute @s minecraft:generic.attack_damage get
+screen inventory
+wait 20
+widgets
+screenshot mig-b-inventory
+key ESCAPE
+wait 10
+openaccessories
+wait 40
+log accessories screen: {screen}
+slots
+screenshot mig-b-accessories
+key ESCAPE
+wait 10
+screen inventory
+wait 10
+clickwidget AccessoryButton
+wait 20
+log aether screen: {screen}
+slots
+screenshot mig-b-aether
+key ESCAPE
+wait 20
+disconnect
+wait 100
+connect localhost:25566
+wait 400
+log rejoined: maxhealth={maxhealth} hotbar={hotbar}
+chat /attribute @s minecraft:generic.attack_damage get
+openaccessories
+wait 40
+log accessories screen after relog: {screen}
+slots
+screenshot mig-b-accessories-relog
+key ESCAPE
+wait 20
+quit

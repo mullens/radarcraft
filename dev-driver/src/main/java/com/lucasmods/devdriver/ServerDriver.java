@@ -31,6 +31,8 @@ public final class ServerDriver {
     private final List<String> lines = new ArrayList<>();
     private int pc = 0;
     private int waitTicks = 40;
+    private java.nio.file.Path waitFile;
+    private int waitFileTimeout;
     private boolean done = false;
     private int failures = 0;
 
@@ -57,6 +59,18 @@ public final class ServerDriver {
             waitTicks--;
             return;
         }
+        if (waitFile != null) {
+            if (!java.nio.file.Files.exists(waitFile)) {
+                if (--waitFileTimeout <= 0) {
+                    DevDriverMod.LOGGER.error("{} [server] timed out waiting for {}", DevDriverMod.TAG, waitFile);
+                    failures++;
+                    waitFile = null;
+                }
+                return;
+            }
+            DevDriverMod.LOGGER.info("{} [server] found {}", DevDriverMod.TAG, waitFile);
+            waitFile = null;
+        }
         if (pc >= lines.size()) {
             done = true;
             DevDriverMod.LOGGER.info("{} server script finished with {} failure(s)", DevDriverMod.TAG, failures);
@@ -78,6 +92,11 @@ public final class ServerDriver {
         String rest = parts.length > 1 ? parts[1] : "";
         switch (cmd) {
             case "wait" -> waitTicks = Integer.parseInt(rest.trim());
+            case "waitfile" -> { // waitfile PATH [maxTicks]: block until the file exists (an outside signal, e.g. "the client has logged out")
+                String[] a = rest.trim().split("\s+");
+                waitFile = java.nio.file.Path.of(a[0]);
+                waitFileTimeout = a.length > 1 ? Integer.parseInt(a[1]) : 20 * 1800;
+            }
             case "cmd" -> server.getCommands().performPrefixedCommand(server.createCommandSourceStack(), rest);
             case "log" -> DevDriverMod.LOGGER.info("{} [server] {}", DevDriverMod.TAG, expand(server, rest));
             case "expect" -> {

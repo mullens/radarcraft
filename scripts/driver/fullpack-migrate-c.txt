@@ -1,0 +1,28 @@
+# Phase C (Accessories + cclayer): can an Artifacts necklace be equipped at all now, and does it survive a relog?
+# Run: python scripts/launch-fullpack.py scripts/driver/fullpack-migrate-c.txt --xmx 10G --timeout 25
+waittitle
+connect localhost:25566
+wait 600
+log joined: maxhealth={maxhealth} hotbar={hotbar}
+chat /clear @s artifacts:crystal_heart
+wait 20
+chat /curios replace necklace 0 @s with artifacts:crystal_heart
+wait 60
+log equipped via curios cmd: maxhealth={maxhealth} hotbar={hotbar}
+screen inventory
+wait 20
+screenshot mig-c-equipped
+key ESCAPE
+wait 20
+disconnect
+wait 100
+log after disconnect: screen={screen}
+connect localhost:25566
+wait 400
+log rejoined: maxhealth={maxhealth} hotbar={hotbar}
+screen inventory
+wait 20
+screenshot mig-c-rejoined
+key ESCAPE
+wait 20
+quit
