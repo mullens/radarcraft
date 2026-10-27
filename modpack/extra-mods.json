@@ -14,5 +14,13 @@
     "file": "accessories_compat_layer-neoforge-0.1.13+1.21.1.jar",
     "url": "https://www.curseforge.com/minecraft/mc-mods/accessories-compat-layer",
     "why": "One accessory screen: wraps Curios (Artifacts, Ars Nouveau, Charm of Undying, Aeronautics compat...) into Accessories, which The Aether bundles anyway. Requires Accessories + Curios."
+  },
+  {
+    "projectID": 661261,
+    "fileID": 8611586,
+    "name": "FLIB (library for Inventory Crafting Grid)",
+    "file": "flib-1.21.1-0.2.9.jar",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/flib",
+    "why": "Required by Inventory Crafting Grid (flib >= 0.2.0)."
   }
 ]

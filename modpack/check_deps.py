@@ -61,6 +61,8 @@ def main():
     kept_jars = [INSTANCE / "mods" / m["file"] for m in mods if m["file"] not in scrapped_files]
     scrapped_jars = [INSTANCE / "mods" / m["file"] for m in mods if m["file"] in scrapped_files]
     own_jars = [p for p in (HERE.parent).glob("*/build/libs/*.jar") if not p.name.endswith(("-sources.jar", "-javadoc.jar"))]
+    # mods added via extra-mods.json, when their jars have been fetched into modpack/tools/downloads
+    own_jars += list((HERE / "tools" / "downloads").glob("*.jar"))
 
     provided_by = collections.defaultdict(list)
     requires = {}
