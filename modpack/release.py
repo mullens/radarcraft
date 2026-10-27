@@ -56,7 +56,7 @@ def main():
         shutil.copytree(dist, pub)
         (pub / "VERSION").write_text(a.version + "\n")
         subprocess.run(["git", "add", "-A", "releases/latest"], cwd=ROOT, check=True)
-        subprocess.run(["git", "commit", "-q", "-m", f"Release {a.version}\n\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"], cwd=ROOT, check=False)
+        subprocess.run(["git", "commit", "-q", "-m", f"Release {a.version}\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"], cwd=ROOT, check=False)
         subprocess.run(["git", "push"], cwd=ROOT, check=True)
         print(f"published to releases/latest and pushed: https://github.com/mullens/radarcraft/tree/main/releases/latest")
 
