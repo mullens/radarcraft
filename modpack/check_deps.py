@@ -186,6 +186,41 @@ def main():
         if not in_range(versions[dep], rng):
             problems += 1
             print(f"VERSION: {jar} [{owner}] requires {dep} {rng}, pack has {versions[dep]}")
+    # upgraded mods: other jars that reference classes the new version no longer has (mixins/hooks that will crash)
+    extras = json.load(open(HERE / "extra-mods.json", encoding="utf-8")) if (HERE / "extra-mods.json").exists() else []
+    inst = json.load(open(INSTANCE / "minecraftinstance.json", encoding="utf-8"))
+    by_pid = {a["addonID"]: a for a in inst["installedAddons"]}
+    for e in extras:
+        old_addon = by_pid.get(e["projectID"])
+        new_jar = HERE / "tools" / "downloads" / e.get("file", "")
+        if not old_addon or not new_jar.is_file():
+            continue
+        old_jar = INSTANCE / "mods" / old_addon["fileNameOnDisk"]
+        if not old_jar.exists() or old_jar.name == new_jar.name:
+            continue
+        with zipfile.ZipFile(old_jar) as zo, zipfile.ZipFile(new_jar) as zn:
+            old_cls = {n[:-6] for n in zo.namelist() if n.endswith(".class")}
+            new_cls = {n[:-6] for n in zn.namelist() if n.endswith(".class")}
+        prefixes = {"/".join(c.split("/")[:3]) for c in old_cls if c.count("/") >= 3}
+        if not prefixes:
+            continue
+        pat = re.compile(rb"(?:" + b"|".join(re.escape(p.encode()) for p in sorted(prefixes)) + rb")/[A-Za-z0-9_/$]+")
+        for jar in kept_jars + own_jars:
+            if jar.name == new_jar.name:
+                continue
+            try:
+                z = zipfile.ZipFile(jar)
+            except zipfile.BadZipFile:
+                continue
+            with z:
+                refs = set()
+                for n in z.namelist():
+                    if n.endswith(".class"):
+                        refs |= {r.decode().split("$")[0] for r in pat.findall(z.read(n))}
+            gone = sorted(r for r in refs if r in old_cls and r not in new_cls)
+            if gone:
+                problems += 1
+                print(f"BREAKS: {jar.name} uses {len(gone)} class(es) removed in {new_jar.name}, e.g. {gone[0]}")
     dupes = {k: v for k, v in provided_by.items() if len(v) > 1}
     for k, v in sorted(dupes.items()):
         print(f"DUPLICATE mod id '{k}': {v}")
