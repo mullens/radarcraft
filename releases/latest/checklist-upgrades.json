@@ -1,107 +1,684 @@
 {
-  "_comment": "Upgrade catalog for the Checklist mod. Every rank costs 1 point; a point is one completed grid square. Ranks can be removed again at any time for free. 'amount' and 'amplifier' are per rank. operation: add_value | add_multiplied_base | add_multiplied_total (vanilla 1.21 names).",
-  "upgrades": [
-
-    {"id": "hearts", "name": "Hearts", "category": "Vitality", "ranks": 12,
-     "description": "+1 heart per rank.",
-     "modifiers": [{"attribute": "minecraft:generic.max_health", "operation": "add_value", "amount": 2.0}]},
-    {"id": "thick_skin", "name": "Thick Skin", "category": "Vitality", "ranks": 10,
-     "description": "+1 armor point per rank, worn or not.",
-     "modifiers": [{"attribute": "minecraft:generic.armor", "operation": "add_value", "amount": 1.0}]},
-    {"id": "sturdy", "name": "Sturdy", "category": "Vitality", "ranks": 8,
-     "description": "+0.5 armor toughness per rank: strong hits hurt less.",
-     "modifiers": [{"attribute": "minecraft:generic.armor_toughness", "operation": "add_value", "amount": 0.5}]},
-    {"id": "hardy", "name": "Hardy", "category": "Vitality", "ranks": 8,
-     "description": "+10% knockback resistance per rank.",
-     "modifiers": [{"attribute": "minecraft:generic.knockback_resistance", "operation": "add_value", "amount": 0.1}]},
-    {"id": "fireproof", "name": "Fireproof", "category": "Vitality", "ranks": 5,
-     "description": "Burn 20% shorter per rank. At rank 5, permanent Fire Resistance.",
-     "modifiers": [{"attribute": "minecraft:generic.burning_time", "operation": "add_multiplied_total", "amount": -0.2}],
-     "effects_at_max": [{"effect": "minecraft:fire_resistance", "amplifier": 0}]},
-    {"id": "deep_lungs", "name": "Deep Lungs", "category": "Vitality", "ranks": 6,
-     "description": "Hold your breath longer per rank. At rank 6, permanent Water Breathing.",
-     "modifiers": [{"attribute": "minecraft:generic.oxygen_bonus", "operation": "add_value", "amount": 1.0}],
-     "effects_at_max": [{"effect": "minecraft:water_breathing", "amplifier": 0}]},
-    {"id": "second_wind", "name": "Second Wind", "category": "Vitality", "ranks": 1,
-     "description": "Once every 5 minutes, a hit that would kill you leaves you at half a heart instead.",
-     "special": "second_wind"},
-
-    {"id": "fleet_foot", "name": "Fleet Foot", "category": "Mobility", "ranks": 10,
-     "description": "+5% movement speed per rank.",
-     "modifiers": [{"attribute": "minecraft:generic.movement_speed", "operation": "add_multiplied_total", "amount": 0.05}]},
-    {"id": "spring_legs", "name": "Spring Legs", "category": "Mobility", "ranks": 8,
-     "description": "Jump a little higher per rank (rank 4 clears a fence, rank 8 two blocks).",
-     "modifiers": [{"attribute": "minecraft:generic.jump_strength", "operation": "add_value", "amount": 0.04}]},
-    {"id": "long_stride", "name": "Long Stride", "category": "Mobility", "ranks": 2,
-     "description": "Walk up half a block more per rank without jumping (rank 2: full blocks).",
-     "modifiers": [{"attribute": "minecraft:generic.step_height", "operation": "add_value", "amount": 0.5}]},
-    {"id": "featherfall", "name": "Featherfall", "category": "Mobility", "ranks": 6,
-     "description": "Fall 2 blocks further per rank before taking damage.",
-     "modifiers": [{"attribute": "minecraft:generic.safe_fall_distance", "operation": "add_value", "amount": 2.0}]},
-    {"id": "cat_landing", "name": "Cat Landing", "category": "Mobility", "ranks": 4,
-     "description": "-15% fall damage per rank.",
-     "modifiers": [{"attribute": "minecraft:generic.fall_damage_multiplier", "operation": "add_multiplied_total", "amount": -0.15}]},
-    {"id": "swimmer", "name": "Swimmer", "category": "Mobility", "ranks": 5,
-     "description": "Move faster in water per rank.",
-     "modifiers": [{"attribute": "minecraft:generic.water_movement_efficiency", "operation": "add_value", "amount": 0.2}]},
-    {"id": "sneaky", "name": "Sneaky", "category": "Mobility", "ranks": 3,
-     "description": "Sneak faster per rank.",
-     "modifiers": [{"attribute": "minecraft:player.sneaking_speed", "operation": "add_value", "amount": 0.2}]},
-    {"id": "surefooted", "name": "Surefooted", "category": "Mobility", "ranks": 4,
-     "description": "Soul sand, honey and cobwebs slow you less per rank.",
-     "modifiers": [{"attribute": "minecraft:generic.movement_efficiency", "operation": "add_value", "amount": 0.25}]},
-    {"id": "blast_brace", "name": "Blast Brace", "category": "Mobility", "ranks": 6,
-     "description": "Explosions throw you around less per rank.",
-     "modifiers": [{"attribute": "minecraft:generic.explosion_knockback_resistance", "operation": "add_value", "amount": 0.15}]},
-    {"id": "moon_walker", "name": "Moon Walker", "category": "Mobility", "ranks": 5,
-     "description": "-6% gravity per rank: floatier jumps and slower falls.",
-     "modifiers": [{"attribute": "minecraft:generic.gravity", "operation": "add_multiplied_total", "amount": -0.06}]},
-
-    {"id": "brawn", "name": "Brawn", "category": "Combat", "ranks": 10,
-     "description": "+1 melee damage per rank.",
-     "modifiers": [{"attribute": "minecraft:generic.attack_damage", "operation": "add_value", "amount": 1.0}]},
-    {"id": "quick_hands", "name": "Quick Hands", "category": "Combat", "ranks": 8,
-     "description": "+5% attack speed per rank.",
-     "modifiers": [{"attribute": "minecraft:generic.attack_speed", "operation": "add_multiplied_total", "amount": 0.05}]},
-    {"id": "heavy_hitter", "name": "Heavy Hitter", "category": "Combat", "ranks": 5,
-     "description": "Your hits knock enemies back further per rank.",
-     "modifiers": [{"attribute": "minecraft:generic.attack_knockback", "operation": "add_value", "amount": 0.25}]},
-    {"id": "sweep", "name": "Sweep", "category": "Combat", "ranks": 6,
-     "description": "Sweeping attacks deal +10% of your damage per rank to everything they hit.",
-     "modifiers": [{"attribute": "minecraft:player.sweeping_damage_ratio", "operation": "add_value", "amount": 0.1}]},
-    {"id": "long_arms", "name": "Long Arms", "category": "Combat", "ranks": 5,
-     "description": "Hit and interact with mobs from half a block further per rank.",
-     "modifiers": [{"attribute": "minecraft:player.entity_interaction_range", "operation": "add_value", "amount": 0.5}]},
-
-    {"id": "pickaxe_arm", "name": "Pickaxe Arm", "category": "Gathering", "ranks": 10,
-     "description": "+10% block breaking speed per rank.",
-     "modifiers": [{"attribute": "minecraft:player.block_break_speed", "operation": "add_multiplied_total", "amount": 0.10}]},
-    {"id": "builders_reach", "name": "Builder's Reach", "category": "Gathering", "ranks": 8,
-     "description": "Place and break blocks half a block further per rank.",
-     "modifiers": [{"attribute": "minecraft:player.block_interaction_range", "operation": "add_value", "amount": 0.5}]},
-    {"id": "underwater_miner", "name": "Underwater Miner", "category": "Gathering", "ranks": 4,
-     "description": "Mine faster while submerged per rank.",
-     "modifiers": [{"attribute": "minecraft:player.submerged_mining_speed", "operation": "add_value", "amount": 0.25}]},
-    {"id": "lucky", "name": "Lucky", "category": "Gathering", "ranks": 8,
-     "description": "+1 Luck per rank: better fishing and loot tables that care about luck.",
-     "modifiers": [{"attribute": "minecraft:generic.luck", "operation": "add_value", "amount": 1.0}]},
-    {"id": "haste", "name": "Haste", "category": "Gathering", "ranks": 2,
-     "description": "Permanent Haste I, then Haste II.",
-     "effects": [{"effect": "minecraft:haste", "amplifier": 0}]},
-    {"id": "magnet", "name": "Magnet", "category": "Gathering", "ranks": 4,
-     "description": "Dropped items drift to you from 1.5 blocks further per rank.",
-     "special": "magnet"},
-
-    {"id": "night_eyes", "name": "Night Eyes", "category": "Senses", "ranks": 1,
-     "description": "Permanent Night Vision.",
-     "effects": [{"effect": "minecraft:night_vision", "amplifier": 0}]},
-    {"id": "giant", "name": "Giant", "category": "Senses", "ranks": 6,
-     "description": "Grow 10% per rank. Bigger reach and stride, bigger target. Cannot be combined with Smol.",
-     "excludes": ["smol"],
-     "modifiers": [{"attribute": "minecraft:generic.scale", "operation": "add_multiplied_total", "amount": 0.10}]},
-    {"id": "smol", "name": "Smol", "category": "Senses", "ranks": 6,
-     "description": "Shrink 10% per rank. Fit through gaps, harder to hit, weaker stride. Cannot be combined with Giant.",
-     "excludes": ["giant"],
-     "modifiers": [{"attribute": "minecraft:generic.scale", "operation": "add_multiplied_total", "amount": -0.10}]}
-  ]
+ "_comment": "Upgrade catalog for Radarcraft RPG (mod id checklist). One point per completed grid square. 'cost' = points per rank (default 1); a one-rank upgrade with cost > 1 is a toggle. Ranks can be removed at any time for free. 'amount' and 'amplifier' are per rank (for specials, 'amount' is the effect per rank). operation: add_value | add_multiplied_base | add_multiplied_total.",
+ "upgrades": [
+  {
+   "id": "hearts",
+   "name": "Hearts",
+   "category": "Vitality",
+   "ranks": 40,
+   "description": "+a quarter heart per point (4 points = 1 heart, 40 points = 10 hearts).",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.max_health",
+     "operation": "add_value",
+     "amount": 0.5
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "thick_skin",
+   "name": "Thick Skin",
+   "category": "Vitality",
+   "ranks": 24,
+   "description": "+0.25 armor per point, worn or not (4 points = 1 armor).",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.armor",
+     "operation": "add_value",
+     "amount": 0.25
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "sturdy",
+   "name": "Sturdy",
+   "category": "Vitality",
+   "ranks": 16,
+   "description": "+0.25 armor toughness per point: strong hits hurt less.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.armor_toughness",
+     "operation": "add_value",
+     "amount": 0.25
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "hardy",
+   "name": "Hardy",
+   "category": "Vitality",
+   "ranks": 16,
+   "description": "+5% knockback resistance per point.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "operation": "add_value",
+     "amount": 0.05
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "fireproof",
+   "name": "Fireproof",
+   "category": "Vitality",
+   "ranks": 18,
+   "description": "Burn 5.5% shorter per point. All 18 points: permanent Fire Resistance.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.burning_time",
+     "operation": "add_multiplied_total",
+     "amount": -0.055
+    }
+   ],
+   "effects_at_max": [
+    {
+     "effect": "minecraft:fire_resistance",
+     "amplifier": 0
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "deep_lungs",
+   "name": "Deep Lungs",
+   "category": "Vitality",
+   "ranks": 12,
+   "description": "Hold your breath longer with every point. All 12 points: permanent Water Breathing.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.oxygen_bonus",
+     "operation": "add_value",
+     "amount": 0.5
+    }
+   ],
+   "effects_at_max": [
+    {
+     "effect": "minecraft:water_breathing",
+     "amplifier": 0
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "second_wind",
+   "name": "Second Wind",
+   "category": "Vitality",
+   "ranks": 1,
+   "description": "Once every 5 minutes, a hit that would kill you leaves you at half a heart instead.",
+   "special": "second_wind",
+   "cost": 8
+  },
+  {
+   "id": "conduit_heart",
+   "name": "Conduit Heart",
+   "category": "Vitality",
+   "ranks": 1,
+   "cost": 10,
+   "description": "Permanent Conduit Power: breathe, see and mine underwater as if a conduit were near.",
+   "effects": [
+    {
+     "effect": "minecraft:conduit_power",
+     "amplifier": 0
+    }
+   ]
+  },
+  {
+   "id": "troll_blood",
+   "name": "Troll Blood",
+   "category": "Vitality",
+   "ranks": 1,
+   "cost": 16,
+   "description": "Permanent Regeneration I.",
+   "effects": [
+    {
+     "effect": "minecraft:regeneration",
+     "amplifier": 0
+    }
+   ]
+  },
+  {
+   "id": "iron_stomach",
+   "name": "Iron Stomach",
+   "category": "Vitality",
+   "ranks": 1,
+   "cost": 4,
+   "description": "Food never gives you Hunger or Nausea: rotten flesh, raw chicken and pufferfish are safe.",
+   "special": "iron_stomach"
+  },
+  {
+   "id": "antidote",
+   "name": "Antidote",
+   "category": "Vitality",
+   "ranks": 1,
+   "cost": 8,
+   "description": "Immune to Poison and Wither.",
+   "special": "antidote"
+  },
+  {
+   "id": "cold_blooded",
+   "name": "Cold Blooded",
+   "category": "Vitality",
+   "ranks": 1,
+   "cost": 2,
+   "description": "Powder snow and freezing never hurt you.",
+   "special": "cold_blooded"
+  },
+  {
+   "id": "soul_keeper",
+   "name": "Soul Keeper",
+   "category": "Vitality",
+   "ranks": 16,
+   "cost": 1,
+   "description": "Keep 2.5% of your XP levels per point when you die; the rest still drops.",
+   "special": "soul_keeper",
+   "amount": 0.025
+  },
+  {
+   "id": "hearty_appetite",
+   "name": "Hearty Appetite",
+   "category": "Vitality",
+   "ranks": 8,
+   "description": "Get hungry 7.5% slower per point.",
+   "special": "hearty_appetite",
+   "cost": 1,
+   "amount": 0.075
+  },
+  {
+   "id": "fleet_foot",
+   "name": "Fleet Foot",
+   "category": "Mobility",
+   "ranks": 24,
+   "description": "+1.25% movement speed per point.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.movement_speed",
+     "operation": "add_multiplied_total",
+     "amount": 0.0125
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "spring_legs",
+   "name": "Spring Legs",
+   "category": "Mobility",
+   "ranks": 16,
+   "description": "Jump a little higher with every point (all 16: clear a fence).",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.jump_strength",
+     "operation": "add_value",
+     "amount": 0.01
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "long_stride",
+   "name": "Long Stride",
+   "category": "Mobility",
+   "ranks": 4,
+   "description": "Walk up a quarter block more per point without jumping (4 points: full blocks).",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.step_height",
+     "operation": "add_value",
+     "amount": 0.25
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "featherfall",
+   "name": "Featherfall",
+   "category": "Mobility",
+   "ranks": 6,
+   "description": "Fall 1.5 blocks further per point before taking damage.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.safe_fall_distance",
+     "operation": "add_value",
+     "amount": 1.5
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "cat_landing",
+   "name": "Cat Landing",
+   "category": "Mobility",
+   "ranks": 4,
+   "description": "-12.5% fall damage per point.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.fall_damage_multiplier",
+     "operation": "add_multiplied_total",
+     "amount": -0.125
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "swimmer",
+   "name": "Swimmer",
+   "category": "Mobility",
+   "ranks": 6,
+   "description": "Move a little faster in water per point.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.water_movement_efficiency",
+     "operation": "add_value",
+     "amount": 0.1
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "sneaky",
+   "name": "Sneaky",
+   "category": "Mobility",
+   "ranks": 4,
+   "description": "Sneak a little faster per point.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:player.sneaking_speed",
+     "operation": "add_value",
+     "amount": 0.1
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "surefooted",
+   "name": "Surefooted",
+   "category": "Mobility",
+   "ranks": 4,
+   "description": "Soul sand, honey and cobwebs slow you a little less per point.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.movement_efficiency",
+     "operation": "add_value",
+     "amount": 0.125
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "blast_brace",
+   "name": "Blast Brace",
+   "category": "Mobility",
+   "ranks": 6,
+   "description": "Explosions throw you around 15% less per point.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.explosion_knockback_resistance",
+     "operation": "add_value",
+     "amount": 0.15
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "moon_walker",
+   "name": "Moon Walker",
+   "category": "Mobility",
+   "ranks": 6,
+   "description": "-3% gravity per point: floatier jumps and slower falls.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.gravity",
+     "operation": "add_multiplied_total",
+     "amount": -0.03
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "dolphin_kick",
+   "name": "Dolphin Kick",
+   "category": "Mobility",
+   "ranks": 1,
+   "cost": 4,
+   "description": "Permanent Dolphin's Grace: swim like a dolphin.",
+   "effects": [
+    {
+     "effect": "minecraft:dolphins_grace",
+     "amplifier": 0
+    }
+   ]
+  },
+  {
+   "id": "double_jump",
+   "name": "Double Jump",
+   "category": "Mobility",
+   "ranks": 1,
+   "cost": 12,
+   "description": "Press jump again in mid-air for a second jump. Recharges when you land.",
+   "special": "double_jump"
+  },
+  {
+   "id": "brawn",
+   "name": "Brawn",
+   "category": "Combat",
+   "ranks": 24,
+   "description": "+0.125 melee damage per point (all 24: +3, like Sharpness V).",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.attack_damage",
+     "operation": "add_value",
+     "amount": 0.125
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "quick_hands",
+   "name": "Quick Hands",
+   "category": "Combat",
+   "ranks": 20,
+   "description": "+1.25% attack speed per point.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.attack_speed",
+     "operation": "add_multiplied_total",
+     "amount": 0.0125
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "heavy_hitter",
+   "name": "Heavy Hitter",
+   "category": "Combat",
+   "ranks": 6,
+   "description": "Your hits knock enemies back a little further per point.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.attack_knockback",
+     "operation": "add_value",
+     "amount": 0.125
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "sweep",
+   "name": "Sweep",
+   "category": "Combat",
+   "ranks": 6,
+   "description": "Sweeping attacks deal +5% of your damage per point to everything they hit.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:player.sweeping_damage_ratio",
+     "operation": "add_value",
+     "amount": 0.05
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "long_arms",
+   "name": "Long Arms",
+   "category": "Combat",
+   "ranks": 8,
+   "description": "Hit and interact with mobs an eighth of a block further per point.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:player.entity_interaction_range",
+     "operation": "add_value",
+     "amount": 0.125
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "vampiric",
+   "name": "Vampiric",
+   "category": "Combat",
+   "ranks": 12,
+   "description": "Every mob you kill heals an eighth of a heart per point.",
+   "special": "vampiric",
+   "cost": 1,
+   "amount": 0.25
+  },
+  {
+   "id": "thorny",
+   "name": "Thorny",
+   "category": "Combat",
+   "ranks": 6,
+   "description": "Reflect 5% of melee damage you take per point back at the attacker.",
+   "special": "thorny",
+   "cost": 1,
+   "amount": 0.05
+  },
+  {
+   "id": "last_stand",
+   "name": "Last Stand",
+   "category": "Combat",
+   "ranks": 12,
+   "description": "+3.75% damage per point while below 30% health.",
+   "special": "last_stand",
+   "cost": 1,
+   "amount": 0.0375
+  },
+  {
+   "id": "marksman",
+   "name": "Marksman",
+   "category": "Combat",
+   "ranks": 20,
+   "description": "+2.5% arrow, trident and other projectile damage per point.",
+   "special": "marksman",
+   "cost": 1,
+   "amount": 0.025
+  },
+  {
+   "id": "pickaxe_arm",
+   "name": "Pickaxe Arm",
+   "category": "Gathering",
+   "ranks": 24,
+   "description": "+2.5% block breaking speed per point.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:player.block_break_speed",
+     "operation": "add_multiplied_total",
+     "amount": 0.025
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "builders_reach",
+   "name": "Builder's Reach",
+   "category": "Gathering",
+   "ranks": 20,
+   "description": "Place and break blocks an eighth of a block further per point.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:player.block_interaction_range",
+     "operation": "add_value",
+     "amount": 0.125
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "underwater_miner",
+   "name": "Underwater Miner",
+   "category": "Gathering",
+   "ranks": 4,
+   "description": "Mine a little faster while submerged per point.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:player.submerged_mining_speed",
+     "operation": "add_value",
+     "amount": 0.125
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "lucky",
+   "name": "Lucky",
+   "category": "Gathering",
+   "ranks": 16,
+   "description": "+0.25 Luck per point: better fishing and loot tables that care about luck.",
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.luck",
+     "operation": "add_value",
+     "amount": 0.25
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "haste",
+   "name": "Haste",
+   "category": "Gathering",
+   "ranks": 2,
+   "description": "Permanent Haste I, then Haste II.",
+   "effects": [
+    {
+     "effect": "minecraft:haste",
+     "amplifier": 0
+    }
+   ],
+   "cost": 6
+  },
+  {
+   "id": "magnet",
+   "name": "Magnet",
+   "category": "Gathering",
+   "ranks": 6,
+   "description": "Dropped items drift to you from 0.75 blocks further per point.",
+   "special": "magnet",
+   "cost": 1,
+   "amount": 0.75
+  },
+  {
+   "id": "smelters_touch",
+   "name": "Smelter's Touch",
+   "category": "Gathering",
+   "ranks": 1,
+   "cost": 8,
+   "description": "Ores you mine drop smelted results, logs drop charcoal, sand drops glass. Sneak to mine normally.",
+   "special": "smelters_touch"
+  },
+  {
+   "id": "tinkerer",
+   "name": "Tinkerer",
+   "category": "Gathering",
+   "ranks": 12,
+   "cost": 1,
+   "description": "Worn and held gear slowly repairs itself: 1 durability every 4 minutes per point.",
+   "special": "tinkerer",
+   "amount": 0.25
+  },
+  {
+   "id": "green_thumb",
+   "name": "Green Thumb",
+   "category": "Gathering",
+   "ranks": 6,
+   "description": "Crops and saplings within 6 blocks grow faster, more with every point.",
+   "special": "green_thumb",
+   "cost": 1,
+   "amount": 1.0
+  },
+  {
+   "id": "night_eyes",
+   "name": "Night Eyes",
+   "category": "Senses",
+   "ranks": 1,
+   "description": "Permanent Night Vision.",
+   "effects": [
+    {
+     "effect": "minecraft:night_vision",
+     "amplifier": 0
+    }
+   ],
+   "cost": 8
+  },
+  {
+   "id": "giant",
+   "name": "Giant",
+   "category": "Senses",
+   "ranks": 8,
+   "description": "Grow 5% per point. Bigger reach and stride, bigger target. Cannot be combined with Smol.",
+   "excludes": [
+    "smol"
+   ],
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.scale",
+     "operation": "add_multiplied_total",
+     "amount": 0.05
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "smol",
+   "name": "Smol",
+   "category": "Senses",
+   "ranks": 8,
+   "description": "Shrink 5% per point. Fit through gaps, harder to hit, weaker stride. Cannot be combined with Giant.",
+   "excludes": [
+    "giant"
+   ],
+   "modifiers": [
+    {
+     "attribute": "minecraft:generic.scale",
+     "operation": "add_multiplied_total",
+     "amount": -0.05
+    }
+   ],
+   "cost": 1
+  },
+  {
+   "id": "shadow_step",
+   "name": "Shadow Step",
+   "category": "Senses",
+   "ranks": 1,
+   "cost": 6,
+   "description": "Turn invisible while sneaking and standing still.",
+   "special": "shadow_step"
+  },
+  {
+   "id": "ender_calm",
+   "name": "Ender Calm",
+   "category": "Senses",
+   "ranks": 1,
+   "cost": 4,
+   "description": "Endermen don't mind being looked at.",
+   "special": "ender_calm"
+  },
+  {
+   "id": "village_favorite",
+   "name": "Village Favorite",
+   "category": "Senses",
+   "ranks": 2,
+   "cost": 6,
+   "description": "Villagers give you hero prices: a bigger discount per rank.",
+   "effects": [
+    {
+     "effect": "minecraft:hero_of_the_village",
+     "amplifier": 0
+    }
+   ]
+  },
+  {
+   "id": "studious",
+   "name": "Studious",
+   "category": "Senses",
+   "ranks": 20,
+   "description": "+2.5% experience from orbs per point.",
+   "special": "studious",
+   "cost": 1,
+   "amount": 0.025
+  }
+ ]
 }

@@ -1,6 +1,6 @@
 {
  "name": "Radarcraft",
- "version": "1.0.2",
+ "version": "1.0.3",
  "neoforge": "neoforge-21.1.248",
  "mods": [
   {
@@ -712,15 +712,6 @@
    "fileID": 9062488,
    "url": "https://edge.forgecdn.net/files/9062/488/justzoom_neoforge_3.0.1_MC_1.21.1.jar",
    "page": "https://www.curseforge.com/minecraft/mc-mods/just-zoom",
-   "source": "curseforge"
-  },
-  {
-   "file": "VisualWorkbench-v21.1.2-1.21.1-NeoForge.jar",
-   "name": "Visual Workbench",
-   "projectID": 500273,
-   "fileID": 8793655,
-   "url": "https://edge.forgecdn.net/files/8793/655/VisualWorkbench-v21.1.2-1.21.1-NeoForge.jar",
-   "page": "https://www.curseforge.com/minecraft/mc-mods/visual-workbench",
    "source": "curseforge"
   },
   {
@@ -2137,6 +2128,15 @@
    "source": "curseforge"
   },
   {
+   "file": "Modern-Dynamics-0.9.6.jar",
+   "name": "Modern Dynamics",
+   "projectID": 552758,
+   "fileID": 6787236,
+   "url": "https://edge.forgecdn.net/files/6787/236/Modern-Dynamics-0.9.6.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/modern-dynamics",
+   "source": "curseforge"
+  },
+  {
    "file": "more_bows_and_arrows-merged-1.21.1-5.0.5.jar",
    "name": "More Bows and Arrows | Major Update Available!",
    "projectID": 888468,
@@ -2197,6 +2197,15 @@
    "fileID": 6826478,
    "url": "https://edge.forgecdn.net/files/6826/478/zombie_variants-neoforge-1.0.3-1.21.1.jar",
    "page": "https://www.curseforge.com/minecraft/mc-mods/zombie-variants",
+   "source": "curseforge"
+  },
+  {
+   "file": "supermartijn642configlib-1.1.8-neoforge-mc1.21.jar",
+   "name": "SuperMartijn642's Config Lib",
+   "projectID": 438332,
+   "fileID": 5546996,
+   "url": "https://edge.forgecdn.net/files/5546/996/supermartijn642configlib-1.1.8-neoforge-mc1.21.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/supermartijn642s-config-lib",
    "source": "curseforge"
   },
   {
@@ -2278,6 +2287,15 @@
    "fileID": 7901588,
    "url": "https://edge.forgecdn.net/files/7901/588/Aquaculture-1.21.1-2.7.21.jar",
    "page": "https://www.curseforge.com/minecraft/mc-mods/aquaculture",
+   "source": "curseforge"
+  },
+  {
+   "file": "supermartijn642corelib-1.1.25-neoforge-mc1.21.jar",
+   "name": "SuperMartijn642's Core Lib",
+   "projectID": 454372,
+   "fileID": 9083552,
+   "url": "https://edge.forgecdn.net/files/9083/552/supermartijn642corelib-1.1.25-neoforge-mc1.21.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/supermartijn642s-core-lib",
    "source": "curseforge"
   },
   {
@@ -2794,6 +2812,15 @@
    "source": "curseforge"
   },
   {
+   "file": "charginggadgets-1.14.1.jar",
+   "name": "Charging Gadgets",
+   "projectID": 399757,
+   "fileID": 5615790,
+   "url": "https://edge.forgecdn.net/files/5615/790/charginggadgets-1.14.1.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/charging-gadgets",
+   "source": "curseforge"
+  },
+  {
    "file": "[NeoForge] Armadillo Scute Armor - MC 1.21 - 1.0.2.jar",
    "name": "Armadillo Scute Armor",
    "projectID": 1011359,
@@ -2980,6 +3007,15 @@
    "fileID": 9165518,
    "url": "https://edge.forgecdn.net/files/9165/518/ImmediatelyFast-NeoForge-1.6.15%2b1.21.1.jar",
    "page": "https://www.curseforge.com/minecraft/mc-mods/immediatelyfast",
+   "source": "curseforge"
+  },
+  {
+   "file": "wirelesschargers-1.0.9a-neoforge-mc1.21.jar",
+   "name": "Wireless Chargers",
+   "projectID": 510656,
+   "fileID": 5551798,
+   "url": "https://edge.forgecdn.net/files/5551/798/wirelesschargers-1.0.9a-neoforge-mc1.21.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/wireless-chargers",
    "source": "curseforge"
   },
   {
@@ -3232,6 +3268,15 @@
    "fileID": 7276577,
    "url": "https://edge.forgecdn.net/files/7276/577/configured-neoforge-1.21.1-2.6.3.jar",
    "page": "https://www.curseforge.com/minecraft/mc-mods/configured",
+   "source": "curseforge"
+  },
+  {
+   "file": "Modern-Industrialization-2.5.10.jar",
+   "name": "Modern Industrialization",
+   "projectID": 405388,
+   "fileID": 9091242,
+   "url": "https://edge.forgecdn.net/files/9091/242/Modern-Industrialization-2.5.10.jar",
+   "page": "https://www.curseforge.com/minecraft/mc-mods/modern-industrialization",
    "source": "curseforge"
   },
   {
@@ -3516,6 +3561,15 @@
   {
    "file": "cherishedmobs-1.21.1-1.0.0.jar",
    "name": "cherishedmobs-1.21.1-1.0.0",
+   "projectID": 0,
+   "fileID": 0,
+   "url": null,
+   "page": "",
+   "source": "zip"
+  },
+  {
+   "file": "foodbuffs-1.21.1-1.0.0.jar",
+   "name": "foodbuffs-1.21.1-1.0.0",
    "projectID": 0,
    "fileID": 0,
    "url": null,
