@@ -1,0 +1,26 @@
+# Full pack: Vinery wines get their Food Buffs too (they finish with their own code), plus the Radar head tooltip.
+# Server first: python scripts/launch-fullpack-server.py start scripts/driver/fullpack-ui-server.txt
+# Run: python scripts/launch-fullpack.py scripts/driver/fullpack-food.txt --xmx 10G --timeout 20
+waittitle
+connect localhost:25566
+wait 400
+chat /gamemode survival
+chat /effect clear @s
+chat /foodbuffs setfood 20 5
+chat /item replace entity @s weapon.mainhand with vinery:apple_wine
+wait 5
+chat /foodbuffs eat
+wait 20
+chat /effect clear @s
+chat /foodbuffs setfood 20 5
+chat /item replace entity @s weapon.mainhand with vinery:jellie_wine
+wait 5
+chat /foodbuffs eat
+wait 20
+screen inventory
+wait 20
+move 60 26
+wait 10
+screenshot fpf-radar-tooltip
+screen none
+quit

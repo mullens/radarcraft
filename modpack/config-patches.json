@@ -2,25 +2,53 @@
   "_comment": "Config changes applied on top of the original pack's config files when the pack is built (build_pack.py). TOML entries replace 'key = value' lines in place (first match, any indentation); JSON entries set nested keys.",
   "patches": [
     {
-      "file": "config/goblintraders-entities.toml", "format": "toml",
+      "file": "config/goblintraders-entities.toml",
+      "format": "toml",
       "why": "Goblins about 10x rarer: spawn chance 25% -> 5% per attempt, attempts every 24000 ticks instead of 12000",
-      "set": {"traderSpawnChance": "5", "spawnInterval": "24000"}
+      "set": {
+        "traderSpawnChance": "5",
+        "spawnInterval": "24000"
+      }
     },
     {
-      "file": "config/lootintegrations.json", "format": "json",
+      "file": "config/lootintegrations.json",
+      "format": "json",
       "why": "Loot Integrations injects modded items into vanilla/structure chests with 3x extra weight; 1 = weighted like vanilla items (about 3x rarer than before)",
-      "set": {"moddedItemWeight.moddedItemWeight": 1}
+      "set": {
+        "moddedItemWeight.moddedItemWeight": 1
+      }
     },
     {
-      "file": "config/artifacts/general.toml", "format": "toml",
+      "file": "config/artifacts/general.toml",
+      "format": "toml",
       "why": "Artifacts (Curios trinkets) 2x rarer in chests, archaeology and on mobs",
-      "set": {"artifactRarity": "2.0", "archaeologyChance": "0.03125", "entityEquipmentChance": "0.00075"}
+      "set": {
+        "artifactRarity": "2.0",
+        "archaeologyChance": "0.03125",
+        "entityEquipmentChance": "0.00075"
+      }
     },
     {
-      "file": "config/simplyswords/loot.toml", "format": "toml",
+      "file": "config/simplyswords/loot.toml",
+      "format": "toml",
       "why": "Simply Swords loot weapons 2x rarer, pity thresholds doubled to match",
-      "set": {"standardLootTableWeight": "0.05", "rareLootTableWeight": "0.2", "runicLootTableWeight": "0.35", "uniqueLootTableWeight": "0.025",
-              "uniqueSoftPityStart": "50", "uniqueHardPity": "150", "tabletHardPity": "120"}
+      "set": {
+        "standardLootTableWeight": "0.05",
+        "rareLootTableWeight": "0.2",
+        "runicLootTableWeight": "0.35",
+        "uniqueLootTableWeight": "0.025",
+        "uniqueSoftPityStart": "50",
+        "uniqueHardPity": "150",
+        "tabletHardPity": "120"
+      }
+    },
+    {
+      "file": "config/ftblibrary-client.snbt",
+      "format": "insert",
+      "why": "Radarcraft RPG's Radar head button sits in the inventory sidebar right of the Quests book and the gear (row 1, column 4)",
+      "after": "buttons: {",
+      "unless": "\"checklist:radarcraft\"",
+      "text": "\t\t\t\"checklist:radarcraft\": {\n\t\t\t\tenabled: true\n\t\t\t\tx: 4\n\t\t\t\ty: 1\n\t\t\t}\n"
     }
   ]
 }

@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SERVER = ROOT / "dev-driver" / "run-fullpack-server"
 PID = SERVER / "server.pid"
 FLAG = SERVER / "stop.flag"
-MODS = ["level-loss-only", "keyboard-keybinds", "cherished-mobs", "radars", "checklist", "dev-driver"]
+MODS = ["level-loss-only", "keyboard-keybinds", "cherished-mobs", "radars", "checklist", "food-buffs", "dev-driver"]
 
 
 def java21():

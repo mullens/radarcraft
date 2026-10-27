@@ -27,6 +27,7 @@ public final class CherishedMobs {
     public static final ModConfigSpec SPEC;
     public static final ModConfigSpec.IntValue FRIENDLY_DAMAGE_REDUCTION_PERCENT;
     public static final ModConfigSpec.BooleanValue FRIENDLY_REGENERATION;
+    public static final ModConfigSpec.IntValue FRIENDLY_REGEN_SECONDS;
     public static final ModConfigSpec.BooleanValue KILL_COMMAND_REMOVES_NAMED_MOBS;
 
     static {
@@ -36,8 +37,11 @@ public final class CherishedMobs {
                 .comment("Percentage of incoming damage friendly mobs ignore. 80 equals a full set of Protection V (the vanilla cap).")
                 .defineInRange("damageReductionPercent", 80, 0, 100);
         FRIENDLY_REGENERATION = b
-                .comment("Give friendly mobs permanent Regeneration I (1 heart every 2.5 seconds).")
+                .comment("Friendly mobs slowly heal on their own.")
                 .define("regeneration", true);
+        FRIENDLY_REGEN_SECONDS = b
+                .comment("Seconds between heals of half a heart. 15 means a cow (5 hearts) is fully healed in 2.5 minutes. Vanilla Regeneration I would be 2.5.")
+                .defineInRange("regenerationSeconds", 15, 1, 3600);
         b.pop();
         b.push("named");
         KILL_COMMAND_REMOVES_NAMED_MOBS = b

@@ -399,6 +399,7 @@ public final class ClientDriver {
             case "inventory" -> mc.setScreen(new InventoryScreen(mc.player));
             case "advancements" -> mc.setScreen(new AdvancementsScreen(mc.player.connection.getAdvancements(), mc.screen));
             case "checklist" -> com.lucasmods.checklist.client.ChecklistClient.open();
+            case "pause" -> mc.setScreen(new net.minecraft.client.gui.screens.PauseScreen(true));
             default -> throw new IllegalArgumentException("unknown screen " + which);
         }
     }

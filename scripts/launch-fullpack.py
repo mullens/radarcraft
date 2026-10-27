@@ -28,6 +28,7 @@ OUR_JARS = [
     ROOT / "cherished-mobs/build/libs/cherishedmobs-1.21.1-1.0.0.jar",
     ROOT / "radars/build/libs/radars-1.21.1-1.0.0.jar",
     ROOT / "checklist/build/libs/checklist-1.21.1-1.0.0.jar",
+    ROOT / "food-buffs/build/libs/foodbuffs-1.21.1-1.0.0.jar",
     ROOT / "dev-driver/build/libs/devdriver-1.21.1-0.0.0.jar",
 ]
 

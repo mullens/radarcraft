@@ -56,12 +56,46 @@ If double-clicking opens Notepad instead of running: right-click → *Run with P
 
 | Mod | What it does for you |
 |-----|----------------------|
-| **Radarcraft RPG** | Replaces the skill trees. A hidden grid of 165 real achievements from across the pack (bosses, dimensions, exploration, Create feats): each one you complete is a point and reveals the four squares next to it. Achievements you already earned count. More points come from **Renown**, a permanent level that grows with all the XP you earn, slowly, like Minecraft's own levels. Points buy upgrades (hearts, speed, reach, double jump, Second Wind, smelting pickaxe...); big ones cost several points. Take them off again any time, for free. Open it with the **Radarcraft** button on the Advancements screen, or **M**. |
+| **Radarcraft RPG** | Replaces the skill trees. A hidden grid of 165 real achievements from across the pack (bosses, dimensions, exploration, Create feats): each one you complete is a point and reveals the four squares next to it. Achievements you already earned count. More points come from **Renown**, a permanent level that grows with all the XP you earn, slowly, like Minecraft's own levels. Points buy upgrades (hearts, speed, reach, double jump, Second Wind, smelting pickaxe...); big ones cost several points. Take them off again any time, for free. Open it with the **Radar head** (a little tuxedo cat) next to the Quests book in your inventory, the **Radarcraft** button on the Advancements screen, or **M**. |
 | **Level Loss Only** | Dying keeps your whole inventory. Your XP levels still drop to zero and spill as orbs, like vanilla. |
-| **Cherished Mobs** | Friendly mobs are tough and regenerate. Anything you name with a name tag can never die, not even in the void. `/kill` is the only way to remove a named mob. |
+| **Cherished Mobs** | Friendly mobs are tough and slowly heal (half a heart every 15 seconds). Anything you name with a name tag can never die, not even in the void. `/kill` is the only way to remove a named mob. |
 | **Radars** | Radar is a real tuxedo cat. Name any mob "Radar" with a name tag: it becomes a little tuxedo cat that points toward the first of six giant boss cats hidden across the world, each 500 to 1000 blocks beyond the last. Beat a boss and it turns back into a cat that points to the next one, and leaves a loot chest that gets better with every fight (everyone gets their own roll). |
 | **Food Buffs** | Modded food is worth cooking. Every modded dish gives buffs like a potion, themed to what it is (fish lets you breathe underwater, spicy and Nether food gives fire resistance, honey regenerates, coffee speeds up mining, sweets make you quick, meat makes you strong, Aether food floats you, Starlight food lets you see in the dark...), and the harder a dish is to make, the more and longer the buffs: from nothing for a raw tomato up to three buffs for eight minutes. You can eat modded food even when full, but no food can push your saturation above its own value, so snacking can't max it out. Vanilla food works exactly like vanilla. The tooltip shows each dish's buffs and its tier, from Snack to Legendary dish. |
-| **Keyboard Keybinds** | A **Keyboard** button on *Options → Controls → Key Binds* shows every key on a keyboard. Red keys are real conflicts, yellow ones are overlaps the game handles fine. Click a key to see everything on it, then Change, Unbind, or keep "Only this" in one click. |
+| **Keyboard Keybinds** | A **keyboard icon** right below Create's goggles on the pause menu (Esc) takes you straight to Key Binds. There, a **Keyboard** button shows every key on a keyboard. Red keys are real conflicts, yellow ones are overlaps the game handles fine. Click a key to see everything on it, then Change, Unbind, or keep "Only this" in one click. |
+
+## What it looks like
+
+**Radarcraft RPG.** Click the Radar head next to the Quests book in your inventory:
+
+![The Radar head button in the inventory sidebar](docs/images/rpg-radar-head.png)
+
+The grid starts hidden. Every achievement you complete reveals the squares next to it:
+
+<img src="docs/images/rpg-grid.png" width="640" alt="The achievement grid">
+
+Spend points on upgrades. Green squares are ranks you own; big upgrades are on/off switches:
+
+<img src="docs/images/rpg-upgrades.png" width="720" alt="The upgrades list">
+
+**Food Buffs.** The tooltip shows what a dish does and how hard it is to make:
+
+<img src="docs/images/food-tooltip.png" width="360" alt="Food tooltip with buffs and its tier">
+
+**Keyboard Keybinds.** The keyboard icon below Create's goggles in the pause menu opens Key Binds:
+
+<img src="docs/images/keybinds-shortcut.png" width="400" alt="Key Binds shortcut in the pause menu">
+
+Red keys have real conflicts. Click one to fix everything on it in one place:
+
+<img src="docs/images/keyboard.png" width="720" alt="The keyboard view">
+
+<img src="docs/images/keyboard-key.png" width="640" alt="Everything bound to B, with Change, Reset, Unbind and Only this">
+
+**Radars.** A boss cat, and the loot chest it leaves behind:
+
+<img src="docs/images/radars-boss.jpg" width="640" alt="A giant tuxedo boss cat">
+
+<img src="docs/images/radars-loot.png" width="360" alt="A boss loot chest">
 
 ## Before the server switches to Radarcraft
 

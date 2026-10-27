@@ -1,0 +1,51 @@
+# UI pass (mini pack): Key Binds shortcut on the title and pause screens, Cherished Mobs slow healing,
+# /radarcraft_menu (what the inventory Radar head runs), upgrade rows with outlined rank squares and two-line text.
+# Run: gradlew :dev-driver:runClient -PdriverScript=scripts/driver/ui-pass.txt
+waittitle
+wait 20
+widgets
+screenshot ui-title
+world uitest
+waitworld
+chat /gamemode creative
+# Cherished Mobs: a cow hurt by 8 heals half a heart every 15 s (old: every 2.5 s, about 7 in 17 s)
+chat /summon minecraft:cow ~3 ~ ~ {NoAI:1b}
+wait 5
+chat /damage @e[type=minecraft:cow,limit=1,sort=nearest] 8
+wait 5
+chat /data get entity @e[type=minecraft:cow,limit=1,sort=nearest] Health
+wait 340
+chat /data get entity @e[type=minecraft:cow,limit=1,sort=nearest] Health
+# pause screen: the keyboard icon (no Create here, so left of Options, one row down) opens Key Binds
+screen pause
+wait 5
+widgets
+screenshot ui-pause
+clickwidget Key Binds
+wait 5
+log after shortcut: screen={screen}
+screen none
+wait 2
+# the Radar head's command
+chat /radarcraft_menu
+wait 5
+log after radarcraft_menu: screen={screen}
+chat /checklist setrank hearts 3
+chat /checklist setrank fireproof 1
+chat /checklist setrank fleet_foot 2
+wait 5
+clickwidget Upgrades
+wait 5
+move 4 300
+wait 2
+screenshot ui-upgrades
+scroll 320 200 -8
+wait 2
+screenshot ui-upgrades-2
+scroll 320 200 -8
+wait 2
+screenshot ui-upgrades-3
+scroll 320 200 -12
+wait 2
+screenshot ui-upgrades-4
+quit

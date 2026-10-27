@@ -112,6 +112,18 @@ def apply_config_patches(overrides):
                     node = node.setdefault(p, {})
                 node[parts[-1]] = val
             json.dump(data, open(target, "w", encoding="utf-8"), indent=2)
+        elif patch["format"] == "insert":
+            # plain text: insert "text" right after the first line containing "after", unless "unless" is already there
+            text = target.read_text(encoding="utf-8")
+            if patch["unless"] not in text:
+                i = text.find(patch["after"])
+                if i < 0:
+                    print(f"WARNING: {patch['after']!r} not found in {patch['file']}"); continue
+                eol = text.index("
+", i) + 1
+                text = text[:eol] + patch["text"] + text[eol:]
+                target.write_text(text, encoding="utf-8")
+            print(f"patched {patch['file']}: inserted {patch['unless']}"); continue
         print(f"patched {patch['file']}: {', '.join(patch['set'])}")
 
 

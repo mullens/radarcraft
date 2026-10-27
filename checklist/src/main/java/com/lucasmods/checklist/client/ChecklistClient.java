@@ -13,6 +13,7 @@ import net.minecraft.client.gui.screens.advancements.AdvancementsScreen;
 import net.minecraft.network.chat.Component;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.RegisterClientCommandsEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
@@ -34,6 +35,20 @@ public final class ChecklistClient {
         NeoForge.EVENT_BUS.addListener(ChecklistClient::onClientTick);
         NeoForge.EVENT_BUS.addListener(ChecklistClient::onScreenInit);
         NeoForge.EVENT_BUS.addListener(ChecklistClient::onScreenRender);
+        NeoForge.EVENT_BUS.addListener(ChecklistClient::onClientCommands);
+    }
+
+    /**
+     * Client-only /radarcraft_menu (the server already has /radarcraft for the admin commands): opens the Radarcraft screen. The Radar head button in FTB Library's inventory sidebar
+     * (assets/checklist/sidebar_buttons/radarcraft.json) runs it. Opened on the next tick, after whatever screen ran it.
+     */
+    private static void onClientCommands(RegisterClientCommandsEvent event) {
+        event.getDispatcher().register(net.minecraft.commands.Commands.literal("radarcraft_menu").executes(ctx -> {
+            Minecraft mc = Minecraft.getInstance();
+            Screen parent = mc.screen; // the inventory, when the sidebar button ran it: Done goes back there
+            mc.tell(() -> { if (mc.player != null) mc.setScreen(new ChecklistScreen(parent)); });
+            return 1;
+        }));
     }
 
     /** Buttons we added, per screen; some mod screens (Better Advancements) paint over foreign widgets, so we redraw them last. */

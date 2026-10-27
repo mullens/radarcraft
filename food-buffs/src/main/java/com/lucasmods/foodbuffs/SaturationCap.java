@@ -2,6 +2,8 @@ package com.lucasmods.foodbuffs;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.food.FoodProperties;
@@ -44,6 +46,7 @@ public final class SaturationCap {
             float allowed = Math.max(before, Math.min(now, food.saturation()));
             if (now > allowed) data.setSaturation(allowed);
         }
+        ensureBuffs(p, event.getItem());
         if (report != null) {
             FoodData data = p.getFoodData();
             StringBuilder effects = new StringBuilder();
@@ -54,6 +57,25 @@ public final class SaturationCap {
                     data.getSaturationLevel(), event.getItem().get(DataComponents.FOOD) == null ? 0f : event.getItem().get(DataComponents.FOOD).saturation(), effects);
             FoodBuffs.LOGGER.info(line);
             p.sendSystemMessage(net.minecraft.network.chat.Component.literal(line));
+        }
+    }
+
+    /**
+     * Some items finish with their own code and skip the food component's effects (Vinery's wines apply only their
+     * own effect). After any configured food is used up, give each of its buffs that did not land.
+     */
+    private static void ensureBuffs(Player p, ItemStack stack) {
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        if ("minecraft".equals(id.getNamespace())) return;
+        FoodConfig.Entry entry = FoodConfig.foods().get(id.toString());
+        if (entry == null || entry.effects() == null) return;
+        for (FoodConfig.Buff b : entry.effects()) {
+            var effect = BuiltInRegistries.MOB_EFFECT.getHolder(ResourceLocation.parse(b.effect()));
+            if (effect.isEmpty()) continue;
+            int ticks = b.seconds() * 20;
+            MobEffectInstance current = p.getEffect(effect.get());
+            boolean landed = current != null && current.getAmplifier() >= b.amplifier() && (current.isInfiniteDuration() || current.getDuration() >= ticks - 40);
+            if (!landed) p.addEffect(new MobEffectInstance(effect.get(), ticks, b.amplifier()));
         }
     }
 

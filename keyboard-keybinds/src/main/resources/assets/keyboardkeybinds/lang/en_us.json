@@ -37,5 +37,6 @@
   "keyboardkeybinds.panel.bindings.one": "1 binding",
   "keyboardkeybinds.panel.conflict": "%s conflict",
   "keyboardkeybinds.panel.overlap": "overlap OK",
-  "keyboardkeybinds.only": "Only this"
+  "keyboardkeybinds.only": "Only this",
+  "keyboardkeybinds.button.shortcut": "Key Binds"
 }

@@ -1,0 +1,7 @@
+# Dedicated full-pack server for fullpack-ui.txt. Stays up until scripts/launch-fullpack-server.py signal.
+# Run: python scripts/launch-fullpack-server.py start scripts/driver/fullpack-ui-server.txt --xmx 8G
+wait 100
+log server up, waiting for the stop flag
+waitfile C:/Users/lucas/vibecraft/dev-driver/run-fullpack-server/stop.flag 36000
+wait 100
+quit

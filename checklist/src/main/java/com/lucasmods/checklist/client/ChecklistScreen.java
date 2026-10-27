@@ -51,7 +51,12 @@ public final class ChecklistScreen extends Screen {
     private static final int BTN_HOVER = 0xFF585858;
     private static final int BTN_DISABLED = 0xFF242424;
     private static final int PIP_ON = 0xFF55FF55;
-    private static final int PIP_OFF = 0xFF444444;
+    private static final int PIP_ON_BORDER = 0xFF1E5E1E;
+    private static final int PIP_OFF = 0xFF262626;
+    private static final int PIP_OFF_BORDER = 0xFFA0A0A0;
+    /** Row heights: name + one description line, or name + two. */
+    private static final int ROW_1 = 22, ROW_2 = 32;
+    private static final int TEXT_RESERVE = 160;
     private static final int RENOWN_FILL = 0xFFC77DFF;
     private static final int TOGGLE_ON = 0xFF2E7D32;
     private static final int TOGGLE_ON_HOVER = 0xFF43A047;
@@ -276,8 +281,8 @@ public final class ChecklistScreen extends Screen {
     private void renderUpgrades(GuiGraphics g, int mouseX, int mouseY) {
         int top = HEADER_H;
         int bottom = height - FOOTER_H;
-        int left = Math.max(10, (width - 420) / 2);
-        int right = Math.min(width - 10, left + 420);
+        int left = Math.max(10, (width - 480) / 2);
+        int right = Math.min(width - 10, left + 480);
         int rowW = right - left;
         g.enableScissor(0, top, width, bottom);
         int y = top - upgradesScroll;
@@ -286,8 +291,9 @@ public final class ChecklistScreen extends Screen {
             y += 14;
             for (UpgradeCatalog.Upgrade u : catalog.all().values()) {
                 if (!u.category.equals(category)) continue;
-                if (y + 22 > top && y < bottom) renderUpgradeRow(g, u, left, y, rowW, mouseX, mouseY, top, bottom);
-                y += 24;
+                int rowH = descLines(u, rowW).size() > 1 ? ROW_2 : ROW_1;
+                if (y + rowH > top && y < bottom) renderUpgradeRow(g, u, left, y, rowW, rowH, mouseX, mouseY, top, bottom);
+                y += rowH + 2;
             }
             y += 4;
         }
@@ -305,7 +311,23 @@ public final class ChecklistScreen extends Screen {
         }
     }
 
-    private void renderUpgradeRow(GuiGraphics g, UpgradeCatalog.Upgrade u, int x, int y, int w, int mouseX, int mouseY, int clipTop, int clipBottom) {
+    /** The description wrapped to the text column: at most two lines, the second cut with "..." only if it still does not fit. */
+    private List<String> descLines(UpgradeCatalog.Upgrade u, int rowW) {
+        int textW = rowW - TEXT_RESERVE - 6;
+        List<String> out = new ArrayList<>();
+        for (var seq : font.split(Component.literal(u.description), textW)) {
+            StringBuilder sb = new StringBuilder();
+            seq.accept((i, style, cp) -> { sb.appendCodePoint(cp); return true; });
+            out.add(sb.toString());
+        }
+        if (out.size() > 2) {
+            String second = String.join(" ", out.subList(1, out.size()));
+            out = new ArrayList<>(List.of(out.get(0), font.plainSubstrByWidth(second, textW - font.width("...")).stripTrailing() + "..."));
+        }
+        return out;
+    }
+
+    private void renderUpgradeRow(GuiGraphics g, UpgradeCatalog.Upgrade u, int x, int y, int w, int h, int mouseX, int mouseY, int clipTop, int clipBottom) {
         int rank = ClientState.rank(u.id);
         String excludedBy = null;
         for (String other : u.excludes) if (ClientState.rank(other) > 0) excludedBy = nameOf(other);
@@ -314,46 +336,50 @@ public final class ChecklistScreen extends Screen {
         boolean canAdd = rank < u.ranks && affordable && excludedBy == null;
         boolean canRemove = rank > 0;
 
-        g.fill(x, y, x + w, y + 22, rank > 0 ? 0x30FFFFFF : 0x18FFFFFF);
+        g.fill(x, y, x + w, y + h, rank > 0 ? 0x30FFFFFF : 0x18FFFFFF);
+        int textW = w - TEXT_RESERVE;
         g.drawString(font, u.name, x + 4, y + 2, rank > 0 ? TEXT : 0xFFDDDDDD, false);
-        // second line: description, or why the next rank cannot be taken
-        String desc = u.description;
-        int descColor = TEXT_DIM;
-        if (rank < u.ranks && excludedBy != null) {
-            desc = "Cannot be combined with " + excludedBy;
-            descColor = WARN;
-        } else if (rank < u.ranks && !affordable && (u.isToggle() || rank == 0)) {
-            desc = "Needs " + u.cost + " points (you have " + ClientState.available() + ")";
-            descColor = WARN;
+        // why the next rank cannot be taken goes after the name, so the description always stays readable
+        String warn = null;
+        if (rank < u.ranks && excludedBy != null) warn = "not with " + excludedBy;
+        else if (rank < u.ranks && !affordable && (u.isToggle() || rank == 0)) warn = "needs " + u.cost + (u.cost == 1 ? " pt" : " pts") + ", you have " + ClientState.available();
+        if (warn != null) {
+            int wx = x + 4 + font.width(u.name) + 6;
+            int room = x + textW - wx;
+            if (room > 20) g.drawString(font, font.width(warn) > room ? font.plainSubstrByWidth(warn, room - 6) + ".." : warn, wx, y + 2, WARN, false);
         }
-        int textW = w - 160;
-        g.drawString(font, font.width(desc) > textW ? font.plainSubstrByWidth(desc, textW - 6) + ".." : desc, x + 4, y + 12, descColor, false);
-        if (mouseX >= x && mouseX < x + w - 160 && mouseY >= Math.max(y, clipTop) && mouseY < Math.min(y + 22, clipBottom)) hoveredUpgrade = u;
+        List<String> lines = descLines(u, w);
+        for (int i = 0; i < lines.size(); i++) g.drawString(font, lines.get(i), x + 4, y + 12 + i * 10, TEXT_DIM, false);
+        if (mouseX >= x && mouseX < x + textW && mouseY >= Math.max(y, clipTop) && mouseY < Math.min(y + h, clipBottom)) hoveredUpgrade = u;
+        int mid = y + (h - 14) / 2; // controls are centred vertically in the row
 
         if (u.isToggle()) {
             // on/off switch with a cost badge
             String badge = u.cost + " pts";
-            g.drawString(font, badge, x + w - 64 - font.width(badge) - 6, y + 7, BADGE, false);
+            g.drawString(font, badge, x + w - 64 - font.width(badge) - 6, mid + 3, affordable || rank > 0 ? BADGE : WARN, false);
             boolean on = rank > 0;
             boolean enabled = on || canAdd;
-            toggleButton(g, x + w - 64, y + 4, 58, 14, on, enabled, mouseX, mouseY, clipTop, clipBottom, () -> setRank(u, on ? 0 : 1));
+            toggleButton(g, x + w - 64, mid, 58, 14, on, enabled, mouseX, mouseY, clipTop, clipBottom, () -> setRank(u, on ? 0 : 1));
             return;
         }
 
-        int pipX = x + w - 150;
-        int pipW = Math.min(8, 60 / Math.max(1, u.ranks));
-        int pipY = u.cost > 1 ? y + 3 : y + 7;
+        // rank squares: each one outlined, so empty ones stay visible on the translucent row
+        int pipX = x + w - 152;
+        int pipW = Math.min(8, (64 - u.ranks) / Math.max(1, u.ranks));
+        int pipY = u.cost > 1 ? mid - 2 : mid + 3;
         for (int i = 0; i < u.ranks; i++) {
             int px = pipX + i * (pipW + 1);
-            g.fill(px, pipY, px + pipW, pipY + 8, i < rank ? PIP_ON : PIP_OFF);
+            boolean filled = i < rank;
+            g.fill(px, pipY, px + pipW, pipY + 8, filled ? PIP_ON : PIP_OFF);
+            g.renderOutline(px, pipY, pipW, 8, filled ? PIP_ON_BORDER : PIP_OFF_BORDER);
         }
-        if (u.cost > 1) g.drawString(font, u.cost + " pts / rank", pipX, y + 13, BADGE, false);
-        g.drawString(font, rank + "/" + u.ranks, x + w - 78, y + 7, TEXT_DIM, false);
+        if (u.cost > 1) g.drawString(font, u.cost + " pts / rank", pipX, mid + 8, affordable || rank > 0 ? BADGE : WARN, false);
+        g.drawString(font, rank + "/" + u.ranks, x + w - 78, mid + 3, TEXT_DIM, false);
 
         int bx = x + w - 48;
         int finalRank = rank;
-        pseudoButton(g, bx, y + 4, 20, 14, "-", canRemove, mouseX, mouseY, clipTop, clipBottom, () -> setRank(u, finalRank - 1));
-        pseudoButton(g, bx + 24, y + 4, 20, 14, "+", canAdd, mouseX, mouseY, clipTop, clipBottom, () -> setRank(u, finalRank + 1));
+        pseudoButton(g, bx, mid, 20, 14, "-", canRemove, mouseX, mouseY, clipTop, clipBottom, () -> setRank(u, finalRank - 1));
+        pseudoButton(g, bx + 24, mid, 20, 14, "+", canAdd, mouseX, mouseY, clipTop, clipBottom, () -> setRank(u, finalRank + 1));
     }
 
     private String nameOf(String id) {

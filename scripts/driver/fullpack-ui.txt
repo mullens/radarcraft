@@ -1,0 +1,92 @@
+# Full pack: the Radar head in FTB Library's inventory sidebar (right of Quests and the gear), the Key Binds icon under
+# Create's goggles on the pause menu, filled + outlined rank squares, and Food Buffs on foods from other mods.
+# Server first: python scripts/launch-fullpack-server.py start scripts/driver/fullpack-ui-server.txt
+# Run: python scripts/launch-fullpack.py scripts/driver/fullpack-ui.txt --xmx 10G --timeout 25
+waittitle
+wait 40
+widgets
+screenshot fpu-title
+connect localhost:25566
+wait 400
+log joined: screen={screen}
+chat /gamemode survival
+# --- inventory sidebar
+screen inventory
+wait 20
+widgets
+screenshot fpu-inventory
+move 60 26
+wait 10
+screenshot fpu-inventory-hover
+click 60 26
+wait 20
+log after radar head: screen={screen}
+screenshot fpu-radar-head-opened
+key ESCAPE
+wait 10
+log after Done/escape: screen={screen}
+screen none
+wait 5
+# --- pause menu: Key Binds icon under Create's goggles
+screen pause
+wait 20
+widgets
+screenshot fpu-pause
+clickwidget Key Binds
+wait 20
+log after shortcut: screen={screen}
+screen none
+wait 5
+# --- rank squares with some ranks bought (11 squares granted = 11 points)
+chat /checklist grant 0 5
+chat /checklist grant 1 5
+chat /checklist grant 2 5
+chat /checklist grant 3 5
+chat /checklist grant 4 5
+chat /checklist grant 5 5
+chat /checklist grant 6 5
+chat /checklist grant 7 5
+chat /checklist grant 8 5
+chat /checklist grant 9 5
+chat /checklist grant 10 5
+wait 20
+chat /checklist setrank hearts 2
+chat /checklist setrank fireproof 1
+chat /checklist setrank fleet_foot 2
+wait 20
+chat /checklist level
+screen checklist
+wait 20
+click 117 16
+wait 10
+move 4 300
+wait 5
+screenshot fpu-upgrades
+screen none
+wait 5
+# --- Food Buffs on other mods' food while full (server log: [FoodBuffs test] ate ...)
+chat /effect clear @s
+chat /foodbuffs setfood 20 5
+chat /item replace entity @s weapon.mainhand with vinery:jellie_wine
+wait 5
+chat /foodbuffs eat
+wait 20
+chat /foodbuffs setfood 20 5
+chat /item replace entity @s weapon.mainhand with mynethersdelight:crimson_stroganoff
+wait 5
+chat /foodbuffs eat
+wait 20
+chat /foodbuffs setfood 6 0
+chat /item replace entity @s weapon.mainhand with aquaculture:sushi
+wait 5
+chat /foodbuffs eat
+wait 20
+chat /item replace entity @s weapon.mainhand with delighto_flight:charged_rose_tea
+screen inventory
+wait 10
+move 248 246
+wait 5
+screenshot fpu-food-tooltip
+screen none
+wait 10
+quit

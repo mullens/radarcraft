@@ -64,6 +64,7 @@ public final class MobHandler {
     public static void onEntityTick(EntityTickEvent.Post event) {
         if (!(event.getEntity() instanceof LivingEntity entity) || entity instanceof Player || entity.level().isClientSide()) return;
         if (entity.tickCount % 100 == 0) refresh(entity); // name tags can be added or removed at any time
+        slowHeal(entity);
         if (!isCherished(entity)) return;
         int floor = entity.level().getMinBuildHeight();
         if (entity.tickCount % 20 == 0 && entity.onGround() && entity.getY() > floor) rememberSafePosition(entity);
@@ -109,11 +110,21 @@ public final class MobHandler {
         syncInvulnerable(entity);
     }
 
+    /** Older versions gave friendly mobs an infinite, hidden Regeneration I. It healed far too fast: take it off again. */
     private static void applyRegeneration(LivingEntity entity) {
+        MobEffectInstance regen = entity.getEffect(MobEffects.REGENERATION);
+        if (regen != null && regen.isInfiniteDuration() && regen.getAmplifier() == 0 && regen.isAmbient() && !regen.isVisible()) {
+            entity.removeEffect(MobEffects.REGENERATION);
+        }
+    }
+
+    /** Friendly mobs heal half a heart every regenerationSeconds (default 15 s, six times slower than Regeneration I). */
+    private static void slowHeal(LivingEntity entity) {
         if (!CherishedMobs.SPEC.isLoaded() || !CherishedMobs.FRIENDLY_REGENERATION.get()) return;
-        if (!isFriendly(entity) || entity.hasEffect(MobEffects.REGENERATION)) return;
-        // infinite, ambient, no particles, no icon
-        entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, MobEffectInstance.INFINITE_DURATION, 0, true, false, false));
+        int period = CherishedMobs.FRIENDLY_REGEN_SECONDS.get() * 20;
+        if (entity.tickCount % period != 0 || entity.getHealth() >= entity.getMaxHealth() || entity.isDeadOrDying()) return;
+        if (!isFriendly(entity)) return;
+        entity.heal(1.0F);
     }
 
     /** Keeps the vanilla invulnerable flag in step with the name tag, touching only flags we set ourselves. */

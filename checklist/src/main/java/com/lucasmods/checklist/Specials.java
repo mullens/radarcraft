@@ -152,10 +152,10 @@ public final class Specials {
         if (event.getNewAboutToBeSetTarget() instanceof ServerPlayer player && shadowed.contains(player)) event.setCanceled(true);
     }
 
-    /** Tinkerer: repairs one durability on worn armour and held items, every 20 s / rank. */
+    /** Tinkerer: repairs one durability on worn armour and held items, every 60 s / rank. */
     private static void tinkerer(ServerPlayer player) {
         int r = rank(player, "tinkerer");
-        if (r <= 0 || player.tickCount % Math.max(1, 400 / r) != 0) return;
+        if (r <= 0 || player.tickCount % Math.max(1, 1200 / r) != 0) return;
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             if (slot.getType() == EquipmentSlot.Type.ANIMAL_ARMOR) continue;
             ItemStack stack = player.getItemBySlot(slot);
@@ -251,7 +251,7 @@ public final class Specials {
         if (event.getEntity() instanceof ServerPlayer player) {
             int r = rank(player, "soul_keeper");
             if (r <= 0 || player.level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) return;
-            int keep = (int) Math.floor(player.experienceLevel * Math.min(1.0, 0.25 * r));
+            int keep = (int) Math.floor(player.experienceLevel * Math.min(1.0, 0.10 * r));
             PlayerState state = PlayerState.load(player);
             state.soulKeptLevels = keep;
             state.save(player);
@@ -265,7 +265,7 @@ public final class Specials {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         int r = rank(player, "soul_keeper");
         if (r <= 0) return;
-        event.setDroppedExperience((int) Math.round(event.getDroppedExperience() * Math.max(0.0, 1.0 - 0.25 * r)));
+        event.setDroppedExperience((int) Math.round(event.getDroppedExperience() * Math.max(0.0, 1.0 - 0.10 * r)));
     }
 
     /** Soul Keeper: give the kept levels back after respawn (works next to Level Loss Only, which keeps items, not XP). */

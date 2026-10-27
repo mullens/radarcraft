@@ -1,0 +1,15 @@
+{
+  "icon": "checklist:textures/gui/radar_head.png",
+  "sort_index": 580,
+  "click": [
+    "command:/radarcraft_menu"
+  ],
+  "required_mods": [
+    "checklist"
+  ],
+  "tooltip": [
+    {
+      "translate": "sidebar_button.checklist.radarcraft.tooltip"
+    }
+  ]
+}

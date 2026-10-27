@@ -1,0 +1,25 @@
+# Full pack: clean screenshots for the README (title screen, Radarcraft upgrades without advancement toasts).
+# Server first: python scripts/launch-fullpack-server.py start scripts/driver/fullpack-ui-server.txt
+# Run: python scripts/launch-fullpack.py scripts/driver/fullpack-shots.txt --xmx 10G --timeout 20
+waittitle
+screen title
+wait 100
+move 4 356
+wait 10
+screenshot readme-title
+connect localhost:25566
+wait 500
+chat /checklist level
+wait 200
+screen checklist
+wait 20
+click 117 16
+wait 10
+move 4 300
+wait 5
+screenshot readme-upgrades
+scroll 320 200 -20
+wait 5
+screenshot readme-upgrades-2
+screen none
+quit

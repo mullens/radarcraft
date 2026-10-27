@@ -79,7 +79,8 @@
      "effect": "minecraft:fire_resistance",
      "amplifier": 0
     }
-   ]
+   ],
+   "cost": 3
   },
   {
    "id": "deep_lungs",
@@ -99,7 +100,8 @@
      "effect": "minecraft:water_breathing",
      "amplifier": 0
     }
-   ]
+   ],
+   "cost": 2
   },
   {
    "id": "second_wind",
@@ -115,7 +117,7 @@
    "name": "Conduit Heart",
    "category": "Vitality",
    "ranks": 1,
-   "cost": 3,
+   "cost": 5,
    "description": "Permanent Conduit Power: breathe, see and mine underwater as if a conduit were near.",
    "effects": [
     {
@@ -171,7 +173,7 @@
    "category": "Vitality",
    "ranks": 4,
    "cost": 2,
-   "description": "Keep 25% of your XP levels per rank when you die; the rest still drops.",
+   "description": "Keep 10% of your XP levels per rank when you die; the rest still drops.",
    "special": "soul_keeper"
   },
   {
@@ -352,12 +354,12 @@
    "name": "Brawn",
    "category": "Combat",
    "ranks": 6,
-   "description": "+1 melee damage per rank.",
+   "description": "+half a point of melee damage per rank (rank 6: +3, like Sharpness V).",
    "modifiers": [
     {
      "attribute": "minecraft:generic.attack_damage",
      "operation": "add_value",
-     "amount": 1.0
+     "amount": 0.5
     }
    ],
    "cost": 2
@@ -409,7 +411,7 @@
    "id": "long_arms",
    "name": "Long Arms",
    "category": "Combat",
-   "ranks": 4,
+   "ranks": 2,
    "description": "Hit and interact with mobs from half a block further per rank.",
    "modifiers": [
     {
@@ -504,12 +506,12 @@
    "name": "Lucky",
    "category": "Gathering",
    "ranks": 4,
-   "description": "+2 Luck per rank: better fishing and loot tables that care about luck.",
+   "description": "+1 Luck per rank: better fishing and loot tables that care about luck.",
    "modifiers": [
     {
      "attribute": "minecraft:generic.luck",
      "operation": "add_value",
-     "amount": 2.0
+     "amount": 1.0
     }
    ],
    "cost": 2
@@ -551,7 +553,7 @@
    "category": "Gathering",
    "ranks": 3,
    "cost": 2,
-   "description": "Worn and held gear slowly repairs itself: 1 durability every 20 seconds per rank.",
+   "description": "Worn and held gear slowly repairs itself: 1 durability per minute per rank.",
    "special": "tinkerer"
   },
   {
@@ -574,7 +576,7 @@
      "amplifier": 0
     }
    ],
-   "cost": 2
+   "cost": 4
   },
   {
    "id": "giant",
@@ -632,8 +634,8 @@
    "id": "village_favorite",
    "name": "Village Favorite",
    "category": "Senses",
-   "ranks": 3,
-   "cost": 2,
+   "ranks": 2,
+   "cost": 3,
    "description": "Villagers give you hero prices: a bigger discount per rank.",
    "effects": [
     {

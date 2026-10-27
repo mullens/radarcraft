@@ -4,7 +4,14 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.SpriteIconButton;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.PauseScreen;
+import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.bus.api.EventPriority;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -45,6 +52,8 @@ public final class KeyboardKeybinds {
     public KeyboardKeybinds(IEventBus modBus, ModContainer container) {
         modBus.addListener((RegisterKeyMappingsEvent event) -> event.register(OPEN_KEY));
         NeoForge.EVENT_BUS.addListener(KeyboardKeybinds::onScreenInit);
+        // LOWEST: after Create has added its goggles button, so ours can line up under it
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, KeyboardKeybinds::addMenuShortcut);
         NeoForge.EVENT_BUS.addListener(KeyboardKeybinds::onScreenRender);
         NeoForge.EVENT_BUS.addListener(KeyboardKeybinds::onClientTick);
         NeoForge.EVENT_BUS.addListener(KeyboardKeybinds::onScreenOpening);
@@ -74,6 +83,45 @@ public final class KeyboardKeybinds {
                 .build();
         event.addListener(button);
         BUTTONS.put(screen, button);
+    }
+
+    private static final ResourceLocation SHORTCUT_ICON = ResourceLocation.fromNamespaceAndPath(MODID, "icon/keybinds");
+
+    /**
+     * A keyboard icon on the pause screen (and an uncustomised title screen) that opens Key Binds in one click (Controlling swaps in its own
+     * screen as usual). It sits right below Create's goggles button; without Create, where the goggles would be:
+     * left of the Options button, one row down.
+     */
+    private static void addMenuShortcut(ScreenEvent.Init.Post event) {
+        Screen screen = event.getScreen();
+        if (!(screen instanceof TitleScreen) && !(screen instanceof PauseScreen)) return;
+        // FancyMenu lays out its own title screen and hides the vanilla buttons and Create's goggles: nothing to sit under
+        if (screen instanceof TitleScreen && net.neoforged.fml.ModList.get().isLoaded("fancymenu")) return;
+        int x, y;
+        AbstractWidget goggles = find(screen, w -> w.getClass().getSimpleName().equals("OpenCreateMenuButton"));
+        if (goggles != null) {
+            x = goggles.getX() + (goggles.getWidth() - 20) / 2;
+            y = goggles.getY() + goggles.getHeight() + 4;
+        } else {
+            AbstractWidget options = find(screen, w -> w.getMessage().getContents() instanceof TranslatableContents t && t.getKey().equals("menu.options"));
+            if (options == null) return;
+            x = options.getX() - 24;
+            y = options.getY() + 24;
+        }
+        Screen parent = screen;
+        SpriteIconButton button = SpriteIconButton.builder(Component.translatable("keyboardkeybinds.button.shortcut"),
+                        b -> Minecraft.getInstance().setScreen(new KeyBindsScreen(parent, Minecraft.getInstance().options)), true)
+                .sprite(SHORTCUT_ICON, 15, 15).size(20, 20).build();
+        button.setPosition(x, y);
+        button.setTooltip(Tooltip.create(Component.translatable("keyboardkeybinds.button.shortcut")));
+        event.addListener(button);
+    }
+
+    private static AbstractWidget find(Screen screen, java.util.function.Predicate<AbstractWidget> test) {
+        for (GuiEventListener child : screen.children()) {
+            if (child instanceof AbstractWidget w && w.visible && test.test(w)) return w;
+        }
+        return null;
     }
 
     private static void onScreenRender(ScreenEvent.Render.Post event) {
